@@ -55,7 +55,7 @@ export default function Home() {
             <div className="flex-shrink-0">
               <Link href="/">
                 <span className="font-bold text-xl cursor-pointer">
-                  TEDx<span className="text-red-600">AdMU</span>
+                  TEDx<span className="text-red-600">AteneoDeManilaU</span>
                 </span>
               </Link>
             </div>
@@ -150,39 +150,32 @@ export default function Home() {
               objectFit="cover"
               className="absolute inset-0"
             />
+              <Image src="/hero-bg2.png" alt="background image" width={600} height={600} className="absolute top-[20%] left-[50%]" />
           </div>
 
-          <div className="container relative z-10 px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-5xl sm:text-7xl font-bold text-white mb-8">
-              <div className="mb-8">
-                <Image
-                  src="/tedx-logo.png"
-                  alt="TEDx"
-                  width={200}
-                  height={50}
-                />
-              
-              </div>
-              <span className="block mt-4 text-6xl sm:text-8xl italic tracking-wider">
+          <div className="container relative z-10 px-4 sm:px-6 lg:px-8 ">
+            <h1 className="text-5xl sm:text-7xl font-bold text-white mb-8 ml-[40%] flex flex-col">
+              <Image src="/tedx-logo.png" alt="TEDx" width={220} height={70} />
+              <span className="block text-6xl sm:text-8xl italic tracking-wider mb-4">
                 LABYRINTHINE
               </span>
+              <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mb-12">
+                Navigating complexity through ideas worth spreading
+              </p>
+              <div
+                className={`transition-all duration-1000 ease-out ${
+                  mounted
+                    ? "opacity-100 transform translate-y-0"
+                    : "opacity-0 transform translate-y-10"
+                }`}
+              >
+                <Link href="/apply">
+                  <span className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl px-8 py-4 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
+                    Apply Now
+                  </span>
+                </Link>
+              </div>
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto mb-12">
-              Navigating complexity through ideas worth spreading
-            </p>
-            <div
-              className={`transition-all duration-1000 ease-out ${
-                mounted
-                  ? "opacity-100 transform translate-y-0"
-                  : "opacity-0 transform translate-y-10"
-              }`}
-            >
-              <Link href="/apply">
-                <span className="inline-block bg-red-600 hover:bg-red-700 text-white text-lg px-10 py-4 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
-                  Apply Now
-                </span>
-              </Link>
-            </div>
           </div>
         </section>
 
