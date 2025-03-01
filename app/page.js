@@ -86,7 +86,7 @@ export default function Home() {
                     : "opacity-0 transform translate-y-10"
                 }`}
               >
-                <Link href="/apply">
+                <Link href="/register">
                   <span className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl px-8 py-4 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
                     Apply Now
                   </span>

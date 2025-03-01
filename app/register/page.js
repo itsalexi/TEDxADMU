@@ -1,16 +1,18 @@
-'use client';
+"use client";
 
-import { useActionState } from 'react';
-import { submitForm } from '@/lib/actions';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useActionState } from "react";
+import { submitForm } from "@/lib/actions";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 function SubmitButton({ isPending }) {
   return (
     <Button type="submit" disabled={isPending} className="w-full">
-      {isPending ? 'Submitting...' : 'Submit Application'}
+      {isPending ? "Submitting..." : "Submit Application"}
     </Button>
   );
 }
@@ -23,74 +25,78 @@ export default function ApplicationForm() {
   );
 
   return (
-    <Card className="max-w-2xl mx-auto my-8">
-      <CardHeader>
-        <CardTitle>Application Form</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <form action={formAction} className="space-y-4">
-          {state?.message && (
-            <div className="p-3 text-sm text-green-600 bg-green-50 border border-green-200 rounded">
-              {state.message}
+    <div className="min-h-screen bg-black text-white pt-40">
+      <Navbar />
+      <Card className="max-w-2xl mx-auto mb-8">
+        <CardHeader>
+          <CardTitle>Application Form</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form action={formAction} className="space-y-4">
+            {state?.message && (
+              <div className="p-3 text-sm text-green-600 bg-green-50 border border-green-200 rounded">
+                {state.message}
+              </div>
+            )}
+            {state?.error && (
+              <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded">
+                {state.error}
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-4">
+              <Input name="firstName" placeholder="First Name" required />
+              <Input name="lastName" placeholder="Last Name" required />
             </div>
-          )}
-          {state?.error && (
-            <div className="p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded">
-              {state.error}
-            </div>
-          )}
 
-          <div className="grid grid-cols-2 gap-4">
-            <Input name="firstName" placeholder="First Name" required />
-            <Input name="lastName" placeholder="Last Name" required />
-          </div>
-
-          <Input
-            name="email"
-            type="email"
-            placeholder="Email Address"
-            required
-          />
-
-          <Input name="company" placeholder="Company/Organization" required />
-
-          <Input name="jobTitle" placeholder="Job Title/Role" required />
-
-          <Input name="address" placeholder="Address" required />
-
-          <div className="grid grid-cols-2 gap-4">
             <Input
-              name="phone"
-              type="tel"
-              placeholder="Phone Number"
+              name="email"
+              type="email"
+              placeholder="Email Address"
               required
             />
-            <Input name="skype" placeholder="Skype ID" />
-          </div>
 
-          <Textarea
-            name="about"
-            placeholder="Tell us about yourself"
-            required
-            className="min-h-[100px]"
-          />
+            <Input name="company" placeholder="Company/Organization" required />
 
-          <Textarea
-            name="links"
-            placeholder="List up to three web links that will help us understand you better"
-            className="min-h-[100px]"
-          />
+            <Input name="jobTitle" placeholder="Job Title/Role" required />
 
-          <Textarea
-            name="goals"
-            placeholder="What do you hope to get from this event?"
-            required
-            className="min-h-[100px]"
-          />
+            <Input name="address" placeholder="Address" required />
 
-          <SubmitButton isPending={isPending} />
-        </form>
-      </CardContent>
-    </Card>
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                name="phone"
+                type="tel"
+                placeholder="Phone Number"
+                required
+              />
+              <Input name="skype" placeholder="Skype ID" />
+            </div>
+
+            <Textarea
+              name="about"
+              placeholder="Tell us about yourself"
+              required
+              className="min-h-[100px]"
+            />
+
+            <Textarea
+              name="links"
+              placeholder="List up to three web links that will help us understand you better"
+              className="min-h-[100px]"
+            />
+
+            <Textarea
+              name="goals"
+              placeholder="What do you hope to get from this event?"
+              required
+              className="min-h-[100px]"
+            />
+
+            <SubmitButton isPending={isPending} />
+          </form>
+        </CardContent>
+      </Card>
+      <Footer />
+    </div>
   );
 }
