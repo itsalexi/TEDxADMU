@@ -1,14 +1,13 @@
 "use client";
 
-// pages/index.js
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import Navbar from "./Navbar";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -48,96 +47,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Navbar */}
-      <nav className="fixed top-0 w-full bg-black z-50 shadow-lg">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex-shrink-0">
-              <Link href="/">
-                <span className="font-bold text-xl cursor-pointer">
-                  TEDx<span className="text-red-600">AteneoDeManilaU</span>
-                </span>
-              </Link>
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link href="/">
-                  <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
-                    Home
-                  </span>
-                </Link>
-                <Link href="/about">
-                  <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
-                    About
-                  </span>
-                </Link>
-                <Link href="/shop">
-                  <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
-                    Shop
-                  </span>
-                </Link>
-                <Link href="/apply">
-                  <span className="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-md font-medium cursor-pointer transition duration-300">
-                    Apply Now
-                  </span>
-                </Link>
-              </div>
-            </div>
-            <div className="md:hidden">
-              <button
-                className="text-gray-300 hover:text-red-500 inline-flex items-center justify-center p-2 rounded-md transition duration-300"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                <svg
-                  className="h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden fixed inset-0 z-40 bg-black bg-opacity-95 transform ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        } transition-transform duration-300 ease-in-out`}
-        style={{ top: "64px" }}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link href="/">
-            <span className="text-gray-300 hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">
-              Home
-            </span>
-          </Link>
-          <Link href="/about">
-            <span className="text-gray-300 hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">
-              About
-            </span>
-          </Link>
-          <Link href="/shop">
-            <span className="text-gray-300 hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">
-              Shop
-            </span>
-          </Link>
-          <Link href="/apply">
-            <span className="bg-red-600 text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">
-              Apply Now
-            </span>
-          </Link>
-        </div>
-      </div>
+      <Navbar />
 
       <main>
         {/* Hero Section */}
@@ -150,7 +60,13 @@ export default function Home() {
               objectFit="cover"
               className="absolute inset-0"
             />
-              <Image src="/hero-bg2.png" alt="background image" width={600} height={600} className="absolute top-[20%] left-[50%]" />
+            <Image
+              src="/hero-bg2.png"
+              alt="background image"
+              width={600}
+              height={600}
+              className="absolute top-[20%] left-[50%]"
+            />
           </div>
 
           <div className="container relative z-10 px-4 sm:px-6 lg:px-8 ">
