@@ -1,23 +1,23 @@
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <>
-      <nav className="fixed top-0 w-full bg-black z-50 shadow-lg">
+      <nav className="top-0 w-full z-50 absolute p-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <span className="font-bold text-xl cursor-pointer">
-                  TEDx<span className="text-red-600">AteneoDeManilaU</span>
-                </span>
+                <Image src="/tedx-logo.png" alt="TEDx" width={80} height={0} />
+                <h1 className="text-3xl font-thin">AteneoDeManilaU</h1>
               </Link>
             </div>
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
+              <div className="ml-10 flex items-baseline space-x-8 text-xl">
                 <Link href="/">
                   <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
                     Home
