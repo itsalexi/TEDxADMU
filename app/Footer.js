@@ -9,10 +9,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-8 md:mb-0">
             <Link href="/">
-              <Image src="/tedx-logo.png" alt="TEDx" width={80} height={0} />
-              <h1 className="text-3xl font-thin">AteneoDeManilaU</h1>
+              <Image src="/logo-white.png" alt="TEDx" width={250} height={0} />
             </Link>
-            <p className="text-gray-400 mt-2">
+            <p className="text-gray-400 mt-2 ml-4">
               Independently organized TED event
             </p>
           </div>
