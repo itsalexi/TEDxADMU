@@ -11,6 +11,24 @@ const AboutPage = () => {
       <main className="container mx-auto px-8 sm:px-6 lg:px-16 py-20">
         <div className="flex flex-col justify-center items-center my-12">
           <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
+            About TEDxAteneoDeManilaU
+          </h1>
+        </div>
+        <section className="prose prose-lg mx-auto prose-invert">
+          <p className="text-gray-300 leading-relaxed text-xl">
+            Since 2024, TEDxAteneoDeManilaU has been under the Ateneo Management
+            Association (AMA). Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </p>
+        </section>
+        <div className="flex flex-col justify-center items-center my-12">
+          <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
             About TEDx
           </h1>
           <span>x = independently organized event</span>
