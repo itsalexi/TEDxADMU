@@ -46,7 +46,7 @@ const ShopPage = () => {
           </div>
           <div className="z-50 mt-[20rem] place-items-center">
             <h1 className="text-7xl mb-8">LABYRINTHINE</h1>
-            <Link href="/apply">
+            <Link href={link}>
               <span className="bg-red-600 text-white hover:bg-red-700  px-3 py-2 rounded-md text-base font-medium cursor-pointer">
                 Buy Now
               </span>
