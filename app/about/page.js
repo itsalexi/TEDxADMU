@@ -3,48 +3,62 @@
 import React from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import Image from "next/image";
 
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
-      <main className="container mx-auto px-8 sm:px-6 lg:px-16 py-20">
-        <div className="flex flex-col justify-center items-center my-12">
-          <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
-            About TEDxAteneoDeManilaU
-          </h1>
-        </div>
-        <section className="prose prose-lg mx-auto prose-invert">
-          <p className="text-gray-300 leading-relaxed text-xl">
-            Since 2024, TEDxAteneoDeManilaU has been under the Ateneo Management
-            Association (AMA). Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </p>
-        </section>
-        <div className="flex flex-col justify-center items-center my-12">
-          <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/about-bg3.png"
+          alt="About Background"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0 opacity-50"
+          priority
+        />
+      </div>
+      <main className="container mx-auto px-8 sm:px-6 lg:px-16 py-20 relative">
+        <div className="flex xl:flex-row mt-[10rem] gap-10 flex-col">
+          <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
             About TEDx
+            <span className="text-white font-thin">AteneoDeManilaU</span>
           </h1>
-          <span>x = independently organized event</span>
+          <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
+            <p className="text-gray-300 leading-relaxed text-xl">
+              Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
+              Management Association (AMA). Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+              occaecat cupidatat non proident, sunt in culpa qui officia
+              deserunt mollit anim id est laborum.
+            </p>
+          </section>
         </div>
-        <section className="prose prose-lg mx-auto prose-invert">
-          <p className="text-gray-300 leading-relaxed text-xl">
-            In the spirit of discovering and spreading ideas, TEDx is a program
-            of local, self-organized events that bring people together to share
-            a TED-like experience. At a TEDx event, TED Talks video and live
-            speakers combine to spark deep discussion and connection. These
-            local, self-organized events are branded TEDx, where x =
-            independently organized TED event. The TED Conference provides
-            general guidance for the TEDx program, but individual TEDx events
-            are self-organized. (Subject to certain rules and regulations.)
-          </p>
-        </section>
+        <div className="flex xl:flex-row my-40 gap-10 flex-col">
+          <div className="xl:order-2 my-12 xl:px-[10rem] text-nowrap text-center">
+            <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
+              About TEDx
+            </h1>
+            <span>x = independently organized event</span>
+          </div>
+          <section className="prose prose-lg mx-auto prose-invert border-r-2 pr-2">
+            <p className="text-gray-300 leading-relaxed text-xl">
+              In the spirit of discovering and spreading ideas, TEDx is a
+              program of local, self-organized events that bring people together
+              to share a TED-like experience. At a TEDx event, TED Talks video
+              and live speakers combine to spark deep discussion and connection.
+              These local, self-organized events are branded TEDx, where x =
+              independently organized TED event. The TED Conference provides
+              general guidance for the TEDx program, but individual TEDx events
+              are self-organized. (Subject to certain rules and regulations.)
+            </p>
+          </section>
+        </div>
         <div className="flex flex-col justify-center items-center my-12">
           <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
             About TED
