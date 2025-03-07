@@ -3,18 +3,16 @@ import Image from "next/image";
 
 const CoreTeamCard = ({ name, role, image }) => {
   return (
-    <div className="flex flex-col items-center bg-gray-900 text-white p-4 rounded-lg shadow-lg">
-      {image ? (
-        <Image
-          src={image}
-          alt={name}
-          width={96}
-          height={96}
-          className="object-cover rounded-full mb-2"
-        />
-      ) : (
-        <div className="w-24 h-24 flex items-center justify-center bg-gray-700 rounded-full mb-2">
-          <span className="text-sm text-gray-400">No Image</span>
+    <div className="w-full aspect-square bg-gray-900 bg-opacity-50 rounded-md flex flex-col items-center justify-center p-4">
+      {image && (
+        <div className="relative w-24 h-24 mb-3">
+          <Image
+            src={image}
+            alt={name}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-full"
+          />
         </div>
       )}
       <h3 className="text-lg font-semibold">{name}</h3>

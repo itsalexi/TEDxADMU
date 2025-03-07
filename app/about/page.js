@@ -44,66 +44,87 @@ const AboutPage = () => {
             </section>
           </div>
         </div>
-        {/*Core Team */}
-        <div>
-          {/* Core Team Header */}
-          <div className="flex flex-col items-center justify-center mb-10">
-            <h1 className="text-7xl text-red-400 mb-4 text-center">
-              TEDxAteneoDeManilaU Core Team
-            </h1>
-            <p className="text-lg text-center">
-              Meet the people that made this event possible.
-            </p>
+        {/* Core Team Section */}
+        <div className="relative">
+          {/* Background Image - Sticky within the Section */}
+          <div className="absolute top-0 left-0 w-full h-full ">
+            <div className="sticky top-0 h-screen">
+              <Image
+                src="/about-bg3.png" // sample image 
+                alt="Core Team Background"
+                width={1920}
+                height={1000}
+                layout="responsive"
+                className="opacity-50 w-[screen]"
+                priority
+              />
+            </div>
           </div>
 
-          {coreTeamData.map((department) => (
-            <div key={department.name} className="mb-10">
-              <h2 className="text-4xl font-bold text-white">
-                {department.name}
-              </h2>
-
-              {department.committees.map((committee) => (
-                <div key={committee.name} className="mt-6">
-                  <h3 className="text-2xl font-semibold text-gray-300">
-                    {committee.name}
-                  </h3>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                    {/* Render Heads */}
-                    {committee.heads.map((head) => (
-                      <CoreTeamCard
-                        key={head.name}
-                        name={head.name}
-                        image={head.image}
-                        role="Head"
-                      />
-                    ))}
-
-                    {/* Render Deputies only if they exist */}
-                    {committee.deputies.length > 0 &&
-                      committee.deputies.map((deputy) => (
-                        <CoreTeamCard
-                          key={deputy.name}
-                          name={deputy.name}
-                          image={deputy.image}
-                          role="Deputy"
-                        />
-                      ))}
-
-                    {/* Render Associates only if they exist */}
-                    {committee.associates.length > 0 &&
-                      committee.associates.map((associate) => (
-                        <CoreTeamCard
-                          key={associate}
-                          name={associate}
-                          role="Associate"
-                        />
-                      ))}
-                  </div>
-                </div>
-              ))}
+          {/* Core Team Content */}
+          <div className="relative z-10 flex flex-col items-center">
+            {/* Core Team Header */}
+            <div className="text-center mb-10">
+              <h1 className="text-4xl md:text-7xl text-red-400 mb-4">
+                TEDxAteneoDeManilaU Core Team
+              </h1>
+              <p className="text-lg">
+                Meet the people who made this event possible.
+              </p>
             </div>
-          ))}
+
+            {coreTeamData.map((department) => (
+              <div
+                key={department.name}
+                className="flex flex-col items-center mb-10"
+              >
+                <h2 className="text-4xl font-bold text-white">
+                  {department.name}
+                </h2>
+
+                {department.committees.map((committee) => (
+                  <div key={committee.name} className="text-center mt-6">
+                    <h3 className="text-2xl font-semibold text-gray-300">
+                      {committee.name}
+                    </h3>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center mt-4">
+                      {/* Render Heads */}
+                      {committee.heads.map((head) => (
+                        <CoreTeamCard
+                          key={head.name}
+                          name={head.name}
+                          image={head.image}
+                          role="Head"
+                        />
+                      ))}
+
+                      {/* Render Deputies */}
+                      {committee.deputies.length > 0 &&
+                        committee.deputies.map((deputy) => (
+                          <CoreTeamCard
+                            key={deputy.name}
+                            name={deputy.name}
+                            image={deputy.image}
+                            role="Deputy"
+                          />
+                        ))}
+
+                      {/* Render Associates */}
+                      {committee.associates.length > 0 &&
+                        committee.associates.map((associate) => (
+                          <CoreTeamCard
+                            key={associate}
+                            name={associate}
+                            role="Associate"
+                          />
+                        ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/*About TEDx */}
