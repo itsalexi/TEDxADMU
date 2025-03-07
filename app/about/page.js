@@ -4,7 +4,7 @@ import React from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Image from "next/image";
-import coreTeam from "./coreTeamMembers.json";
+import coreTeamData from "./coreTeamMembers.json";
 import CoreTeamCard from "./CoreTeamCard";
 
 const AboutPage = () => {
@@ -43,47 +43,69 @@ const AboutPage = () => {
               </p>
             </section>
           </div>
-          {/*Core Team */}
-          <div>
-            <div className="flex flex-col items-center justify-center mb-10">
-              <h1 className="text-7xl text-red-400 mb-4">
-                TEDxAteneoDeManilaU Core Team
-              </h1>
-              <p>Meet the people that made this event possible.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {coreTeam.map((member, index) => (
-                <CoreTeamCard key={index} {...member} />
-              ))}
-              <h2>Project Heads</h2>
-              <div>
-                <h2>Programs</h2>
-                <h3>Entertainment</h3>
-                <h3>Stakeholder Management</h3>
-              </div>
-              <div>
-                <h2>Advertising Communications</h2>
-                <h3>Marketing Strategy</h3>
-                <h3>Documentations and Editing</h3>
-                <h3>Productions</h3>
-                <h3>Creatives</h3>
-                <h3>Website Development</h3>
-              </div>
-              <div>
-                <h2>Logistics</h2>
-                <h3>Security Operations</h3>
-                <h3>Technical Operations</h3>
-                <h3>Physical Operations</h3>
-              </div>
-              <div>
-                <h2>PEXP</h2>
-                <h3>Participant Management</h3>
-                <h3>Talent Management</h3>
-              </div>
-              <h2>Corporate Relations</h2>
-            </div>
-          </div>
         </div>
+        {/*Core Team */}
+        <div>
+          {/* Core Team Header */}
+          <div className="flex flex-col items-center justify-center mb-10">
+            <h1 className="text-7xl text-red-400 mb-4 text-center">
+              TEDxAteneoDeManilaU Core Team
+            </h1>
+            <p className="text-lg text-center">
+              Meet the people that made this event possible.
+            </p>
+          </div>
+
+          {coreTeamData.map((department) => (
+            <div key={department.name} className="mb-10">
+              <h2 className="text-4xl font-bold text-white">
+                {department.name}
+              </h2>
+
+              {department.committees.map((committee) => (
+                <div key={committee.name} className="mt-6">
+                  <h3 className="text-2xl font-semibold text-gray-300">
+                    {committee.name}
+                  </h3>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                    {/* Render Heads */}
+                    {committee.heads.map((head) => (
+                      <CoreTeamCard
+                        key={head.name}
+                        name={head.name}
+                        image={head.image}
+                        role="Head"
+                      />
+                    ))}
+
+                    {/* Render Deputies only if they exist */}
+                    {committee.deputies.length > 0 &&
+                      committee.deputies.map((deputy) => (
+                        <CoreTeamCard
+                          key={deputy.name}
+                          name={deputy.name}
+                          image={deputy.image}
+                          role="Deputy"
+                        />
+                      ))}
+
+                    {/* Render Associates only if they exist */}
+                    {committee.associates.length > 0 &&
+                      committee.associates.map((associate) => (
+                        <CoreTeamCard
+                          key={associate}
+                          name={associate}
+                          role="Associate"
+                        />
+                      ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
         {/*About TEDx */}
         <div className="flex xl:flex-row my-40 gap-10 flex-col">
           <div className="xl:order-2 my-12 xl:px-[10rem] text-nowrap text-center">
