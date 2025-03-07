@@ -1,0 +1,22 @@
+[
+  {
+    "name": "John Doe",
+    "role": "Event Organizer",
+    "image": "/path/to/john-doe-image.jpg"
+  },
+  {
+    "name": "Jane Smith",
+    "role": "Marketing Lead",
+    "image": "/path/to/jane-smith-image.jpg"
+  },
+  {
+    "name": "Alice Johnson",
+    "role": "Speaker Coordinator",
+    "image": "/path/to/alice-johnson-image.jpg"
+  },
+  {
+    "name": "Bob Brown",
+    "role": "Technical Director",
+    "image": "/path/to/bob-brown-image.jpg"
+  }
+]

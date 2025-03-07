@@ -4,6 +4,8 @@ import React from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Image from "next/image";
+import coreTeam from "./coreTeamMembers.json";
+import CoreTeamCard from "./CoreTeamCard";
 
 const AboutPage = () => {
   return (
@@ -20,25 +22,69 @@ const AboutPage = () => {
         />
       </div>
       <main className="container mx-auto px-8 sm:px-6 lg:px-16 py-20 relative">
-        <div className="flex xl:flex-row mt-[10rem] gap-10 flex-col">
-          <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
-            About TEDx
-            <span className="text-white font-thin">AteneoDeManilaU</span>
-          </h1>
-          <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
-            <p className="text-gray-300 leading-relaxed text-xl">
-              Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
-              Management Association (AMA). Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum.
-            </p>
-          </section>
+        {/*About TEDxAteneoDeManilaU */}
+        <div>
+          <div className="flex xl:flex-row my-[10rem]  gap-10 flex-col">
+            <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
+              About TEDx
+              <span className="text-white font-thin">AteneoDeManilaU</span>
+            </h1>
+            <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
+              <p className="text-gray-300 leading-relaxed text-xl">
+                Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
+                Management Association (AMA). Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt mollit anim id est laborum.
+              </p>
+            </section>
+          </div>
+          {/*Core Team */}
+          <div>
+            <div className="flex flex-col items-center justify-center mb-10">
+              <h1 className="text-7xl text-red-400 mb-4">
+                TEDxAteneoDeManilaU Core Team
+              </h1>
+              <p>Meet the people that made this event possible.</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {coreTeam.map((member, index) => (
+                <CoreTeamCard key={index} {...member} />
+              ))}
+              <h2>Project Heads</h2>
+              <div>
+                <h2>Programs</h2>
+                <h3>Entertainment</h3>
+                <h3>Stakeholder Management</h3>
+              </div>
+              <div>
+                <h2>Advertising Communications</h2>
+                <h3>Marketing Strategy</h3>
+                <h3>Documentations and Editing</h3>
+                <h3>Productions</h3>
+                <h3>Creatives</h3>
+                <h3>Website Development</h3>
+              </div>
+              <div>
+                <h2>Logistics</h2>
+                <h3>Security Operations</h3>
+                <h3>Technical Operations</h3>
+                <h3>Physical Operations</h3>
+              </div>
+              <div>
+                <h2>PEXP</h2>
+                <h3>Participant Management</h3>
+                <h3>Talent Management</h3>
+              </div>
+              <h2>Corporate Relations</h2>
+            </div>
+          </div>
         </div>
+        {/*About TEDx */}
         <div className="flex xl:flex-row my-40 gap-10 flex-col">
           <div className="xl:order-2 my-12 xl:px-[10rem] text-nowrap text-center">
             <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
