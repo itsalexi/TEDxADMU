@@ -47,15 +47,15 @@ const AboutPage = () => {
         {/* Core Team Section */}
         <div className="relative">
           {/* Background Image - Sticky within the Section */}
-          <div className="absolute top-0 left-0 w-full h-full ">
+          <div className="absolute top-48 left-0 w-full h-full ">
             <div className="sticky top-0 h-screen">
               <Image
-                src="/about-bg3.png" // sample image 
+                src="/coreteam-bg2.png" // sample image 
                 alt="Core Team Background"
                 width={1920}
                 height={1000}
                 layout="responsive"
-                className="opacity-50 w-[screen]"
+                className="opacity-70 w-[screen]"
                 priority
               />
             </div>
@@ -65,8 +65,12 @@ const AboutPage = () => {
           <div className="relative z-10 flex flex-col items-center">
             {/* Core Team Header */}
             <div className="text-center mb-10">
-              <h1 className="text-4xl md:text-7xl text-red-400 mb-4">
-                TEDxAteneoDeManilaU Core Team
+            <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
+              TEDx
+              <span className="text-white font-thin">AteneoDeManilaU</span>
+            </h1>
+              <h1 className="text-4xl md:text-7xl font-bold text-red-500 mb-4">
+                Core Team
               </h1>
               <p className="text-lg">
                 Meet the people who made this event possible.
@@ -88,7 +92,7 @@ const AboutPage = () => {
                       {committee.name}
                     </h3>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 place-items-center mt-4">
+                    <div className="flex gap-6 justify-center items-center mt-4">
                       {/* Render Heads */}
                       {committee.heads.map((head) => (
                         <CoreTeamCard
@@ -128,7 +132,7 @@ const AboutPage = () => {
         </div>
 
         {/*About TEDx */}
-        <div className="flex xl:flex-row my-40 gap-10 flex-col">
+        <div className="flex xl:flex-row mt-52 gap-10 flex-col">
           <div className="xl:order-2 my-12 xl:px-[10rem] text-nowrap text-center">
             <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
               About TEDx
