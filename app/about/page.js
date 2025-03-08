@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Navbar from "../Navbar";
 import Footer from "../Footer";
 import Image from "next/image";
 import coreTeamData from "./coreTeamMembers.json";
@@ -10,7 +9,6 @@ import CoreTeamCard from "./CoreTeamCard";
 const AboutPage = () => {
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
       <div className="absolute inset-0 z-0">
         <Image
           src="/about-bg3.png"

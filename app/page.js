@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 export default function Home() {
@@ -48,7 +47,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
 
       <main>
         {/* Hero Section */}

@@ -11,7 +11,6 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
-import Navbar from '../Navbar';
 import Footer from '../Footer';
 import SteppedProgress from '@/components/stepped-progress';
 import BasicInfoStep from './steps/basic-info-step';
@@ -255,7 +254,6 @@ export default function ApplicationForm() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
-      <Navbar />
       <main className="container mx-auto px-4 pt-32 pb-16">
         <div className="max-w-4xl mx-auto">
           <Card className="border-none shadow-xl bg-white/5 backdrop-blur-sm relative overflow-hidden">
