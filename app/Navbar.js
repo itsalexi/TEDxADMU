@@ -30,7 +30,12 @@ export default function Navbar() {
                 </Link>
                 <Link href="/about">
                   <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
-                    About
+                    About TEDx
+                  </span>
+                </Link>
+                <Link href="/core-team">
+                  <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
+                    Get to Know the Team
                   </span>
                 </Link>
                 <Link href="/shop">
