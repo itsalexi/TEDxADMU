@@ -47,7 +47,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
       <main>
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
@@ -75,7 +74,7 @@ export default function Home() {
                 LABYRINTHINE
               </span>
               <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mb-12">
-                Navigating complexity through ideas worth spreading
+                Unlocking Paths, Inspiring Change
               </p>
               <div
                 className={`transition-all duration-1000 ease-out ${
