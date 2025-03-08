@@ -9,6 +9,7 @@ export default function PersonalityStep({
   updateFormData,
   errors = {},
 }) {
+  console.log(formData)
   const handleEngagementChange = (question, value) => {
     updateFormData({
       ...formData,
@@ -30,20 +31,12 @@ export default function PersonalityStep({
   const handleCommitmentChange = (value) => {
     updateFormData({
       ...formData,
-      commitToParticipate: value === 'yes',
+      commit_to_participate: value === 'yes',
     });
   };
 
   return (
     <div className="space-y-8">
-      <div className="space-y-2">
-        <h2 className="text-xl font-semibold text-white">
-          Personality & Thought Process
-        </h2>
-        <p className="text-sm text-gray-400">
-          Let us know how you think and engage with ideas
-        </p>
-      </div>
 
       <div className="space-y-6">
         <div className="space-y-3 bg-white/5 p-5 rounded-md">
@@ -136,22 +129,22 @@ export default function PersonalityStep({
         </div>
 
         <div className="space-y-3">
-          <Label htmlFor="tedTalkTopic" className="text-gray-300">
+          <Label htmlFor="ted_talk_topic" className="text-gray-300">
             If you could give a TED Talk on any topic, what would it be and why?
           </Label>
           <Textarea
-            id="tedTalkTopic"
-            name="tedTalkTopic"
-            value={formData.tedTalkTopic}
+            id="ted_talk_topic"
+            name="ted_talk_topic"
+            value={formData.ted_talk_topic}
             onChange={handleTextareaChange}
             className={`min-h-[150px] bg-white/10 border-gray-700 text-white py-3 ${
-              errors.tedTalkTopic ? 'border-red-500' : ''
+              errors.ted_talk_topic ? 'border-red-500' : ''
             }`}
             placeholder="Share your ideas and why they matter to you..."
             required
           />
-          {errors.tedTalkTopic && (
-            <p className="text-sm text-red-500 mt-1">{errors.tedTalkTopic}</p>
+          {errors.ted_talk_topic && (
+            <p className="text-sm text-red-500 mt-1">{errors.ted_talk_topic}</p>
           )}
         </div>
 
@@ -162,7 +155,7 @@ export default function PersonalityStep({
             discussions and interactive segments?
           </Label>
           <RadioGroup
-            value={formData.commitToParticipate ? 'yes' : 'no'}
+            value={formData.commit_to_participate ? 'yes' : 'no'}
             onValueChange={handleCommitmentChange}
             className="flex space-x-4 pt-2"
           >

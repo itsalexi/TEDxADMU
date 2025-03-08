@@ -1,6 +1,6 @@
 import { CheckCircle2 } from 'lucide-react';
 
-export default function SuccessStep() {
+export default function SuccessStep({ formData }) {
   return (
     <div className="flex flex-col items-center justify-center py-10 space-y-8 text-center">
       <div className="h-24 w-24 rounded-full bg-indigo-900/30 flex items-center justify-center border border-indigo-500">
@@ -22,9 +22,7 @@ export default function SuccessStep() {
       </p>
 
       <div className="text-sm text-gray-400 pt-4 bg-white/5 p-5 rounded-md w-full">
-        <p>
-          Reference ID: TEDx-{new Date().getTime().toString().substring(0, 10)}
-        </p>
+        <p>Reference ID: TEDx-{formData.reference_no}</p>
         <p>Submission Date: {new Date().toLocaleDateString()}</p>
         <p className="mt-3">
           If you have any questions, please contact{' '}

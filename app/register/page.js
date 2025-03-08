@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, startTransition } from 'react';
 import { useActionState } from 'react';
 import { submitForm } from '@/lib/actions';
 import {
@@ -22,70 +22,73 @@ import SuccessStep from './steps/success-step';
 export default function ApplicationForm() {
   const { toast } = useToast();
 
-  // Form state
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [formData, setFormData] = useState({
-    // Basic Info
-    firstName: '',
-    lastName: '',
+    reference_no: Math.random().toString(36).substring(2, 10).toUpperCase(),
+    first_name: '',
+    last_name: '',
     email: '',
     phone: '',
     age: '',
     occupation: '',
-    schoolInfo: '',
-    attendedBefore: false,
+    school_info: '',
+    attended_before: false,
 
-    // Personality
     engagement: {
       different_values: 3,
       failure_learning: 3,
       different_experiences: 3,
     },
-    tedTalkTopic: '',
-    commitToParticipate: true,
+    ted_talk_topic: '',
+    commit_to_participate: true,
 
-    // Checkout
-    registrationType: 'single', // single, group
-    additionalAttendees: [],
-    acceptedTerms: false,
+    registration_type: 'single', // single, group
+    additional_attendees: [],
+    accepted_terms: false,
+    is_scholar_or_ama: false,
+    cost: 0,
   });
 
-  // Validation errors state
   const [errors, setErrors] = useState({
     basicInfo: {},
     personality: {},
     checkout: {},
   });
 
-  // Form submission
   const initialState = {};
   const [state, formAction, isPending] = useActionState(
     submitForm,
     initialState
   );
 
-  // Show toast when form is submitted successfully
   useEffect(() => {
-    if (state?.success) {
+    if (state.message === 'Form submitted successfully!') {
       toast({
         title: 'Application Submitted',
-        description: 'Your application has been submitted successfully!',
+        description: state.message,
         variant: 'success',
       });
+
+      if (currentStep === 3) {
+        setCurrentStep(4);
+      }
+      setIsSubmitting(false);
     } else if (state?.error) {
       toast({
         title: 'Submission Error',
         description: state.error,
         variant: 'destructive',
       });
+      setIsSubmitting(false);
     }
-  }, [state, toast]);
+  }, [state, toast, currentStep]);
 
-  const totalSteps = 4; // Including success step
+  const totalSteps = 4;
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
-      // Only proceed if validation passes
       if (validateCurrentStep()) {
         setCurrentStep(currentStep + 1);
       }
@@ -104,7 +107,6 @@ export default function ApplicationForm() {
       ...stepData,
     });
 
-    // Clear errors for fields that have been filled
     if (currentStep === 1) {
       const newErrors = { ...errors.basicInfo };
       Object.keys(stepData).forEach((field) => {
@@ -136,40 +138,39 @@ export default function ApplicationForm() {
     e.preventDefault();
 
     if (currentStep < totalSteps - 1) {
-      // Just navigate to next step without validation for now
       handleNext();
     } else {
-      // For the final step, submit the form
-      const formDataObj = new FormData();
+      if (validateCurrentStep()) {
+        setIsSubmitting(true);
 
-      // Add all form data to FormData object
-      Object.entries(formData).forEach(([key, value]) => {
-        if (typeof value === 'object' && value !== null) {
-          formDataObj.append(key, JSON.stringify(value));
-        } else {
-          formDataObj.append(key, String(value));
-        }
-      });
+        const formDataObj = new FormData();
 
-      // Submit and go to success step
-      formAction(formDataObj);
-      setCurrentStep(currentStep + 1); // Directly go to success step
+        Object.entries(formData).forEach(([key, value]) => {
+          if (typeof value === 'object' && value !== null) {
+            formDataObj.append(key, JSON.stringify(value));
+          } else {
+            formDataObj.append(key, String(value));
+          }
+        });
+
+        startTransition(() => {
+          formAction(formDataObj);
+        });
+      }
     }
   };
 
-  // Add validation function to check if current step is complete
   const validateCurrentStep = () => {
     let isValid = true;
     const newErrors = {};
 
     if (currentStep === 1) {
-      // Validate Basic Info step
-      if (!formData.firstName) {
-        newErrors.firstName = 'First name is required';
+      if (!formData.first_name) {
+        newErrors.first_name = 'First name is required';
         isValid = false;
       }
-      if (!formData.lastName) {
-        newErrors.lastName = 'Last name is required';
+      if (!formData.last_name) {
+        newErrors.last_name = 'Last name is required';
         isValid = false;
       }
       if (!formData.email) {
@@ -194,26 +195,25 @@ export default function ApplicationForm() {
 
       setErrors({ ...errors, basicInfo: newErrors });
     } else if (currentStep === 2) {
-      if (!formData.tedTalkTopic) {
-        newErrors.tedTalkTopic = 'Please share your TED Talk topic idea';
+      if (!formData.ted_talk_topic) {
+        newErrors.ted_talk_topic = 'Please share your TED Talk topic idea';
         isValid = false;
       }
       setErrors({ ...errors, personality: newErrors });
     } else if (currentStep === 3) {
-      if (!formData.acceptedTerms) {
+      if (!formData.accepted_terms) {
         newErrors.acceptedTerms = 'You must accept the terms to continue';
         isValid = false;
       }
 
-      // If group registration, validate additional attendees
       if (
-        formData.registrationType === 'group' &&
-        formData.additionalAttendees.length > 0
+        formData.registration_type === 'group' &&
+        formData.additional_attendees.length > 0
       ) {
         const attendeeErrors = {};
 
-        formData.additionalAttendees.forEach((attendee, index) => {
-          if (!attendee.firstName || !attendee.lastName || !attendee.email) {
+        formData.additional_attendees.forEach((attendee, index) => {
+          if (!attendee.first_name || !attendee.last_name || !attendee.email) {
             attendeeErrors[attendee.id] =
               'Please complete all fields for this attendee';
             isValid = false;
@@ -254,117 +254,128 @@ export default function ApplicationForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white flex flex-col">
-      <div className="flex-grow flex items-center justify-center py-16 px-4">
-        <Card className="w-full max-w-4xl mx-auto border-none shadow-xl bg-white/5 backdrop-blur-sm">
-          <CardHeader className="pb-2 px-8 pt-8">
-            <CardTitle className="text-2xl text-white">
-              TEDx Labyrinthine Application
-            </CardTitle>
-            <CardDescription className="text-gray-300">
-              {getStepTitle()}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="px-8 pb-8">
-            <SteppedProgress
-              numSteps={totalSteps - 1}
-              stepsComplete={currentStep}
-            />
-
-            <form onSubmit={handleSubmit} className="mt-8 space-y-8">
-              {state?.message && (
-                <div className="p-4 text-sm text-green-500 bg-green-900/20 border border-green-800 rounded-md">
-                  {state.message}
+    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
+      <Navbar />
+      <main className="container mx-auto px-4 pt-32 pb-16">
+        <div className="max-w-4xl mx-auto">
+          <Card className="border-none shadow-xl bg-white/5 backdrop-blur-sm relative overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute inset-0 flex items-center justify-center opacity-[0.02]">
+                <div className="w-[200%] aspect-square transform rotate-45">
+                  <div className="absolute top-1/2 left-0 w-full h-32 -translate-y-1/2 bg-gradient-to-r from-transparent via-white to-transparent"></div>
+                  <div className="absolute top-0 left-1/2 h-full w-32 -translate-x-1/2 bg-gradient-to-b from-transparent via-white to-transparent"></div>
                 </div>
-              )}
-              {state?.error && (
-                <div className="p-4 text-sm text-red-500 bg-red-900/20 border border-red-800 rounded-md">
-                  {state.error}
+              </div>
+            </div>
+            <CardContent className="p-8 relative z-10">
+              <SteppedProgress
+                numSteps={totalSteps - 1}
+                stepsComplete={currentStep}
+              />
+
+              <form
+                action={formAction}
+                onSubmit={handleSubmit}
+                className="mt-8 space-y-8"
+              >
+                {state?.error && (
+                  <div className="p-4 text-sm text-red-500 bg-red-900/20 border border-red-800 rounded-md">
+                    {state.error}
+                  </div>
+                )}
+
+                <div className="space-y-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-white">
+                    {getStepTitle()}
+                  </h2>
+                  <p className="text-sm text-gray-400">
+                    {currentStep === 1 && "We need some information to get to know you better"}
+                    {currentStep === 2 && "Share your perspective and ideas with us"}
+                    {currentStep === 3 && "Choose your registration type and complete payment details"}
+                    {currentStep === 4 && "Thank you for your application"}
+                  </p>
                 </div>
-              )}
 
-              {currentStep === 1 && (
-                <BasicInfoStep
-                  formData={formData}
-                  updateFormData={updateFormData}
-                  errors={errors.basicInfo}
-                />
-              )}
+                {currentStep === 1 && (
+                  <BasicInfoStep
+                    formData={formData}
+                    updateFormData={updateFormData}
+                    errors={errors.basicInfo}
+                  />
+                )}
 
-              {currentStep === 2 && (
-                <PersonalityStep
-                  formData={formData}
-                  updateFormData={updateFormData}
-                  errors={errors.personality}
-                />
-              )}
+                {currentStep === 2 && (
+                  <PersonalityStep
+                    formData={formData}
+                    updateFormData={updateFormData}
+                    errors={errors.personality}
+                  />
+                )}
 
-              {currentStep === 3 && (
-                <CheckoutStep
-                  formData={formData}
-                  updateFormData={updateFormData}
-                  errors={errors.checkout}
-                />
-              )}
+                {currentStep === 3 && (
+                  <CheckoutStep
+                    formData={formData}
+                    updateFormData={updateFormData}
+                    errors={errors.checkout}
+                  />
+                )}
 
-              {currentStep === 4 && <SuccessStep />}
+                {currentStep === 4 && <SuccessStep formData={formData} />}
 
-              {currentStep < totalSteps && (
-                <div className="flex items-center justify-end gap-3 pt-8">
-                  {currentStep > 1 && (
-                    <button
-                      type="button"
-                      className="px-6 py-3 rounded-md hover:bg-gray-800 text-gray-300 border border-gray-700 transition-colors"
-                      onClick={handlePrevious}
-                      disabled={isPending}
-                    >
-                      Previous
-                    </button>
-                  )}
-                  <button
-                    type={currentStep === totalSteps - 1 ? 'submit' : 'button'}
-                    className="px-6 py-3 rounded-md bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-md"
-                    onClick={
-                      currentStep < totalSteps - 1 ? handleNext : undefined
-                    }
-                    disabled={isPending}
-                  >
-                    {isPending ? (
-                      <span className="flex items-center gap-2">
-                        <svg
-                          className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          ></circle>
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                          ></path>
-                        </svg>
-                        Processing...
-                      </span>
-                    ) : currentStep === totalSteps - 1 ? (
-                      'Submit Application'
-                    ) : (
-                      'Next'
+                {currentStep < totalSteps && (
+                  <div className="flex items-center justify-end gap-3 pt-8 border-t border-gray-800">
+                    {currentStep > 1 && (
+                      <button
+                        type="button"
+                        className="px-6 py-3 rounded-md hover:bg-gray-800 text-gray-300 border border-gray-700 transition-colors"
+                        onClick={handlePrevious}
+                        disabled={isSubmitting}
+                      >
+                        Previous
+                      </button>
                     )}
-                  </button>
-                </div>
-              )}
-            </form>
-          </CardContent>
-        </Card>
-      </div>
+                    <button
+                      type="submit"
+                      className="px-6 py-3 rounded-md bg-red-600 text-white hover:bg-red-700 transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center gap-2">
+                          <svg
+                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          Processing...
+                        </span>
+                      ) : currentStep === totalSteps - 1 ? (
+                        'Submit Application'
+                      ) : (
+                        'Next'
+                      )}
+                    </button>
+                  </div>
+                )}
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </main>
       <Footer />
     </div>
   );

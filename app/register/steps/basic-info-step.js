@@ -1,62 +1,70 @@
-"use client"
+'use client';
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
-export default function BasicInfoStep({ formData, updateFormData, errors = {} }) {
+export default function BasicInfoStep({
+  formData,
+  updateFormData,
+  errors = {},
+}) {
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
+    const { name, value, type, checked } = e.target;
     updateFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    })
-  }
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
 
   const handleRadioChange = (value) => {
     updateFormData({
       ...formData,
-      attendedBefore: value === "yes",
-    })
-  }
+      attended_before: value === 'yes',
+    });
+  };
 
   return (
     <div className="space-y-8">
-      <div className="space-y-2">
-        <h2 className="text-xl font-semibold text-white">Basic Information</h2>
-        <p className="text-sm text-gray-400">We need some information to get to know you better</p>
-      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <Label htmlFor="firstName" className="text-gray-300">
+          <Label htmlFor="first_name" className="text-gray-300">
             First Name
           </Label>
           <Input
-            id="firstName"
-            name="firstName"
-            value={formData.firstName}
+            id="first_name"
+            name="first_name"
+            value={formData.first_name}
             onChange={handleChange}
             required
-            className={`bg-white/10 border-gray-700 text-white py-3 ${errors.firstName ? "border-red-500" : ""}`}
+            className={`bg-white/10 border-gray-700 text-white py-3 ${
+              errors.first_name ? 'border-red-500' : ''
+            }`}
             placeholder="Your first name"
           />
-          {errors.firstName && <p className="text-sm text-red-500 mt-1">{errors.firstName}</p>}
+          {errors.first_name && (
+            <p className="text-sm text-red-500 mt-1">{errors.first_name}</p>
+          )}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="lastName" className="text-gray-300">
+          <Label htmlFor="last_name" className="text-gray-300">
             Last Name
           </Label>
           <Input
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
+            id="last_name"
+            name="last_name"
+            value={formData.last_name}
             onChange={handleChange}
             required
-            className={`bg-white/10 border-gray-700 text-white py-3 ${errors.lastName ? "border-red-500" : ""}`}
+            className={`bg-white/10 border-gray-700 text-white py-3 ${
+              errors.last_name ? 'border-red-500' : ''
+            }`}
             placeholder="Your last name"
           />
-          {errors.lastName && <p className="text-sm text-red-500 mt-1">{errors.lastName}</p>}
+          {errors.last_name && (
+            <p className="text-sm text-red-500 mt-1">{errors.last_name}</p>
+          )}
         </div>
       </div>
 
@@ -71,10 +79,14 @@ export default function BasicInfoStep({ formData, updateFormData, errors = {} })
           value={formData.email}
           onChange={handleChange}
           required
-          className={`bg-white/10 border-gray-700 text-white py-3 ${errors.email ? "border-red-500" : ""}`}
+          className={`bg-white/10 border-gray-700 text-white py-3 ${
+            errors.email ? 'border-red-500' : ''
+          }`}
           placeholder="your.email@example.com"
         />
-        {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
+        {errors.email && (
+          <p className="text-sm text-red-500 mt-1">{errors.email}</p>
+        )}
       </div>
 
       <div className="space-y-2">
@@ -88,10 +100,14 @@ export default function BasicInfoStep({ formData, updateFormData, errors = {} })
           value={formData.phone}
           onChange={handleChange}
           required
-          className={`bg-white/10 border-gray-700 text-white py-3 ${errors.phone ? "border-red-500" : ""}`}
+          className={`bg-white/10 border-gray-700 text-white py-3 ${
+            errors.phone ? 'border-red-500' : ''
+          }`}
           placeholder="+1 (555) 123-4567"
         />
-        {errors.phone && <p className="text-sm text-red-500 mt-1">{errors.phone}</p>}
+        {errors.phone && (
+          <p className="text-sm text-red-500 mt-1">{errors.phone}</p>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -106,10 +122,14 @@ export default function BasicInfoStep({ formData, updateFormData, errors = {} })
             value={formData.age}
             onChange={handleChange}
             required
-            className={`bg-white/10 border-gray-700 text-white py-3 ${errors.age ? "border-red-500" : ""}`}
+            className={`bg-white/10 border-gray-700 text-white py-3 ${
+              errors.age ? 'border-red-500' : ''
+            }`}
             placeholder="Your age"
           />
-          {errors.age && <p className="text-sm text-red-500 mt-1">{errors.age}</p>}
+          {errors.age && (
+            <p className="text-sm text-red-500 mt-1">{errors.age}</p>
+          )}
         </div>
         <div className="space-y-2">
           <Label htmlFor="occupation" className="text-gray-300">
@@ -121,43 +141,59 @@ export default function BasicInfoStep({ formData, updateFormData, errors = {} })
             value={formData.occupation}
             onChange={handleChange}
             required
-            className={`bg-white/10 border-gray-700 text-white py-3 ${errors.occupation ? "border-red-500" : ""}`}
+            className={`bg-white/10 border-gray-700 text-white py-3 ${
+              errors.occupation ? 'border-red-500' : ''
+            }`}
             placeholder="Your profession"
           />
-          {errors.occupation && <p className="text-sm text-red-500 mt-1">{errors.occupation}</p>}
+          {errors.occupation && (
+            <p className="text-sm text-red-500 mt-1">{errors.occupation}</p>
+          )}
         </div>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="schoolInfo" className="text-gray-300">
+        <Label htmlFor="school_info" className="text-gray-300">
           School, Year, Course (For Students)
         </Label>
         <Input
-          id="schoolInfo"
-          name="schoolInfo"
-          value={formData.schoolInfo}
+          id="school_info"
+          name="school_info"
+          value={formData.school_info}
           onChange={handleChange}
           placeholder="Leave blank if not applicable"
           className="bg-white/10 border-gray-700 text-white py-3"
         />
-        <p className="text-xs text-gray-500 mt-1">Only fill this if you're currently a student</p>
+        <p className="text-xs text-gray-500 mt-1">
+          Only fill this if you're currently a student
+        </p>
       </div>
 
       <div className="space-y-3 bg-white/5 p-5 rounded-md">
-        <Label className="text-gray-300">Have you attended a TEDx event before?</Label>
+        <Label className="text-gray-300">
+          Have you attended a TEDx event before?
+        </Label>
         <RadioGroup
-          value={formData.attendedBefore ? "yes" : "no"}
+          value={formData.attended_before ? 'yes' : 'no'}
           onValueChange={handleRadioChange}
           className="flex space-x-4 pt-2"
         >
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="yes" id="attended-yes" className="border-gray-600 text-indigo-500" />
+            <RadioGroupItem
+              value="yes"
+              id="attended-yes"
+              className="border-gray-600 text-indigo-500"
+            />
             <Label htmlFor="attended-yes" className="text-gray-300">
               Yes
             </Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="no" id="attended-no" className="border-gray-600 text-indigo-500" />
+            <RadioGroupItem
+              value="no"
+              id="attended-no"
+              className="border-gray-600 text-indigo-500"
+            />
             <Label htmlFor="attended-no" className="text-gray-300">
               No
             </Label>
@@ -165,6 +201,5 @@ export default function BasicInfoStep({ formData, updateFormData, errors = {} })
         </RadioGroup>
       </div>
     </div>
-  )
+  );
 }
-

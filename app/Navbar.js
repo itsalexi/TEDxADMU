@@ -1,6 +1,7 @@
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,7 +13,12 @@ export default function Navbar() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <Image src="/logo-white.png" alt="TEDx" width={300} height={0} />
+                <Image
+                  src="/logo-white.png"
+                  alt="TEDx"
+                  width={300}
+                  height={0}
+                />
               </Link>
             </div>
             <div className="hidden md:block">
@@ -67,9 +73,9 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={`md:hidden fixed inset-0 z-40 bg-black bg-opacity-95 transform ${
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         } transition-transform duration-300 ease-in-out`}
-        style={{ top: "64px" }}
+        style={{ top: '64px' }}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <Link href="/">
