@@ -12,8 +12,7 @@ export default function Navbar() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <Image src="/tedx-logo.png" alt="TEDx" width={80} height={0} />
-                <h1 className="text-3xl font-thin">AteneoDeManilaU</h1>
+                <Image src="/logo-white.png" alt="TEDx" width={300} height={0} />
               </Link>
             </div>
             <div className="hidden md:block">
