@@ -29,7 +29,7 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleLogin} className="max-w-md mx-auto p-6">
+    <form onSubmit={handleLogin} className="max-w-md mx-auto p-6 py-32">
       {error && (
         <div className="mb-4 p-2 text-red-500 border border-red-500 rounded">
           {error}
