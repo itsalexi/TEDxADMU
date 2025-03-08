@@ -40,7 +40,7 @@ export default function Navbar() {
                 </Link>
                 <Link href="/register">
                   <span className="bg-red-600 text-white hover:bg-red-700 px-4 py-2 rounded-md font-medium cursor-pointer transition duration-300">
-                    Apply Now
+                    Register Now
                   </span>
                 </Link>
               </div>
