@@ -8,11 +8,11 @@ import CoreTeamCard from "./CoreTeamCard";
 
 const CoreTeamPage = () => {
   return (
-    <div>
+    <div className="relative">
       {/* Core Team Section */}
-      <div className="relative">
+      <div className="bg-black pt-60">
         {/* Background Image - Sticky within the Section */}
-        <div className="absolute top-48 left-0 w-full h-full ">
+        <div className="absolute top-48 left-0 w-full h-full">
           <div className="sticky top-0 h-screen">
             <Image
               src="/coreteam-bg2.png" // sample image
@@ -26,10 +26,11 @@ const CoreTeamPage = () => {
           </div>
         </div>
 
-        {/* Core Team Content */}
+        {/* Core Team Members */}
         <div className="relative z-10 flex flex-col items-center">
           {/* Core Team Header */}
           <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl text-white font-light">Meet the</h2>
             <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
               TEDx
               <span className="text-white font-thin">AteneoDeManilaU</span>
@@ -94,8 +95,11 @@ const CoreTeamPage = () => {
             </div>
           ))}
         </div>
+        {/* Group Photos */}
+        <div className="w-full h-[1000px]">
+          
+        </div>
       </div>
-      <Footer />
     </div>
   );
 };
