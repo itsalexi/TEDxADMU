@@ -137,7 +137,6 @@ const AboutPage = () => {
           </p>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };
