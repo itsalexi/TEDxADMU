@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import Navbar from "../Navbar";
-import Footer from "../Footer";
 import ProductCard from "./ProductCard";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,8 +30,7 @@ const ShopPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative">
-      <Navbar />
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 bg-black mb-20">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 bg-black">
         {/* Hero Section */}
         <div className="h-[600px] w-full flex justify-center mb-20">
           <div className="absolute left-0 top-40 w-full h-[600px] z-0">
