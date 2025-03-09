@@ -68,7 +68,7 @@ export default function Home() {
           </div>
 
           <div className="container relative z-10 px-4 sm:px-6 lg:px-8 ">
-            <h1 className="text-5xl sm:text-7xl font-bold text-white mb-8 ml-[40%] flex flex-col">
+            <h1 className="text-3xl sm:text-7xl font-bold text-white mb-8 ml-[40%] flex flex-col">
               <Image src="/tedx-logo.png" alt="TEDx" width={220} height={70} />
               <span className="block text-6xl sm:text-8xl italic tracking-wider mb-4">
                 LABYRINTHINE
