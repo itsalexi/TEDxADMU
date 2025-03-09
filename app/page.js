@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -48,8 +46,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Navbar />
-
       <main>
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
@@ -77,7 +73,7 @@ export default function Home() {
                 LABYRINTHINE
               </span>
               <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mb-12">
-                Navigating complexity through ideas worth spreading
+                Unlocking Paths, Inspiring Change
               </p>
               <div
                 className={`transition-all duration-1000 ease-out ${
@@ -88,7 +84,7 @@ export default function Home() {
               >
                 <Link href="/register">
                   <span className="inline-block bg-red-600 hover:bg-red-700 text-white text-2xl px-8 py-4 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
-                    Apply Now
+                    Register Now
                   </span>
                 </Link>
               </div>
@@ -154,7 +150,6 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }
