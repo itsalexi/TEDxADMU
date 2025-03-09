@@ -45,7 +45,31 @@ const CoreTeamPage = () => {
             </div>
 
             <div className="mx-8">
-              {coreTeamData.map((department) => (
+              {/* Leadership Team */}
+              <div className="flex flex-wrap justify-center gap-12 mt-6 w-full">
+                {coreTeamData.leadershipTeam.map((category) => (
+                  <div
+                    key={category.category}
+                    className="flex flex-col items-center mb-10"
+                  >
+                    <h2 className="text-4xl font-bold text-white text-center">
+                      {category.category}
+                    </h2>
+                    <div className="flex flex-wrap justify-center gap-6 mt-6"> 
+                      {category.members.map((member) => (
+                        <CoreTeamCard
+                          key={member.name}
+                          name={member.name}
+                          image={member.image}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Core Team */}
+              {coreTeamData.coreTeam.map((department) => (
                 <div
                   key={department.name}
                   className="flex flex-col items-center mb-10 w-full"
@@ -53,8 +77,7 @@ const CoreTeamPage = () => {
                   <h2 className="text-5xl font-bold text-red-500 text-center">
                     {department.name}
                   </h2>
-
-                  <div className="flex flex-wrap justify-center gap-12 mt-6 ">
+                  <div className="flex flex-wrap justify-center gap-12 mt-6">
                     {department.committees.map((committee) => (
                       <div
                         key={committee.name}
@@ -63,7 +86,6 @@ const CoreTeamPage = () => {
                         <h3 className="text-2xl font-semibold text-gray-300">
                           {committee.name}
                         </h3>
-
                         <div className="flex flex-wrap justify-center gap-6 mt-4">
                           {/* Heads */}
                           {committee.heads.map((head) => (
@@ -74,7 +96,6 @@ const CoreTeamPage = () => {
                               role="Head"
                             />
                           ))}
-
                           {/* Deputies */}
                           {committee.deputies.map((deputy) => (
                             <CoreTeamCard
@@ -84,7 +105,6 @@ const CoreTeamPage = () => {
                               role="Deputy"
                             />
                           ))}
-
                           {/* Associates */}
                           {committee.associates.map((associate) => (
                             <CoreTeamCard
