@@ -374,7 +374,6 @@ export default function ApplicationForm() {
           </Card>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

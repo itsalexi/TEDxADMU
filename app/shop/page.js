@@ -18,7 +18,6 @@ const ShopPage = () => {
           </p>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };
