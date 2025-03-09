@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const CoreTeamCard = ({ name, role, image }) => {
   return (
-    <div className="w-full aspect-square bg-gray-900 bg-opacity-50 rounded-md flex flex-col items-center justify-center p-4">
+    <div className="flex-1 max-w-[25vw] aspect-square bg-red-500 bg-opacity-50 rounded-md flex flex-col items-center justify-center p-4">
       {image && (
         <div className="relative w-24 h-24 mb-3">
           <Image

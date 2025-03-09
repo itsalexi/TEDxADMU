@@ -44,64 +44,67 @@ const CoreTeamPage = () => {
               </p>
             </div>
 
-            {coreTeamData.map((department) => (
-              <div
-                key={department.name}
-                className="flex flex-col items-center mb-10"
-              >
-                <h2 className="text-4xl font-bold text-white">
-                  {department.name}
-                </h2>
+            <div className="mx-8">
+              {coreTeamData.map((department) => (
+                <div
+                  key={department.name}
+                  className="flex flex-col items-center mb-10 w-full"
+                >
+                  <h2 className="text-5xl font-bold text-red-500 text-center">
+                    {department.name}
+                  </h2>
 
-                {department.committees.map((committee) => (
-                  <div key={committee.name} className="text-center mt-6">
-                    <h3 className="text-2xl font-semibold text-gray-300">
-                      {committee.name}
-                    </h3>
+                  <div className="flex flex-wrap justify-center gap-12 mt-6 ">
+                    {department.committees.map((committee) => (
+                      <div
+                        key={committee.name}
+                        className="text-center md:max-w-[50vw]"
+                      >
+                        <h3 className="text-2xl font-semibold text-gray-300">
+                          {committee.name}
+                        </h3>
 
-                    <div className="flex gap-6 justify-center items-center mt-4 text-gray-200">
-                      {/* Render Heads */}
-                      {committee.heads.map((head) => (
-                        <CoreTeamCard
-                          key={head.name}
-                          name={head.name}
-                          image={head.image}
-                          role="Head"
-                        />
-                      ))}
+                        <div className="flex flex-wrap justify-center gap-6 mt-4">
+                          {/* Heads */}
+                          {committee.heads.map((head) => (
+                            <CoreTeamCard
+                              key={head.name}
+                              name={head.name}
+                              image={head.image}
+                              role="Head"
+                            />
+                          ))}
 
-                      {/* Render Deputies */}
-                      {committee.deputies.length > 0 &&
-                        committee.deputies.map((deputy) => (
-                          <CoreTeamCard
-                            key={deputy.name}
-                            name={deputy.name}
-                            image={deputy.image}
-                            role="Deputy"
-                          />
-                        ))}
+                          {/* Deputies */}
+                          {committee.deputies.map((deputy) => (
+                            <CoreTeamCard
+                              key={deputy.name}
+                              name={deputy.name}
+                              image={deputy.image}
+                              role="Deputy"
+                            />
+                          ))}
 
-                      {/* Render Associates */}
-                      {committee.associates.length > 0 &&
-                        committee.associates.map((associate) => (
-                          <CoreTeamCard
-                            key={associate}
-                            name={associate}
-                            role="Associate"
-                          />
-                        ))}
-                    </div>
+                          {/* Associates */}
+                          {committee.associates.map((associate) => (
+                            <CoreTeamCard
+                              key={associate}
+                              name={associate}
+                              role="Associate"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
       {/* Group Photos */}
-      <div className="w-full">
-        
-      </div>
+      <div className="w-full"></div>
     </div>
   );
 };
