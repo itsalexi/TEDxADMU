@@ -11,7 +11,6 @@ import {
   CardDescription,
 } from '@/components/ui/card';
 import { useToast } from '@/components/ui/use-toast';
-import Footer from '../Footer';
 import SteppedProgress from '@/components/stepped-progress';
 import BasicInfoStep from './steps/basic-info-step';
 import PersonalityStep from './steps/personality-step';
