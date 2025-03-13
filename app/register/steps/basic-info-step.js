@@ -11,6 +11,7 @@ export default function BasicInfoStep({
   updateFormData,
   errors = {},
 }) {
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     updateFormData({
