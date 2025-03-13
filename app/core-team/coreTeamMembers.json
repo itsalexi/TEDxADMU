@@ -3,51 +3,50 @@
     {
       "category": "Project Supervisors",
       "members": [
-        { "name": "Kiana Hernandez", "image": "/images/sophia-reyes.jpg" },
-        { "name": "Paul Go", "image": "/images/daniel-cruz.jpg" }
+        { "name": "Kiana Hernandez", "image": "" },
+        { "name": "Paul Go", "image": "" }
       ]
     },
     {
       "category": "Project Heads",
       "members": [
-        { "name": "Shell Reyes", "image": "/images/sophia-reyes.jpg" },
-        { "name": "Kirs Misa", "image": "/images/daniel-cruz.jpg" },
-        { "name": "Cesca Co", "image": "/images/daniel-cruz.jpg" },
-        { "name": "Sean Borrega", "image": "/images/daniel-cruz.jpg" }
+        { "name": "Shell Reyes", "image": "" },
+        { "name": "Kirs Misa", "image": "" },
+        { "name": "Cesca Co", "image": "" },
+        { "name": "Sean Borrega", "image": "" }
       ]
     },
     {
       "category": "OSG Heads",
       "members": [
-        { "name": "Cass Cabra", "image": "/images/daniel-cruz.jpg" },
-        { "name": "Althea Lardizabal", "image": "/images/daniel-cruz.jpg" }
+        { "name": "Cass Cabra", "image": "" },
+        { "name": "Althea Lardizabal", "image": "" }
       ]
     },
     {
       "category": "Finance Heads",
       "members": [
-        { "name": "Sophia Salcedo", "image": "/images/daniel-cruz.jpg" },
-        { "name": "Mikaela Ramos", "image": "/images/daniel-cruz.jpg" }
+        { "name": "Sophia Salcedo", "image": "" },
+        { "name": "Mikaela Ramos", "image": "" }
       ]
     },
     {
       "category": "ESG Strategists",
       "members": [
-        { "name": "Sophia Ong", "image": "/images/daniel-cruz.jpg" },
-        { "name": "Genei Agero", "image": "/images/daniel-cruz.jpg" }
+        { "name": "Sophia Ong", "image": "" },
+        { "name": "Genei Agero", "image": "" }
       ]
     },
-    
     {
       "category": "T&D Deputy",
       "members": [
-        { "name": "Lance Santos", "image": "/images/daniel-cruz.jpg" }
+        { "name": "Lance Santos", "image": "" }
       ]
     },
     {
       "category": "Corporate Relations",
       "members": [
-        { "name": "Gabriel Santos", "image": "/images/gabriel-santos.jpg" }
+        { "name": "Gabriel Santos", "image": "" }
       ]
     }
   ],
@@ -57,24 +56,31 @@
       "committees": [
         {
           "name": "Entertainment",
-          "heads": [{ "name": "Lucas Tan", "image": "/images/lucas-tan.jpg" }],
+          "heads": [{ "name": "Lucas Tan", "image": "" }],
           "deputies": [
-            { "name": "Isabella Lim", "image": "/images/isabella-lim.jpg" }
+            { "name": "Isabella Lim", "image": "" }
           ],
-          "associates": ["Nathan Uy", "Celine Go", "Adrian Sy"]
+          "associates": [
+            { "name": "Nathan Uy", "image": "" },
+            { "name": "Celine Go", "image": "" },
+            { "name": "Adrian Sy", "image": "" }
+          ]
         },
         {
           "name": "Stakeholder Management",
           "heads": [
             {
               "name": "Miguel Dela Cruz",
-              "image": "/images/miguel-dela-cruz.jpg"
+              "image": ""
             }
           ],
           "deputies": [
-            { "name": "Jasmine Ong", "image": "/images/jasmine-ong.jpg" }
+            { "name": "Jasmine Ong", "image": "" }
           ],
-          "associates": ["Rafael Chua", "Patricia Lao"]
+          "associates": [
+            { "name": "Rafael Chua", "image": "" },
+            { "name": "Patricia Lao", "image": "" }
+          ]
         }
       ]
     },
@@ -84,46 +90,63 @@
         {
           "name": "Marketing Strategy",
           "heads": [
-            { "name": "Ethan Rivera", "image": "/images/ethan-rivera.jpg" }
+            { "name": "Ethan Rivera", "image": "" }
           ],
           "deputies": [
-            { "name": "Alyssa Gomez", "image": "/images/alyssa-gomez.jpg" }
+            { "name": "Alyssa Gomez", "image": "" }
           ],
-          "associates": ["Joanna Tan", "Kyle Yu", "Dominic Choi"]
+          "associates": [
+            { "name": "Joanna Tan", "image": "" },
+            { "name": "Kyle Yu", "image": "" },
+            { "name": "Dominic Choi", "image": "" }
+          ]
         },
         {
           "name": "Documentations and Editing",
           "heads": [
-            { "name": "Andrea Lopez", "image": "/images/andrea-lopez.jpg" }
+            { "name": "Andrea Lopez", "image": "" }
           ],
           "deputies": [],
-          "associates": ["Benjamin Chan", "Veronica Sy"]
+          "associates": [
+            { "name": "Benjamin Chan", "image": "" },
+            { "name": "Veronica Sy", "image": "" }
+          ]
         },
         {
           "name": "Productions",
           "heads": [
-            { "name": "Matthew Torres", "image": "/images/matthew-torres.jpg" }
+            { "name": "Matthew Torres", "image": "" }
           ],
           "deputies": [],
-          "associates": ["Samantha Ang", "Carlo Lim"]
+          "associates": [
+            { "name": "Samantha Ang", "image": "" },
+            { "name": "Carlo Lim", "image": "" }
+          ]
         },
         {
           "name": "Creatives",
           "heads": [
-            { "name": "Victoria Yu", "image": "/images/victoria-yu.jpg" }
+            { "name": "Victoria Yu", "image": "" }
           ],
           "deputies": [
-            { "name": "Justin Ramos", "image": "/images/justin-ramos.jpg" }
+            { "name": "Justin Ramos", "image": "" }
           ],
-          "associates": ["Derek Chua", "Elaine Tan", "Christine Go"]
+          "associates": [
+            { "name": "Derek Chua", "image": "" },
+            { "name": "Elaine Tan", "image": "" },
+            { "name": "Christine Go", "image": "" }
+          ]
         },
         {
           "name": "Website Development",
           "heads": [
-            { "name": "Carl Siy", "image": "/images/aaron-fernandez.jpg" }
+            { "name": "Carl Siy", "image": "" }
           ],
           "deputies": [],
-          "associates": ["Alexi Canamo", "JJ Pardo"]
+          "associates": [
+            { "name": "Alexi Canamo", "image": "" },
+            { "name": "JJ Pardo", "image": "" }
+          ]
         }
       ]
     },
@@ -135,29 +158,38 @@
           "heads": [
             {
               "name": "Nathaniel Santos",
-              "image": "/images/nathaniel-santos.jpg"
+              "image": ""
             }
           ],
           "deputies": [],
-          "associates": ["Joshua Tan", "Clarissa Dy"]
+          "associates": [
+            { "name": "Joshua Tan", "image": "" },
+            { "name": "Clarissa Dy", "image": "" }
+          ]
         },
         {
           "name": "Technical Operations",
           "heads": [
-            { "name": "Samantha Lee", "image": "/images/samantha-lee.jpg" }
+            { "name": "Samantha Lee", "image": "" }
           ],
           "deputies": [],
-          "associates": ["Eric Chua", "Daniella Sy"]
+          "associates": [
+            { "name": "Eric Chua", "image": "" },
+            { "name": "Daniella Sy", "image": "" }
+          ]
         },
         {
           "name": "Physical Operations",
           "heads": [
-            { "name": "Jonathan Ramos", "image": "/images/jonathan-ramos.jpg" }
+            { "name": "Jonathan Ramos", "image": "" }
           ],
           "deputies": [
-            { "name": "Melissa Uy", "image": "/images/melissa-uy.jpg" }
+            { "name": "Melissa Uy", "image": "" }
           ],
-          "associates": ["Christian Ong", "Fiona Go"]
+          "associates": [
+            { "name": "Christian Ong", "image": "" },
+            { "name": "Fiona Go", "image": "" }
+          ]
         }
       ]
     },
@@ -167,20 +199,26 @@
         {
           "name": "Participant Management",
           "heads": [
-            { "name": "Hannah Dizon", "image": "/images/hannah-dizon.jpg" }
+            { "name": "Hannah Dizon", "image": "" }
           ],
           "deputies": [
-            { "name": "Raymond Tan", "image": "/images/raymond-tan.jpg" }
+            { "name": "Raymond Tan", "image": "" }
           ],
-          "associates": ["Michelle Choi", "Andrew Sy"]
+          "associates": [
+            { "name": "Michelle Choi", "image": "" },
+            { "name": "Andrew Sy", "image": "" }
+          ]
         },
         {
           "name": "Talent Management",
           "heads": [
-            { "name": "Isabel Gomez", "image": "/images/isabel-gomez.jpg" }
+            { "name": "Isabel Gomez", "image": "" }
           ],
           "deputies": [],
-          "associates": ["Kevin Uy", "Sophia Lee"]
+          "associates": [
+            { "name": "Kevin Uy", "image": "" },
+            { "name": "Sophia Lee", "image": "" }
+          ]
         }
       ]
     }
