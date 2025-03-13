@@ -16,6 +16,7 @@ import BasicInfoStep from './steps/basic-info-step';
 import PersonalityStep from './steps/personality-step';
 import CheckoutStep from './steps/checkout-step';
 import SuccessStep from './steps/success-step';
+import DiscountEligibilityStep from './steps/discount-eligibility-step';
 
 export default function ApplicationForm() {
   const { toast } = useToast();
@@ -31,8 +32,11 @@ export default function ApplicationForm() {
     phone: '',
     age: '',
     occupation: '',
-    school_info: '',
+    school: '',
+    year_and_course: '',
     attended_before: false,
+    is_scholar_or_ama: false,
+    is_atenean: false,
 
     engagement: {
       different_values: 3,
@@ -45,14 +49,16 @@ export default function ApplicationForm() {
     registration_type: 'single', // single, group
     additional_attendees: [],
     accepted_terms: false,
-    is_scholar_or_ama: false,
     cost: 0,
   });
+
+  console.log(formData);
 
   const [errors, setErrors] = useState({
     basicInfo: {},
     personality: {},
     checkout: {},
+    discountEligibility: {},
   });
 
   const initialState = {};
@@ -69,9 +75,7 @@ export default function ApplicationForm() {
         variant: 'success',
       });
 
-      if (currentStep === 3) {
-        setCurrentStep(4);
-      }
+      setCurrentStep(5);
       setIsSubmitting(false);
     } else if (state?.error) {
       toast({
@@ -81,9 +85,9 @@ export default function ApplicationForm() {
       });
       setIsSubmitting(false);
     }
-  }, [state, toast, currentStep]);
+  }, [state, toast]);
 
-  const totalSteps = 4;
+  const totalSteps = 5;
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
@@ -114,13 +118,13 @@ export default function ApplicationForm() {
       });
       setErrors({ ...errors, basicInfo: newErrors });
     } else if (currentStep === 2) {
-      const newErrors = { ...errors.personality };
+      const newErrors = { ...errors.basicInfo };
       Object.keys(stepData).forEach((field) => {
         if (stepData[field] && newErrors[field]) {
           delete newErrors[field];
         }
       });
-      setErrors({ ...errors, personality: newErrors });
+      setErrors({ ...errors, basicInfo: newErrors });
     } else if (currentStep === 3) {
       const newErrors = { ...errors.checkout };
       Object.keys(stepData).forEach((field) => {
@@ -135,15 +139,20 @@ export default function ApplicationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentStep < totalSteps - 1) {
+    if (currentStep < 4) {
       handleNext();
-    } else {
+    } else if (currentStep === 4) {
       if (validateCurrentStep()) {
         setIsSubmitting(true);
 
         const formDataObj = new FormData();
 
-        Object.entries(formData).forEach(([key, value]) => {
+        const dataToSubmit = {
+          ...formData,
+          additional_attendees: formData.registration_type === 'group' ? formData.additional_attendees : []
+        };
+
+        Object.entries(dataToSubmit).forEach(([key, value]) => {
           if (typeof value === 'object' && value !== null) {
             formDataObj.append(key, JSON.stringify(value));
           } else {
@@ -162,73 +171,131 @@ export default function ApplicationForm() {
     let isValid = true;
     const newErrors = {};
 
+    // Skip validation for success step
+    if (currentStep === 5) {
+      return true;
+    }
+
     if (currentStep === 1) {
-      if (!formData.first_name) {
-        newErrors.first_name = 'First name is required';
+      // Discount eligibility validation - at least one option must be selected
+      const hasDiscount = formData.is_scholar_or_ama || formData.is_atenean;
+      const noDiscountSelected = !formData.is_scholar_or_ama && !formData.is_atenean;
+      if (!hasDiscount && !noDiscountSelected) {
+        newErrors.discount = 'Please select your registration category';
         isValid = false;
       }
-      if (!formData.last_name) {
-        newErrors.last_name = 'Last name is required';
-        isValid = false;
+      setErrors({ ...errors, discountEligibility: newErrors });
+    } else if (currentStep === 2) {
+      // Basic info validation
+      const requiredFields = {
+        first_name: 'First name is required',
+        last_name: 'Last name is required',
+        email: 'Email is required',
+        phone: 'Phone number is required',
+        age: 'Age is required',
+        occupation: 'Occupation is required',
+      };
+
+      // Add school fields as required for Ateneans and Scholar/AMA
+      if (formData.is_atenean || formData.is_scholar_or_ama) {
+        requiredFields.school = 'School is required';
+        requiredFields.year_and_course = 'Year and Course is required';
       }
-      if (!formData.email) {
-        newErrors.email = 'Email is required';
-        isValid = false;
-      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        newErrors.email = 'Please enter a valid email address';
-        isValid = false;
+
+      Object.entries(requiredFields).forEach(([field, message]) => {
+        if (!formData[field]) {
+          newErrors[field] = message;
+          isValid = false;
+        }
+      });
+
+      // Email format validation
+      if (formData.email) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+          newErrors.email = 'Please enter a valid email address';
+          isValid = false;
+        } else if ((formData.is_atenean || formData.is_scholar_or_ama) && !formData.email.toLowerCase().endsWith('.ateneo.edu')) {
+          newErrors.email = 'Registration requires an ateneo.edu email address';
+          isValid = false;
+        }
       }
-      if (!formData.phone) {
-        newErrors.phone = 'Phone number is required';
-        isValid = false;
+
+      // Age validation
+      if (formData.age) {
+        const age = parseInt(formData.age);
+        if (isNaN(age) || age < 13 || age > 120) {
+          newErrors.age = 'Please enter a valid age between 13 and 120';
+          isValid = false;
+        }
       }
-      if (!formData.age) {
-        newErrors.age = 'Age is required';
-        isValid = false;
-      }
-      if (!formData.occupation) {
-        newErrors.occupation = 'Occupation is required';
+
+      // Phone number validation
+      if (formData.phone && !/^[+]?[\d\s-()]{8,}$/.test(formData.phone)) {
+        newErrors.phone = 'Please enter a valid phone number';
         isValid = false;
       }
 
+      // Year and Course validation
+      if ((formData.is_atenean || formData.is_scholar_or_ama) && formData.year_and_course) {
+        if (!/^[1-5]\s+[A-Za-z\s]+$/.test(formData.year_and_course)) {
+          newErrors.year_and_course = 'Please enter a valid year and course (e.g., 3 BS Computer Science)';
+          isValid = false;
+        }
+      }
+
       setErrors({ ...errors, basicInfo: newErrors });
-    } else if (currentStep === 2) {
-      if (!formData.ted_talk_topic) {
-        newErrors.ted_talk_topic = 'Please share your TED Talk topic idea';
+    } else if (currentStep === 3) {
+      // Personality step validation
+      if (!formData.ted_talk_topic || formData.ted_talk_topic.trim().length < 10) {
+        newErrors.ted_talk_topic = 'Please share your TED Talk topic idea (minimum 10 characters)';
         isValid = false;
       }
+
+      // Validate engagement scores
+      const engagementFields = ['different_values', 'failure_learning', 'different_experiences'];
+      engagementFields.forEach(field => {
+        if (!formData.engagement[field] || formData.engagement[field] < 1 || formData.engagement[field] > 5) {
+          newErrors[field] = 'Please rate your engagement level (1-5)';
+          isValid = false;
+        }
+      });
+
       setErrors({ ...errors, personality: newErrors });
-    } else if (currentStep === 3) {
+    } else if (currentStep === 4) {
+      // Checkout step validation
       if (!formData.accepted_terms) {
         newErrors.acceptedTerms = 'You must accept the terms to continue';
         isValid = false;
       }
 
-      if (
-        formData.registration_type === 'group' &&
-        formData.additional_attendees.length > 0
-      ) {
-        const attendeeErrors = {};
-
-        formData.additional_attendees.forEach((attendee, index) => {
-          if (!attendee.first_name || !attendee.last_name || !attendee.email) {
-            attendeeErrors[attendee.id] =
-              'Please complete all fields for this attendee';
-            isValid = false;
+      if (formData.registration_type === 'group') {
+        if (!formData.additional_attendees || formData.additional_attendees.length === 0) {
+          newErrors.additionalAttendees = 'Group registration requires at least one additional attendee';
+          isValid = false;
+        } else {
+          const attendeeErrors = {};
+          formData.additional_attendees.forEach((attendee, index) => {
+            if (!attendee.first_name || !attendee.last_name || !attendee.email) {
+              attendeeErrors[index] = 'Please complete all fields for this attendee';
+              isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(attendee.email)) {
+              attendeeErrors[index] = 'Please enter a valid email address for this attendee';
+              isValid = false;
+            }
+          });
+          if (Object.keys(attendeeErrors).length > 0) {
+            newErrors.attendees = attendeeErrors;
           }
-        });
-
-        if (Object.keys(attendeeErrors).length > 0) {
-          newErrors.attendees = attendeeErrors;
         }
       }
+
       setErrors({ ...errors, checkout: newErrors });
     }
 
     if (!isValid) {
       toast({
-        title: 'Please fix the errors',
-        description: 'There are some fields that need your attention',
+        title: 'Validation Error',
+        description: 'Please fix the highlighted fields before proceeding',
         variant: 'destructive',
       });
     }
@@ -239,17 +306,21 @@ export default function ApplicationForm() {
   const getStepTitle = () => {
     switch (currentStep) {
       case 1:
-        return 'Tell us about yourself';
+        return 'Discount Eligibility';
       case 2:
-        return 'Share your thoughts and perspectives';
+        return 'Tell us about yourself';
       case 3:
-        return 'Complete your registration';
+        return 'Share your thoughts and perspectives';
       case 4:
+        return 'Complete your registration';
+      case 5:
         return 'Application submitted';
       default:
         return '';
     }
   };
+
+  console.log(currentStep)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
@@ -265,10 +336,12 @@ export default function ApplicationForm() {
               </div>
             </div>
             <CardContent className="p-8 relative z-10">
-              <SteppedProgress
-                numSteps={totalSteps - 1}
-                stepsComplete={currentStep}
-              />
+              {currentStep < 5 && (
+                <SteppedProgress
+                  numSteps={4}
+                  stepsComplete={currentStep}
+                />
+              )}
 
               <form
                 action={formAction}
@@ -286,14 +359,23 @@ export default function ApplicationForm() {
                     {getStepTitle()}
                   </h2>
                   <p className="text-sm text-gray-400">
-                    {currentStep === 1 && "We need some information to get to know you better"}
-                    {currentStep === 2 && "Share your perspective and ideas with us"}
-                    {currentStep === 3 && "Choose your registration type and complete payment details"}
-                    {currentStep === 4 && "Thank you for your application"}
+                    {currentStep === 1 && "Select your registration category to determine your discount eligibility"}
+                    {currentStep === 2 && "We need some information to get to know you better"}
+                    {currentStep === 3 && "Share your perspective and ideas with us"}
+                    {currentStep === 4 && "Choose your registration type and complete payment details"}
+                    {currentStep === 5 && "Thank you for your application"}
                   </p>
                 </div>
 
                 {currentStep === 1 && (
+                  <DiscountEligibilityStep
+                    formData={formData}
+                    updateFormData={updateFormData}
+                    errors={errors.discountEligibility}
+                  />
+                )}
+
+                {currentStep === 2 && (
                   <BasicInfoStep
                     formData={formData}
                     updateFormData={updateFormData}
@@ -301,7 +383,7 @@ export default function ApplicationForm() {
                   />
                 )}
 
-                {currentStep === 2 && (
+                {currentStep === 3 && (
                   <PersonalityStep
                     formData={formData}
                     updateFormData={updateFormData}
@@ -309,7 +391,7 @@ export default function ApplicationForm() {
                   />
                 )}
 
-                {currentStep === 3 && (
+                {currentStep === 4 && (
                   <CheckoutStep
                     formData={formData}
                     updateFormData={updateFormData}
@@ -317,9 +399,9 @@ export default function ApplicationForm() {
                   />
                 )}
 
-                {currentStep === 4 && <SuccessStep formData={formData} />}
+                {currentStep === 5 && <SuccessStep formData={formData} />}
 
-                {currentStep < totalSteps && (
+                {currentStep < 5 && (
                   <div className="flex items-center justify-end gap-3 pt-8 border-t border-gray-800">
                     {currentStep > 1 && (
                       <button
@@ -360,7 +442,7 @@ export default function ApplicationForm() {
                           </svg>
                           Processing...
                         </span>
-                      ) : currentStep === totalSteps - 1 ? (
+                      ) : currentStep === 4 ? (
                         'Submit Application'
                       ) : (
                         'Next'
