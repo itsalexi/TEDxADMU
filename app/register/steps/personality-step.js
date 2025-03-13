@@ -9,7 +9,6 @@ export default function PersonalityStep({
   updateFormData,
   errors = {},
 }) {
-  console.log(formData)
   const handleEngagementChange = (question, value) => {
     updateFormData({
       ...formData,

@@ -7,11 +7,16 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Trash2, Users, User } from 'lucide-react';
-
-const SINGLE_TICKET_PRICE = 99;
-const GROUP_DISCOUNT_THRESHOLD = 3;
-const GROUP_DISCOUNT_PERCENTAGE = 15;
-const SCHOLAR_AMA_DISCOUNT_PERCENTAGE = 20;
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import {
+  SINGLE_TICKET_PRICE,
+  GROUP_DISCOUNT_THRESHOLD,
+  GROUP_DISCOUNT,
+  SCHOLAR_AMA_DISCOUNT,
+  ATENEAN_DISCOUNT,
+  IS_PRE_SPEAKER_PERIOD,
+  PRE_SPEAKER_DISCOUNT
+} from '@/app/config/registration';
 
 export default function CheckoutStep({
   formData,
@@ -26,11 +31,19 @@ export default function CheckoutStep({
 
   const calculateTotalPrice = (totalAttendees) => {
     let price = SINGLE_TICKET_PRICE * totalAttendees;
-    if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
-      price = price * (1 - GROUP_DISCOUNT_PERCENTAGE / 100);
-    } else if (formData.is_scholar_or_ama) {
-      // Only apply scholar/AMA discount for individual registrations
-      price = price * (1 - SCHOLAR_AMA_DISCOUNT_PERCENTAGE / 100);
+    
+    if (IS_PRE_SPEAKER_PERIOD) {
+      price = price - (PRE_SPEAKER_DISCOUNT * totalAttendees);
+    } else {
+      if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
+        price = price - GROUP_DISCOUNT;
+      } else {
+        if (formData.is_scholar_or_ama) {
+          price = price - (SCHOLAR_AMA_DISCOUNT * totalAttendees);
+        } else if (formData.is_atenean) {
+          price = price - (ATENEAN_DISCOUNT * totalAttendees);
+        }
+      }
     }
     return price;
   };
@@ -42,17 +55,22 @@ export default function CheckoutStep({
     updateFormData({
       ...formData,
       cost: updatedPrice,
+      additional_attendees: formData.registration_type === 'group' ? attendees : []
     });
   }, [attendees]);
 
   const handleRegistrationTypeChange = (value) => {
+    if (value === 'group' && (formData.is_scholar_or_ama || formData.is_atenean)) {
+      return;
+    }
+
     const totalAttendees = value === 'group' ? 1 + attendees.length : 1;
     
-    // Reset scholar/AMA discount when switching to group registration
     const updatedFormData = {
       ...formData,
       registration_type: value,
-      is_scholar_or_ama: value === 'group' ? false : formData.is_scholar_or_ama
+      is_scholar_or_ama: value === 'group' ? false : formData.is_scholar_or_ama,
+      additional_attendees: value === 'group' ? attendees : []
     };
 
     const updatedPrice = calculateTotalPrice(totalAttendees);
@@ -76,26 +94,37 @@ export default function CheckoutStep({
       first_name: '',
       last_name: '',
       email: '',
+      age: '',
+      occupation: '',
+      phone: '',
+      attended_before: false,
+      is_scholar_or_ama: false,
+      is_atenean: false,
+      school: '',
+      year_and_course: ''
     };
 
     const newAttendees = [...attendees, newAttendee];
     setAttendees(newAttendees);
 
-    updateFormData({
-      ...formData,
-      additional_attendees: newAttendees,
-    });
+    if (formData.registration_type === 'group') {
+      updateFormData({
+        ...formData,
+        additional_attendees: newAttendees,
+      });
+    }
   };
 
   const removeAttendee = (id) => {
     const newAttendees = attendees.filter((a) => a.id !== id);
-
     setAttendees(newAttendees);
 
-    updateFormData({
-      ...formData,
-      additional_attendees: newAttendees,
-    });
+    if (formData.registration_type === 'group') {
+      updateFormData({
+        ...formData,
+        additional_attendees: newAttendees,
+      });
+    }
   };
 
   const updateAttendee = (id, field, value) => {
@@ -105,10 +134,12 @@ export default function CheckoutStep({
 
     setAttendees(newAttendees);
 
-    updateFormData({
-      ...formData,
-      additional_attendees: newAttendees,
-    });
+    if (formData.registration_type === 'group') {
+      updateFormData({
+        ...formData,
+        additional_attendees: newAttendees,
+      });
+    }
   };
 
   const totalAttendees =
@@ -150,61 +181,48 @@ export default function CheckoutStep({
                 Standard attendee registration for one person
               </div>
               <div className="font-medium text-right text-indigo-400">
-                ${SINGLE_TICKET_PRICE}
+                ₱{SINGLE_TICKET_PRICE}
               </div>
             </div>
           </div>
 
-          <div className="flex items-start space-x-3 p-5 border border-gray-700 rounded-md hover:bg-white/5 transition-colors">
+          <div className={`flex items-start space-x-3 p-5 border border-gray-700 rounded-md transition-colors ${
+            (formData.is_scholar_or_ama || formData.is_atenean) 
+              ? 'opacity-50 cursor-not-allowed' 
+              : 'hover:bg-white/5'
+          }`}>
             <RadioGroupItem
               value="group"
               id="registration-group"
               className="mt-1 border-gray-600 text-indigo-500"
+              disabled={formData.is_scholar_or_ama || formData.is_atenean}
             />
             <div className="space-y-1 flex-1">
               <div className="flex items-center">
                 <Users className="h-4 w-4 mr-2 text-gray-400" />
                 <Label
                   htmlFor="registration-group"
-                  className="font-medium text-white"
+                  className={`font-medium ${(formData.is_scholar_or_ama || formData.is_atenean) ? 'text-gray-500' : 'text-white'}`}
                 >
                   Group Registration
                 </Label>
               </div>
               <div className="text-sm text-gray-400">
-                Register with friends and save {GROUP_DISCOUNT_PERCENTAGE}% when
-                you register 3 or more attendees!
+                Register multiple attendees to qualify for group discount
               </div>
               <div className="font-medium text-right text-indigo-400">
-                ${SINGLE_TICKET_PRICE} per person
+                ₱{SINGLE_TICKET_PRICE} × number of attendees
               </div>
+              {(formData.is_scholar_or_ama || formData.is_atenean) && (
+                <div className="text-sm text-red-500 mt-1">
+                  Group registration is not available for Ateneans, scholars, or AMA members
+                </div>
+              )}
             </div>
           </div>
         </RadioGroup>
 
-        {formData.registration_type === 'single' && (
-          <div className="mt-4 flex items-center space-x-3 p-4 border border-gray-700 rounded-md">
-            <Checkbox
-              id="scholar_ama"
-              checked={formData.is_scholar_or_ama}
-              onCheckedChange={(checked) => {
-                updateFormData({
-                  ...formData,
-                  is_scholar_or_ama: checked,
-                });
-              }}
-              className="border-gray-600 text-indigo-500"
-            />
-            <div className="space-y-1">
-              <Label htmlFor="scholar_ama" className="font-medium text-white">
-                Scholar / AMA Member Discount
-              </Label>
-              <p className="text-sm text-gray-400">
-                {SCHOLAR_AMA_DISCOUNT_PERCENTAGE}% discount for scholars and AMA members (Individual registration only)
-              </p>
-            </div>
-          </div>
-        )}
+
       </div>
 
       {formData.registration_type === 'group' && (
@@ -319,8 +337,112 @@ export default function CheckoutStep({
                       }
                       required
                       className="bg-white/10 border-gray-700 text-white py-3"
-                      placeholder="email@example.com"
+                      placeholder="your.email@example.com"
                     />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor={`attendee-${attendee.id}-age`}
+                        className="text-gray-300"
+                      >
+                        Age
+                      </Label>
+                      <Input
+                        id={`attendee-${attendee.id}-age`}
+                        type="number"
+                        value={attendee.age || ''}
+                        onChange={(e) =>
+                          updateAttendee(attendee.id, 'age', e.target.value)
+                        }
+                        required
+                        className="bg-white/10 border-gray-700 text-white py-3"
+                        placeholder="Age"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label
+                        htmlFor={`attendee-${attendee.id}-occupation`}
+                        className="text-gray-300"
+                      >
+                        Occupation
+                      </Label>
+                      <Input
+                        id={`attendee-${attendee.id}-occupation`}
+                        value={attendee.occupation || ''}
+                        onChange={(e) =>
+                          updateAttendee(attendee.id, 'occupation', e.target.value)
+                        }
+                        required
+                        className="bg-white/10 border-gray-700 text-white py-3"
+                        placeholder="Profession"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label
+                      htmlFor={`attendee-${attendee.id}-phone`}
+                      className="text-gray-300"
+                    >
+                      Phone Number
+                    </Label>
+                    <Input
+                      id={`attendee-${attendee.id}-phone`}
+                      type="tel"
+                      value={attendee.phone || ''}
+                      onChange={(e) =>
+                        updateAttendee(attendee.id, 'phone', e.target.value)
+                      }
+                      required
+                      className="bg-white/10 border-gray-700 text-white py-3"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+
+                  <div className="space-y-3 bg-white/5 p-5 rounded-md">
+                    <Label className="text-gray-300">
+                      Has this person attended a TEDx event before?
+                    </Label>
+                    <RadioGroup
+                      value={attendee.attended_before ? 'yes' : 'no'}
+                      onValueChange={(value) =>
+                        updateAttendee(
+                          attendee.id,
+                          'attended_before',
+                          value === 'yes'
+                        )
+                      }
+                      className="flex space-x-4 pt-2"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="yes"
+                          id={`attended-yes-${attendee.id}`}
+                          className="border-gray-600 text-red-500"
+                        />
+                        <Label
+                          htmlFor={`attended-yes-${attendee.id}`}
+                          className="text-gray-300"
+                        >
+                          Yes
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="no"
+                          id={`attended-no-${attendee.id}`}
+                          className="border-gray-600 text-red-500"
+                        />
+                        <Label
+                          htmlFor={`attended-no-${attendee.id}`}
+                          className="text-gray-300"
+                        >
+                          No
+                        </Label>
+                      </div>
+                    </RadioGroup>
                   </div>
                 </div>
               ))}
@@ -340,72 +462,76 @@ export default function CheckoutStep({
               Registration Fee ({totalAttendees}{' '}
               {totalAttendees === 1 ? 'attendee' : 'attendees'})
             </span>
-            <span>${SINGLE_TICKET_PRICE * totalAttendees}</span>
+            <span>₱{SINGLE_TICKET_PRICE * totalAttendees}</span>
           </div>
 
-          {isEligibleForDiscount && (
+          {IS_PRE_SPEAKER_PERIOD ? (
             <div className="flex justify-between text-green-400">
-              <span>Group Discount ({GROUP_DISCOUNT_PERCENTAGE}%)</span>
+              <span>Pre-speaker Discount (₱{PRE_SPEAKER_DISCOUNT} off per person)</span>
               <span>
-                -$
-                {(
-                  (SINGLE_TICKET_PRICE *
-                    totalAttendees *
-                    GROUP_DISCOUNT_PERCENTAGE) /
-                  100
-                ).toFixed(2)}
+                -₱{PRE_SPEAKER_DISCOUNT * totalAttendees}
               </span>
             </div>
-          )}
+          ) : (
+            <>
+              {isEligibleForDiscount && (
+                <div className="flex justify-between text-green-400">
+                  <span>Group Discount (₱{GROUP_DISCOUNT} off)</span>
+                  <span>
+                    -₱{GROUP_DISCOUNT}
+                  </span>
+                </div>
+              )}
 
-          {!isEligibleForDiscount && formData.is_scholar_or_ama && formData.registration_type === 'single' && (
-            <div className="flex justify-between text-green-400">
-              <span>Scholar/AMA Discount ({SCHOLAR_AMA_DISCOUNT_PERCENTAGE}%)</span>
-              <span>
-                -$
-                {(
-                  (SINGLE_TICKET_PRICE *
-                    totalAttendees *
-                    SCHOLAR_AMA_DISCOUNT_PERCENTAGE) /
-                  100
-                ).toFixed(2)}
-              </span>
-            </div>
+              {!isEligibleForDiscount && formData.is_scholar_or_ama && (
+                <div className="flex justify-between text-green-400">
+                  <span>Scholar/AMA Discount (₱{SCHOLAR_AMA_DISCOUNT} off per person)</span>
+                  <span>
+                    -₱{SCHOLAR_AMA_DISCOUNT * totalAttendees}
+                  </span>
+                </div>
+              )}
+
+              {!isEligibleForDiscount && formData.is_atenean && !formData.is_scholar_or_ama && (
+                <div className="flex justify-between text-green-400">
+                  <span>Atenean Discount (₱{ATENEAN_DISCOUNT} off per person)</span>
+                  <span>
+                    -₱{ATENEAN_DISCOUNT * totalAttendees}
+                  </span>
+                </div>
+              )}
+            </>
           )}
 
           <div className="border-t border-indigo-700 pt-3 mt-3 flex justify-between font-bold text-white">
             <span>Total</span>
-            <span>${totalPrice.toFixed(2)}</span>
+            <span>₱{totalPrice.toFixed(2)}</span>
           </div>
 
-          <div className="text-sm text-gray-400 pt-3">
+          <div className="text-sm text-gray-400 pt-3 text-bold">
             Payment will be collected after your application is approved. You'll
             receive payment instructions by email.
           </div>
         </div>
       </div>
 
-      <div className="pt-4 flex items-start space-x-3 bg-white/5 p-5 rounded-md">
+      <div className="bg-white/5 p-4 rounded-md flex items-center gap-3">
         <Checkbox
           id="accept-terms"
           checked={formData.accepted_terms}
           onCheckedChange={handleTermsChange}
           required
-          className="border-gray-600 text-indigo-500 mt-1"
+          className="border-gray-600 text-indigo-500"
         />
-        <div className="space-y-1 leading-none">
-          <Label
-            htmlFor="accept-terms"
-            className="text-gray-300 cursor-pointer"
-          >
-            I understand that TEDx Labyrinthine requires a registration fee of $
-            {SINGLE_TICKET_PRICE} per person and agree to proceed with my
-            application.
-          </Label>
-          {errors.accepted_terms && (
-            <p className="text-sm text-red-500 mt-2">{errors.accepted_terms}</p>
-          )}
-        </div>
+        <Label
+          htmlFor="accept-terms"
+          className="text-gray-300 cursor-pointer"
+        >
+          I understand that TEDx AteneodeManilaU requires a registration fee and agree to proceed with my application.
+        </Label>
+        {errors.accepted_terms && (
+          <p className="text-sm text-red-500 mt-2">{errors.accepted_terms}</p>
+        )}
       </div>
 
       <div className="bg-white/5 p-6 rounded-md border border-gray-800">
@@ -413,17 +539,22 @@ export default function CheckoutStep({
           <div className="flex justify-between items-center">
             <div className="text-lg font-medium text-white">Total Price</div>
             <div className="text-2xl font-bold text-indigo-400">
-              ${totalPrice.toFixed(2)}
+              ₱{totalPrice.toFixed(2)}
             </div>
           </div>
           {isEligibleForDiscount && (
             <div className="text-sm text-green-400">
-              Group discount of {GROUP_DISCOUNT_PERCENTAGE}% applied!
+              Group discount of ₱{GROUP_DISCOUNT} applied for registering 3 or more attendees!
             </div>
           )}
-          {!isEligibleForDiscount && formData.is_scholar_or_ama && formData.registration_type === 'single' && (
+          {!isEligibleForDiscount && formData.is_scholar_or_ama && (
             <div className="text-sm text-green-400">
-              Scholar/AMA member discount of {SCHOLAR_AMA_DISCOUNT_PERCENTAGE}% applied!
+              Scholar/AMA member discount of ₱{SCHOLAR_AMA_DISCOUNT} applied!
+            </div>
+          )}
+          {!isEligibleForDiscount && formData.is_atenean && !formData.is_scholar_or_ama && (
+            <div className="text-sm text-green-400">
+              Atenean discount of ₱{ATENEAN_DISCOUNT} applied!
             </div>
           )}
         </div>
