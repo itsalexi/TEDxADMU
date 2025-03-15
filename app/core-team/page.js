@@ -16,13 +16,13 @@ const CoreTeamPage = () => {
     const timer = setTimeout(() => {
       setIsVisible(true);
       console.log("visible true");
-    }, 300);
+    }, 100);
 
     // Set up intersection observer for scroll animations
     const observerOptions = {
       root: null, // viewport
       rootMargin: "0px",
-      threshold: 0.2, // 15% of the element needs to be visible
+      threshold: 0.15, // 15% of the element needs to be visible
     };
 
     const handleIntersect = (entries, observer) => {
@@ -81,7 +81,7 @@ const CoreTeamPage = () => {
           <div className="relative z-10 flex flex-col items-center">
             {/* Core Team Header */}
             <div
-              className={`text-center mb-10 transform transition-all duration-1000 ease-out ${
+              className={`text-center mb-2 transform transition-all duration-1000 ease-out ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-16"
@@ -90,21 +90,23 @@ const CoreTeamPage = () => {
               <h2 className="text-3xl md:text-5xl text-white font-light">
                 Meet the
               </h2>
-              <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
-                TEDx
-                <span className="text-white font-thin">AteneoDeManilaU</span>
-              </h1>
-              <h1 className="text-4xl md:text-7xl font-bold text-red-500 mb-4">
-                Core Team
-              </h1>
-              <p className="text-lg text-white">
+              <div className="text-3xl md:text-6xl text-center">
+                <h1 className="font-bold text-red-500">
+                  TEDx
+                  <span className="text-white font-thin">AteneoDeManilaU</span>
+                </h1>
+                <h1 className="text-4xl md:text-7xl font-bold text-red-500 mb-4">
+                  Core Team
+                </h1>
+              </div>
+              <p className="text-sm md:text-lg text-white">
                 Meet the people who made this event possible.
               </p>
             </div>
 
             <div className="mx-8">
               {/* Leadership Team */}
-              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-40 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
+              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-36 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
                 {coreTeamData.leadershipTeam.map((category) => (
                   <div
                     key={category.category}
