@@ -1,19 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import coreTeamData from "./coreTeamMembers.json";
 import CoreTeamCard from "./CoreTeamCard";
-import { useState, useEffect } from "react";
+import ParticlesBackground from "../ParticlesBackground";
 
 const CoreTeamPage = () => {
   const [isVisible, setIsVisible] = useState(false);
+  console.log("CoreTeamPage rendered");
 
+  // Mounting animations
   useEffect(() => {
     // Set a small timeout to ensure the animation triggers after component mounts
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 400);
+      console.log("visible true");
+    }, 300);
 
     // Set up intersection observer for scroll animations
     const observerOptions = {
@@ -55,16 +58,9 @@ const CoreTeamPage = () => {
 
   return (
     <div className="relative min-h-screen bg-black">
-      <div
-        className={`min-h-screen transition-opacity duration-1000 ease-out ${
-          isVisible ? "opacity-100" : "opacity-0"
-        } bg-fixed bg-cover`}
-        style={{
-          background: "url(/starry-background-dense.svg)",
-          backgroundSize: "contain",
-          backgroundAttachment: "fixed",
-        }}
-      >
+      <ParticlesBackground />
+
+      <div className="relative z-10">
         {/* Core Team Section */}
         <div className="relative pt-56">
           {/* Background Image - Sticky within the Section */}
