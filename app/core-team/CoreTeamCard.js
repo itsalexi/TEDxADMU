@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const CoreTeamCard = ({ name, role, image }) => {
   return (
-    <div className="w-36 h-56 aspect-square text-white bg-gray-900 bg-opacity-70 rounded-md flex flex-col items-center justify-center p-4 shadow-lg shadow-red-400 transition-transform transform hover:scale-105">
-      <div className="relative w-24 h-24 mb-3">
+    <div className="w-32 h-52 md:w-36 md:h-56 aspect-square text-white bg-gray-900 bg-opacity-70 rounded-md flex flex-col items-center justify-center p-4 shadow-lg shadow-red-400 transition-transform transform hover:scale-105">
+      <div className="relative w-20 h-20 md:w-24 md:h-24 mb-3">
         {/* Red circular frame always present */}
         <div className="absolute inset-0 rounded-full border-2 border-red-500 p-0.5">
           <div className="relative w-full h-full">
