@@ -18,7 +18,7 @@ const TrippyScroll = () => {
   );
 };
 
-const NUM_SECTIONS = 25;
+const NUM_SECTIONS = 10;
 const PADDING = `${100 / NUM_SECTIONS / 2}vmin`;
 
 const generateSections = (count, color, rotate) => {
@@ -26,7 +26,7 @@ const generateSections = (count, color, rotate) => {
     return <></>;
   }
 
-  const nextColor = color === "#161616" ? "#eb0028" : "#161616";
+  const nextColor = color === "black" ? "#eb0028" : "black";
 
   return (
     <Section rotate={rotate} background={color}>
@@ -37,8 +37,8 @@ const generateSections = (count, color, rotate) => {
 
 const Trippy = ({ rotate }) => {
   return (
-    <motion.div className="absolute inset-0 overflow-hidden bg-[#161616]">
-      {generateSections(0, "#161616", rotate)}
+    <motion.div className="absolute inset-0 overflow-hidden bg-black">
+      {generateSections(0, "black", rotate)}
     </motion.div>
   );
 };
