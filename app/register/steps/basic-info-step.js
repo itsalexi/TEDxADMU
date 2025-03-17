@@ -3,17 +3,27 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function BasicInfoStep({
   formData,
   updateFormData,
   errors = {},
 }) {
+  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     updateFormData({
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleSelectChange = (name, value) => {
+    updateFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
@@ -24,9 +34,11 @@ export default function BasicInfoStep({
     });
   };
 
+  // Show school info only for Atenean or Scholar/AMA
+  const showSchoolInfo = formData.is_atenean || formData.is_scholar_or_ama;
+
   return (
     <div className="space-y-8">
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <Label htmlFor="first_name" className="text-gray-300">
@@ -70,7 +82,7 @@ export default function BasicInfoStep({
 
       <div className="space-y-2">
         <Label htmlFor="email" className="text-gray-300">
-          Email Address
+          Email Address {(formData.is_atenean || formData.is_scholar_or_ama) && <span className="text-red-500">*must be an ateneo.edu email</span>}
         </Label>
         <Input
           id="email"
@@ -82,10 +94,19 @@ export default function BasicInfoStep({
           className={`bg-white/10 border-gray-700 text-white py-3 ${
             errors.email ? 'border-red-500' : ''
           }`}
-          placeholder="your.email@example.com"
+          placeholder={
+            (formData.is_atenean || formData.is_scholar_or_ama)
+              ? "your.name@student.ateneo.edu (or other ateneo.edu domain)" 
+              : "your.email@example.com"
+          }
         />
         {errors.email && (
           <p className="text-sm text-red-500 mt-1">{errors.email}</p>
+        )}
+        {(formData.is_atenean || formData.is_scholar_or_ama) && (
+          <p className="text-xs text-gray-500 mt-1">
+            Accepts any ateneo.edu email domain (e.g., student.ateneo.edu, obf.ateneo.edu)
+          </p>
         )}
       </div>
 
@@ -152,22 +173,60 @@ export default function BasicInfoStep({
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="school_info" className="text-gray-300">
-          School, Year, Course (For Students)
-        </Label>
-        <Input
-          id="school_info"
-          name="school_info"
-          value={formData.school_info}
-          onChange={handleChange}
-          placeholder="Leave blank if not applicable"
-          className="bg-white/10 border-gray-700 text-white py-3"
-        />
-        <p className="text-xs text-gray-500 mt-1">
-          Only fill this if you're currently a student
-        </p>
-      </div>
+      {showSchoolInfo && (
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="school" className="text-gray-300">
+              School
+            </Label>
+            <Select
+              value={formData.school || ''}
+              onValueChange={(value) => handleSelectChange('school', value)}
+            >
+              <SelectTrigger
+                className={`w-full bg-white/10 border-gray-700 text-white ${
+                  errors.school ? 'border-red-500' : ''
+                }`}
+              >
+                <SelectValue placeholder="Select your school" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="SOSE">School of Science and Engineering (SOSE)</SelectItem>
+                <SelectItem value="SOSS">School of Social Sciences (SOSS)</SelectItem>
+                <SelectItem value="SOH">School of Humanities (SOH)</SelectItem>
+                <SelectItem value="JGSOM">School of Management (JGSOM)</SelectItem>
+                <SelectItem value="GBSEALD">School of Education and Learning Design (GBSEALD)</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.school && (
+              <p className="text-sm text-red-500 mt-1">{errors.school}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="year_and_course" className="text-gray-300">
+              Year and Course
+            </Label>
+            <Input
+              id="year_and_course"
+              name="year_and_course"
+              value={formData.year_and_course || ''}
+              onChange={handleChange}
+              required={formData.is_atenean}
+              placeholder="e.g., 3 BS Computer Science"
+              className={`bg-white/10 border-gray-700 text-white py-3 ${
+                errors.year_and_course ? 'border-red-500' : ''
+              }`}
+            />
+            {errors.year_and_course && (
+              <p className="text-sm text-red-500 mt-1">{errors.year_and_course}</p>
+            )}
+            <p className="text-xs text-gray-500 mt-1">
+              Format: Year followed by Course (e.g., 2 BS Management, 4 AB Literature)
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="space-y-3 bg-white/5 p-5 rounded-md">
         <Label className="text-gray-300">
@@ -182,7 +241,7 @@ export default function BasicInfoStep({
             <RadioGroupItem
               value="yes"
               id="attended-yes"
-              className="border-gray-600 text-indigo-500"
+              className="border-gray-600 text-red-500"
             />
             <Label htmlFor="attended-yes" className="text-gray-300">
               Yes
@@ -192,7 +251,7 @@ export default function BasicInfoStep({
             <RadioGroupItem
               value="no"
               id="attended-no"
-              className="border-gray-600 text-indigo-500"
+              className="border-gray-600 text-red-500"
             />
             <Label htmlFor="attended-no" className="text-gray-300">
               No
