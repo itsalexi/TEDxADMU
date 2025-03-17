@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import TrippyScroll from "@/components/TrippyScroll";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => {  
     setMounted(true);
   }, []);
 
@@ -69,10 +70,10 @@ export default function Home() {
           <div className="container relative z-10 px-4 sm:px-6 lg:px-8 ">
             <h1 className="text-3xl sm:text-7xl font-bold text-white mb-8 ml-[40%] flex flex-col">
               <Image src="/tedx-logo.png" alt="TEDx" width={220} height={70} />
-              <span className="block text-6xl sm:text-8xl italic tracking-wider mb-4">
+              <span className="block text-6xl sm:text-8xl tracking-wider mb-4">
                 LABYRINTHINE
               </span>
-              <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mb-12">
+              <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mb-2 font-normal">
                 Unlocking Paths, Inspiring Change
               </p>
               <div
@@ -90,6 +91,10 @@ export default function Home() {
               </div>
             </h1>
           </div>
+        </section>
+
+        <section className="py-20 bg-[#161616]">
+          <TrippyScroll />
         </section>
 
         {/* Event Description */}
