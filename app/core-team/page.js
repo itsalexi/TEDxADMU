@@ -170,8 +170,9 @@ const CoreTeamPage = () => {
                           {/* Associates */}
                           {committee.associates.map((associate) => (
                             <CoreTeamCard
-                              key={associate}
-                              name={associate}
+                              key={associate.name}
+                              name={associate.name}
+                              image={associate.image}
                               role="Associate"
                             />
                           ))}
