@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import Footer from "./Footer";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -151,7 +150,6 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

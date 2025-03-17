@@ -1,7 +1,6 @@
 'use client'
 
 import React from "react";
-import Footer from "../Footer";
 
 const ShopPage = () => {
   return (
@@ -18,7 +17,6 @@ const ShopPage = () => {
           </p>
         </section>
       </main>
-      <Footer />
     </div>
   );
 };

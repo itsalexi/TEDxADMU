@@ -1,0 +1,226 @@
+{
+  "leadershipTeam": [
+    {
+      "category": "Project Supervisors",
+      "members": [
+        { "name": "Kiana Hernandez", "image": "" },
+        { "name": "Paul Go", "image": "" }
+      ]
+    },
+    {
+      "category": "Project Heads",
+      "members": [
+        { "name": "Shell Reyes", "image": "" },
+        { "name": "Kirs Misa", "image": "" },
+        { "name": "Cesca Co", "image": "" },
+        { "name": "Sean Borrega", "image": "" }
+      ]
+    },
+    {
+      "category": "OSG Heads",
+      "members": [
+        { "name": "Cass Cabra", "image": "" },
+        { "name": "Althea Lardizabal", "image": "" }
+      ]
+    },
+    {
+      "category": "Finance Heads",
+      "members": [
+        { "name": "Sophia Salcedo", "image": "" },
+        { "name": "Mikaela Ramos", "image": "" }
+      ]
+    },
+    {
+      "category": "ESG Strategists",
+      "members": [
+        { "name": "Sophia Ong", "image": "" },
+        { "name": "Genei Agero", "image": "" }
+      ]
+    },
+    {
+      "category": "T&D Deputy",
+      "members": [
+        { "name": "Lance Santos", "image": "" }
+      ]
+    },
+    {
+      "category": "Corporate Relations",
+      "members": [
+        { "name": "Gabriel Santos", "image": "" }
+      ]
+    }
+  ],
+  "coreTeam": [
+    {
+      "name": "Programs",
+      "committees": [
+        {
+          "name": "Entertainment",
+          "heads": [{ "name": "Lucas Tan", "image": "" }],
+          "deputies": [
+            { "name": "Isabella Lim", "image": "" }
+          ],
+          "associates": [
+            { "name": "Nathan Uy", "image": "" },
+            { "name": "Celine Go", "image": "" },
+            { "name": "Adrian Sy", "image": "" }
+          ]
+        },
+        {
+          "name": "Stakeholder Management",
+          "heads": [
+            {
+              "name": "Miguel Dela Cruz",
+              "image": ""
+            }
+          ],
+          "deputies": [
+            { "name": "Jasmine Ong", "image": "" }
+          ],
+          "associates": [
+            { "name": "Rafael Chua", "image": "" },
+            { "name": "Patricia Lao", "image": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ADCOMM",
+      "committees": [
+        {
+          "name": "Marketing Strategy",
+          "heads": [
+            { "name": "Ethan Rivera", "image": "" }
+          ],
+          "deputies": [
+            { "name": "Alyssa Gomez", "image": "" }
+          ],
+          "associates": [
+            { "name": "Joanna Tan", "image": "" },
+            { "name": "Kyle Yu", "image": "" },
+            { "name": "Dominic Choi", "image": "" }
+          ]
+        },
+        {
+          "name": "Documentations and Editing",
+          "heads": [
+            { "name": "Andrea Lopez", "image": "" }
+          ],
+          "deputies": [],
+          "associates": [
+            { "name": "Benjamin Chan", "image": "" },
+            { "name": "Veronica Sy", "image": "" }
+          ]
+        },
+        {
+          "name": "Productions",
+          "heads": [
+            { "name": "Matthew Torres", "image": "" }
+          ],
+          "deputies": [],
+          "associates": [
+            { "name": "Samantha Ang", "image": "" },
+            { "name": "Carlo Lim", "image": "" }
+          ]
+        },
+        {
+          "name": "Creatives",
+          "heads": [
+            { "name": "Victoria Yu", "image": "" }
+          ],
+          "deputies": [
+            { "name": "Justin Ramos", "image": "" }
+          ],
+          "associates": [
+            { "name": "Derek Chua", "image": "" },
+            { "name": "Elaine Tan", "image": "" },
+            { "name": "Christine Go", "image": "" }
+          ]
+        },
+        {
+          "name": "Website Development",
+          "heads": [
+            { "name": "Carl Siy", "image": "" }
+          ],
+          "deputies": [],
+          "associates": [
+            { "name": "Alexi Canamo", "image": "" },
+            { "name": "JJ Pardo", "image": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Logistics",
+      "committees": [
+        {
+          "name": "Security Operations",
+          "heads": [
+            {
+              "name": "Nathaniel Santos",
+              "image": ""
+            }
+          ],
+          "deputies": [],
+          "associates": [
+            { "name": "Joshua Tan", "image": "" },
+            { "name": "Clarissa Dy", "image": "" }
+          ]
+        },
+        {
+          "name": "Technical Operations",
+          "heads": [
+            { "name": "Samantha Lee", "image": "" }
+          ],
+          "deputies": [],
+          "associates": [
+            { "name": "Eric Chua", "image": "" },
+            { "name": "Daniella Sy", "image": "" }
+          ]
+        },
+        {
+          "name": "Physical Operations",
+          "heads": [
+            { "name": "Jonathan Ramos", "image": "" }
+          ],
+          "deputies": [
+            { "name": "Melissa Uy", "image": "" }
+          ],
+          "associates": [
+            { "name": "Christian Ong", "image": "" },
+            { "name": "Fiona Go", "image": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PEXP",
+      "committees": [
+        {
+          "name": "Participant Management",
+          "heads": [
+            { "name": "Hannah Dizon", "image": "" }
+          ],
+          "deputies": [
+            { "name": "Raymond Tan", "image": "" }
+          ],
+          "associates": [
+            { "name": "Michelle Choi", "image": "" },
+            { "name": "Andrew Sy", "image": "" }
+          ]
+        },
+        {
+          "name": "Talent Management",
+          "heads": [
+            { "name": "Isabel Gomez", "image": "" }
+          ],
+          "deputies": [],
+          "associates": [
+            { "name": "Kevin Uy", "image": "" },
+            { "name": "Sophia Lee", "image": "" }
+          ]
+        }
+      ]
+    }
+  ]
+}
