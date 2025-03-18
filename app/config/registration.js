@@ -1,13 +1,13 @@
 // Registration pricing and discounts
-export const SINGLE_TICKET_PRICE = 479;
+export const SINGLE_TICKET_PRICE = 480;
 
 // Group registration settings
 export const GROUP_DISCOUNT_THRESHOLD = 3;
-export const GROUP_DISCOUNT = 137;
+export const GROUP_DISCOUNT = 140;
 
 // Individual discounts
-export const SCHOLAR_AMA_DISCOUNT = 69;
-export const ATENEAN_DISCOUNT = 49;
+export const SCHOLAR_AMA_DISCOUNT = 50;
+export const ATENEAN_DISCOUNT = 30;
 
 // Pre-speaker period settings
 export const IS_PRE_SPEAKER_PERIOD = false;
