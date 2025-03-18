@@ -10,6 +10,9 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
   const [lockAnimations, setLockAnimations] = useState([]);
 
   useEffect(() => {
+    // Add class to body to prevent scrolling
+    document.body.style.overflow = 'hidden';
+
     // Initialize with random characters
     const randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-.<>?/";
     let initialText = "";
@@ -33,6 +36,7 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
     
     return () => {
       // Cleanup will be handled within the startRevealAnimation function
+      document.body.style.overflow = 'unset';
     };
   }, []);
 
@@ -109,7 +113,6 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
       setLockedPositions(prev => [...prev, positionToLock]);
       currentIndex++;
       
-
       const variableFactor = Math.random() * 0.5 + 0.5;
       const nextRevealTime = baseCharacterRevealTime * variableFactor;
       
