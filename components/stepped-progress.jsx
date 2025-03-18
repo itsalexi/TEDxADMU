@@ -26,10 +26,10 @@ const Steps = ({ numSteps, stepsComplete }) => {
             {stepNum !== stepArray.length && (
               <div className="w-full h-1.5 rounded-full bg-gray-800 relative">
                 <motion.div
-                  className="absolute top-0 bottom-0 left-0 bg-indigo-600 rounded-full"
+                  className="absolute top-0 bottom-0 left-0 bg-[#eb0028] rounded-full"
                   animate={{ width: isActive ? '100%' : 0 }}
                   transition={{ ease: 'easeIn', duration: 0.3 }}
-                />
+                />  
               </div>
             )}
           </React.Fragment>
@@ -45,7 +45,7 @@ const Step = ({ num, isActive, isPrevious }) => {
       <div
         className={`w-14 h-14 flex items-center justify-center shrink-0 border-2 rounded-full font-semibold text-base relative z-10 transition-colors duration-300 ${
           isActive
-            ? 'border-indigo-600 bg-indigo-600 text-white'
+            ? 'border-[#eb0028] bg-[#eb0028] text-white'
             : 'border-gray-700 text-gray-500'
         }`}
       >
@@ -81,7 +81,7 @@ const Step = ({ num, isActive, isPrevious }) => {
         </AnimatePresence>
       </div>
       {isActive && (
-        <div className="absolute z-0 -inset-2 bg-indigo-900/50 rounded-full animate-pulse" />
+        <div className="absolute z-0 -inset-2 bg-[#eb0028]/50 rounded-full animate-pulse" />
       )}
     </div>
   );
