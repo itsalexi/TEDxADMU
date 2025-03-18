@@ -4,6 +4,7 @@ import React from "react";
 import ProductCard from "./ProductCard";
 import Image from "next/image";
 import Link from "next/link";
+import { SmoothScrollHero } from "@/components/smoothScroll";
 
 const ShopPage = () => {
   const link = "https://google.com"; // link to google forms
@@ -52,6 +53,7 @@ const ShopPage = () => {
         </div>
 
         {/* Catalog Section */}
+        <SmoothScrollHero />
         <h1 className="text-4xl sm:text-6xl font-bold text-center my-12">
           Shop at TEDxAdMU
         </h1>
