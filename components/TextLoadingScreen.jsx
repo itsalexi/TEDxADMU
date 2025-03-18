@@ -26,7 +26,7 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
     // Not all characters take the same time to "crack"
     // Some are discovered quickly, others take longer
     const baseCharacterRevealTime = totalDuration / word.length;
-    const shuffleInterval = 30; // faster shuffling for more intensity
+    const shuffleInterval = 50; // faster shuffling for more intensity
     
     // Start the animation immediately
     startRevealAnimation(baseCharacterRevealTime, shuffleInterval);
@@ -124,24 +124,24 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
+    <div className={`fixed inset-0 flex items-center justify-center bg-black z-50 transition-opacity duration-500 ${isComplete ? 'opacity-0' : 'opacity-100'}`}>
       <MazeBackground />
       <div className="text-center">
-        <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-mono font-bold tracking-wider">
+        <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-wider">
           {displayText.split('').map((char, index) => (
             <span
               key={index}
               className={`inline-block transition-all duration-200 ${
                 lockedPositions.includes(index) 
-                  ? "text-red-500" 
-                  : "text-white"
+                  ? "text-white" 
+                  : "text-red-500"
               } ${
                 lockAnimations[index] && !isComplete
                   ? "animate-pulse scale-110" 
                   : ""
               } ${
                 isComplete 
-                  ? "text-red-500" 
+                  ? "text-white" 
                   : ""
               }`}
             >
@@ -149,7 +149,6 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
             </span>
           ))}
         </div>
-
       </div>
     </div>
   );

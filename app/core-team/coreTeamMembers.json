@@ -10,24 +10,21 @@
     {
       "category": "Project Heads",
       "members": [
-        { "name": "Shell Reyes", "image": "" },
-        { "name": "Kirs Misa", "image": "" },
-        { "name": "Cesca Co", "image": "" },
+        { "name": "Julianne Reyes", "image": "" },
+        { "name": "Kirstenn Misa", "image": "" },
+        { "name": "Francesca Co", "image": "" },
         { "name": "Sean Borrega", "image": "" }
       ]
     },
     {
       "category": "OSG Heads",
-      "members": [
-        { "name": "Cass Cabra", "image": "" },
-        { "name": "Althea Lardizabal", "image": "" }
-      ]
+      "members": [{ "name": "Cris Gabriel", "image": "" }]
     },
     {
       "category": "Finance Heads",
       "members": [
         { "name": "Sophia Salcedo", "image": "" },
-        { "name": "Mikaela Ramos", "image": "" }
+        { "name": "Mikaila Ramos", "image": "" }
       ]
     },
     {
@@ -39,15 +36,7 @@
     },
     {
       "category": "T&D Deputy",
-      "members": [
-        { "name": "Lance Santos", "image": "" }
-      ]
-    },
-    {
-      "category": "Corporate Relations",
-      "members": [
-        { "name": "Gabriel Santos", "image": "" }
-      ]
+      "members": [{ "name": "Lance Santos", "image": "" }]
     }
   ],
   "coreTeam": [
@@ -56,30 +45,41 @@
       "committees": [
         {
           "name": "Entertainment",
-          "heads": [{ "name": "Lucas Tan", "image": "" }],
+          "heads": [{ "name": "Felisa Aquino", "image": "" }],
           "deputies": [
-            { "name": "Isabella Lim", "image": "" }
+            { "name": "MJ Binuhe", "image": "" },
+            { "name": "Vonn Puga", "image": "" }
           ],
           "associates": [
-            { "name": "Nathan Uy", "image": "" },
-            { "name": "Celine Go", "image": "" },
-            { "name": "Adrian Sy", "image": "" }
+            { "name": "Kendrick Reyes", "image": "" },
+            { "name": "Moriah Castrodes", "image": "" },
+            { "name": "Stephanie Domingo", "image": "" },
+            { "name": "Muskan Budhrani", "image": "" },
+            { "name": "Matteo Vistan", "image": "" },
+            { "name": "Ysobel Reyes", "image": "" },
+            { "name": "Lavina Chua", "image": "" },
+            { "name": "Andrew Lim", "image": "" },
+            { "name": "Hans Periodico", "image": "" }
           ]
         },
         {
           "name": "Stakeholder Management",
           "heads": [
-            {
-              "name": "Miguel Dela Cruz",
-              "image": ""
-            }
+            { "name": "Joseph Antes", "image": "" },
+            { "name": "Angelyn Ganipan", "image": "" }
           ],
           "deputies": [
-            { "name": "Jasmine Ong", "image": "" }
+            { "name": "Charmaigne Matulac", "image": "" },
+            { "name": "Alexia Tan", "image": "" }
           ],
           "associates": [
-            { "name": "Rafael Chua", "image": "" },
-            { "name": "Patricia Lao", "image": "" }
+            { "name": "Ava Dumaup", "image": "" },
+            { "name": "Nathan Ng", "image": "" },
+            { "name": "Guillianne Mercado", "image": "" },
+            { "name": "Jacinda Ng", "image": "" },
+            { "name": "Jilliana Meriño", "image": "" },
+            { "name": "Coleen Ditan", "image": "" },
+            { "name": "Mischa Lim", "image": "" }
           ]
         }
       ]
@@ -89,63 +89,79 @@
       "committees": [
         {
           "name": "Marketing Strategy",
-          "heads": [
-            { "name": "Ethan Rivera", "image": "" }
-          ],
+          "heads": [{ "name": "Florence Estaño", "image": "" }],
           "deputies": [
-            { "name": "Alyssa Gomez", "image": "" }
+            { "name": "Maxine Gutierrez", "image": "" },
+            { "name": "Avielle Dizon", "image": "" }
           ],
           "associates": [
-            { "name": "Joanna Tan", "image": "" },
-            { "name": "Kyle Yu", "image": "" },
-            { "name": "Dominic Choi", "image": "" }
+            { "name": "Linette Ang", "image": "" },
+            { "name": "Ma. Andres", "image": "" },
+            { "name": "Geelyn Avanceña", "image": "" },
+            { "name": "Elijah Fernandez", "image": "" },
+            { "name": "Rod Fermantez", "image": "" },
+            { "name": "Geryna Abarcar", "image": "" }
           ]
         },
         {
           "name": "Documentations and Editing",
-          "heads": [
-            { "name": "Andrea Lopez", "image": "" }
+          "heads": [{ "name": "Vian Patricio", "image": "" }],
+          "deputies": [
+            { "name": "Emiko Carlos", "image": "" },
+            { "name": "Janmarc Josef", "image": "" }
           ],
-          "deputies": [],
           "associates": [
-            { "name": "Benjamin Chan", "image": "" },
-            { "name": "Veronica Sy", "image": "" }
+            { "name": "Alexandrielle Gaspar", "image": "" },
+            { "name": "Joeren Yap", "image": "" },
+            { "name": "Kim Umayam", "image": "" },
+            { "name": "Antonio Mauricio", "image": "" },
+            { "name": "Rylee Aquino", "image": "" },
+            { "name": "Aaron Magpantay", "image": "" }
           ]
         },
         {
           "name": "Productions",
           "heads": [
-            { "name": "Matthew Torres", "image": "" }
+            { "name": "Anika Ledesma", "image": "" },
+            { "name": "Nirmala Singgaran", "image": "" }
           ],
-          "deputies": [],
+          "deputies": [{ "name": "Aretha Rillera", "image": "" }],
           "associates": [
-            { "name": "Samantha Ang", "image": "" },
-            { "name": "Carlo Lim", "image": "" }
+            { "name": "Alexandra Villanueva", "image": "" },
+            { "name": "Mika Marasigan", "image": "" },
+            { "name": "Amanda Mediana", "image": "" },
+            { "name": "Marcus Duran", "image": "" },
+            { "name": "Maryken Guevarra", "image": "" },
+            { "name": "Sayde Pajarillaga", "image": "" }
           ]
         },
         {
           "name": "Creatives",
           "heads": [
-            { "name": "Victoria Yu", "image": "" }
+            { "name": "Mikaela Tan", "image": "" },
+            { "name": "Camille See", "image": "" }
           ],
           "deputies": [
-            { "name": "Justin Ramos", "image": "" }
+            { "name": "Ritika Kalia", "image": "" },
+            { "name": "Julianne Go", "image": "" }
           ],
           "associates": [
-            { "name": "Derek Chua", "image": "" },
-            { "name": "Elaine Tan", "image": "" },
-            { "name": "Christine Go", "image": "" }
+            { "name": "Arianna Reyes", "image": "" },
+            { "name": "Niccolo Tuazon", "image": "" },
+            { "name": "Bettina Manuel", "image": "" },
+            { "name": "Faith Jimenez", "image": "" },
+            { "name": "Angelica Dabon", "image": "" },
+            { "name": "Alliyah Rodriguez", "image": "" },
+            { "name": "Amanda Perez", "image": "" }
           ]
         },
         {
           "name": "Website Development",
-          "heads": [
-            { "name": "Carl Siy", "image": "" }
-          ],
+          "heads": [{ "name": "Carl Siy", "image": "" }],
           "deputies": [],
           "associates": [
             { "name": "Alexi Canamo", "image": "" },
-            { "name": "JJ Pardo", "image": "" }
+            { "name": "John Pardo", "image": "" }
           ]
         }
       ]
@@ -155,40 +171,53 @@
       "committees": [
         {
           "name": "Security Operations",
-          "heads": [
-            {
-              "name": "Nathaniel Santos",
-              "image": ""
-            }
+          "heads": [{ "name": "Rynne Barrios", "image": "" }],
+          "deputies": [
+            { "name": "Mikael Sebastian", "image": "" },
+            { "name": "Raymond Reyes", "image": "" }
           ],
-          "deputies": [],
           "associates": [
-            { "name": "Joshua Tan", "image": "" },
-            { "name": "Clarissa Dy", "image": "" }
+            { "name": "Andrea Ganancial", "image": "" },
+            { "name": "Julianne Sales", "image": "" },
+            { "name": "Patrick Osmeña", "image": "" },
+            { "name": "Uan Alindayo", "image": "" },
+            { "name": "Ethan Sarte", "image": "" },
+            { "name": "Sean Zeng", "image": "" },
+            { "name": "Anjeline Rodriguez", "image": "" }
           ]
         },
         {
           "name": "Technical Operations",
-          "heads": [
-            { "name": "Samantha Lee", "image": "" }
+          "heads": [{ "name": "Angelique Telan", "image": "" }],
+          "deputies": [
+            { "name": "Earl Tañedo", "image": "" },
+            { "name": "Benn Tiope", "image": "" }
           ],
-          "deputies": [],
           "associates": [
-            { "name": "Eric Chua", "image": "" },
-            { "name": "Daniella Sy", "image": "" }
+            { "name": "Dana Lapitan", "image": "" },
+            { "name": "Ellaine Edles", "image": "" },
+            { "name": "Riyen Ang", "image": "" },
+            { "name": "Alexandra Avila", "image": "" },
+            { "name": "Nicole Palo", "image": "" },
+            { "name": "Nicholas Sy", "image": "" },
+            { "name": "Julianne Lucio", "image": "" }
           ]
         },
         {
           "name": "Physical Operations",
-          "heads": [
-            { "name": "Jonathan Ramos", "image": "" }
-          ],
+          "heads": [{ "name": "Daphne Cunanan", "image": "" }],
           "deputies": [
-            { "name": "Melissa Uy", "image": "" }
+            { "name": "Alexander Uy", "image": "" },
+            { "name": "Lucia Sulay", "image": "" }
           ],
           "associates": [
-            { "name": "Christian Ong", "image": "" },
-            { "name": "Fiona Go", "image": "" }
+            { "name": "Bianca Ledesma", "image": "" },
+            { "name": "Brandon Kho", "image": "" },
+            { "name": "Shane Tan", "image": "" },
+            { "name": "Sophia Bautista", "image": "" },
+            { "name": "Katrice Mendoza", "image": "" },
+            { "name": "Maia Punzalan", "image": "" },
+            { "name": "Jhamie Aranzanso", "image": "" }
           ]
         }
       ]
@@ -198,26 +227,54 @@
       "committees": [
         {
           "name": "Participant Management",
-          "heads": [
-            { "name": "Hannah Dizon", "image": "" }
-          ],
+          "heads": [{ "name": "Joyce Cesicar", "image": "" }],
           "deputies": [
-            { "name": "Raymond Tan", "image": "" }
+            { "name": "Juan Bautista", "image": "" },
+            { "name": "Ulrich Abcede", "image": "" },
+            { "name": "Jaime Cuadrante", "image": "" }
           ],
           "associates": [
-            { "name": "Michelle Choi", "image": "" },
-            { "name": "Andrew Sy", "image": "" }
+            { "name": "Raphael Borja", "image": "" },
+            { "name": "Hans Elma", "image": "" },
+            { "name": "Regine Lim", "image": "" }
           ]
         },
         {
           "name": "Talent Management",
+          "heads": [],
+          "deputies": [],
+          "associates": [
+            { "name": "Ma. Martija", "image": "" },
+            { "name": "Abigail Agbayani", "image": "" },
+            { "name": "Jersey Gutierrez", "image": "" },
+            { "name": "Marco Lantin", "image": "" },
+            { "name": "Amanda Limwan", "image": "" },
+            { "name": "Bienvenido Gonzales", "image": "" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Corporate Relations",
+      "committees": [
+        {
+          "name": "Corporate Relations",
           "heads": [
-            { "name": "Isabel Gomez", "image": "" }
+            { "name": "Siegfrid Luis", "image": "" },
+            { "name": "Enrico Castillo", "image": "" },
+            { "name": "Ryan Dela Cruz", "image": "" }
           ],
           "deputies": [],
           "associates": [
-            { "name": "Kevin Uy", "image": "" },
-            { "name": "Sophia Lee", "image": "" }
+            { "name": "Andre Dizon", "image": "" },
+            { "name": "Shadrach Manlapaz", "image": "" },
+            { "name": "Rosen Narciso", "image": "" },
+            { "name": "Sean Te", "image": "" },
+            { "name": "Sebastian Pansuelo", "image": "" },
+            { "name": "Jaymee Yeo", "image": "" },
+            { "name": "Sage Tsai", "image": "" },
+            { "name": "Maria De Castro", "image": "" },
+            { "name": "Gabby Pagunsan", "image": "" }
           ]
         }
       ]

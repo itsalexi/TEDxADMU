@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-black to-gray-900 text-white py-16">
+    <footer className="relative bg-gradient-to-b from-black to-gray-900 text-white py-16 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Logo and Tagline */}
