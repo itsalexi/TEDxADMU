@@ -8,17 +8,22 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="top-0 w-full z-50 absolute p-10">
+      <nav className="top-0 w-full z-50 absolute p-4 sm:p-6 md:p-8 lg:p-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0">
               <Link href="/">
-                <Image
-                  src="/logo-white.png"
-                  alt="TEDx"
-                  width={300}
-                  height={0}
-                />
+                {/* Responsive logo with different sizes based on screen width */}
+                <div className="w-32 xs:w-40 sm:w-48 md:w-56 lg:w-64 relative">
+                  <Image
+                    src="/logo-white.png"
+                    alt="TEDx"
+                    width={300}
+                    height={100}
+                    className="w-full h-auto"
+                    priority
+                  />
+                </div>
               </Link>
             </div>
             <div className="hidden md:block">
@@ -30,7 +35,12 @@ export default function Navbar() {
                 </Link>
                 <Link href="/about">
                   <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
-                    About
+                    About TEDx
+                  </span>
+                </Link>
+                <Link href="/core-team">
+                  <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
+                    Get to Know the Team
                   </span>
                 </Link>
                 <Link href="/shop">
@@ -49,6 +59,7 @@ export default function Navbar() {
               <button
                 className="text-gray-300 hover:text-red-500 inline-flex items-center justify-center p-2 rounded-md transition duration-300"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle menu"
               >
                 <svg
                   className="h-6 w-6"
@@ -88,14 +99,19 @@ export default function Navbar() {
               About
             </span>
           </Link>
+          <Link href="/core-team">
+            <span className="text-gray-300 hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">
+              Get to Know the Team
+            </span>
+          </Link>
           <Link href="/shop">
             <span className="text-gray-300 hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">
               Shop
             </span>
           </Link>
-          <Link href="/apply">
+          <Link href="/register">
             <span className="bg-red-600 text-white hover:bg-red-700 block px-3 py-2 rounded-md text-base font-medium cursor-pointer">
-              Apply Now
+              Register Now
             </span>
           </Link>
         </div>
