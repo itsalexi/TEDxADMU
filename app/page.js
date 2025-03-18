@@ -178,7 +178,7 @@ export default function Home() {
           id="first-spline-section"
           className="bg-black py-20 relative overflow-hidden"
         >
-          <div className="container mx-auto flex flex-col relative z-10">
+          <div className="container mx-auto flex flex-col relative z-10 max-w-[1200px]">
             <div className="flex-1 pr-4 pl-4 md:pl-0">
               <div className="flex flex-col lg:flex-row items-center">
                 <div className="w-full lg:w-1/2 pr-0 lg:pr-8 mb-10 lg:mb-0">
