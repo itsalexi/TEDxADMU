@@ -17,6 +17,8 @@ export default function Home() {
   const [titleLoaded, setTitleLoaded] = useState(false);
   const [subtitleLoaded, setSubtitleLoaded] = useState(false);
   const [buttonLoaded, setButtonLoaded] = useState(false);
+  const [showSpread, setShowSpread] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {  
     setMounted(true);
@@ -190,17 +192,60 @@ export default function Home() {
         </section>
 
         <section className="py-20 bg-black">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
-              Our Speakers
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {speakers.map((speaker, index) => (
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
+          Our Speakers
+        </h2>
+        
+        {/* Desktop version - overlapping cards with spread functionality */}
+        <div className="hidden md:block">
+          <div className="flex justify-center items-center h-96 relative mb-16">
+            {speakers.map((speaker, index) => {
+              // Calculate spread positioning
+              let leftPosition;
+              let rotation;
+              let scale = 1;
+              let zIndex = index;
+              
+              if (showSpread) {
+                // When button is clicked - spread cards evenly
+                const totalWidth = Math.min(speakers.length * 300, 1200);
+                const increment = totalWidth / speakers.length;
+                leftPosition = `calc(50% - ${totalWidth/2}px + ${index * increment + increment/2}px)`;
+                rotation = 0;
+                zIndex = 10;
+              } else if (hoveredIndex === index) {
+                // When this card is hovered
+                leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                rotation = 0;
+                scale = 1.1;
+                zIndex = 50;
+              } else if (hoveredIndex !== null) {
+                // When another card is hovered - slightly move away
+                const direction = index < hoveredIndex ? -1 : 1;
+                leftPosition = `calc(45% - 32px + ${index * 70}px + ${direction * 20}px)`;
+                rotation = (index - Math.floor(speakers.length / 2)) * 5;
+                zIndex = index;
+              } else {
+                // Default state - fanned out
+                leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                rotation = (index - Math.floor(speakers.length / 2)) * 5;
+                zIndex = index;
+              }
+              
+              return (
                 <div
                   key={index}
-                  className="h-full w-full bg-purple-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-purple-300"
+                  className="absolute h-80 w-64 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
+                  style={{
+                    left: leftPosition,
+                    transform: `translateX(-50%) rotate(${rotation}deg) scale(${scale})`,
+                    zIndex: zIndex,
+                  }}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  <div className="relative h-64 w-full">
+                  <div className="relative h-40 w-full overflow-hidden rounded-t-md">
                     <Image
                       src={speaker.image}
                       alt={speaker.name}
@@ -208,17 +253,52 @@ export default function Home() {
                       objectFit="cover"
                     />
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-3 text-white">
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold mb-2 text-white">
                       {speaker.name}
                     </h3>
-                    <p className="text-gray-400">{speaker.bio}</p>
+                    <p className="text-gray-400 text-sm line-clamp-3">{speaker.bio}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+        
+        <div className="md:hidden space-y-4 max-w-sm mx-auto">
+          {speakers.map((speaker, index) => (
+            <div
+              key={index}
+              className="relative ml-auto h-full w-full bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <div className="relative h-48 w-full overflow-hidden rounded-t-md">
+                <Image
+                  src={speaker.image}
+                  alt={speaker.name}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="text-xl font-semibold mb-2 text-white">
+                  {speaker.name}
+                </h3>
+                <p className="text-gray-400">{speaker.bio}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="text-center mt-8">
+          <button 
+            className="bg-[#eb0028] text-white px-6 py-3 rounded-md hover:bg-red-700 transition-colors"
+            onClick={() => setShowSpread(prev => !prev)}
+          >
+            {showSpread ? "Collapse Cards" : "View All Speakers"}
+          </button>
+        </div>
+      </div>
+    </section>
       </main>
     </div>
   );
