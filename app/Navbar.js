@@ -8,7 +8,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef(null);
 
-  // Handle scroll effect for navbar
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -17,7 +16,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Disable body scroll when menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -104,7 +102,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Modern mobile menu with staggered animations */}
       <div className={`md:hidden fixed inset-0 z-40 backdrop-blur-xl bg-black/95 transform transition-all duration-500 ease-in-out ${
         mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-100%] opacity-0'
       }`} style={{ top: '0', height: '100vh' }}>
