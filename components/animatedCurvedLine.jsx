@@ -42,25 +42,25 @@ const CurvedLineAnimation = () => {
     
     // Trigger the animation by setting the transition and changing the dashoffset
     setTimeout(() => {
-      pathRef.current.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+      pathRef.current.style.transition = 'stroke-dashoffset 2s ease-in-out';
       pathRef.current.style.strokeDashoffset = '0';
     }, 100);
   }, [isVisible]);
   
   return (
-    <div ref={containerRef} className="w-full h-40 flex items-center justify-center">
+    <div ref={containerRef} className="w-full h-60 flex items-center justify-center overflow-hidden">
       <svg 
         ref={svgRef}
-        viewBox="0 0 800 200" 
+        viewBox="0 0 1000 240" 
         className="w-full h-full"
         preserveAspectRatio="xMidYMid meet"
       >
         <path
           ref={pathRef}
-          d="M800,100 Q650,20 500,100 T200,100"
+          d="M0,120 Q200,40 400,120 T800,120 T1000,120"
           fill="none"
           stroke="#e63946"
-          strokeWidth="6"
+          strokeWidth="8"
           strokeLinecap="round"
         />
       </svg>

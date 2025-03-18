@@ -38,18 +38,11 @@ const AnimatedEventDescription = () => {
       }`}
     >
       <p className="text-gray-300 leading-relaxed text-xl">
-        TEDxAdMU Labyrinthine invites you to explore the intricate
-        pathways of human innovation, challenges, and triumphs. Like a
-        labyrinth, our journey through life presents complex choices and
-        unexpected turns.
-      </p>
-      <p className="text-gray-300 leading-relaxed text-xl mt-6">
-        Join us for a day of thought-provoking talks, meaningful
-        connections, and ideas that challenge you to navigate your own
-        labyrinth with renewed purpose. Our speakers bring diverse
-        perspectives on technology, culture, science, and the arts—all
-        connecting to our central theme of finding clarity within
-        complexity.
+      TEDxAdMU Labyrinthine invites you to explore
+      the intricate pathways of human innovation, 
+      challenges, and triumphs. Like a labyrinth, our 
+      journey through life presents complex choices 
+      and unexpected turns.
       </p>
     </div>
   );
