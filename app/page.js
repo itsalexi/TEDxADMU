@@ -9,12 +9,14 @@ import AnimatedEventDescription from "@/components/animatedEventDesc";
 import CurvedLineAnimation from "@/components/animatedCurvedLine";
 import MazeBackground from "@/components/MazeBackground";
 import Spline from "@splinetool/react-spline";
+import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [titleLoaded, setTitleLoaded] = useState(false);
   const [subtitleLoaded, setSubtitleLoaded] = useState(false);
+  const [buttonLoaded, setButtonLoaded] = useState(false);
 
   useEffect(() => {  
     setMounted(true);
@@ -23,11 +25,14 @@ export default function Home() {
     const logoTimer = setTimeout(() => setLogoLoaded(true), 300);
     const titleTimer = setTimeout(() => setTitleLoaded(true), 600);
     const subtitleTimer = setTimeout(() => setSubtitleLoaded(true), 900);
+    // Button appears after subtitle
+    const buttonTimer = setTimeout(() => setButtonLoaded(true), 1200);
     
     return () => {
       clearTimeout(logoTimer);
       clearTimeout(titleTimer);
       clearTimeout(subtitleTimer);
+      clearTimeout(buttonTimer);
     };
   }, []);
 
@@ -113,10 +118,10 @@ export default function Home() {
                   Unlocking Paths, Inspiring Change
                 </p>
                 
-                {/* Button with existing scroll-up animation */}
+                {/* Button - appears only after subtitle is loaded */}
                 <div
                   className={`transition-all duration-1000 ease-out ${
-                    mounted
+                    buttonLoaded
                       ? "opacity-100 transform translate-y-0"
                       : "opacity-0 transform translate-y-10"
                   }`}
@@ -143,7 +148,7 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row items-center">
                 <div className="w-full lg:w-1/2 pr-0 lg:pr-8 mb-10 lg:mb-0">
                   <h2 className="text-3xl sm:text-5xl font-bold mb-5 text-[#eb0028]">
-                    What Awaits You at <br /> TEDxAdMU Labyrinthine?
+                    What Awaits You at <br /> TEDxAteneoeDeManilaU Labyrinthine?
                   </h2>
                   <AnimatedEventDescription />
                 </div>
@@ -170,14 +175,14 @@ export default function Home() {
                 <div className="flex flex-col lg:flex-row items-center">
                 <div className="w-full lg:w-1/2 h-[50vh]">
                     <Spline
-                      scene="https://prod.spline.design/dexYsw9US6fR1uiA/scene.splinecode"
+                      scene="https://prod.spline.design/cnkcTWHRQAPm-gkj/scene.splinecode" 
                     />
                   </div>
                   <div className="w-full lg:w-1/2 pr-0 lg:pr-8 mb-10 lg:mb-0">
                     <h2 className="text-3xl sm:text-5xl font-bold mb-5 text-[#eb0028]">
-                      What Awaits You at <br /> TEDxAdMU Labyrinthine?
+                      Ideas, Connections, Clarity.
                     </h2>
-                    <AnimatedEventDescription />
+                    <AnimatedTeamDescription />
                   </div>
                 </div>
               </div>
