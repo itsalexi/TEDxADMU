@@ -17,6 +17,7 @@ import PersonalityStep from './steps/personality-step';
 import CheckoutStep from './steps/checkout-step';
 import SuccessStep from './steps/success-step';
 import DiscountEligibilityStep from './steps/discount-eligibility-step';
+import ParticlesBackground from '../ParticlesBackground';
 
 export default function ApplicationForm() {
   const { toast } = useToast();
@@ -320,10 +321,11 @@ export default function ApplicationForm() {
     }
   };
 
-  console.log(currentStep)
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
+    <div className="min-h-screen bg-black">
+      <ParticlesBackground />
+
       <main className="container mx-auto px-4 pt-32 pb-16">
         <div className="max-w-4xl mx-auto">
           <Card className="border-none shadow-xl bg-white/5 backdrop-blur-sm relative overflow-hidden">
