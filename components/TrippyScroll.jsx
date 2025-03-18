@@ -18,7 +18,7 @@ const TrippyScroll = () => {
   );
 };
 
-const NUM_SECTIONS = 10;
+const NUM_SECTIONS = 7;
 const PADDING = `${100 / NUM_SECTIONS / 2}vmin`;
 
 const generateSections = (count, color, rotate) => {

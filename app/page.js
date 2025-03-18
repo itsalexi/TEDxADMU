@@ -71,14 +71,14 @@ export default function Home() {
       </Head>
 
       <main>
-        {/* Hero Section with Scroll-Up Animation */}
+       
         <section className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
           <MazeBackground />
       
           <div className="container relative z-10 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
             <div className="w-full max-w-4xl">
               <div className="text-center flex flex-col items-center">
-                {/* Logo with scroll-up animation */}
+           
                 <div 
                   className={`w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
                     logoLoaded 
@@ -96,7 +96,7 @@ export default function Home() {
                   />
                 </div>
               
-                {/* Title with scroll-up animation */}
+              
                 <h1 
                   className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white tracking-wider mb-2 sm:mb-4 transition-all duration-1000 ease-out ${
                     titleLoaded 
@@ -107,7 +107,7 @@ export default function Home() {
                   LABYRINTHINE
                 </h1>
                 
-                {/* Subtitle with scroll-up animation */}
+                
                 <p 
                   className={`text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal px-4 transition-all duration-1000 ease-out ${
                     subtitleLoaded 
@@ -118,7 +118,7 @@ export default function Home() {
                   Unlocking Paths, Inspiring Change
                 </p>
                 
-                {/* Button - appears only after subtitle is loaded */}
+                
                 <div
                   className={`transition-all duration-1000 ease-out ${
                     buttonLoaded
@@ -137,7 +137,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Rest of the components remain unchanged */}
+        
         <section className="bg-[#161616]">
           <TrippyScroll />
         </section>
@@ -188,7 +188,7 @@ export default function Home() {
               </div>
             </div>
         </section>
-        {/* Speakers Section */}
+
         <section className="py-20 bg-black">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
@@ -198,7 +198,7 @@ export default function Home() {
               {speakers.map((speaker, index) => (
                 <div
                   key={index}
-                  className="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-red-900/30 transition-all duration-300 transform hover:-translate-y-1"
+                  className="h-full w-full bg-purple-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-purple-300"
                 >
                   <div className="relative h-64 w-full">
                     <Image
