@@ -50,8 +50,8 @@ export default function Navbar() {
                 </div>
               </Link>
             </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8 text-xl">
+            <div className="hidden lg:block">
+              <div className="ml-10 flex items-baseline xl:space-x-8 xl:text-xl text-base space-x-6">
                 <Link href="/">
                   <span className="text-gray-300 hover:text-red-500 px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300">
                     Home
@@ -79,7 +79,7 @@ export default function Navbar() {
                 </Link>
               </div>
             </div>
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <button
                 className={`${mobileMenuOpen ? 'text-red-500' : 'text-gray-300'} hover:text-red-500 inline-flex items-center justify-center p-2 rounded-md transition-all duration-300`}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -102,7 +102,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <div className={`md:hidden fixed inset-0 z-40 backdrop-blur-xl bg-black/95 transform transition-all duration-500 ease-in-out ${
+      <div className={`lg:hidden fixed inset-0 z-40 backdrop-blur-xl bg-black/95 transform transition-all duration-500 ease-in-out ${
         mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-100%] opacity-0'
       }`} style={{ top: '0', height: '100vh' }}>
         <div className="flex flex-col h-full justify-center items-center space-y-8 pt-16">
