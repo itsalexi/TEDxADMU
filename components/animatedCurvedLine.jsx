@@ -48,16 +48,16 @@ const CurvedLineAnimation = () => {
   }, [isVisible]);
   
   return (
-    <div ref={containerRef} className="w-full h-60 flex items-center justify-center overflow-hidden">
+    <div ref={containerRef} className="w-full h-60 flex items-center justify-center">
       <svg 
         ref={svgRef}
-        viewBox="0 0 1000 240" 
+        viewBox="0 0 1200 240" 
         className="w-full h-full"
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio="xMinYMid meet"
       >
         <path
           ref={pathRef}
-          d="M0,120 Q200,40 400,120 T800,120 T1000,120"
+          d="M0,120 Q200,40 400,120 T800,120 T1200,120"
           fill="none"
           stroke="#e63946"
           strokeWidth="8"

@@ -93,35 +93,29 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
       
       const positionToLock = shuffledPositions[currentIndex];
       
-      // Start the lock animation
       setLockAnimations(prev => {
         const newAnimations = [...prev];
         newAnimations[positionToLock] = true;
         return newAnimations;
       });
       
-      // Lock the current position with the correct letter
       setDisplayText(prev => {
         const chars = prev.split('');
         chars[positionToLock] = word[positionToLock];
         return chars.join('');
       });
-      
-      // Update both the temporary tracking and the state
+    
       tempLockedPositions.push(positionToLock);
       setLockedPositions(prev => [...prev, positionToLock]);
       currentIndex++;
       
-      // Vary the time between character reveals to make it feel more realistic
-      // Some characters are "cracked" quickly, others take longer
-      const variableFactor = Math.random() * 0.5 + 0.5; // 0.5 to 1.0 (faster range)
+
+      const variableFactor = Math.random() * 0.5 + 0.5;
       const nextRevealTime = baseCharacterRevealTime * variableFactor;
       
-      // Schedule the next letter reveal
       setTimeout(lockNextPosition, nextRevealTime);
     };
     
-    // Start the letter-by-letter reveal
     lockNextPosition();
     
     return () => {

@@ -235,97 +235,95 @@ export default function Home() {
                   <AnimatedEventDescription />
                 </div>
                 
-                <div className="w-full lg:w-1/2 h-[50vh]">
-                  {splineVisible.first && (
-                    <Suspense fallback={<SplinePlaceholder />}>
-                      <LazySpline
-                        scene="https://prod.spline.design/dexYsw9US6fR1uiA/scene.splinecode"
-                        onLoad={() => console.log("First Spline loaded")}
-                      />
-                    </Suspense>
-                  )}
-                  {!splineVisible.first && <SplinePlaceholder />}
+                <div className="w-full lg:w-1/2 h-[50vh] flex items-center justify-center">
+                  <Image
+                    src="/goingtosomewhere.gif"
+                    alt="Going to somewhere animation"
+                    width={500}
+                    height={500}
+                    priority
+                    className="object-contain w-full h-full"
+                  />
                 </div>
               </div>
             </div>
           </div>
           
           <div className="h-24 sm:h-32 md:h-40 lg:h-48"></div>
-        
-          <div className="absolute left-0 bottom-0 w-full sm:w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/3 transform translate-y-0">
+          
+          <div className="absolute left-0 bottom-0 w-full sm:w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/3 transform translate-y-0 overflow-visible pb-16">
             <CurvedLineAnimation />
           </div>
         </section>
 
-        <section id="second-spline-section" className="bg-black py-20 relative overflow-hidden">
+        <section id="second-spline-section" className="bg-black py-5 relative overflow-hidden">
           <div className="container mx-auto flex flex-col relative z-10">
-              <div className="flex-1 pr-4 pl-4 md:pl-0">
-                <div className="flex flex-col lg:flex-row items-center">
-                <div className="w-full lg:w-1/2 h-[50vh]">
-                    {splineVisible.second && (
-                      <Suspense fallback={<SplinePlaceholder />}>
-                        <LazySpline
-                          scene="https://prod.spline.design/cnkcTWHRQAPm-gkj/scene.splinecode"
-                          onLoad={() => console.log("Second Spline loaded")}
-                        />
-                      </Suspense>
-                    )}
-                    {!splineVisible.second && <SplinePlaceholder />}
-                  </div>
-                  <div className="w-full lg:w-1/2 pr-0 lg:pr-8 mb-10 lg:mb-0">
-                    <h2 className="text-3xl sm:text-5xl font-bold mb-5 text-[#eb0028]">
-                      Ideas, Connections, Clarity.
-                    </h2>
-                    <AnimatedTeamDescription />
-                  </div>
+            <div className="flex-1 pr-4 pl-4 md:pl-0">
+              <div className="flex flex-col lg:flex-row items-center">
+                <div className="w-full lg:w-1/2 h-[50vh] flex items-center justify-center">
+                  <Image
+                    src="/movingcoolthing.gif"
+                    alt="Moving cool animation"
+                    width={500}
+                    height={500}
+                    priority
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <div className="w-full lg:w-1/2 pr-0 lg:pr-8 mb-10 lg:mb-0">
+                  <h2 className="text-3xl sm:text-5xl font-bold mb-5 text-[#eb0028]">
+                    Ideas, Connections, Clarity.
+                  </h2>
+                  <AnimatedTeamDescription />
                 </div>
               </div>
             </div>
+          </div>
         </section>
 
-        <section id="speaker-section" className="py-20 bg-black">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
-              Our Speakers
-            </h2>
-            
-            {/* Desktop version - overlapping cards with spread functionality */}
-            <div className="hidden md:block">
-              <div className="flex justify-center items-center h-96 relative mb-16">
-                {speakers.map((speaker, index) => {
-                  // Calculate spread positioning
-                  let leftPosition;
-                  let rotation;
-                  let scale = 1;
-                  let zIndex = index;
-                  
-                  if (showSpread) {
-                    // When button is clicked - spread cards evenly
-                    const totalWidth = Math.min(speakers.length * 300, 1200);
-                    const increment = totalWidth / speakers.length;
-                    leftPosition = `calc(50% - ${totalWidth/2}px + ${index * increment + increment/2}px)`;
-                    rotation = 0;
-                    zIndex = 10;
-                  } else if (hoveredIndex === index) {
-                    // When this card is hovered
-                    leftPosition = `calc(45% - 32px + ${index * 70}px)`;
-                    rotation = 0;
-                    scale = 1.1;
-                    zIndex = 50;
-                  } else if (hoveredIndex !== null) {
-                    // When another card is hovered - slightly move away
-                    const direction = index < hoveredIndex ? -1 : 1;
-                    leftPosition = `calc(45% - 32px + ${index * 70}px + ${direction * 20}px)`;
-                    rotation = (index - Math.floor(speakers.length / 2)) * 5;
-                    zIndex = index;
-                  } else {
-                    // Default state - fanned out
-                    leftPosition = `calc(45% - 32px + ${index * 70}px)`;
-                    rotation = (index - Math.floor(speakers.length / 2)) * 5;
-                    zIndex = index;
-                  }
-                  
-                  return (
+          <section id="speaker-section" className="py-20 bg-black">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
+                Our Speakers
+              </h2>
+              
+              {/* Desktop version - overlapping cards with spread functionality */}
+              <div className="hidden md:block">
+                <div className="flex justify-center items-center h-96 relative mb-16">
+                  {speakers.map((speaker, index) => {
+                    // Calculate spread positioning
+                    let leftPosition;
+                    let rotation;
+                    let scale = 1;
+                    let zIndex = index;
+                    
+                    if (showSpread) {
+                      // When button is clicked - spread cards evenly
+                      const totalWidth = Math.min(speakers.length * 300, 1200);
+                      const increment = totalWidth / speakers.length;
+                      leftPosition = `calc(50% - ${totalWidth/2}px + ${index * increment + increment/2}px)`;
+                      rotation = 0;
+                      zIndex = 10;
+                    } else if (hoveredIndex === index) {
+                      // When this card is hovered
+                      leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                      rotation = 0;
+                      scale = 1.1;
+                      zIndex = 50;
+                    } else if (hoveredIndex !== null) {
+                      // When another card is hovered - slightly move away
+                      const direction = index < hoveredIndex ? -1 : 1;
+                      leftPosition = `calc(45% - 32px + ${index * 70}px + ${direction * 20}px)`;
+                      rotation = (index - Math.floor(speakers.length / 2)) * 5;
+                      zIndex = index;
+                    } else {
+                      // Default state - fanned out
+                      leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                      rotation = (index - Math.floor(speakers.length / 2)) * 5;
+                      zIndex = index;
+                    }
+                    
+                    return (
                     <div
                       key={index}
                       className="absolute h-80 w-64 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
