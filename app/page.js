@@ -10,6 +10,7 @@ import CurvedLineAnimation from '@/components/animatedCurvedLine';
 import MazeBackground from '@/components/MazeBackground';
 import AnimatedTeamDescription from '@/components/animatedTeamDecsription';
 import TextLoadingScreen from '@/components/TextLoadingScreen';
+import ParticlesBackground from './ParticlesBackground';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -100,15 +101,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <Head>
-        <title>TEDxAdMU: Labyrinthine</title>
-        <meta
-          name="description"
-          content="TEDxAdMU presents Labyrinthine - navigating complexity through ideas worth spreading"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       {isLoading && <TextLoadingScreen onLoadComplete={handleLoadComplete} />}
 
       <main>
