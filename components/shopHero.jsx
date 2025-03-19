@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { motion, stagger, useAnimate } from "motion/react"
+import { useEffect } from "react";
+import { motion, stagger, useAnimate } from "motion/react";
+import Link from "next/link";
 
-import Floating, {
-  FloatingElement,
-} from "./parallax-floating"
+import Floating, { FloatingElement } from "./parallax-floating";
 
 const exampleImages = [
   {
@@ -56,14 +55,18 @@ const exampleImages = [
     link: "https://unsplash.com/photos/a-table-topped-with-two-wine-glasses-and-plates-Ig0gRAHspV0",
     title: "A table topped with two wine glasses and plates",
   },
-]
+];
 
 const ShopHero = () => {
-  const [scope, animate] = useAnimate()
+  const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    animate("img", { opacity: [0, 1] }, { duration: 0.5, delay: stagger(0.15) })
-  }, [])
+    animate(
+      "img",
+      { opacity: [0, 1] },
+      { duration: 0.5, delay: stagger(0.15) }
+    );
+  }, []);
 
   return (
     <div
@@ -75,13 +78,18 @@ const ShopHero = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.88, delay: 1.5 }}
-      > 
+      >
         <p className="text-5xl md:text-7xl z-50 text-white font-calendas italic">
           Labyrinthine
         </p>
-        <p className="text-xs z-50 hover:scale-110 transition-transform bg-red-600 rounded-full py-2 w-20 cursor-pointer">
+        <Link
+          href="https://google.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-xs z-50 hover:scale-110 transition-transform bg-red-600 rounded-full py-2 w-20 cursor-pointer"
+        >
           Buy Now
-        </p>
+        </Link>
       </motion.div>
 
       <Floating sensitivity={-1} className="overflow-hidden">
@@ -145,7 +153,7 @@ const ShopHero = () => {
         </FloatingElement>
       </Floating>
     </div>
-  )
-}
+  );
+};
 
-export { ShopHero }
+export { ShopHero };
