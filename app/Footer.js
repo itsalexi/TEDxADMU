@@ -39,21 +39,19 @@ const Footer = () => {
 
           {/* Social Media Links */}
           <div className="flex space-x-6 mt-8 md:mt-0">
-            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://www.instagram.com/tedxateneodemanilau?igsh=a21xN2xqMzc1NGh6" target="_blank" rel="noopener noreferrer">
               <FaInstagram className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
             </Link>
-            <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://www.facebook.com/share/1DENrPZB5y/" target="_blank" rel="noopener noreferrer">
               <FaFacebookF className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
             </Link>
-            <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <FaXTwitter className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
-            </Link>
+            
           </div>
 
           {/* Copyright Notice */}
           <div className="text-center md:text-right mt-8 md:mt-0">
             <p className="text-gray-400">
-              © 2025 TEDxAteneoDeManilaU. All rights reserved.
+              © 2025 TEDxAteneodeManilaU. All rights reserved.
             </p>
             <p className="text-gray-400 mt-2">
               This independent TEDx event is operated under license from TED.
