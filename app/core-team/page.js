@@ -1,25 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import coreTeamData from "./coreTeamMembers.json";
 import CoreTeamCard from "./CoreTeamCard";
-import { useState, useEffect } from "react";
+import ParticlesBackground from "../ParticlesBackground";
 
 const CoreTeamPage = () => {
   const [isVisible, setIsVisible] = useState(false);
+  console.log("CoreTeamPage rendered");
 
+  // Mounting animations
   useEffect(() => {
     // Set a small timeout to ensure the animation triggers after component mounts
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 400);
+      console.log("visible true");
+    }, 100);
 
     // Set up intersection observer for scroll animations
     const observerOptions = {
       root: null, // viewport
       rootMargin: "0px",
-      threshold: 0.2, // 15% of the element needs to be visible
+      threshold: 0.01,
     };
 
     const handleIntersect = (entries, observer) => {
@@ -55,16 +58,9 @@ const CoreTeamPage = () => {
 
   return (
     <div className="relative min-h-screen bg-black">
-      <div
-        className={`min-h-screen transition-opacity duration-1000 ease-out ${
-          isVisible ? "opacity-100" : "opacity-0"
-        } bg-fixed bg-cover`}
-        style={{
-          background: "url(/starry-background-dense.svg)",
-          backgroundSize: "contain",
-          backgroundAttachment: "fixed",
-        }}
-      >
+      <ParticlesBackground />
+
+      <div className="relative z-10">
         {/* Core Team Section */}
         <div className="relative pt-56">
           {/* Background Image - Sticky within the Section */}
@@ -85,7 +81,7 @@ const CoreTeamPage = () => {
           <div className="relative z-10 flex flex-col items-center">
             {/* Core Team Header */}
             <div
-              className={`text-center mb-10 transform transition-all duration-1000 ease-out ${
+              className={`text-center mb-2 transform transition-all duration-1000 ease-out ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-16"
@@ -94,21 +90,23 @@ const CoreTeamPage = () => {
               <h2 className="text-3xl md:text-5xl text-white font-light">
                 Meet the
               </h2>
-              <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
-                TEDx
-                <span className="text-white font-thin">AteneoDeManilaU</span>
-              </h1>
-              <h1 className="text-4xl md:text-7xl font-bold text-red-500 mb-4">
-                Core Team
-              </h1>
-              <p className="text-lg text-white">
+              <div className="text-3xl md:text-6xl text-center">
+                <h1 className="font-bold text-red-500">
+                  TEDx
+                  <span className="text-white font-thin">AteneoDeManilaU</span>
+                </h1>
+                <h1 className="text-4xl md:text-7xl font-bold text-red-500 mb-4">
+                  Core Team
+                </h1>
+              </div>
+              <p className="text-sm md:text-lg text-white">
                 Meet the people who made this event possible.
               </p>
             </div>
 
             <div className="mx-8">
               {/* Leadership Team */}
-              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-40 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
+              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-36 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
                 {coreTeamData.leadershipTeam.map((category) => (
                   <div
                     key={category.category}
@@ -136,7 +134,7 @@ const CoreTeamPage = () => {
                   key={department.name}
                   className="department-section flex flex-col items-center mb-10 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out"
                 >
-                  <h2 className="text-5xl mb-6 font-bold text-center w-full bg-gradient-to-r from-rose-700 via-red-500 to-orange-600 py-6 rounded-3xl shadow-lg shadow-red-900 transition-transform transform hover:scale-[1.02]">
+                  <h2 className="text-5xl mb-6 font-bold text-black text-center w-full bg-gradient-to-r from-rose-700 via-red-500 to-orange-600 py-6 rounded-3xl shadow-lg shadow-red-900 transition-transform transform hover:scale-[1.02]">
                     {department.name}
                   </h2>
                   <div className="flex flex-wrap justify-center gap-12 mt-6">
@@ -187,11 +185,16 @@ const CoreTeamPage = () => {
         </div>
         {/*About TEDxAteneoDeManilaU */}
         <div>
-          <div className="flex xl:flex-row mt-40 mx-8 gap-10 flex-col">
-            <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
-              About TEDx
-              <span className="text-white font-thin">AteneoDeManilaU</span>
-            </h1>
+          <div className=" flex xl:flex-row mt-40 mx-8 gap-10 flex-col">
+            <div className="text-2xl sm:text-3xl md:text-5xl">
+              <h1 className="text-center font-bold text-red-500">
+                About
+                <p>
+                  TEDx
+                  <span className="text-white font-thin">AteneoDeManilaU</span>
+                </p>
+              </h1>
+            </div>
             <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
               <p className="text-gray-300 leading-relaxed text-xl">
                 Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
