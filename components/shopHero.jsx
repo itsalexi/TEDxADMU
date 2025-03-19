@@ -69,28 +69,28 @@ const ShopHero = () => {
       </motion.div>
 
       <Floating sensitivity={-1} className="overflow-hidden">
-        <FloatingElement depth={0.5} className="top-[17%] left-[23%]">
+        <FloatingElement depth={0.5} className="top-[36rem] left-[23%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[0].url}
             className="w-24 h-16 md:w-36 md:h-24 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
-        <FloatingElement depth={1} className="top-[10%] left-[32%]">
+        <FloatingElement depth={1} className="top-[27rem] left-[32%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[1].url}
             className="w-28 h-20 md:w-36 md:h-28 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
-        <FloatingElement depth={2} className="top-[4%] left-[60%]">
+        <FloatingElement depth={2} className="top-[15rem] left-[60%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[2].url}
             className="w-40 h-32 md:w-52 md:h-40 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
-        <FloatingElement depth={1} className="top-[15%] left-[83%]">
+        <FloatingElement depth={1} className="top-[36rem] left-[83%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[3].url}
@@ -98,14 +98,14 @@ const ShopHero = () => {
           />
         </FloatingElement>
 
-        <FloatingElement depth={1} className="top-[4%] left-[22%]">
+        <FloatingElement depth={1} className="top-[12rem] left-[25%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[4].url}
             className="w-32 h-32 md:w-44 md:h-44 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
-        <FloatingElement depth={2} className="top-[7%] left-[77%]">
+        <FloatingElement depth={2} className="top-[20rem] left-[77%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[5].url}
@@ -113,14 +113,14 @@ const ShopHero = () => {
           />
         </FloatingElement>
 
-        <FloatingElement depth={4} className="top-[7%] left-[19%]">
+        <FloatingElement depth={4} className="top-[19rem] left-[19%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[6].url}
             className="w-64 md:w-64 h-full object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
-        <FloatingElement depth={4} className="top-[13%] left-[60%]">
+        <FloatingElement depth={4} className="top-[30rem] left-[60%]">
           <motion.img
             initial={{ opacity: 0 }}
             src={images[7].url}
