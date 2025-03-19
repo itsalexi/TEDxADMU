@@ -8,27 +8,30 @@ import Floating, { FloatingElement } from "./parallax-floating";
 
 const images = [
   {
-    url: "/sticker-1.png"
+    url: "/sticker-1.png",
   },
   {
-    url: "/sticker-2.png"
+    url: "/sticker-2.png",
   },
   {
-    url: "/sticker-3.png"
+    url: "/sticker-3.png",
   },
   {
-    url: "/sticker-4.png"
+    url: "/sticker-4.png",
   },
   {
-    url: "shirt-dark.png"
+    url: "shirt-dark-front.png",
   },
   {
-    url: "shirt-light-front.png"
+    url: "shirt-light-front.png",
   },
   {
-    url: "shirt-light-back.png"
-  }
-]
+    url: "shirt-light-back.png",
+  },
+  {
+    url: "shirt-dark-back.png",
+  },
+];
 
 const ShopHero = () => {
   const [scope, animate] = useAnimate();
@@ -117,9 +120,14 @@ const ShopHero = () => {
             className="w-64 md:w-64 h-full object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
-        <FloatingElement depth={1} className="top-[13%] left-[50%]">
-          
+        <FloatingElement depth={4} className="top-[13%] left-[60%]">
+          <motion.img
+            initial={{ opacity: 0 }}
+            src={images[7].url}
+            className="w-64 md:w-64 h-full object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
+          />
         </FloatingElement>
+       
       </Floating>
     </div>
   );
