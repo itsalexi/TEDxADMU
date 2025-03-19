@@ -33,7 +33,7 @@ const Footer = () => {
               About TEDx
             </Link>
             <Link
-              href="/team"
+              href="/core-team"
               className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
             >
               Get to Know the Team
