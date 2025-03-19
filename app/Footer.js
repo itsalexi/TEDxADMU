@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
+import { FaInstagram, FaFacebookF, FaLinkedin } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -20,32 +20,61 @@ const Footer = () => {
 
           {/* Navigation Links */}
           <div className="flex flex-col space-y-4 ">
-            <Link href="/" className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105">
+            <Link
+              href="/"
+              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+            >
               Home
             </Link>
-            <Link href="/about" className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105">
+            <Link
+              href="/about"
+              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+            >
               About TEDx
             </Link>
-            <Link href="/team" className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105">
+            <Link
+              href="/team"
+              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+            >
               Get to Know the Team
             </Link>
-            <Link href="/shop" className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105">
+            <Link
+              href="/shop"
+              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+            >
               Shop
             </Link>
-            <Link href="/register" className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105">
+            <Link
+              href="/register"
+              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+            >
               Register Now
             </Link>
           </div>
 
           {/* Social Media Links */}
           <div className="flex space-x-6 mt-8 md:mt-0">
-            <Link href="https://www.instagram.com/tedxateneodemanilau?igsh=a21xN2xqMzc1NGh6" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://www.instagram.com/tedxateneodemanilau?igsh=a21xN2xqMzc1NGh6"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaInstagram className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
             </Link>
-            <Link href="https://www.facebook.com/share/1DENrPZB5y/" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://www.facebook.com/share/1DENrPZB5y/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaFacebookF className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
             </Link>
-            
+            <Link
+              href="https://www.linkedin.com/company/tedxateneodemanilau/posts/?feedView=all"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
+            </Link>
           </div>
 
           {/* Copyright Notice */}
