@@ -56,7 +56,7 @@ const AboutPage = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
-          <h1 className="text-4xl md:text-6xl text-center font-bold text-red-500">
+          <h1 className="text-2xl sm:text-3xl md:text-6xl text-center font-bold text-red-500">
             About{" "}
             <p>
               TEDx
