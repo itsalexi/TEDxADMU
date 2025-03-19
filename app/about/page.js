@@ -56,7 +56,7 @@ const AboutPage = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
-          <h1 className="text-2xl sm:text-3xl md:text-6xl text-center font-bold text-red-500">
+          <h1 className="text-2xl sm:text-3xl md:text-6xl text-center font-bold text-[#eb0028]">
             About{" "}
             <p>
               TEDx
@@ -81,7 +81,7 @@ const AboutPage = () => {
         {/*About TEDx */}
         <div className="about-section opacity-0 translate-y-16 transform transition-all duration-1000 ease-out flex xl:flex-row mt-24 gap-10 flex-col">
           <div className="xl:order-2 mb-2 xl:px-[10rem] text-nowrap text-center flex flex-col items-center justify-center">
-            <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
+            <h1 className="text-4xl sm:text-6xl font-bold text-center text-[#eb0028]">
               About TEDx
             </h1>
             <span>x = independently organized event</span>
@@ -101,7 +101,7 @@ const AboutPage = () => {
         </div>
         <div className="about-section opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
           <div className="flex flex-col justify-center items-center mb-12 mt-24">
-            <h1 className="text-4xl sm:text-6xl font-bold text-center text-red-500">
+            <h1 className="text-4xl sm:text-6xl font-bold text-center text-[#eb0028]">
               About TED
             </h1>
             <span>x = independently organized event</span>

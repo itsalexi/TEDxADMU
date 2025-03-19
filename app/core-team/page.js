@@ -91,11 +91,11 @@ const CoreTeamPage = () => {
                 Meet the
               </h2>
               <div className="text-3xl md:text-6xl text-center">
-                <h1 className="font-bold text-red-500">
+                <h1 className="font-bold text-[#eb0028]">
                   TEDx
                   <span className="text-white font-thin">AteneoDeManilaU</span>
                 </h1>
-                <h1 className="text-4xl md:text-7xl font-bold text-red-500 mb-4">
+                <h1 className="text-4xl md:text-7xl font-bold text-[#eb0028] mb-4">
                   Core Team
                 </h1>
               </div>
@@ -134,7 +134,7 @@ const CoreTeamPage = () => {
                   key={department.name}
                   className="department-section flex flex-col items-center mb-10 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out"
                 >
-                  <h2 className="text-5xl mb-6 font-bold text-black text-center w-full bg-gradient-to-r from-rose-700 via-red-500 to-orange-600 py-6 rounded-3xl shadow-lg shadow-red-900 transition-transform transform hover:scale-[1.02]">
+                  <h2 className="text-5xl mb-6 font-bold text-black text-center w-full bg-gradient-to-r from-red-700 via-[#eb0028] to-orange-600 py-6 rounded-3xl shadow-lg shadow-red-900 transition-transform transform hover:scale-[1.02]">
                     {department.name}
                   </h2>
                   <div className="flex flex-wrap justify-center gap-12 mt-6">
@@ -143,7 +143,7 @@ const CoreTeamPage = () => {
                         key={committee.name}
                         className="text-center md:max-w-[50vw]"
                       >
-                        <div className="text-2xl font-semibold bg-gray-900 bg-opacity-70 text-white shadow-red-300 shadow-md transition-transform transform hover:scale-105 px-4 py-2 rounded-lg mb-6">
+                        <div className="text-2xl font-semibold bg-gray-900 bg-opacity-70 text-white shadow-red-600 shadow-md transition-transform transform hover:scale-105 px-4 py-2 rounded-lg mb-6">
                           {committee.name}
                         </div>
                         <div className="flex flex-wrap justify-center gap-6 mt-4">
@@ -187,7 +187,7 @@ const CoreTeamPage = () => {
         <div>
           <div className=" flex xl:flex-row mt-40 mx-8 gap-10 flex-col">
             <div className="text-2xl sm:text-3xl md:text-5xl">
-              <h1 className="text-center font-bold text-red-500">
+              <h1 className="text-center font-bold text-[#eb0028]">
                 About
                 <p>
                   TEDx
