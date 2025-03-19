@@ -4,6 +4,8 @@ import React from "react";
 import ProductCard from "./ProductCard";
 import Image from "next/image";
 import Link from "next/link";
+import { SmoothScrollHero } from "@/components/smoothScroll";
+import { ShopHero } from "@/components/shopHero";
 
 const ShopPage = () => {
   const link = "https://google.com"; // link to google forms
@@ -32,26 +34,11 @@ const ShopPage = () => {
     <div className="min-h-screen bg-black text-white relative">
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 bg-black">
         {/* Hero Section */}
-        <div className="h-[600px] w-full flex justify-center mb-20">
-          <div className="absolute left-0 top-40 w-full h-[600px] z-0">
-            <Image
-              src="/shop-hero-bg.png"
-              alt="Shop Hero Background"
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
-          <div className="z-50 mt-[20rem] place-items-center">
-            <h1 className="text-7xl mb-8">LABYRINTHINE</h1>
-            <Link href={link}>
-              <span className="bg-red-600 text-white hover:bg-red-700  px-3 py-2 rounded-md text-base font-medium cursor-pointer">
-                Buy Now
-              </span>
-            </Link>
-          </div>
-        </div>
+        <ShopHero />
+        
 
         {/* Catalog Section */}
+        <SmoothScrollHero />
         <h1 className="text-4xl sm:text-6xl font-bold text-center my-12">
           Shop at TEDxAdMU
         </h1>
