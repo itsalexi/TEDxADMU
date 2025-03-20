@@ -114,7 +114,7 @@ export default function Navbar() {
 
                   {/* Dropdown Menu */}
                   <div
-                    className={`absolute left-0 pt-2 w-56 rounded-md shadow-lg bg-black/95 backdrop-blur-sm ring-1 ring-black ring-opacity-5 font-medium transition-all duration-300 ${
+                    className={`absolute left-0 pt-2 w-44 rounded-md shadow-lg bg-black/95 backdrop-blur-sm ring-1 ring-black ring-opacity-5 font-medium transition-all duration-300 ${
                       aboutDropdownOpen
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 -translate-y-2 pointer-events-none"
