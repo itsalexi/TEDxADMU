@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebookF, FaLinkedin } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-gradient-to-b from-black to-gray-900 text-white py-16 z-10">
+    <footer className="relative bg-gradient-to-b from-black to-gray-900 text-white py-14 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           {/* Logo and Tagline */}
@@ -19,34 +19,40 @@ const Footer = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex flex-col space-y-4 ">
+          <div className="flex flex-col space-y-4 text-xl font-bold">
             <Link
               href="/"
-              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
+              className="text-gray-300  hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
+              className="text-gray-300  hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               About TEDx
             </Link>
             <Link
-              href="/core-team"
-              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
+              href="/event-details"
+              className="text-gray-300  hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
-              Get to Know the Team
+              Event Details
+            </Link>
+            <Link
+              href="/core-team"
+              className="text-gray-300  hover:text-[#eb0028] transition-transform transform hover:scale-105"
+            >
+              Our Story
             </Link>
             <Link
               href="/shop"
-              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
+              className="text-gray-300  hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               Shop
             </Link>
             <Link
               href="/register"
-              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
+              className="text-gray-300 hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               Register Now
             </Link>
