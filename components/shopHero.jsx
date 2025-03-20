@@ -50,19 +50,19 @@ const ShopHero = () => {
       ref={scope}
     >
       <motion.div
-        className="z-50 text-center space-y-4 items-center flex flex-col"
+        className="z-10 text-center space-y-4 items-center flex flex-col"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.88, delay: 1.5 }}
       >
-        <p className="text-5xl md:text-7xl z-50 text-white font-calendas italic">
+        <p className="text-5xl md:text-7xl text-white font-calendas italic">
           Labyrinthine
         </p>
         <Link
           href="https://google.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs z-50 hover:scale-110 transition-transform bg-red-600 rounded-full py-2 w-20 cursor-pointer"
+          className="text-xs hover:scale-110 transition-transform bg-red-600 rounded-full py-2 w-20 cursor-pointer"
         >
           Buy Now
         </Link>
