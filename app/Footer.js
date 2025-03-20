@@ -22,31 +22,31 @@ const Footer = () => {
           <div className="flex flex-col space-y-4 ">
             <Link
               href="/"
-              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               Home
             </Link>
             <Link
               href="/about"
-              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               About TEDx
             </Link>
             <Link
               href="/core-team"
-              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               Get to Know the Team
             </Link>
             <Link
               href="/shop"
-              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               Shop
             </Link>
             <Link
               href="/register"
-              className="text-gray-300 text-2xl font-bold hover:text-red-500 transition-transform transform hover:scale-105"
+              className="text-gray-300 text-2xl font-bold hover:text-[#eb0028] transition-transform transform hover:scale-105"
             >
               Register Now
             </Link>
@@ -59,21 +59,21 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
+              <FaInstagram className="text-gray-400 hover:text-[#eb0028] transition-transform transform hover:scale-125 text-2xl" />
             </Link>
             <Link
               href="https://www.facebook.com/share/1DENrPZB5y/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebookF className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
+              <FaFacebookF className="text-gray-400 hover:text-[#eb0028] transition-transform transform hover:scale-125 text-2xl" />
             </Link>
             <Link
               href="https://www.linkedin.com/company/tedxateneodemanilau/posts/?feedView=all"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaLinkedin className="text-gray-400 hover:text-red-500 transition-transform transform hover:scale-125 text-2xl" />
+              <FaLinkedin className="text-gray-400 hover:text-[#eb0028] transition-transform transform hover:scale-125 text-2xl" />
             </Link>
           </div>
 

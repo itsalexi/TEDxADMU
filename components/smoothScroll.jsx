@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export const SmoothScrollHero = () => {
   useEffect(() => {
@@ -27,13 +28,13 @@ export const SmoothScrollHero = () => {
   }, []);
 
   return (
-    <div className="bg-zinc-950">
+    <div>
       <Hero />
     </div>
   );
 };
 
-const SECTION_HEIGHT = 5000;
+const SECTION_HEIGHT = 5500;
 
 const Hero = () => {
   return (
@@ -42,6 +43,7 @@ const Hero = () => {
       className="relative w-full"
     >
       <CenterImage />
+      <ParallaxImages />
       <ParallaxCards />
     </div>
   );
@@ -68,7 +70,7 @@ const CenterImage = () => {
 
   return (
     <motion.div
-      className="sticky top-0 h-screen w-full"
+      className="sticky top-0 h-screen w-full -z-1"
       style={{
         clipPath,
         backgroundSize,
@@ -117,38 +119,109 @@ const productData = [
   },
 ];
 
-const ParallaxCards = () => {
+const ParallaxImages = () => {
   return (
-    <div className="mx-auto max-w-5xl px-4 pt-[200px]">
-      <ParallaxCard
-        product={productData[0]}
+    <div className="px-4 2xl:pr-40 pt-[200px]">
+      <ParallaxImg
+        src="/shirt-light-back.png"
+        alt="And example of a space launch"
         start={-200}
         end={200}
-        className="w-full"
+        text="Navigating complexity."
+        className="ml-1 w-1/2"
       />
-      <ParallaxCard
-        product={productData[1]}
+      <ParallaxImg
+        src="/shirt-light-front.png"
+        alt="An example of a space launch"
         start={200}
         end={-250}
-        className="mx-auto w-full"
+        text="Unlocking paths."
+        className="mx-auto w-1/2"
       />
-      <ParallaxCard
-        product={productData[2]}
+      <ParallaxImg
+        src="/shirt-dark-front.png"
+        alt="Orbiting satellite"
         start={-200}
         end={200}
-        className="ml-auto w-full"
+        text="Inspiring change."
+        className="ml-auto w-1/2"
       />
-      <ParallaxCard
-        product={productData[3]}
+      <ParallaxImg
+        src="/shirt-dark-back.png"
+        alt="Orbiting satellite"
         start={0}
-        end={-200}
-        className="ml-24 w-full"
+        end={-500}
+        text="Out of the Labyrinthe."
+        className="ml-24 w-1/2"
       />
     </div>
   );
 };
 
-const ParallaxCard = ({ className, product, start, end }) => {
+const ParallaxImg = ({ className, alt, src, start, end, text }) => {
+  const ref = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: [`${start}px end`, `end ${end * -1}px`],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0.75, 1], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0.75, 1], [1, 0.85]);
+
+  const y = useTransform(scrollYProgress, [0, 1], [start, end]);
+  const transform = useMotionTemplate`translateY(${y}px) scale(${scale})`;
+
+  return (
+    <motion.div
+      className="flex items-center justify-between w-full"
+      ref={ref}
+      style={{ transform, opacity }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        className={`${className} transition-transform duration-500 hover:scale-105`}
+        height={100}
+        width={100}
+      />
+      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white z-50">{text}</h2>
+    </motion.div>
+  );
+};
+
+const ParallaxCards = () => {
+  return (
+    <div className="mx-auto grid md:grid-cols-2 gap-6 px-4 pt-[100px]">
+      <ParallaxCard
+        product={productData[0]}
+        start={-200}
+        end={200}
+        className=""
+      />
+      <ParallaxCard
+        product={productData[1]}
+        start={-200}
+        end={200}
+        className=""
+      />
+      <ParallaxCard
+        product={productData[2]}
+        start={-200}
+        end={200}
+        className=""
+      />
+      <ParallaxCard
+        product={productData[3]}
+        start={-200}
+        end={200}
+        className=""
+      />
+    </div>
+  );
+};
+
+const ParallaxCard = ({ product, start, end }) => {
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -166,9 +239,9 @@ const ParallaxCard = ({ className, product, start, end }) => {
     <motion.div
       ref={ref}
       style={{ transform, opacity }}
-      className={`${className} bg-zinc-800 bg-opacity-0 rounded-xl overflow-hidden shadow-lg mb-32 flex items-center`}
+      className={`bg-zinc-800 bg-opacity-40 rounded-xl overflow-hidden shadow-lg mb-32 flex items-center justify-between`}
     >
-      <div className="overflow-hidden">
+      <div className="max-w-[40%] overflow-hidden">
         <motion.img
           src={product.image}
           alt={product.alt}
@@ -180,13 +253,13 @@ const ParallaxCard = ({ className, product, start, end }) => {
       <div className="p-6">
         <h3 className="text-xl font-bold text-white mb-2">{product.title}</h3>
         <p className="text-zinc-300 mb-4">{product.description}</p>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between w-full">
           <span className="text-lg font-bold text-white">{product.price}</span>
           <Link
-            href="https://google.com" 
-            target="_blank" 
+            href="https://google.com"
+            target="_blank"
             rel="noopener noreferrer"
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-all duration-300"
+            className="bg-red-600 hover:bg-red-700 text-white max-lg:text-sm font-bold py-1 lg:py-2 lg:px-4 px-2 rounded transition-all duration-300 hover:scale-105"
           >
             Buy Now
           </Link>
