@@ -142,7 +142,7 @@ export default function Navbar() {
                         onClick={() => setAboutDropdownOpen(false)}
                       >
                         <span className="block px-4 py-3 text-gray-300 hover:text-[#eb0028] transition duration-300">
-                          Get to Know the Team
+                          Our Story
                         </span>
                       </Link>
                     </div>
@@ -246,7 +246,7 @@ export default function Navbar() {
               }`}
               style={{ transitionDelay: "300ms" }}
             >
-              Get to Know the Team
+              Our Story
             </span>
           </Link>
           <Link href="/shop" onClick={() => setMobileMenuOpen(false)}>
