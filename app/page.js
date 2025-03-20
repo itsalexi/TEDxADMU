@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState, useEffect, Suspense, lazy } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
-import TrippyScroll from '@/components/TrippyScroll';
-import AnimatedEventDescription from '@/components/animatedEventDesc';
-import CurvedLineAnimation from '@/components/animatedCurvedLine';
-import MazeBackground from '@/components/MazeBackground';
-import AnimatedTeamDescription from '@/components/animatedTeamDecsription';
-import TextLoadingScreen from '@/components/TextLoadingScreen';
-import ParticlesBackground from './ParticlesBackground';
+import { useState, useEffect, Suspense, lazy } from "react";
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
+import TrippyScroll from "@/components/TrippyScroll";
+import AnimatedEventDescription from "@/components/animatedEventDesc";
+import CurvedLineAnimation from "@/components/animatedCurvedLine";
+import MazeBackground from "@/components/MazeBackground";
+import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
+import TextLoadingScreen from "@/components/TextLoadingScreen";
+import ParticlesBackground from "./ParticlesBackground";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -23,6 +23,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
+
+  const speakersAnnounced = false;
 
   useEffect(() => {
     setMounted(true);
@@ -58,12 +60,12 @@ export default function Home() {
       },
       {
         root: null,
-        rootMargin: '0px',
+        rootMargin: "0px",
         threshold: 0.6, // Trigger when 60% of the element is visible
       }
     );
 
-    const speakerSection = document.getElementById('speaker-section');
+    const speakerSection = document.getElementById("speaker-section");
 
     if (speakerSection) speakerSectionObserver.observe(speakerSection);
 
@@ -78,24 +80,24 @@ export default function Home() {
 
   const speakers = [
     {
-      name: 'Dr. Maria Santos',
-      bio: 'Cognitive Neuroscientist exploring the depths of human consciousness',
-      image: '/api/placeholder/300/300',
+      name: "Dr. Maria Santos",
+      bio: "Cognitive Neuroscientist exploring the depths of human consciousness",
+      image: "/api/placeholder/300/300",
     },
     {
-      name: 'Architect Juan Reyes',
-      bio: 'Sustainable urban designer creating spaces that heal communities',
-      image: '/api/placeholder/300/300',
+      name: "Architect Juan Reyes",
+      bio: "Sustainable urban designer creating spaces that heal communities",
+      image: "/api/placeholder/300/300",
     },
     {
-      name: 'Innovator Ana Cruz',
-      bio: 'Tech entrepreneur bridging digital divides in underserved regions',
-      image: '/api/placeholder/300/300',
+      name: "Innovator Ana Cruz",
+      bio: "Tech entrepreneur bridging digital divides in underserved regions",
+      image: "/api/placeholder/300/300",
     },
     {
-      name: 'Prof. David Lee',
-      bio: 'Philosopher examining the ethical labyrinths of emerging technologies',
-      image: '/api/placeholder/300/300',
+      name: "Prof. David Lee",
+      bio: "Philosopher examining the ethical labyrinths of emerging technologies",
+      image: "/api/placeholder/300/300",
     },
   ];
 
@@ -113,8 +115,8 @@ export default function Home() {
                 <div
                   className={`w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
                     logoLoaded
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-16'
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-16"
                   }`}
                 >
                   <Image
@@ -137,8 +139,8 @@ export default function Home() {
                 <p
                   className={`text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal px-4 transition-all duration-1000 ease-out ${
                     subtitleLoaded
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-16'
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-16"
                   }`}
                 >
                   Unlocking Paths, Inspiring Change
@@ -147,8 +149,8 @@ export default function Home() {
                 <div
                   className={`transition-all duration-1000 ease-out ${
                     buttonLoaded
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-10'
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-10"
                   }`}
                 >
                   <Link href="/register">
@@ -238,56 +240,169 @@ export default function Home() {
             {/* Desktop version - overlapping cards with spread functionality */}
             <div className="hidden md:block">
               <div className="flex justify-center items-center h-96 relative mb-16">
-                {speakers.map((speaker, index) => {
-                  // Calculate spread positioning
-                  let leftPosition;
-                  let rotation;
-                  let scale = 1;
-                  let zIndex = index;
+                {speakersAnnounced
+                  ? // Original speakers code when speakers are announced
+                    speakers.map((speaker, index) => {
+                      // Calculate spread positioning
+                      let leftPosition;
+                      let rotation;
+                      let scale = 1;
+                      let zIndex = index;
 
-                  if (showSpread) {
-                    // When button is clicked - spread cards evenly
-                    const totalWidth = Math.min(speakers.length * 300, 1200);
-                    const increment = totalWidth / speakers.length;
-                    leftPosition = `calc(50% - ${totalWidth / 2}px + ${
-                      index * increment + increment / 2
-                    }px)`;
-                    rotation = 0;
-                    zIndex = 10;
-                  } else if (hoveredIndex === index) {
-                    // When this card is hovered
-                    leftPosition = `calc(45% - 32px + ${index * 70}px)`;
-                    rotation = 0;
-                    scale = 1.1;
-                    zIndex = 50;
-                  } else if (hoveredIndex !== null) {
-                    // When another card is hovered - slightly move away
-                    const direction = index < hoveredIndex ? -1 : 1;
-                    leftPosition = `calc(45% - 32px + ${index * 70}px + ${
-                      direction * 20
-                    }px)`;
-                    rotation = (index - Math.floor(speakers.length / 2)) * 5;
-                    zIndex = index;
-                  } else {
-                    // Default state - fanned out
-                    leftPosition = `calc(45% - 32px + ${index * 70}px)`;
-                    rotation = (index - Math.floor(speakers.length / 2)) * 5;
-                    zIndex = index;
-                  }
+                      if (showSpread) {
+                        // When button is clicked - spread cards evenly
+                        const totalWidth = Math.min(
+                          speakers.length * 300,
+                          1200
+                        );
+                        const increment = totalWidth / speakers.length;
+                        leftPosition = `calc(50% - ${totalWidth / 2}px + ${
+                          index * increment + increment / 2
+                        }px)`;
+                        rotation = 0;
+                        zIndex = 10;
+                      } else if (hoveredIndex === index) {
+                        // When this card is hovered
+                        leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                        rotation = 0;
+                        scale = 1.1;
+                        zIndex = 50;
+                      } else if (hoveredIndex !== null) {
+                        // When another card is hovered - slightly move away
+                        const direction = index < hoveredIndex ? -1 : 1;
+                        leftPosition = `calc(45% - 32px + ${index * 70}px + ${
+                          direction * 20
+                        }px)`;
+                        rotation =
+                          (index - Math.floor(speakers.length / 2)) * 5;
+                        zIndex = index;
+                      } else {
+                        // Default state - fanned out
+                        leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                        rotation =
+                          (index - Math.floor(speakers.length / 2)) * 5;
+                        zIndex = index;
+                      }
 
-                  return (
+                      return (
+                        <div
+                          key={index}
+                          className="absolute h-80 w-64 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
+                          style={{
+                            left: leftPosition,
+                            transform: `translateX(-50%) rotate(${rotation}deg) scale(${scale})`,
+                            zIndex: zIndex,
+                          }}
+                          onMouseEnter={() => setHoveredIndex(index)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                          <div className="relative h-40 w-full overflow-hidden rounded-t-md">
+                            <Image
+                              src={speaker.image}
+                              alt={speaker.name}
+                              layout="fill"
+                              objectFit="cover"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <h3 className="text-lg font-semibold mb-2 text-white">
+                              {speaker.name}
+                            </h3>
+                            <p className="text-gray-400 text-sm line-clamp-3">
+                              {speaker.bio}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : // Coming soon cards
+                    [...Array(4)].map((_, index) => {
+                      // Calculate spread positioning for coming soon cards
+                      let leftPosition;
+                      let rotation;
+                      let scale = 1;
+                      let zIndex = index;
+
+                      if (showSpread) {
+                        const totalWidth = Math.min(4 * 300, 1200);
+                        const increment = totalWidth / 4;
+                        leftPosition = `calc(50% - ${totalWidth / 2}px + ${
+                          index * increment + increment / 2
+                        }px)`;
+                        rotation = 0;
+                        zIndex = 10;
+                      } else if (hoveredIndex === index) {
+                        leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                        rotation = 0;
+                        scale = 1.1;
+                        zIndex = 50;
+                      } else if (hoveredIndex !== null) {
+                        const direction = index < hoveredIndex ? -1 : 1;
+                        leftPosition = `calc(45% - 32px + ${index * 70}px + ${
+                          direction * 20
+                        }px)`;
+                        rotation = (index - Math.floor(4 / 2)) * 5;
+                        zIndex = index;
+                      } else {
+                        leftPosition = `calc(45% - 32px + ${index * 70}px)`;
+                        rotation = (index - Math.floor(4 / 2)) * 5;
+                        zIndex = index;
+                      }
+
+                      return (
+                        <div
+                          key={index}
+                          className="absolute h-80 w-64 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
+                          style={{
+                            left: leftPosition,
+                            transform: `translateX(-50%) rotate(${rotation}deg) scale(${scale})`,
+                            zIndex: zIndex,
+                          }}
+                          onMouseEnter={() => setHoveredIndex(index)}
+                          onMouseLeave={() => setHoveredIndex(null)}
+                        >
+                          <div className="relative h-40 w-full overflow-hidden rounded-t-md bg-gray-800 flex items-center justify-center">
+                            <div className="text-gray-500 text-4xl opacity-30">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-16 w-16"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                          <div className="p-4 flex flex-col items-center justify-center text-center">
+                            <h3 className="text-xl font-semibold mb-2 text-white">
+                              Coming Soon
+                            </h3>
+                            <p className="text-gray-400 text-sm">
+                              Watch out for the Announcement on April 1!
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+              </div>
+            </div>
+
+            {/* Mobile version */}
+            <div className="md:hidden space-y-4 max-w-sm mx-auto">
+              {speakersAnnounced
+                ? // Original speakers code for mobile
+                  speakers.map((speaker, index) => (
                     <div
                       key={index}
-                      className="absolute h-80 w-64 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
-                      style={{
-                        left: leftPosition,
-                        transform: `translateX(-50%) rotate(${rotation}deg) scale(${scale})`,
-                        zIndex: zIndex,
-                      }}
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
+                      className="relative ml-auto h-full w-full bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 shadow-lg transition-all duration-300 hover:scale-105"
                     >
-                      <div className="relative h-40 w-full overflow-hidden rounded-t-md">
+                      <div className="relative h-48 w-full overflow-hidden rounded-t-md">
                         <Image
                           src={speaker.image}
                           alt={speaker.name}
@@ -296,44 +411,48 @@ export default function Home() {
                         />
                       </div>
                       <div className="p-4">
-                        <h3 className="text-lg font-semibold mb-2 text-white">
+                        <h3 className="text-xl font-semibold mb-2 text-white">
                           {speaker.name}
                         </h3>
-                        <p className="text-gray-400 text-sm line-clamp-3">
-                          {speaker.bio}
+                        <p className="text-gray-400">{speaker.bio}</p>
+                      </div>
+                    </div>
+                  ))
+                : // Coming soon cards for mobile
+                  [...Array(4)].map((_, index) => (
+                    <div
+                      key={index}
+                      className="relative ml-auto h-full w-full bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 shadow-lg transition-all duration-300 hover:scale-105"
+                    >
+                      <div className="relative h-48 w-full overflow-hidden rounded-t-md bg-gray-800 flex items-center justify-center">
+                        <div className="text-gray-500 text-4xl opacity-30">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-16 w-16"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="p-4 text-center">
+                        <h3 className="text-xl font-semibold mb-2 text-white">
+                          Coming Soon
+                        </h3>
+                        <p className="text-gray-400">
+                          Watch out for the Announcement on April 1!
                         </p>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  ))}
             </div>
-
-            <div className="md:hidden space-y-4 max-w-sm mx-auto">
-              {speakers.map((speaker, index) => (
-                <div
-                  key={index}
-                  className="relative ml-auto h-full w-full bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 shadow-lg transition-all duration-300 hover:scale-105"
-                >
-                  <div className="relative h-48 w-full overflow-hidden rounded-t-md">
-                    <Image
-                      src={speaker.image}
-                      alt={speaker.name}
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-xl font-semibold mb-2 text-white">
-                      {speaker.name}
-                    </h3>
-                    <p className="text-gray-400">{speaker.bio}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* View All Speakers button removed */}
           </div>
         </section>
       </main>
