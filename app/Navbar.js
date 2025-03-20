@@ -86,7 +86,14 @@ export default function Navbar() {
                     className="text-gray-300 hover:text-[#eb0028] px-3 py-2 rounded-md font-medium cursor-pointer transition duration-300 flex items-center gap-1"
                     onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
                   >
-                    About
+                    <Link
+                        href="/event-details"
+                        onClick={() => setAboutDropdownOpen(false)}
+                      >
+                        <span className="block px-4 py-3 text-gray-300 hover:text-[#eb0028] transition duration-300">
+                          About
+                        </span>
+                      </Link>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={`h-4 w-4 transition-transform duration-300 ${
