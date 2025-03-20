@@ -177,7 +177,7 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row items-center">
                 <div className="w-full lg:w-1/2 pr-0 lg:pr-8 mb-10 lg:mb-0">
                   <h2 className="text-3xl sm:text-5xl font-bold mb-5 text-[#eb0028]">
-                    What Awaits You at <br /> TEDxAteneoDeManilaU Labyrinthine?
+                    What Awaits You at <br /> TEDxAteneodeManilaU: Labyrinthine?
                   </h2>
                   <AnimatedEventDescription />
                 </div>
