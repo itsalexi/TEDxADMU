@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense, lazy } from "react";
-import Head from "next/head";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import TrippyScroll from "@/components/TrippyScroll";
@@ -10,7 +9,7 @@ import CurvedLineAnimation from "@/components/animatedCurvedLine";
 import MazeBackground from "@/components/MazeBackground";
 import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
 import TextLoadingScreen from "@/components/TextLoadingScreen";
-import ParticlesBackground from "./ParticlesBackground";
+import { GlareGrid } from "@/components/glareGrid";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -228,6 +227,17 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        <section id="topics-section" className="py-20">
+          <div className="container px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
+              About Labyrinthine
+            </h2>
+
+            {/* Topics Cards */}
+            <GlareGrid />
           </div>
         </section>
 
