@@ -60,6 +60,7 @@ const Footer = () => {
 
           {/* Social Media Links */}
           <div className="flex space-x-6 mt-8 md:mt-0">
+            <p className="text-gray-400">Find us on: </p>
             <Link
               href="https://www.instagram.com/tedxateneodemanilau?igsh=a21xN2xqMzc1NGh6"
               target="_blank"
@@ -85,7 +86,13 @@ const Footer = () => {
 
           {/* Copyright Notice */}
           <div className="text-center md:text-right mt-8 md:mt-0">
-            <p className="text-gray-400">
+            <p className="text-gray-300">
+              Contact us! We&apos;d love to hear from you.
+            </p>
+            <p className="text-gray-300 mt-2">
+              tedxateneodemanila2425@gmail.com
+            </p>
+            <p className="text-gray-400 mt-5">
               © 2025 TEDxAteneodeManilaU. All rights reserved.
             </p>
             <p className="text-gray-400 mt-2">
