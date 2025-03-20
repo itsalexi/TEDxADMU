@@ -384,7 +384,7 @@ export default function Home() {
                               Coming Soon
                             </h3>
                             <p className="text-gray-400 text-sm">
-                              Watch out for the Announcement on April 1!
+                              Watch out for the Announcement in April!
                             </p>
                           </div>
                         </div>
@@ -447,7 +447,7 @@ export default function Home() {
                           Coming Soon
                         </h3>
                         <p className="text-gray-400">
-                          Watch out for the Announcement on April 1!
+                          Watch out for the Announcement in April!
                         </p>
                       </div>
                     </div>
