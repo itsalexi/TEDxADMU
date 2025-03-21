@@ -231,7 +231,7 @@ export default function Home() {
         </section>
 
         <section id="topics-section" className="py-20">
-          <div className="container px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
               About Labyrinthine
             </h2>
