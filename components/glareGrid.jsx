@@ -114,11 +114,12 @@ const SelectedCard = ({ selected }) => {
       {/* Preserve title position from card view */}
       <motion.div 
         layoutId={`title-${selected.id}`}
-        className="absolute inset-0 flex items-center justify-center z-20"
+        className="absolute inset-0 grid grid-rows-2 z-20"
       >
-        <div className=" px-4 py-2 rounded text-white font-bold text-2xl md:text-4xl">
+        <div className="flex justify-center items-center mt-10 px-4 py-2 rounded text-white font-bold text-2xl md:text-4xl">
           {selected.title}
         </div>
+        <div></div>
       </motion.div>
       
       <motion.div
@@ -279,9 +280,10 @@ export function GlareGrid() {
       title: "Curiosity",
       content: (
         <div>
-          <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-            A serene and tranquil retreat, this house in the woods offers a peaceful
-            escape from the hustle and bustle of city life.
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">Microbiome: The Ecosystem Inside You</h3>
+          <h4 className="font-normal text-base max-w-lg italic">Nutrition and Dietetics, Lifestyle</h4>
+          <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
+          This talk will explore the interconnectedness between our gut and brain, the potential of microbiome-based therapies, and the impact of modern lifestyles on this vital ecosystem.
           </p>
         </div>
       ),
@@ -294,10 +296,9 @@ export function GlareGrid() {
       title: "Impasse",
       content: (
         <div>
-          <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-            Perched high above the world, this house offers breathtaking views and a
-            unique living experience. It&apos;s a place where the sky meets home,
-            and tranquility is a way of life.
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">Finding Purpose and Strength in Stillness and Grief</h3>
+          <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
+          This talk explores how waiting, particularly in grief, can become a powerful tool for transformation, clarity, and resilience.
           </p>
         </div>
       ),
@@ -310,9 +311,9 @@ export function GlareGrid() {
       title: "Turning Point",
       content: (
         <div>
-          <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-            A house surrounded by greenery and nature&apos;s beauty. It&apos;s the
-            perfect place to relax, unwind, and enjoy life.
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">Artivism: The Power of Art in Activism</h3>
+          <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
+          This topic explores how artists harness their creativity as a tool for activism, using storytelling, performance, and visual expression to address pressing societal challenges and advocate for meaningful change.
           </p>
         </div>
       ),
@@ -325,9 +326,9 @@ export function GlareGrid() {
       title: "Transformation",
       content: (
         <div>
-          <p className="font-normal text-base my-4 max-w-lg text-neutral-200">
-            A house by the river is a place of peace and tranquility. It&apos;s the
-            perfect place to relax, unwind, and enjoy life.
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">Digital Nomads: Work with Freedom and Fulfillment</h3>
+          <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
+          The talk explores transformation, encouraging individuals to reflect on whether digital nomadism aligns with their personal and professional evolution, and how the shift in mindset and lifestyle can lead to a new way of thriving in a complex and interconnected world.
           </p>
         </div>
       ),
