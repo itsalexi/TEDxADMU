@@ -10,7 +10,7 @@ export const SCHOLAR_AMA_DISCOUNT = 50;
 export const ATENEAN_DISCOUNT = 30;
 
 // Pre-speaker period settings
-export const IS_PRE_SPEAKER_PERIOD = false;
+export const IS_PRE_SPEAKER_PERIOD = true;
 export const PRE_SPEAKER_DISCOUNT = 80;
 export const PRE_SPEAKER_PERIOD_START = "March 24";
 export const PRE_SPEAKER_PERIOD_END = "March 30"; 

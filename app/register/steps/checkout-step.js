@@ -60,7 +60,7 @@ export default function CheckoutStep({
   }, [attendees]);
 
   const handleRegistrationTypeChange = (value) => {
-    if (value === 'group' && (formData.is_scholar_or_ama || formData.is_atenean)) {
+    if (value === 'group' && (formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD)) {
       return;
     }
 
@@ -187,7 +187,7 @@ export default function CheckoutStep({
           </div>
 
           <div className={`flex items-start space-x-3 p-5 border border-gray-700 rounded-md transition-colors ${
-            (formData.is_scholar_or_ama || formData.is_atenean) 
+            (formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD) 
               ? 'opacity-50 cursor-not-allowed' 
               : 'hover:bg-white/5'
           }`}>
@@ -195,14 +195,14 @@ export default function CheckoutStep({
               value="group"
               id="registration-group"
               className="mt-1 border-gray-600 text-indigo-500"
-              disabled={formData.is_scholar_or_ama || formData.is_atenean}
+              disabled={formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD}
             />
             <div className="space-y-1 flex-1">
               <div className="flex items-center">
                 <Users className="h-4 w-4 mr-2 text-gray-400" />
                 <Label
                   htmlFor="registration-group"
-                  className={`font-medium ${(formData.is_scholar_or_ama || formData.is_atenean) ? 'text-gray-500' : 'text-white'}`}
+                  className={`font-medium ${(formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD) ? 'text-gray-500' : 'text-white'}`}
                 >
                   Group Registration
                 </Label>
@@ -213,7 +213,11 @@ export default function CheckoutStep({
               <div className="font-medium text-right text-indigo-400">
                 ₱{SINGLE_TICKET_PRICE} × number of attendees
               </div>
-              {(formData.is_scholar_or_ama || formData.is_atenean) && (
+              {IS_PRE_SPEAKER_PERIOD ? (
+                <div className="text-sm text-red-500 mt-1">
+                  Group registration is not available during the pre-speaker discount period
+                </div>
+              ) : (formData.is_scholar_or_ama || formData.is_atenean) && (
                 <div className="text-sm text-red-500 mt-1">
                   Group registration is not available for Ateneans, scholars, or AMA members
                 </div>
@@ -542,20 +546,28 @@ export default function CheckoutStep({
               ₱{totalPrice.toFixed(2)}
             </div>
           </div>
-          {isEligibleForDiscount && (
+          {IS_PRE_SPEAKER_PERIOD ? (
             <div className="text-sm text-green-400">
-              Group discount of ₱{GROUP_DISCOUNT} applied for registering 3 or more attendees!
+              Pre-speaker discount of ₱{PRE_SPEAKER_DISCOUNT} per person applied!
             </div>
-          )}
-          {!isEligibleForDiscount && formData.is_scholar_or_ama && (
-            <div className="text-sm text-green-400">
-              Scholar/AMA member discount of ₱{SCHOLAR_AMA_DISCOUNT} applied!
-            </div>
-          )}
-          {!isEligibleForDiscount && formData.is_atenean && !formData.is_scholar_or_ama && (
-            <div className="text-sm text-green-400">
-              Atenean discount of ₱{ATENEAN_DISCOUNT} applied!
-            </div>
+          ) : (
+            <>
+              {isEligibleForDiscount && (
+                <div className="text-sm text-green-400">
+                  Group discount of ₱{GROUP_DISCOUNT} applied for registering 3 or more attendees!
+                </div>
+              )}
+              {!isEligibleForDiscount && formData.is_scholar_or_ama && (
+                <div className="text-sm text-green-400">
+                  Scholar/AMA member discount of ₱{SCHOLAR_AMA_DISCOUNT} applied!
+                </div>
+              )}
+              {!isEligibleForDiscount && formData.is_atenean && !formData.is_scholar_or_ama && (
+                <div className="text-sm text-green-400">
+                  Atenean discount of ₱{ATENEAN_DISCOUNT} applied!
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
