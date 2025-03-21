@@ -42,7 +42,7 @@ export const LayoutGrid = ({ cards }) => {
                 layoutId={`title-${card.id}`}
                 className="absolute inset-0 flex items-center justify-center z-10"
               >
-                <div className= "px-4 py-2 rounded text-white font-bold text-xl md:text-2xl">
+                <div className= "px-4 py-2 rounded text-white font-bold text-xl md:text-3xl">
                   {card.title}
                 </div>
               </motion.div>
@@ -282,7 +282,7 @@ export function GlareGrid() {
       ),
       className: "md:col-span-2",
       thumbnail:
-        "https://images.unsplash.com/photo-1476231682828-37e571bc172f?q=80&w=3474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "/maze-elevated.jpg",
     },
     {
       id: 2,
@@ -298,7 +298,7 @@ export function GlareGrid() {
       ),
       className: "col-span-1",
       thumbnail:
-        "https://images.unsplash.com/photo-1464457312035-3d7d0e0c058e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "/stair-gap.jpg",
     },
     {
       id: 3,
@@ -313,7 +313,7 @@ export function GlareGrid() {
       ),
       className: "col-span-1",
       thumbnail:
-        "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "/fork-road-ill.png",
     },
     {
       id: 4,
@@ -328,7 +328,7 @@ export function GlareGrid() {
       ),
       className: "md:col-span-2",
       thumbnail:
-        "https://images.unsplash.com/photo-1475070929565-c985b496cb9f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "/walking.jpg",
     },
   ];
 
