@@ -7,27 +7,23 @@ import ParticlesBackground from "../ParticlesBackground";
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
-    // Set a small timeout to ensure the animation triggers after component mounts
     const timer = setTimeout(() => {
       setIsVisible(true);
       console.log("visible true");
     }, 300);
 
-    // Set up intersection observer for scroll animations
     const observerOptions = {
-      root: null, // viewport
+      root: null,
       rootMargin: "0px",
-      threshold: 0.2, // 15% of the element needs to be visible
+      threshold: 0.2,
     };
 
     const handleIntersect = (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Add visible class to the element
           entry.target.classList.remove("opacity-0", "translate-y-16");
           entry.target.classList.add("opacity-100", "translate-y-0");
 
-          // Stop observing once animation is triggered
           observer.unobserve(entry.target);
         }
       });
@@ -35,7 +31,6 @@ const AboutPage = () => {
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
-    // Observe leadership team sections
     document.querySelectorAll(".about-section").forEach((section) => {
       observer.observe(section);
     });
