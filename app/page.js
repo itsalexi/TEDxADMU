@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense, lazy } from "react";
-import Head from "next/head";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import TrippyScroll from "@/components/TrippyScroll";
@@ -10,7 +9,7 @@ import CurvedLineAnimation from "@/components/animatedCurvedLine";
 import MazeBackground from "@/components/MazeBackground";
 import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
 import TextLoadingScreen from "@/components/TextLoadingScreen";
-import ParticlesBackground from "./ParticlesBackground";
+import { GlareGrid } from "@/components/glareGrid";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -231,7 +230,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="speaker-section" className="py-20 bg-black">
+        <section id="topics-section" className="py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
+              Explore the Labyrinthe
+            </h2>
+            <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">Event topics</h4>
+
+            {/* Topics Cards */}
+            <GlareGrid />
+          </div>
+        </section>
+
+        <section id="speaker-section" className="py-10 bg-black">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
               Our Speakers
