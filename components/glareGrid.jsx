@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
 
 export const LayoutGrid = ({ cards }) => {
@@ -43,7 +42,7 @@ export const LayoutGrid = ({ cards }) => {
                 layoutId={`title-${card.id}`}
                 className="absolute inset-0 flex items-center justify-center z-10"
               >
-                <p className="text-white tracking-wide font-serif drop-shadow-2xl text-xl md:text-3xl">
+                <p className="text-[#eb0028] tracking-[0.15em] font-norwester drop-shadow-2xl text-xl md:text-3xl">
                   {card.title}
                 </p>
               </motion.div>
@@ -114,7 +113,7 @@ const SelectedCard = ({ selected }) => {
         layoutId={`title-${selected.id}`}
         className="absolute inset-0 grid grid-rows-2 z-20"
       >
-        <div className="flex justify-center items-center mt-10 px-4 py-2 rounded text-white tracking-wide font-serif drop-shadow-2xl text-2xl md:text-5xl">
+        <div className="flex justify-center items-center mt-10 px-4 py-2 rounded text-[#eb0028] tracking-[0.15em] font-norwester drop-shadow-2xl text-2xl md:text-5xl">
           {selected.title}
         </div>
         <div></div>
