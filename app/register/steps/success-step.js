@@ -12,7 +12,7 @@ export default function SuccessStep({ formData }) {
       </h2>
 
       <p className="text-gray-300 max-w-md leading-relaxed">
-        Thank you for applying to TEDx Labyrinthine. We've received your
+        Thank you for applying to TEDx AteneoDeManila U: Labyrinthine. We've received your
         application and will review it shortly.
         <br />
         <br />
@@ -26,7 +26,7 @@ export default function SuccessStep({ formData }) {
         <p>Submission Date: {new Date().toLocaleDateString()}</p>
         <p className="mt-3">
           If you have any questions, please contact{' '}
-          <span className="text-indigo-400">support@tedxlabyrinthine.com</span>
+          <span className="text-indigo-400">tedxateneodemanila2425@gmail.com</span>
         </p>
       </div>
     </div>
