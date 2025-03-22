@@ -204,7 +204,7 @@ export const GlareCard = ({ children, className }) => {
     <div
       style={containerStyle}
       className={cn(
-        "relative isolate [contain:layout_style] [perspective:600px] transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-transform h-full w-full",
+        "cursor-pointer relative isolate [contain:layout_style] [perspective:600px] transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-transform h-full w-full",
         className
       )}
       ref={refElement}
