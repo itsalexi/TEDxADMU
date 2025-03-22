@@ -6,15 +6,16 @@ import { SmoothScrollHero } from "@/components/smoothScroll";
 import { ShopHero } from "@/components/shopHero";
 import Image from "next/image";
 import ParticlesBackground from "../ParticlesBackground";
+import { IS_SHOP_ANNOUNCED } from "../config/config";
+
 
 const ShopPage = () => {
-  const shopReleased = false;
 
   return (
     <div className="min-h-screen bg-black text-white relative">
       <ParticlesBackground />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 bg-black">
-        {shopReleased ? (
+        {IS_SHOP_ANNOUNCED ? (
           <div>
             <ShopHero />
             <SmoothScrollHero />
