@@ -70,7 +70,7 @@ const AboutPage = () => {
           className="bg-black py-5 relative overflow-hidden"
           id="topics-section"
         >
-          <div className="container flex flex-col relative">
+          <div className="w-screen flex flex-col items-center relative">
             <div className="text-center text-xl">
               Topics
             </div>
