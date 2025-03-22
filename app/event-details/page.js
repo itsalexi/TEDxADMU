@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useEffect, useState } from "react";
-import ParticlesBackground from "../ParticlesBackground";
+import { FaqSectionDemo } from "@/components/topicsDropdown";
 
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,24 +43,44 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <ParticlesBackground />
-      <main className="container mx-auto px-8 sm:px-6 lg:px-16 py-20 relative">
-        {/*About TEDxAteneoDeManilaU */}
-        <div
-          className={`flex flex-col mt-24 gap-10 transform transition-all duration-1000 ease-out ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
-          }`}
+      <main className="py-20 relative">
+        {/*Event Details */}
+        <section className="bg-black py-5 relative overflow-hidden container mx-auto px-8 sm:px-6 lg:px-16">
+          <div
+            className={`flex flex-col mt-24 gap-10 transform transition-all duration-1000 ease-out ${
+              isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-16"
+            }`}
+          >
+            <h1 className="text-2xl sm:text-3xl md:text-6xl text-center font-bold text-[#eb0028]">
+              About{" "}
+              <p>
+                TEDx
+                <span className="text-white font-thin">AteneoDeManilaU</span>
+              </p>
+              <p>Event Details</p>
+              <p>Labyrinthine</p>
+            </h1>
+          </div>
+        </section>
+
+        {/* Topics */}
+        <section
+          className="bg-black py-5 relative overflow-hidden"
+          id="topics-section"
         >
-          <h1 className="text-2xl sm:text-3xl md:text-6xl text-center font-bold text-[#eb0028]">
-            About{" "}
-            <p>
-              TEDx
-              <span className="text-white font-thin">AteneoDeManilaU</span>
-            </p>
-            <p>Event Details</p>
-            <p>Labyrinthine</p>
-          </h1>
-        </div>
+          <div className="container flex flex-col relative">
+            <div className="text-center text-xl">
+              Topics
+            </div>
+            <FaqSectionDemo />
+            {/* Curiosity */}
+            <div className="w-screen bg-[#eb0028] h-96">
+
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
