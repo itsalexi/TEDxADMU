@@ -7,7 +7,13 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Plus, Trash2, Users, User } from 'lucide-react';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select';
 import {
   SINGLE_TICKET_PRICE,
   GROUP_DISCOUNT_THRESHOLD,
@@ -15,8 +21,8 @@ import {
   SCHOLAR_AMA_DISCOUNT,
   ATENEAN_DISCOUNT,
   IS_PRE_SPEAKER_PERIOD,
-  PRE_SPEAKER_DISCOUNT
-} from '@/app/config/registration';
+  PRE_SPEAKER_DISCOUNT,
+} from '@/app/config/config';
 
 export default function CheckoutStep({
   formData,
@@ -31,17 +37,17 @@ export default function CheckoutStep({
 
   const calculateTotalPrice = (totalAttendees) => {
     let price = SINGLE_TICKET_PRICE * totalAttendees;
-    
+
     if (IS_PRE_SPEAKER_PERIOD) {
-      price = price - (PRE_SPEAKER_DISCOUNT * totalAttendees);
+      price = price - PRE_SPEAKER_DISCOUNT * totalAttendees;
     } else {
       if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
         price = price - GROUP_DISCOUNT;
       } else {
         if (formData.is_scholar_or_ama) {
-          price = price - (SCHOLAR_AMA_DISCOUNT * totalAttendees);
+          price = price - SCHOLAR_AMA_DISCOUNT * totalAttendees;
         } else if (formData.is_atenean) {
-          price = price - (ATENEAN_DISCOUNT * totalAttendees);
+          price = price - ATENEAN_DISCOUNT * totalAttendees;
         }
       }
     }
@@ -49,28 +55,35 @@ export default function CheckoutStep({
   };
 
   useEffect(() => {
-    const totalAttendees = formData.registration_type === 'group' ? 1 + attendees.length : 1;
+    const totalAttendees =
+      formData.registration_type === 'group' ? 1 + attendees.length : 1;
     const updatedPrice = calculateTotalPrice(totalAttendees);
 
     updateFormData({
       ...formData,
       cost: updatedPrice,
-      additional_attendees: formData.registration_type === 'group' ? attendees : []
+      additional_attendees:
+        formData.registration_type === 'group' ? attendees : [],
     });
   }, [attendees]);
 
   const handleRegistrationTypeChange = (value) => {
-    if (value === 'group' && (formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD)) {
+    if (
+      value === 'group' &&
+      (formData.is_scholar_or_ama ||
+        formData.is_atenean ||
+        IS_PRE_SPEAKER_PERIOD)
+    ) {
       return;
     }
 
     const totalAttendees = value === 'group' ? 1 + attendees.length : 1;
-    
+
     const updatedFormData = {
       ...formData,
       registration_type: value,
       is_scholar_or_ama: value === 'group' ? false : formData.is_scholar_or_ama,
-      additional_attendees: value === 'group' ? attendees : []
+      additional_attendees: value === 'group' ? attendees : [],
     };
 
     const updatedPrice = calculateTotalPrice(totalAttendees);
@@ -101,7 +114,7 @@ export default function CheckoutStep({
       is_scholar_or_ama: false,
       is_atenean: false,
       school: '',
-      year_and_course: ''
+      year_and_course: '',
     };
 
     const newAttendees = [...attendees, newAttendee];
@@ -150,7 +163,6 @@ export default function CheckoutStep({
 
   return (
     <div className="space-y-8">
-
       <div className="bg-white/5 p-6 rounded-md border border-gray-800">
         <div className="text-lg font-medium mb-4 text-white">
           Registration Options
@@ -186,23 +198,37 @@ export default function CheckoutStep({
             </div>
           </div>
 
-          <div className={`flex items-start space-x-3 p-5 border border-gray-700 rounded-md transition-colors ${
-            (formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD) 
-              ? 'opacity-50 cursor-not-allowed' 
-              : 'hover:bg-white/5'
-          }`}>
+          <div
+            className={`flex items-start space-x-3 p-5 border border-gray-700 rounded-md transition-colors ${
+              formData.is_scholar_or_ama ||
+              formData.is_atenean ||
+              IS_PRE_SPEAKER_PERIOD
+                ? 'opacity-50 cursor-not-allowed'
+                : 'hover:bg-white/5'
+            }`}
+          >
             <RadioGroupItem
               value="group"
               id="registration-group"
               className="mt-1 border-gray-600 text-indigo-500"
-              disabled={formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD}
+              disabled={
+                formData.is_scholar_or_ama ||
+                formData.is_atenean ||
+                IS_PRE_SPEAKER_PERIOD
+              }
             />
             <div className="space-y-1 flex-1">
               <div className="flex items-center">
                 <Users className="h-4 w-4 mr-2 text-gray-400" />
                 <Label
                   htmlFor="registration-group"
-                  className={`font-medium ${(formData.is_scholar_or_ama || formData.is_atenean || IS_PRE_SPEAKER_PERIOD) ? 'text-gray-500' : 'text-white'}`}
+                  className={`font-medium ${
+                    formData.is_scholar_or_ama ||
+                    formData.is_atenean ||
+                    IS_PRE_SPEAKER_PERIOD
+                      ? 'text-gray-500'
+                      : 'text-white'
+                  }`}
                 >
                   Group Registration
                 </Label>
@@ -215,18 +241,20 @@ export default function CheckoutStep({
               </div>
               {IS_PRE_SPEAKER_PERIOD ? (
                 <div className="text-sm text-red-500 mt-1">
-                  Group registration is not available during the pre-speaker discount period
+                  Group registration is not available during the pre-speaker
+                  discount period
                 </div>
-              ) : (formData.is_scholar_or_ama || formData.is_atenean) && (
-                <div className="text-sm text-red-500 mt-1">
-                  Group registration is not available for Ateneans, scholars, or AMA members
-                </div>
+              ) : (
+                (formData.is_scholar_or_ama || formData.is_atenean) && (
+                  <div className="text-sm text-red-500 mt-1">
+                    Group registration is not available for Ateneans, scholars,
+                    or AMA members
+                  </div>
+                )
               )}
             </div>
           </div>
         </RadioGroup>
-
-
       </div>
 
       {formData.registration_type === 'group' && (
@@ -376,7 +404,11 @@ export default function CheckoutStep({
                         id={`attendee-${attendee.id}-occupation`}
                         value={attendee.occupation || ''}
                         onChange={(e) =>
-                          updateAttendee(attendee.id, 'occupation', e.target.value)
+                          updateAttendee(
+                            attendee.id,
+                            'occupation',
+                            e.target.value
+                          )
                         }
                         required
                         className="bg-white/10 border-gray-700 text-white py-3"
@@ -471,39 +503,40 @@ export default function CheckoutStep({
 
           {IS_PRE_SPEAKER_PERIOD ? (
             <div className="flex justify-between text-green-400">
-              <span>Pre-speaker Discount (₱{PRE_SPEAKER_DISCOUNT} off per person)</span>
               <span>
-                -₱{PRE_SPEAKER_DISCOUNT * totalAttendees}
+                Pre-speaker Discount (₱{PRE_SPEAKER_DISCOUNT} off per person)
               </span>
+              <span>-₱{PRE_SPEAKER_DISCOUNT * totalAttendees}</span>
             </div>
           ) : (
             <>
               {isEligibleForDiscount && (
                 <div className="flex justify-between text-green-400">
                   <span>Group Discount (₱{GROUP_DISCOUNT} off)</span>
-                  <span>
-                    -₱{GROUP_DISCOUNT}
-                  </span>
+                  <span>-₱{GROUP_DISCOUNT}</span>
                 </div>
               )}
 
               {!isEligibleForDiscount && formData.is_scholar_or_ama && (
                 <div className="flex justify-between text-green-400">
-                  <span>Scholar/AMA Discount (₱{SCHOLAR_AMA_DISCOUNT} off per person)</span>
                   <span>
-                    -₱{SCHOLAR_AMA_DISCOUNT * totalAttendees}
+                    Scholar/AMA Discount (₱{SCHOLAR_AMA_DISCOUNT} off per
+                    person)
                   </span>
+                  <span>-₱{SCHOLAR_AMA_DISCOUNT * totalAttendees}</span>
                 </div>
               )}
 
-              {!isEligibleForDiscount && formData.is_atenean && !formData.is_scholar_or_ama && (
-                <div className="flex justify-between text-green-400">
-                  <span>Atenean Discount (₱{ATENEAN_DISCOUNT} off per person)</span>
-                  <span>
-                    -₱{ATENEAN_DISCOUNT * totalAttendees}
-                  </span>
-                </div>
-              )}
+              {!isEligibleForDiscount &&
+                formData.is_atenean &&
+                !formData.is_scholar_or_ama && (
+                  <div className="flex justify-between text-green-400">
+                    <span>
+                      Atenean Discount (₱{ATENEAN_DISCOUNT} off per person)
+                    </span>
+                    <span>-₱{ATENEAN_DISCOUNT * totalAttendees}</span>
+                  </div>
+                )}
             </>
           )}
 
@@ -527,11 +560,9 @@ export default function CheckoutStep({
           required
           className="border-gray-600 text-indigo-500"
         />
-        <Label
-          htmlFor="accept-terms"
-          className="text-gray-300 cursor-pointer"
-        >
-          I understand that TEDx AteneodeManilaU requires a registration fee and agree to proceed with my application.
+        <Label htmlFor="accept-terms" className="text-gray-300 cursor-pointer">
+          I understand that TEDx AteneodeManilaU requires a registration fee and
+          agree to proceed with my application.
         </Label>
         {errors.accepted_terms && (
           <p className="text-sm text-red-500 mt-2">{errors.accepted_terms}</p>
@@ -548,25 +579,30 @@ export default function CheckoutStep({
           </div>
           {IS_PRE_SPEAKER_PERIOD ? (
             <div className="text-sm text-green-400">
-              Pre-speaker discount of ₱{PRE_SPEAKER_DISCOUNT} per person applied!
+              Pre-speaker discount of ₱{PRE_SPEAKER_DISCOUNT} per person
+              applied!
             </div>
           ) : (
             <>
               {isEligibleForDiscount && (
                 <div className="text-sm text-green-400">
-                  Group discount of ₱{GROUP_DISCOUNT} applied for registering 3 or more attendees!
+                  Group discount of ₱{GROUP_DISCOUNT} applied for registering 3
+                  or more attendees!
                 </div>
               )}
               {!isEligibleForDiscount && formData.is_scholar_or_ama && (
                 <div className="text-sm text-green-400">
-                  Scholar/AMA member discount of ₱{SCHOLAR_AMA_DISCOUNT} applied!
+                  Scholar/AMA member discount of ₱{SCHOLAR_AMA_DISCOUNT}{' '}
+                  applied!
                 </div>
               )}
-              {!isEligibleForDiscount && formData.is_atenean && !formData.is_scholar_or_ama && (
-                <div className="text-sm text-green-400">
-                  Atenean discount of ₱{ATENEAN_DISCOUNT} applied!
-                </div>
-              )}
+              {!isEligibleForDiscount &&
+                formData.is_atenean &&
+                !formData.is_scholar_or_ama && (
+                  <div className="text-sm text-green-400">
+                    Atenean discount of ₱{ATENEAN_DISCOUNT} applied!
+                  </div>
+                )}
             </>
           )}
         </div>
