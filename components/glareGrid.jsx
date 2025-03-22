@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -70,7 +70,7 @@ export const LayoutGrid = ({ cards }) => {
             <motion.div
               layoutId={`card-${selected.id}`}
               className="relative w-full max-w-4xl h-3/4 mx-auto z-50 rounded-lg overflow-hidden"
-              onClick={(e) => e.stopPropagation()} 
+              onClick={(e) => e.stopPropagation()}
             >
               <SelectedCard selected={selected} />
             </motion.div>
@@ -270,6 +270,32 @@ export const GlareCard = ({ children, className }) => {
 
 // Example usage component
 export function GlareGrid() {
+  const [isVisible, setIsVisible] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.2,
+      }
+    );
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => {
+      if (contentRef.current) {
+        observer.unobserve(contentRef.current);
+      }
+    };
+  }, []);
   const cards = [
     {
       id: 1,
@@ -349,9 +375,13 @@ export function GlareGrid() {
       thumbnail: "/walking.jpg",
     },
   ];
-
   return (
-    <div className="min-h-screen w-full">
+    <div
+      ref={contentRef}
+      className={`min-h-screen w-full transition-all duration-1000 transform  ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-24 opacity-0"
+      }`}
+    >
       <LayoutGrid cards={cards} />
     </div>
   );
