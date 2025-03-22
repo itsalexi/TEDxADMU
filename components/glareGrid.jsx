@@ -11,7 +11,7 @@ export const LayoutGrid = ({ cards }) => {
   const handleClick = (card) => {
     setLastSelected(selected);
     setSelected(card);
-    console.log("clicked")
+    console.log("clicked");
   };
 
   const handleOutsideClick = () => {
@@ -37,13 +37,13 @@ export const LayoutGrid = ({ cards }) => {
               layoutId={`card-${card.id}`}
             >
               <ImageComponent card={card} />
-              
+
               {/* Title overlay in the middle of the card */}
-              <motion.div 
+              <motion.div
                 layoutId={`title-${card.id}`}
                 className="absolute inset-0 flex items-center justify-center z-10"
               >
-                <div className= "px-4 py-2 rounded text-white font-bold text-xl md:text-3xl">
+                <div className="px-4 py-2 rounded text-white font-bold text-xl md:text-3xl">
                   {card.title}
                 </div>
               </motion.div>
@@ -55,30 +55,28 @@ export const LayoutGrid = ({ cards }) => {
       <AnimatePresence>
         {selected && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center"
+            className="absolute inset-0 z-50 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={handleOutsideClick}
           >
+            {/* Overlay: Click to close */}
+            <motion.div
+              className="absolute inset-0 bg-black opacity-0 z-10"
+              onClick={handleOutsideClick}
+              animate={{ opacity: selected?.id ? 0.3 : 0 }}
+            />
+
             <motion.div
               layoutId={`card-${selected.id}`}
-              className="relative w-full max-w-4xl h-1/2 mx-auto z-50 rounded-lg overflow-hidden"
+              className="relative w-full max-w-4xl h-3/4 mx-auto z-50 rounded-lg overflow-hidden"
+              onClick={(e) => e.stopPropagation()} 
             >
               <SelectedCard selected={selected} />
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <motion.div
-        onClick={handleOutsideClick}
-        className={cn(
-          "fixed inset-0 bg-black opacity-0 z-10",
-          selected?.id ? "pointer-events-auto" : "pointer-events-none"
-        )}
-        animate={{ opacity: selected?.id ? 0.3 : 0 }}
-      />
     </div>
   );
 };
@@ -110,9 +108,9 @@ const SelectedCard = ({ selected }) => {
         className="object-cover object-top absolute inset-0 h-full w-full transition duration-200"
         alt="thumbnail"
       />
-      
+
       {/* Preserve title position from card view */}
-      <motion.div 
+      <motion.div
         layoutId={`title-${selected.id}`}
         className="absolute inset-0 grid grid-rows-2 z-20"
       >
@@ -121,7 +119,7 @@ const SelectedCard = ({ selected }) => {
         </div>
         <div></div>
       </motion.div>
-      
+
       <motion.div
         layoutId={`content-${selected.id}`}
         initial={{ opacity: 0, y: 100 }}
@@ -131,7 +129,7 @@ const SelectedCard = ({ selected }) => {
         className="relative px-8 pb-4 z-[70]"
       >
         {selected.content}
-        
+
         {/* Learn More button */}
         <motion.button
           initial={{ opacity: 0, y: 20 }}
@@ -144,9 +142,9 @@ const SelectedCard = ({ selected }) => {
           }}
         >
           <Link href="/event-details">
-          <span className="px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-black hover:text-white transition-colors duration-300">
-            Learn More
-          </span>
+            <span className="px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-black hover:text-white transition-colors duration-300">
+              Learn More
+            </span>
           </Link>
         </motion.button>
       </motion.div>
@@ -258,9 +256,7 @@ export const GlareCard = ({ children, className }) => {
     >
       <div className="h-full w-full grid will-change-transform origin-center transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] [transform:rotateY(var(--r-x))_rotateX(var(--r-y))] rounded-[var(--radius)] border border-slate-800 hover:[--opacity:0.6] hover:[--duration:200ms] hover:[--easing:linear] hover:filter-none overflow-hidden">
         <div className="w-full h-full grid [grid-area:1/1] mix-blend-soft-light [clip-path:inset(0_0_0_0_round_var(--radius))]">
-          <div className="h-full w-full bg-slate-950">
-            {children}
-          </div>
+          <div className="h-full w-full bg-slate-950">{children}</div>
         </div>
         <div className="pointer-events-none w-full h-full grid [grid-area:1/1] mix-blend-soft-light [clip-path:inset(0_0_1px_0_round_var(--radius))] opacity-[var(--opacity)] transition-opacity transition-background duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-background [background:radial-gradient(farthest-corner_circle_at_var(--m-x)_var(--m-y),_rgba(255,255,255,0.8)_10%,_rgba(255,255,255,0.65)_20%,_rgba(255,255,255,0)_90%)]" />
         <div
@@ -280,61 +276,77 @@ export function GlareGrid() {
       title: "Curiosity",
       content: (
         <div>
-          <h3 className="text-lg mt-4 max-w-lg font-semibold">Microbiome: The Ecosystem Inside You</h3>
-          <h4 className="font-normal text-base max-w-lg italic">Nutrition and Dietetics, Lifestyle</h4>
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">
+            Microbiome: The Ecosystem Inside You
+          </h3>
+          <h4 className="font-normal text-base max-w-lg italic">
+            Nutrition and Dietetics, Lifestyle
+          </h4>
           <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
-          This talk will explore the interconnectedness between our gut and brain, the potential of microbiome-based therapies, and the impact of modern lifestyles on this vital ecosystem.
+            This talk will explore the interconnectedness between our gut and
+            brain, the potential of microbiome-based therapies, and the impact
+            of modern lifestyles on this vital ecosystem.
           </p>
         </div>
       ),
       className: "md:col-span-2",
-      thumbnail:
-        "/maze-elevated.jpg",
+      thumbnail: "/maze-elevated.jpg",
     },
     {
       id: 2,
       title: "Impasse",
       content: (
         <div>
-          <h3 className="text-lg mt-4 max-w-lg font-semibold">Finding Purpose and Strength in Stillness and Grief</h3>
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">
+            Finding Purpose and Strength in Stillness and Grief
+          </h3>
           <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
-          This talk explores how waiting, particularly in grief, can become a powerful tool for transformation, clarity, and resilience.
+            This talk explores how waiting, particularly in grief, can become a
+            powerful tool for transformation, clarity, and resilience.
           </p>
         </div>
       ),
       className: "col-span-1",
-      thumbnail:
-        "/stair-gap.jpg",
+      thumbnail: "/stair-gap.jpg",
     },
     {
       id: 3,
       title: "Turning Point",
       content: (
         <div>
-          <h3 className="text-lg mt-4 max-w-lg font-semibold">Artivism: The Power of Art in Activism</h3>
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">
+            Artivism: The Power of Art in Activism
+          </h3>
           <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
-          This topic explores how artists harness their creativity as a tool for activism, using storytelling, performance, and visual expression to address pressing societal challenges and advocate for meaningful change.
+            This topic explores how artists harness their creativity as a tool
+            for activism, using storytelling, performance, and visual expression
+            to address pressing societal challenges and advocate for meaningful
+            change.
           </p>
         </div>
       ),
       className: "col-span-1",
-      thumbnail:
-        "/fork-road-ill.png",
+      thumbnail: "/fork-road-ill.png",
     },
     {
       id: 4,
       title: "Transformation",
       content: (
         <div>
-          <h3 className="text-lg mt-4 max-w-lg font-semibold">Digital Nomads: Work with Freedom and Fulfillment</h3>
+          <h3 className="text-lg mt-4 max-w-lg font-semibold">
+            Digital Nomads: Work with Freedom and Fulfillment
+          </h3>
           <p className="font-normal text-base my-2 max-w-lg text-neutral-200">
-          The talk explores transformation, encouraging individuals to reflect on whether digital nomadism aligns with their personal and professional evolution, and how the shift in mindset and lifestyle can lead to a new way of thriving in a complex and interconnected world.
+            The talk explores transformation, encouraging individuals to reflect
+            on whether digital nomadism aligns with their personal and
+            professional evolution, and how the shift in mindset and lifestyle
+            can lead to a new way of thriving in a complex and interconnected
+            world.
           </p>
         </div>
       ),
       className: "md:col-span-2",
-      thumbnail:
-        "/walking.jpg",
+      thumbnail: "/walking.jpg",
     },
   ];
 
