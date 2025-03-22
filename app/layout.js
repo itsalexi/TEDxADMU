@@ -15,9 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: 'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
-  description: 'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
-  keywords: 'TEDx, TEDxAteneoDeManilaU, Labyrinthine, Ateneo de Manila University, TED Talks, Innovation, Ideas Worth Spreading',
+  title:
+    'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
+  description:
+    'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
+  keywords:
+    'TEDx, TEDxAteneoDeManilaU, Labyrinthine, Ateneo de Manila University, TED Talks, Innovation, Ideas Worth Spreading',
   authors: [{ name: 'TEDxAteneoDeManilaU Team' }],
   creator: 'TEDxAteneoDeManilaU',
   publisher: 'TEDxAteneoDeManilaU',
@@ -31,8 +34,10 @@ export const metadata = {
     locale: 'en_US',
     url: 'https://tedxateneodemanilau.com',
     siteName: 'TEDxAteneoDeManilaU',
-    title: 'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
-    description: 'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
+    title:
+      'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
+    description:
+      'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
     images: [
       {
         url: '/tedx-logo.png',
@@ -44,8 +49,10 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
-    description: 'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
+    title:
+      'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
+    description:
+      'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
     images: ['/tedx-logo.png'],
   },
   robots: {
@@ -74,6 +81,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "68b74fefacd54b36984ff59565cd4010"}'
+        ></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

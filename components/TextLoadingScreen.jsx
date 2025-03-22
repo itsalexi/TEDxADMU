@@ -8,10 +8,33 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
   const [lockedPositions, setLockedPositions] = useState([]);
   const [isComplete, setIsComplete] = useState(false);
   const [lockAnimations, setLockAnimations] = useState([]);
+  const [showSkipHint, setShowSkipHint] = useState(true);
 
   useEffect(() => {
     // Add class to body to prevent scrolling
     document.body.style.overflow = 'hidden';
+
+    // Handle skip functionality
+    const handleSkip = () => {
+      setDisplayText(word);
+      setLockedPositions(Array.from({ length: word.length }, (_, i) => i));
+      setIsComplete(true);
+      if (onLoadComplete) {
+        setTimeout(onLoadComplete, 500);
+      }
+    };
+
+    // Add event listeners for skip
+    const handleKeyPress = (e) => {
+      handleSkip();
+    };
+
+    const handleClick = () => {
+      handleSkip();
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+    document.addEventListener('click', handleClick);
 
     // Initialize with random characters
     const randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-.<>?/";
@@ -32,11 +55,13 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
     const shuffleInterval = 50; // faster shuffling for more intensity
     
     // Start the animation immediately
-    startRevealAnimation(baseCharacterRevealTime, shuffleInterval);
+    const cleanup = startRevealAnimation(baseCharacterRevealTime, shuffleInterval);
     
     return () => {
-      // Cleanup will be handled within the startRevealAnimation function
       document.body.style.overflow = 'unset';
+      document.removeEventListener('keydown', handleKeyPress);
+      document.removeEventListener('click', handleClick);
+      cleanup();
     };
   }, []);
 
@@ -152,6 +177,11 @@ const TextLoadingScreen = ({ onLoadComplete }) => {
             </span>
           ))}
         </div>
+        {showSkipHint && !isComplete && (
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 text-sm opacity-50">
+            Press any key or click anywhere to skip
+          </div>
+        )}
       </div>
     </div>
   );

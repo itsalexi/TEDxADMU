@@ -11,12 +11,42 @@ import {
   PRE_SPEAKER_PERIOD_END,
   GROUP_DISCOUNT
 } from '@/app/config/registration';
+import { useState, useEffect } from 'react';
 
 export default function DiscountEligibilityStep({
   formData,
   updateFormData,
   errors = {},
 }) {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const endDate = new Date(PRE_SPEAKER_PERIOD_END);
+      const now = new Date();
+      const difference = endDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        });
+      }
+    };
+
+    calculateTimeLeft();
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const handleDiscountChange = (value) => {
     const isScholarOrAma = value === 'scholar_ama';
     const isAtenean = value === 'atenean';
@@ -40,8 +70,29 @@ export default function DiscountEligibilityStep({
             <p className="text-indigo-300 font-medium">Pre-speaker Discount Period</p>
           </div>
           <p className="text-sm text-gray-400 mt-2">
-            Enjoy a special ₱{PRE_SPEAKER_DISCOUNT} discount during {PRE_SPEAKER_PERIOD_START}-{PRE_SPEAKER_PERIOD_END}! This discount will be applied automatically and cannot be combined with other discounts.
+            Enjoy a special ₱{PRE_SPEAKER_DISCOUNT} discount during {new Date(PRE_SPEAKER_PERIOD_START).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}-{new Date(PRE_SPEAKER_PERIOD_END).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}! This discount will be applied automatically and cannot be combined with other discounts.
           </p>
+          <div className="flex items-center mt-3 bg-indigo-950/50 p-2 rounded border border-indigo-700">
+            <span className="text-sm text-indigo-200 mr-2">Time remaining:</span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                <span className="text-indigo-300 font-medium">{timeLeft.days}</span>
+                <span className="text-gray-400 text-sm">d</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-indigo-300 font-medium">{timeLeft.hours}</span>
+                <span className="text-gray-400 text-sm">h</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-indigo-300 font-medium">{timeLeft.minutes}</span>
+                <span className="text-gray-400 text-sm">m</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-indigo-300 font-medium">{timeLeft.seconds}</span>
+                <span className="text-gray-400 text-sm">s</span>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
@@ -136,4 +187,4 @@ export default function DiscountEligibilityStep({
       </div>
     </div>
   );
-} 
+}
