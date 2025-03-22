@@ -71,18 +71,20 @@ export default function ApplicationForm() {
   useEffect(() => {
     if (state.message === 'Form submitted successfully!') {
       toast({
-        title: 'Application Submitted',
-        description: state.message,
+        title: '🎉 Application Submitted Successfully!',
+        description: 'Thank you for registering for TEDxADMU! You will receive a confirmation email shortly with further instructions.',
         variant: 'success',
+        duration: 6000,
       });
 
       setCurrentStep(5);
       setIsSubmitting(false);
     } else if (state?.error) {
       toast({
-        title: 'Submission Error',
-        description: state.error,
+        title: '❌ Submission Error',
+        description: `${state.error} Please try again or contact support if the issue persists.`,
         variant: 'destructive',
+        duration: 8000,
       });
       setIsSubmitting(false);
     }
@@ -295,9 +297,10 @@ export default function ApplicationForm() {
 
     if (!isValid) {
       toast({
-        title: 'Validation Error',
-        description: 'Please fix the highlighted fields before proceeding',
+        title: '⚠️ Validation Error',
+        description: 'Please check and fix the highlighted fields before proceeding.',
         variant: 'destructive',
+        duration: 5000,
       });
     }
 
