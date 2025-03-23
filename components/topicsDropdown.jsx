@@ -53,8 +53,8 @@ const TopicsDropdown = () => {
   ];
 
   return (
-    <div className="w-full h-[110vh]">
-      <div className="flex flex-col w-full h-full">
+    <div className="w-full">
+      <div className="flex flex-col w-full">
         {topics.map((topic, index) => (
           <TopicSection
             key={topic.id}
@@ -64,7 +64,6 @@ const TopicsDropdown = () => {
               setSelectedTopic(selectedTopic === topic.id ? null : topic.id)
             }
             isExpanded={selectedTopic !== null}
-            isAnySelected={selectedTopic !== null}
           />
         ))}
       </div>
@@ -72,23 +71,15 @@ const TopicsDropdown = () => {
   );
 };
 
-const TopicSection = ({
-  topic,
-  isSelected,
-  onClick,
-  isExpanded,
-  isAnySelected,
-}) => {
+const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
   return (
     <motion.div
       layout
       className={cn(
         "relative overflow-hidden transition-all duration-700 ease-in-out cursor-pointer border-b border-gray-800",
         isSelected
-          ? "h-[80vh] flex-grow"
-          : isAnySelected
-          ? "h-[20vh] flex-shrink"
-          : "flex-1"
+          ? "h-[600px]" // Fixed expanded height
+          : "h-[200px]" // Fixed collapsed height
       )}
       onClick={onClick}
       initial={false}
@@ -186,8 +177,8 @@ const TopicSection = ({
             )}
           </AnimatePresence>
 
-          {/* Show short description when not selected and not any selected */}
-          {!isSelected && !isAnySelected && (
+          {/* Show short description when not selected */}
+          {!isSelected && (
             <motion.p className="text-white text-sm md:text-base mt-2">
               {topic.shortDescription}
             </motion.p>
