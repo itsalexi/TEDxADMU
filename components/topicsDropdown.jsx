@@ -72,43 +72,39 @@ const TopicsDropdown = () => {
 };
 
 const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
+  // Add a transition config for smoother animations
+  const transition = {
+    type: "spring",
+    stiffness: 100,
+    damping: 20,
+    duration: 1,
+  };
+
   return (
     <motion.div
       layout
       className={cn(
-        "relative overflow-hidden transition-all duration-700 ease-in-out cursor-pointer border-b border-gray-800",
+        "relative overflow-hidden cursor-pointer border-b border-gray-800",
         isSelected
-          ? "h-[600px]" // Fixed expanded height
-          : "h-[200px]" // Fixed collapsed height
+          ? "h-[36rem]" 
+          : "h-[18rem]"
       )}
       onClick={onClick}
       initial={false}
+      transition={transition}
     >
       <motion.div
-        layout
         className={cn(
           "relative w-full h-full flex flex-col bg-gradient-to-b",
-          `${topic.color}`,
-          isSelected ? "opacity-100" : "opacity-80 hover:opacity-90"
+          `${topic.color}`
         )}
+        transition={transition}
       >
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <div
-            className={cn(
-              "absolute inset-0 bg-black z-10 transition-opacity duration-700",
-              isSelected ? "opacity-40" : "opacity-60"
-            )}
-          ></div>
+          <div className="absolute inset-0 bg-black z-10 bg-opacity-50"></div>
           <div className="h-full w-full relative">
-            <div
-              className={cn(
-                "w-full h-full bg-gradient-to-b absolute z-10 transition-opacity duration-700",
-                isSelected
-                  ? "from-black/20 to-black/50"
-                  : "from-black/30 to-black/60"
-              )}
-            ></div>
+            <div className="w-full h-full bg-gradient-to-b absolute z-10 from-black/25 to-black/55"></div>
             <Image
               src={topic.image}
               alt={topic.title}
@@ -130,19 +126,20 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
         {/* Content */}
         <div
           className={cn(
-            "relative z-20 w-full flex flex-col p-4 md:p-8 transition-all duration-700",
+            "relative z-20 w-full flex flex-col p-4 md:p-8",
             isSelected ? "justify-center" : "justify-start"
           )}
         >
           {/* Title always visible */}
-          <motion.div layout className="flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <motion.h2
               layout
+              transition={transition}
               className={cn(
-                "font-bold transition-all duration-700 ease-in-out",
+                "font-bold",
                 isSelected
-                  ? "text-3xl md:text-5xl lg:text-6xl"
-                  : "text-xl md:text-2xl",
+                  ? "text-5xl md:text-6xl lg:text-7xl"
+                  : "text-4xl md:text-5xl",
                 "text-white"
               )}
             >
@@ -151,20 +148,21 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
 
             <motion.div
               animate={{ rotate: isSelected ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
               className="text-white"
             >
               <ChevronDown className="h-6 w-6" />
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Description - only visible when selected */}
-          <AnimatePresence>
-            {isSelected && (
+          {/* Description - without exit animation for immediate disappearance */}
+          <AnimatePresence mode="sync" initial={false}>
+            {isSelected ? (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                key="full-description"
+                initial={{ y: 20 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.3 }}
                 className="text-white mt-8 max-w-3xl"
               >
                 <p className="text-xl md:text-2xl lg:text-3xl mb-6 font-light">
@@ -174,15 +172,15 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
                   {topic.fullDescription}
                 </p>
               </motion.div>
+            ) : (
+              <motion.p
+                key="short-description"
+                className="text-white text-sm md:text-base mt-2"
+              >
+                {topic.shortDescription}
+              </motion.p>
             )}
           </AnimatePresence>
-
-          {/* Show short description when not selected */}
-          {!isSelected && (
-            <motion.p className="text-white text-sm md:text-base mt-2">
-              {topic.shortDescription}
-            </motion.p>
-          )}
         </div>
       </motion.div>
     </motion.div>
