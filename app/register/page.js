@@ -80,6 +80,7 @@ export default function ApplicationForm() {
 
       setCurrentStep(5);
       setIsSubmitting(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (state?.error) {
       toast({
         title: '❌ Submission Error',
