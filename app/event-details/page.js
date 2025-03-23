@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useEffect, useState } from "react";
-import { FaqSectionDemo } from "@/components/topicsDropdown";
+import TopicsDropdown, { FaqSectionDemo } from "@/components/topicsDropdown";
 
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -70,14 +70,10 @@ const AboutPage = () => {
           className="bg-black py-5 relative overflow-hidden"
           id="topics-section"
         >
-          <div className="w-screen flex flex-col items-center relative">
-            <div className="text-center text-xl">
-              Topics
-            </div>
-            <FaqSectionDemo />
-            {/* Curiosity */}
-            <div className="w-screen bg-[#eb0028] h-96">
-
+          <div className="w-full h-full flex flex-col items-center">
+            <div className="text-center text-xl mb-4 md:mb-8">Topics</div>
+            <div className="w-full h-full">
+              <TopicsDropdown />
             </div>
           </div>
         </section>

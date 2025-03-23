@@ -2,157 +2,200 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown} from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
-const FaqSection = React.forwardRef(
-  ({ className, title, description, items, contactInfo, ...props }, ref) => {
-    return (
-      <section
-        ref={ref}
-        className={cn(
-          "py-16 w-full ",
-          className
-        )}
-        {...props}
-      >
-        <div className="">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl mx-auto text-center mb-12"
-          >
-            <h2 className="text-3xl font-semibold mb-3 bg-gradient-to-r from-foreground via-foreground/80 to-foreground bg-clip-text text-transparent">
-              {title}
-            </h2>
-            {description && (
-              <p className="text-sm text-muted-foreground">{description}</p>
-            )}
-          </motion.div>
+const TopicsDropdown = () => {
+  const [selectedTopic, setSelectedTopic] = React.useState(null);
 
-          <div className="max-w-2xl mx-auto space-y-2">
-            {items.map((item, index) => (
-              <FaqItem
-                key={index}
-                question={item.question}
-                answer={item.answer}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-);
-FaqSection.displayName = "FaqSection";
+  const topics = [
+    {
+      id: "curiosity",
+      title: "Curiosity",
+      shortDescription: "The spark that ignites our journey",
+      fullDescription:
+        "Curiosity is the initial spark that sets us on a path of discovery. It's about questioning the status quo, exploring new territories, and being open to the unknown. This stage of the labyrinth represents our innate desire to learn and understand more about ourselves and the world around us.",
+      image: "/curiosity.jpg",
+      color: "from-red-600 to-orange-500",
+      textColor: "text-orange-500",
+    },
+    {
+      id: "impasse",
+      title: "Impasse",
+      shortDescription: "Confronting obstacles and uncertainty",
+      fullDescription:
+        "An impasse is a point where progress seems impossible, where we confront obstacles and uncertainty. In the labyrinth, these are the dead-ends and false paths that challenge our resolve. This stage is about acknowledging difficulties and finding the resilience to continue despite them.",
+      image: "/impasse.jpg",
+      color: "from-blue-600 to-indigo-500",
+      textColor: "text-blue-500",
+    },
+    {
+      id: "turning-point",
+      title: "Turning Point",
+      shortDescription: "Moments of clarity and decision",
+      fullDescription:
+        "A turning point marks a critical moment of clarity and decision. In the labyrinth, it's where we find a new direction after being lost. This stage represents transformation, where challenges become opportunities and we gain new perspectives that shape our path forward.",
+      image: "/turning-point.jpg",
+      color: "from-green-600 to-emerald-500",
+      textColor: "text-green-500",
+    },
+    {
+      id: "transformation",
+      title: "Transformation",
+      shortDescription: "Emerging changed and enlightened",
+      fullDescription:
+        "Transformation is the culmination of our journey through the labyrinth, where we emerge changed and enlightened. This stage represents the growth and insight gained from navigating complexity, embracing uncertainty, and persevering through challenges. It's about becoming more than we were when we started.",
+      image: "/transformation.jpg",
+      color: "from-purple-600 to-violet-500",
+      textColor: "text-purple-500",
+    },
+  ];
 
-const FaqItem = React.forwardRef(({ question, answer, index }, ref) => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  return (
+    <div className="w-full h-[110vh]">
+      <div className="flex flex-col w-full h-full">
+        {topics.map((topic, index) => (
+          <TopicSection
+            key={topic.id}
+            topic={topic}
+            isSelected={selectedTopic === topic.id}
+            onClick={() =>
+              setSelectedTopic(selectedTopic === topic.id ? null : topic.id)
+            }
+            isExpanded={selectedTopic !== null}
+            isAnySelected={selectedTopic !== null}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
+const TopicSection = ({
+  topic,
+  isSelected,
+  onClick,
+  isExpanded,
+  isAnySelected,
+}) => {
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, delay: index * 0.1 }}
+      layout
       className={cn(
-        "group rounded-lg border border-border/50 transition-all duration-200 ease-in-out",
-        isOpen
-          ? "bg-gradient-to-br from-background via-muted/50 to-background"
-          : "hover:bg-muted/50"
+        "relative overflow-hidden transition-all duration-700 ease-in-out cursor-pointer border-b border-gray-800",
+        isSelected
+          ? "h-[80vh] flex-grow"
+          : isAnySelected
+          ? "h-[20vh] flex-shrink"
+          : "flex-1"
       )}
+      onClick={onClick}
+      initial={false}
     >
-      <Button
-        variant="ghost"
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-4 h-auto justify-between hover:bg-transparent"
-      >
-        <h3
-          className={cn(
-            "text-base font-medium transition-colors duration-200 text-left",
-            "text-foreground/70",
-            isOpen && "text-foreground"
-          )}
-        >
-          {question}
-        </h3>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.1 : 1 }}
-          transition={{ duration: 0.2 }}
-          className={cn(
-            "p-0.5 rounded-full flex-shrink-0 transition-colors duration-200",
-            isOpen ? "text-primary" : "text-muted-foreground"
-          )}
-        >
-          <ChevronDown className="h-4 w-4" />
-        </motion.div>
-      </Button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{
-              height: "auto",
-              opacity: 1,
-              transition: { duration: 0.2, ease: "easeOut" },
-            }}
-            exit={{
-              height: 0,
-              opacity: 0,
-              transition: { duration: 0.2, ease: "easeIn" },
-            }}
-          >
-            <div className="px-6 pb-4 pt-2">
-              <motion.p
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                className="text-sm text-muted-foreground leading-relaxed"
-              >
-                {answer}
-              </motion.p>
-            </div>
-          </motion.div>
+      <motion.div
+        layout
+        className={cn(
+          "relative w-full h-full flex flex-col bg-gradient-to-b",
+          `${topic.color}`,
+          isSelected ? "opacity-100" : "opacity-80 hover:opacity-90"
         )}
-      </AnimatePresence>
+      >
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <div
+            className={cn(
+              "absolute inset-0 bg-black z-10 transition-opacity duration-700",
+              isSelected ? "opacity-40" : "opacity-60"
+            )}
+          ></div>
+          <div className="h-full w-full relative">
+            <div
+              className={cn(
+                "w-full h-full bg-gradient-to-b absolute z-10 transition-opacity duration-700",
+                isSelected
+                  ? "from-black/20 to-black/50"
+                  : "from-black/30 to-black/60"
+              )}
+            ></div>
+            <Image
+              src={topic.image}
+              alt={topic.title}
+              layout="fill"
+              objectFit="cover"
+              className={cn(
+                "z-0 transition-transform duration-700",
+                isSelected ? "scale-105" : "scale-100"
+              )}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://via.placeholder.com/800x600?text=Topic+Image";
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Content */}
+        <div
+          className={cn(
+            "relative z-20 w-full flex flex-col p-4 md:p-8 transition-all duration-700",
+            isSelected ? "justify-center" : "justify-start"
+          )}
+        >
+          {/* Title always visible */}
+          <motion.div layout className="flex items-center justify-between">
+            <motion.h2
+              layout
+              className={cn(
+                "font-bold transition-all duration-700 ease-in-out",
+                isSelected
+                  ? "text-3xl md:text-5xl lg:text-6xl"
+                  : "text-xl md:text-2xl",
+                "text-white"
+              )}
+            >
+              {topic.title}
+            </motion.h2>
+
+            <motion.div
+              animate={{ rotate: isSelected ? 180 : 0 }}
+              className="text-white"
+            >
+              <ChevronDown className="h-6 w-6" />
+            </motion.div>
+          </motion.div>
+
+          {/* Description - only visible when selected */}
+          <AnimatePresence>
+            {isSelected && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="text-white mt-8 max-w-3xl"
+              >
+                <p className="text-xl md:text-2xl lg:text-3xl mb-6 font-light">
+                  {topic.shortDescription}
+                </p>
+                <p className="text-base md:text-lg lg:text-xl leading-relaxed">
+                  {topic.fullDescription}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Show short description when not selected and not any selected */}
+          {!isSelected && !isAnySelected && (
+            <motion.p className="text-white text-sm md:text-base mt-2">
+              {topic.shortDescription}
+            </motion.p>
+          )}
+        </div>
+      </motion.div>
     </motion.div>
   );
-});
-FaqItem.displayName = "FaqItem";
+};
 
-const DEMO_FAQS = [
-  {
-    question: "What makes your platform unique?",
-    answer:
-      "Our platform stands out through its intuitive design, powerful automation capabilities, and seamless integration options. We've focused on creating a user experience that combines simplicity with advanced features.",
-  },
-  {
-    question: "How does the pricing structure work?",
-    answer:
-      "We offer flexible, transparent pricing tiers designed to scale with your needs. Each tier includes a core set of features, with additional capabilities as you move up. All plans start with a 14-day free trial.",
-  },
-  {
-    question: "What kind of support do you offer?",
-    answer:
-      "We provide comprehensive support through multiple channels. This includes 24/7 live chat, detailed documentation, video tutorials, and dedicated account managers for enterprise clients.",
-  },
-];
-
-export function FaqSectionDemo() {
-  return (
-    <FaqSection
-      title="Frequently Asked Questions"
-      description="Everything you need to know about our platform"
-      items={DEMO_FAQS}
-      contactInfo={{
-        title: "Still have questions?",
-        description: "We're here to help you",
-        buttonText: "Contact Support",
-        onContact: () => console.log("Contact support clicked"),
-      }}
-    />
-  );
-}
+export default TopicsDropdown;
