@@ -10,6 +10,7 @@ import MazeBackground from "@/components/MazeBackground";
 import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
 import TextLoadingScreen from "@/components/TextLoadingScreen";
 import { GlareGrid } from "@/components/glareGrid";
+import TedxSection from "@/components/tedxSection";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -22,6 +23,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
+  const [tedxSectionVisible, setTedxSectionVisible] = useState(false);
+  const [headingHighlight, setHeadingHighlight] = useState(false);
 
   const speakersAnnounced = false;
 
@@ -68,37 +71,44 @@ export default function Home() {
 
     if (speakerSection) speakerSectionObserver.observe(speakerSection);
 
+    // New observer for TEDx section
+    const tedxSectionObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setTedxSectionVisible(true);
+          tedxSectionObserver.disconnect();
+        }
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.3, // Trigger when 30% of the element is visible
+      }
+    );
+
+    const tedxSection = document.getElementById("tedx-section");
+    if (tedxSection) tedxSectionObserver.observe(tedxSection);
+
     return () => {
       speakerSectionObserver.disconnect();
+      tedxSectionObserver.disconnect();
     };
   }, [mounted, isLoading]);
+
+  useEffect(() => {
+    // Trigger heading highlight animation with delay after section becomes visible
+    if (tedxSectionVisible) {
+      const highlightTimer = setTimeout(() => {
+        setHeadingHighlight(true);
+      }, 200); // 0.2 second delay
+
+      return () => clearTimeout(highlightTimer);
+    }
+  }, [tedxSectionVisible]);
 
   const handleLoadComplete = () => {
     setIsLoading(false);
   };
-
-  const speakers = [
-    {
-      name: "Dr. Maria Santos",
-      bio: "Cognitive Neuroscientist exploring the depths of human consciousness",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Architect Juan Reyes",
-      bio: "Sustainable urban designer creating spaces that heal communities",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Innovator Ana Cruz",
-      bio: "Tech entrepreneur bridging digital divides in underserved regions",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Prof. David Lee",
-      bio: "Philosopher examining the ethical labyrinths of emerging technologies",
-      image: "/api/placeholder/300/300",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -230,18 +240,30 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="topics-section" className="py-20">
+        {/* Topics Cards */}
+        <section id="topics-section" className="py-10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
               Explore the Labyrinth
             </h2>
-            <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">Event topics</h4>
+            <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">
+              Event topics
+            </h4>
 
-            {/* Topics Cards */}
             <GlareGrid />
           </div>
         </section>
 
+        {/* What is TEDx? - Now using the component */}
+        <TedxSection
+          tedxSectionVisible={tedxSectionVisible}
+          headingHighlight={headingHighlight}
+        />
+
+        {/* Meet the Organizers */}
+        <section id="meet-organizers-section"></section>
+
+        {/* Speakers Cards */}
         <section id="speaker-section" className="py-10 bg-black">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
