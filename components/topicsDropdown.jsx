@@ -8,6 +8,31 @@ import Image from "next/image";
 
 const TopicsDropdown = () => {
   const [selectedTopic, setSelectedTopic] = React.useState(null);
+  const [preSelectTopic, setPreSelectTopic] = React.useState(null);
+  const [preCollapseTopic, setPreCollapseTopic] = React.useState(null);
+
+  // Handle the click with appropriate delays for both expanding and collapsing
+  const handleTopicClick = (topicId) => {
+    if (selectedTopic === topicId) {
+      // First mark for pre-collapse to fade out descriptions
+      setPreCollapseTopic(topicId);
+
+      // Then actually collapse after delay
+      setTimeout(() => {
+        setSelectedTopic(null);
+        setPreCollapseTopic(null);
+      }, 200);
+    } else {
+      // Expanding - set pre-select immediately (for fade-out)
+      setPreSelectTopic(topicId);
+
+      // Actual expansion after delay
+      setTimeout(() => {
+        setSelectedTopic(topicId);
+        setPreSelectTopic(null);
+      }, 200);
+    }
+  };
 
   const topics = [
     {
@@ -60,9 +85,9 @@ const TopicsDropdown = () => {
             key={topic.id}
             topic={topic}
             isSelected={selectedTopic === topic.id}
-            onClick={() =>
-              setSelectedTopic(selectedTopic === topic.id ? null : topic.id)
-            }
+            isPreSelected={preSelectTopic === topic.id}
+            isPreCollapsed={preCollapseTopic === topic.id}
+            onClick={() => handleTopicClick(topic.id)}
             isExpanded={selectedTopic !== null}
           />
         ))}
@@ -71,13 +96,68 @@ const TopicsDropdown = () => {
   );
 };
 
-const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
-  // Add a transition config for smoother animations
-  const transition = {
+const TopicSection = ({
+  topic,
+  isSelected,
+  isPreSelected,
+  isPreCollapsed,
+  onClick,
+  isExpanded,
+}) => {
+  const [animationState, setAnimationState] = React.useState("initial");
+  const [showShortDesc, setShowShortDesc] = React.useState(
+    !isSelected && !isPreSelected
+  );
+  const [showFullDesc, setShowFullDesc] = React.useState(false);
+
+  // Update animation state and content visibility
+  React.useEffect(() => {
+    // When pre-collapsing, hide both descriptions immediately
+    if (isPreCollapsed) {
+      setShowFullDesc(false);
+      setShowShortDesc(false);
+      return;
+    }
+
+    // When pre-selected, hide short description immediately
+    if (isPreSelected) {
+      setShowShortDesc(false);
+      return;
+    }
+
+    if (isSelected) {
+      // Begin selection sequence
+      setAnimationState("expanding");
+      setShowShortDesc(false);
+
+      // After section expands, show the full description
+      const timer = setTimeout(() => {
+        setAnimationState("expanded");
+        setShowFullDesc(true);
+      }, 750);
+
+      return () => clearTimeout(timer);
+    } else {
+      // Begin collapse sequence
+      setAnimationState("collapsing");
+      setShowFullDesc(false);
+
+      // After section collapses, show the short description
+      const timer = setTimeout(() => {
+        setAnimationState("collapsed");
+        setShowShortDesc(true);
+      }, 750);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isSelected, isPreSelected, isPreCollapsed]);
+
+  // Main section transition (expand/collapse)
+  const sectionTransition = {
     type: "spring",
-    stiffness: 100,
+    stiffness: 70,
     damping: 20,
-    duration: 1,
+    duration: 1.5,
   };
 
   return (
@@ -85,18 +165,18 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
       layout
       className={cn(
         "relative overflow-hidden cursor-pointer border-b border-gray-800",
-        isSelected ? "h-[36rem]" : "h-[18rem]"
+        isSelected ? "h-[40rem]" : "h-[18rem]"
       )}
       onClick={onClick}
       initial={false}
-      transition={transition}
+      transition={sectionTransition}
     >
       <motion.div
         className={cn(
           "relative w-full h-full flex flex-col bg-gradient-to-b",
           `${topic.color}`
         )}
-        transition={transition}
+        transition={sectionTransition}
       >
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
@@ -109,7 +189,7 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
               layout="fill"
               objectFit="cover"
               className={cn(
-                "z-0 transition-transform duration-700",
+                "z-0 transition-transform duration-1500",
                 isSelected ? "scale-105" : "scale-100"
               )}
               onError={(e) => {
@@ -132,7 +212,7 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
           <div className="flex items-center justify-between">
             <motion.h2
               layout
-              transition={transition}
+              transition={sectionTransition}
               className={cn(
                 "font-bold",
                 isSelected
@@ -153,14 +233,35 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
             </motion.div>
           </div>
 
-          {/* Description - without exit animation for immediate disappearance */}
-          <AnimatePresence mode="sync" initial={false}>
-            {isSelected ? (
+          {/* Short Description */}
+          <AnimatePresence mode="wait">
+            {showShortDesc && !isSelected && (
+              <motion.p
+                key="short-description"
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                className="text-white text-sm md:text-base mt-2"
+              >
+                {topic.shortDescription}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          {/* Full Description - updated transition with faster exit */}
+          <AnimatePresence>
+            {showFullDesc && isSelected && (
               <motion.div
                 key="full-description"
-                initial={{ y: 20 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{
+                  opacity: 0,
+                  y: 100,
+                  transition: { duration: 0.2, ease: "easeInOut" },
+                }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
                 className="text-white mt-8 max-w-3xl"
               >
                 <p className="text-xl md:text-2xl lg:text-3xl mb-6 font-light">
@@ -170,13 +271,6 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
                   {topic.fullDescription}
                 </p>
               </motion.div>
-            ) : (
-              <motion.p
-                key="short-description"
-                className="text-white text-sm md:text-base mt-2"
-              >
-                {topic.shortDescription}
-              </motion.p>
             )}
           </AnimatePresence>
         </div>
