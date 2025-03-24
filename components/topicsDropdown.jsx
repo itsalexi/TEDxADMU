@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -13,9 +13,9 @@ const TopicsDropdown = () => {
     {
       id: "curiosity",
       title: "Curiosity",
-      shortDescription: "The spark that ignites our journey",
+      shortDescription: "Microbiome: The Ecosystem Inside You",
       fullDescription:
-        "Curiosity is the initial spark that sets us on a path of discovery. It's about questioning the status quo, exploring new territories, and being open to the unknown. This stage of the labyrinth represents our innate desire to learn and understand more about ourselves and the world around us.",
+        "The microbiome is the diverse community of microorganisms which includes bacteria, fungi, and viruses that live within us. From digestion to mental health, this intricate ecosystem plays a crucial role in shaping our overall well-being. This talk will explore the interconnectedness between our gut and brain, the potential of microbiome-based therapies, and the impact of modern lifestyles on this vital ecosystem. By understanding the importance of the microbiome, we can take proactive steps to cultivate a healthy internal ecosystem. Adopt mindful eating practices, reduce antibiotic use, and consider personalized microbiome-based interventions. By nurturing the microbiome, we can unlock our full potential and improve our overall well-being.",
       image: "/curiosity.jpg",
       color: "from-red-600 to-orange-500",
       textColor: "text-orange-500",
@@ -23,9 +23,9 @@ const TopicsDropdown = () => {
     {
       id: "impasse",
       title: "Impasse",
-      shortDescription: "Confronting obstacles and uncertainty",
+      shortDescription: "Finding Purpose and Strength in Stillness and Grief",
       fullDescription:
-        "An impasse is a point where progress seems impossible, where we confront obstacles and uncertainty. In the labyrinth, these are the dead-ends and false paths that challenge our resolve. This stage is about acknowledging difficulties and finding the resilience to continue despite them.",
+        "In a fast-paced world where instant gratification is the norm, we’re often unprepared for moments that force us to pause—especially in times of loss, uncertainty, or pain. This talk explores how waiting, particularly in grief, can become a powerful tool for transformation, clarity, and resilience. Grief is one of life’s longest waits—waiting for healing, answers, or a sense of wholeness. Yet, like all forms of waiting, it can also be a departure point: a painful but necessary pause that teaches the value of stillness and the lessons we’d miss in our rush to move on. For college students, this stage of life is often marked by excitement but also uncertainty, fear, and loss—whether it’s the death of a loved one, a failed relationship, the loss of a work opportunity, or the struggle to find identity. These experiences remind us that some things can’t be rushed or fixed. By reframing grief as an active, strategic part of our journey, this talk offers students a new perspective on challenges and loss. It reminds them that waiting isn’t passive—it’s a time of preparation, reflection, and, ultimately, transformation.",
       image: "/impasse.jpg",
       color: "from-blue-600 to-indigo-500",
       textColor: "text-blue-500",
@@ -33,9 +33,9 @@ const TopicsDropdown = () => {
     {
       id: "turning-point",
       title: "Turning Point",
-      shortDescription: "Moments of clarity and decision",
+      shortDescription: "Artivism: The Power of Art in Activism",
       fullDescription:
-        "A turning point marks a critical moment of clarity and decision. In the labyrinth, it's where we find a new direction after being lost. This stage represents transformation, where challenges become opportunities and we gain new perspectives that shape our path forward.",
+        "In a world marked by growing societal divides, art has emerged as a powerful force for unity, understanding, and social change. Through shared experiences and emotional engagement, art transcends boundaries, inspiring action, building empathy, and fostering community. This topic explores how artists harness their creativity as a tool for activism, using storytelling, performance, and visual expression to address pressing societal challenges and advocate for meaningful change. From protest art to community-driven projects, discover how artivism empowers individuals and movements to imagine—and create—a better world.",
       image: "/turning-point.jpg",
       color: "from-green-600 to-emerald-500",
       textColor: "text-green-500",
@@ -43,9 +43,9 @@ const TopicsDropdown = () => {
     {
       id: "transformation",
       title: "Transformation",
-      shortDescription: "Emerging changed and enlightened",
+      shortDescription: "Digital Nomads: Work with Freedom and Fulfillment",
       fullDescription:
-        "Transformation is the culmination of our journey through the labyrinth, where we emerge changed and enlightened. This stage represents the growth and insight gained from navigating complexity, embracing uncertainty, and persevering through challenges. It's about becoming more than we were when we started.",
+        "Imagine a world where work transcends geographical boundaries, allowing individuals to explore new cultures, pursue their passions, and live life on their own terms. This reality is embraced by millions of digital nomads, who challenge the traditional 9-to-5 work model and redefine what it means to have a successful career. However, the digital nomad lifestyle is not without its controversies. As global companies push for employees to return to the office, questions arise about the value of this lifestyle in terms of productivity, collaboration, and work-life balance. This talk will delve into the complexities of digital nomadism, examining both its advantages and drawbacks across different industries.",
       image: "/transformation.jpg",
       color: "from-purple-600 to-violet-500",
       textColor: "text-purple-500",
@@ -85,9 +85,7 @@ const TopicSection = ({ topic, isSelected, onClick, isExpanded }) => {
       layout
       className={cn(
         "relative overflow-hidden cursor-pointer border-b border-gray-800",
-        isSelected
-          ? "h-[36rem]" 
-          : "h-[18rem]"
+        isSelected ? "h-[36rem]" : "h-[18rem]"
       )}
       onClick={onClick}
       initial={false}
