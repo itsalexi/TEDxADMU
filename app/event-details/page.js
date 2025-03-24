@@ -67,7 +67,7 @@ const AboutPage = () => {
 
         {/* Topics */}
         <section
-          className="bg-black py-5 relative overflow-hidden"
+          className="bg-black py-5 relative overflow-hidden pt-40" // Added pt-20 for extra padding at top
           id="topics-section"
         >
           <div className="w-full h-full flex flex-col items-center">
