@@ -91,8 +91,8 @@ const AboutPage = () => {
           id="topics-section"
         >
           <div className="w-full h-full flex flex-col items-center">
-            <div className="topics-header transform transition-all duration-1000 ease-out">
-              <div className="w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6 flex justify-center">
+            <div className="topics-header transform transition-all duration-1000 ease-out flex flex-col items-center">
+              <div className="w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6">
                 <Image
                   src="/tedx-logo.png"
                   alt="TEDx"
