@@ -50,8 +50,8 @@ const TopicsDropdown = () => {
         proactive steps to cultivate a healthy internal ecosystem. Adopt mindful eating practices, reduce 
         antibiotic use, and consider personalized microbiome-based interventions. By nurturing the microbiome, 
         we can unlock our full potential and improve our overall well-being.`,
-      image: "/curiosity.jpg",
-      color: "from-red-600 to-orange-500",
+      image: "/empty-head.png", // Keep only the image property
+      backgroundColor: "bg-gray-900",
       textColor: "text-orange-500",
     },
     {
@@ -69,9 +69,9 @@ const TopicsDropdown = () => {
       remind us that some things can’t be rushed or fixed. By reframing grief as an active, strategic part of 
       our journey, this talk offers students a new perspective on challenges and loss. It reminds them that 
       waiting isn’t passive—it’s a time of preparation, reflection, and, ultimately, transformation.`,
-      image: "/impasse.jpg",
-      color: "from-blue-600 to-indigo-500",
-      textColor: "text-blue-500",
+      image: "/red-drawing.png", // Keep only the image property
+      backgroundColor: "bg-[#eb0028]",
+      textColor: "text-black",
     },
     {
       id: "turning-point",
@@ -84,8 +84,8 @@ const TopicsDropdown = () => {
          challenges and advocate for meaningful change. From protest art to community-driven projects, discover how 
          artivism empowers individuals and movements to imagine—and create—a better world.`,
       image: "/turning-point.jpg",
-      color: "from-green-600 to-emerald-500",
-      textColor: "text-green-500",
+      backgroundColor: "bg-green-900",
+      textColor: "text-yellow-300",
     },
     {
       id: "transformation",
@@ -99,8 +99,8 @@ const TopicsDropdown = () => {
         balance. This talk will delve into the complexities of digital nomadism, examining both its advantages and drawbacks 
         across different industries.`,
       image: "/transformation.jpg",
-      color: "from-purple-600 to-violet-500",
-      textColor: "text-purple-500",
+      backgroundColor: "bg-[#eb0028]",
+      textColor: "text-black",
     },
   ];
 
@@ -135,19 +135,22 @@ const TopicSection = React.forwardRef(
       !isSelected && !isPreSelected
     );
     const [showFullDesc, setShowFullDesc] = React.useState(false);
+    const [showImage, setShowImage] = React.useState(!isSelected);
 
     // Update animation state and content visibility
     React.useEffect(() => {
-      // When pre-collapsing, hide both descriptions immediately
+      // When pre-collapsing, hide descriptions and image immediately
       if (isPreCollapsed) {
         setShowFullDesc(false);
         setShowShortDesc(false);
+        setShowImage(false); // Hide image immediately when pre-collapsing
         return;
       }
 
-      // When pre-selected, hide short description immediately
+      // When pre-selected, hide short description and image
       if (isPreSelected) {
         setShowShortDesc(false);
+        setShowImage(false);
         return;
       }
 
@@ -155,24 +158,34 @@ const TopicSection = React.forwardRef(
         // Begin selection sequence
         setAnimationState("expanding");
         setShowShortDesc(false);
+        setShowImage(false);
 
-        // After section expands, show the full description
+        // After section expands, show the full description and image
         const timer = setTimeout(() => {
           setAnimationState("expanded");
           setShowFullDesc(true);
+          setShowImage(true); // Show image in expanded state
         }, 750);
 
         return () => clearTimeout(timer);
       } else {
-        // Begin collapse sequence
+        // Begin collapse sequence - hide image first
         setAnimationState("collapsing");
         setShowFullDesc(false);
+        setShowImage(false);
 
-        // After section collapses, show the short description
+        // After a delay to ensure image has faded out, show the short description
         const timer = setTimeout(() => {
           setAnimationState("collapsed");
           setShowShortDesc(true);
-        }, 750);
+
+          // Wait a bit longer before showing the image in collapsed state
+          const imageTimer = setTimeout(() => {
+            setShowImage(true);
+          }, 300);
+
+          return () => clearTimeout(imageTimer);
+        }, 550);
 
         return () => clearTimeout(timer);
       }
@@ -189,42 +202,74 @@ const TopicSection = React.forwardRef(
     return (
       <motion.div
         ref={ref}
-        layout
+        layout="position"
         className={cn(
-          "relative overflow-hidden cursor-pointer border-b border-gray-800",
+          "relative w-full origin-top overflow-hidden cursor-pointer",
+          `${topic.backgroundColor}`,
           isSelected ? "h-[40rem]" : "h-[18rem]"
         )}
         onClick={onClick}
         initial={false}
-        transition={sectionTransition}
+        animate={{
+          backgroundColor: topic.backgroundColor,
+          height: isSelected ? "40rem" : "18rem",
+        }}
+        transition={{
+          duration: 0.8,
+          backgroundColor: { duration: 1.5 },
+        }}
       >
         <motion.div
-          className={cn(
-            "relative w-full h-full flex flex-col bg-gradient-to-b",
-            `${topic.color}`
-          )}
+          className="relative w-full h-full flex flex-col"
           transition={sectionTransition}
         >
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-black z-10 bg-opacity-50"></div>
+          {/* Background Image */}
+          <div
+            className={cn(
+              "absolute z-0",
+              isSelected
+                ? "md:w-1/2 md:right-0 inset-y-0 opacity-100 md:opacity-100"
+                : "inset-0 opacity-100"
+            )}
+          >
             <div className="h-full w-full relative">
-              <div className="w-full h-full bg-gradient-to-b absolute z-10 from-black/25 to-black/55"></div>
-              <Image
-                src={topic.image}
-                alt={topic.title}
-                layout="fill"
-                objectFit="cover"
-                className={cn(
-                  "z-0 transition-transform duration-1500",
-                  isSelected ? "scale-105" : "scale-100"
+              {/* Static Image with proper fade in/out animation */}
+              <AnimatePresence mode="sync">
+                {showImage && (
+                  <motion.div
+                    key="static-image"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.2,
+                      ease: "easeInOut",
+                    }}
+                    className={cn(
+                      "absolute inset-0",
+                      isSelected ? "md:mr-0" : "mt-16 md:mt-0" // Add top margin only on mobile when unselected
+                    )}
+                  >
+                    <Image
+                      src={topic.image}
+                      alt={topic.title}
+                      layout="fill"
+                      objectFit="contain"
+                      className={cn(
+                        "transition-transform duration-1000",
+                        isSelected ? "scale-110 md:scale-110" : "scale-100"
+                      )}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "";
+                      }}
+                    />
+                  </motion.div>
                 )}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src =
-                    "https://via.placeholder.com/800x600?text=Topic+Image";
-                }}
-              />
+              </AnimatePresence>
             </div>
           </div>
 
@@ -232,10 +277,17 @@ const TopicSection = React.forwardRef(
           <div
             className={cn(
               "relative z-20 w-full flex flex-col p-4 md:p-8",
-              isSelected ? "justify-center" : "justify-start"
+              isSelected
+                ? "justify-center md:w-1/2 md:mr-auto"
+                : "justify-start"
             )}
           >
-            {/* Title always visible */}
+            {/* Content Background Overlay for Mobile */}
+            {isSelected && (
+              <div className="absolute inset-0 md:bg-transparent rounded-lg -z-10"></div>
+            )}
+
+            {/* Title always visible - updated with topic textColor */}
             <div className="flex items-center justify-between">
               <motion.h2
                 layout
@@ -245,7 +297,7 @@ const TopicSection = React.forwardRef(
                   isSelected
                     ? "text-5xl md:text-6xl lg:text-7xl"
                     : "text-4xl md:text-5xl",
-                  "text-white"
+                  topic.textColor // Use topic-specific text color
                 )}
               >
                 {topic.title}
@@ -254,13 +306,13 @@ const TopicSection = React.forwardRef(
               <motion.div
                 animate={{ rotate: isSelected ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
-                className="text-white"
+                className={topic.textColor} // Use topic-specific text color
               >
                 <ChevronDown className="h-6 w-6" />
               </motion.div>
             </div>
 
-            {/* Short Description */}
+            {/* Short Description - updated with topic textColor */}
             <AnimatePresence mode="wait">
               {showShortDesc && !isSelected && (
                 <motion.p
@@ -269,14 +321,17 @@ const TopicSection = React.forwardRef(
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2, ease: "easeInOut" }}
-                  className="text-white text-sm md:text-base mt-2"
+                  className={cn(
+                    "text-sm md:text-base mt-2 italic",
+                    topic.textColor // Use topic-specific text color
+                  )}
                 >
                   {topic.shortDescription}
                 </motion.p>
               )}
             </AnimatePresence>
 
-            {/* Full Description - updated transition with faster exit */}
+            {/* Full Description - updated with topic textColor */}
             <AnimatePresence>
               {showFullDesc && isSelected && (
                 <motion.div
@@ -289,9 +344,13 @@ const TopicSection = React.forwardRef(
                     transition: { duration: 0.2, ease: "easeInOut" },
                   }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="text-white mt-8 max-w-3xl"
+                  className={cn(
+                    "mt-8 max-w-3xl",
+                    topic.textColor,
+                    "rounded-lg md:p-0"
+                  )}
                 >
-                  <p className="text-xl md:text-2xl lg:text-3xl mb-6 font-light">
+                  <p className="text-xl md:text-2xl lg:text-3xl mb-6 font-light italic">
                     {topic.shortDescription}
                   </p>
                   <p className="text-base md:text-lg lg:text-xl leading-relaxed">
