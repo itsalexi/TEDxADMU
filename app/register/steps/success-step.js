@@ -12,11 +12,11 @@ export default function SuccessStep({ formData }) {
       </h2>
 
       <p className="text-gray-300 max-w-md leading-relaxed">
-        Thank you for applying to TEDx AteneoDeManila U: Labyrinthine. We've received your
+        Thank you for applying to TEDx AteneoDeManila U: Labyrinthine. We&apos;ve received your
         application and will review it shortly.
         <br />
         <br />
-        You will receive an email within 5-7 business days with the status of
+        You will receive an email within 3-5 business days with the status of
         your application. If approved, the email will include payment
         instructions and next steps.
       </p>

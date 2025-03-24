@@ -103,7 +103,7 @@ export default function CheckoutStep({
 
   const addAttendee = () => {
     const newAttendee = {
-      id: Date.now(),
+      id: attendees.length + 1,
       first_name: '',
       last_name: '',
       email: '',

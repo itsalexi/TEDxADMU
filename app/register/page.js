@@ -72,13 +72,15 @@ export default function ApplicationForm() {
     if (state.message === 'Form submitted successfully!') {
       toast({
         title: '🎉 Application Submitted Successfully!',
-        description: 'Thank you for registering for TEDxADMU! You will receive a confirmation email shortly with further instructions.',
+        description:
+          'Thank you for registering for TEDxADMU! You will receive a confirmation email shortly with further instructions.',
         variant: 'success',
         duration: 6000,
       });
 
       setCurrentStep(5);
       setIsSubmitting(false);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (state?.error) {
       toast({
         title: '❌ Submission Error',
@@ -96,6 +98,7 @@ export default function ApplicationForm() {
     if (currentStep < totalSteps) {
       if (validateCurrentStep()) {
         setCurrentStep(currentStep + 1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }
   };
@@ -103,6 +106,7 @@ export default function ApplicationForm() {
   const handlePrevious = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -152,7 +156,10 @@ export default function ApplicationForm() {
 
         const dataToSubmit = {
           ...formData,
-          additional_attendees: formData.registration_type === 'group' ? formData.additional_attendees : []
+          additional_attendees:
+            formData.registration_type === 'group'
+              ? formData.additional_attendees
+              : [],
         };
 
         Object.entries(dataToSubmit).forEach(([key, value]) => {
@@ -182,7 +189,8 @@ export default function ApplicationForm() {
     if (currentStep === 1) {
       // Discount eligibility validation - at least one option must be selected
       const hasDiscount = formData.is_scholar_or_ama || formData.is_atenean;
-      const noDiscountSelected = !formData.is_scholar_or_ama && !formData.is_atenean;
+      const noDiscountSelected =
+        !formData.is_scholar_or_ama && !formData.is_atenean;
       if (!hasDiscount && !noDiscountSelected) {
         newErrors.discount = 'Please select your registration category';
         isValid = false;
@@ -217,7 +225,10 @@ export default function ApplicationForm() {
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
           newErrors.email = 'Please enter a valid email address';
           isValid = false;
-        } else if ((formData.is_atenean || formData.is_scholar_or_ama) && !formData.email.toLowerCase().endsWith('.ateneo.edu')) {
+        } else if (
+          (formData.is_atenean || formData.is_scholar_or_ama) &&
+          !formData.email.toLowerCase().endsWith('.ateneo.edu')
+        ) {
           newErrors.email = 'Registration requires an ateneo.edu email address';
           isValid = false;
         }
@@ -239,9 +250,13 @@ export default function ApplicationForm() {
       }
 
       // Year and Course validation
-      if ((formData.is_atenean || formData.is_scholar_or_ama) && formData.year_and_course) {
+      if (
+        (formData.is_atenean || formData.is_scholar_or_ama) &&
+        formData.year_and_course
+      ) {
         if (!/^[1-5]\s+[A-Za-z\s]+$/.test(formData.year_and_course)) {
-          newErrors.year_and_course = 'Please enter a valid year and course (e.g., 3 BS Computer Science)';
+          newErrors.year_and_course =
+            'Please enter a valid year and course (e.g., 3 BS Computer Science)';
           isValid = false;
         }
       }
@@ -249,15 +264,27 @@ export default function ApplicationForm() {
       setErrors({ ...errors, basicInfo: newErrors });
     } else if (currentStep === 3) {
       // Personality step validation
-      if (!formData.ted_talk_topic || formData.ted_talk_topic.trim().length < 10) {
-        newErrors.ted_talk_topic = 'Please share your TED Talk topic idea (minimum 10 characters)';
+      if (
+        !formData.ted_talk_topic ||
+        formData.ted_talk_topic.trim().length < 10
+      ) {
+        newErrors.ted_talk_topic =
+          'Please share your TED Talk topic idea (minimum 10 characters)';
         isValid = false;
       }
 
       // Validate engagement scores
-      const engagementFields = ['different_values', 'failure_learning', 'different_experiences'];
-      engagementFields.forEach(field => {
-        if (!formData.engagement[field] || formData.engagement[field] < 1 || formData.engagement[field] > 5) {
+      const engagementFields = [
+        'different_values',
+        'failure_learning',
+        'different_experiences',
+      ];
+      engagementFields.forEach((field) => {
+        if (
+          !formData.engagement[field] ||
+          formData.engagement[field] < 1 ||
+          formData.engagement[field] > 5
+        ) {
           newErrors[field] = 'Please rate your engagement level (1-5)';
           isValid = false;
         }
@@ -272,17 +299,27 @@ export default function ApplicationForm() {
       }
 
       if (formData.registration_type === 'group') {
-        if (!formData.additional_attendees || formData.additional_attendees.length === 0) {
-          newErrors.additionalAttendees = 'Group registration requires at least one additional attendee';
+        if (
+          !formData.additional_attendees ||
+          formData.additional_attendees.length === 0
+        ) {
+          newErrors.additionalAttendees =
+            'Group registration requires at least one additional attendee';
           isValid = false;
         } else {
           const attendeeErrors = {};
           formData.additional_attendees.forEach((attendee, index) => {
-            if (!attendee.first_name || !attendee.last_name || !attendee.email) {
-              attendeeErrors[index] = 'Please complete all fields for this attendee';
+            if (
+              !attendee.first_name ||
+              !attendee.last_name ||
+              !attendee.email
+            ) {
+              attendeeErrors[index] =
+                'Please complete all fields for this attendee';
               isValid = false;
             } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(attendee.email)) {
-              attendeeErrors[index] = 'Please enter a valid email address for this attendee';
+              attendeeErrors[index] =
+                'Please enter a valid email address for this attendee';
               isValid = false;
             }
           });
@@ -298,7 +335,8 @@ export default function ApplicationForm() {
     if (!isValid) {
       toast({
         title: '⚠️ Validation Error',
-        description: 'Please check and fix the highlighted fields before proceeding.',
+        description:
+          'Please check and fix the highlighted fields before proceeding.',
         variant: 'destructive',
         duration: 5000,
       });
@@ -324,7 +362,6 @@ export default function ApplicationForm() {
     }
   };
 
-
   return (
     <div className="min-h-screen bg-black">
       <ParticlesBackground />
@@ -342,10 +379,7 @@ export default function ApplicationForm() {
             </div>
             <CardContent className="p-8 relative z-10">
               {currentStep < 5 && (
-                <SteppedProgress
-                  numSteps={4}
-                  stepsComplete={currentStep}
-                />
+                <SteppedProgress numSteps={4} stepsComplete={currentStep} />
               )}
 
               <form
@@ -364,11 +398,15 @@ export default function ApplicationForm() {
                     {getStepTitle()}
                   </h2>
                   <p className="text-sm text-gray-400">
-                    {currentStep === 1 && "Select your registration category to determine your discount eligibility"}
-                    {currentStep === 2 && "We need some information to get to know you better"}
-                    {currentStep === 3 && "Share your perspective and ideas with us"}
-                    {currentStep === 4 && "Choose your registration type and complete payment details"}
-                    {currentStep === 5 && "Thank you for your application"}
+                    {currentStep === 1 &&
+                      'Select your registration category to determine your discount eligibility'}
+                    {currentStep === 2 &&
+                      'We need some information to get to know you better'}
+                    {currentStep === 3 &&
+                      'Share your perspective and ideas with us'}
+                    {currentStep === 4 &&
+                      'Choose your registration type and complete payment details'}
+                    {currentStep === 5 && 'Thank you for your application'}
                   </p>
                 </div>
 

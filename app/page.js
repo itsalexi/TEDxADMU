@@ -233,7 +233,7 @@ export default function Home() {
         <section id="topics-section" className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
-              Explore the Labyrinthe
+              Explore the Labyrinth
             </h2>
             <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">Event topics</h4>
 

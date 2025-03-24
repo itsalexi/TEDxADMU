@@ -4,10 +4,12 @@
 
 @font-face {
   font-family: 'Norwester';
-  src: url('/fonts/Norwester.otf') format('opentype');
+  src: url('/fonts/norwester.woff2') format('woff2'),
+       url('/fonts/norwester.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
+
 
 
 

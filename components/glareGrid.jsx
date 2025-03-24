@@ -129,7 +129,7 @@ const SelectedCard = ({ selected }) => {
       >
         {selected.content}
 
-        {/* Learn More button */}
+        {/* Learn More button - updated with anchor link to topics section */}
         <motion.button
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ const SelectedCard = ({ selected }) => {
             console.log(`Learn more about ${selected.title}`);
           }}
         >
-          <Link href="/event-details">
+          <Link href="/event-details#topics-section">
             <span className="px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-black hover:text-white transition-colors duration-300">
               Learn More
             </span>
@@ -204,7 +204,7 @@ export const GlareCard = ({ children, className }) => {
     <div
       style={containerStyle}
       className={cn(
-        "relative isolate [contain:layout_style] [perspective:600px] transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-transform h-full w-full",
+        "cursor-pointer relative isolate [contain:layout_style] [perspective:600px] transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] will-change-transform h-full w-full",
         className
       )}
       ref={refElement}
