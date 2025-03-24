@@ -51,7 +51,7 @@ const TopicsDropdown = () => {
         antibiotic use, and consider personalized microbiome-based interventions. By nurturing the microbiome, 
         we can unlock our full potential and improve our overall well-being.`,
       image: "/empty-head.png", // Keep only the image property
-      backgroundColor: "bg-gray-900",
+      backgroundColor: "bg-blue-950",
       textColor: "text-orange-500",
     },
     {
@@ -83,9 +83,9 @@ const TopicsDropdown = () => {
          as a tool for activism, using storytelling, performance, and visual expression to address pressing societal 
          challenges and advocate for meaningful change. From protest art to community-driven projects, discover how 
          artivism empowers individuals and movements to imagine—and create—a better world.`,
-      image: "/turning-point.jpg",
+      image: "/fishing.png",
       backgroundColor: "bg-green-900",
-      textColor: "text-yellow-300",
+      textColor: "text-lime-100",
     },
     {
       id: "transformation",
@@ -98,14 +98,14 @@ const TopicsDropdown = () => {
         the office, questions arise about the value of this lifestyle in terms of productivity, collaboration, and work-life 
         balance. This talk will delve into the complexities of digital nomadism, examining both its advantages and drawbacks 
         across different industries.`,
-      image: "/transformation.jpg",
-      backgroundColor: "bg-[#eb0028]",
-      textColor: "text-black",
+      image: "/batman.png",
+      backgroundColor: "bg-gray-900",
+      textColor: "text-yellow-400",
     },
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-">
       <div className="flex flex-col w-full">
         {topics.map((topic, index) => (
           <TopicSection
