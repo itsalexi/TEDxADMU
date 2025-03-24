@@ -9,7 +9,8 @@ import {
   ATENEAN_DISCOUNT,
   PRE_SPEAKER_PERIOD_START,
   PRE_SPEAKER_PERIOD_END,
-  GROUP_DISCOUNT,
+  ATENEAN_AMA_BUNDLE_DISCOUNT,
+  OUTSIDER_BUNDLE_DISCOUNT,
 } from '@/app/config/config';
 import { useState, useEffect } from 'react';
 
@@ -68,11 +69,12 @@ export default function DiscountEligibilityStep({
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 bg-indigo-500 rounded-full animate-pulse"></div>
             <p className="text-indigo-300 font-medium">
-              Pre-speaker Discount Period
+              Early Bird Promo Period
             </p>
           </div>
           <p className="text-sm text-gray-400 mt-2">
-            Enjoy a special ₱{PRE_SPEAKER_DISCOUNT} discount during{' '}
+            🎉 Get ₱{PRE_SPEAKER_DISCOUNT} off per person during our Early Bird
+            Special from{' '}
             {new Date(PRE_SPEAKER_PERIOD_START).toLocaleDateString('en-US', {
               month: 'long',
               day: 'numeric',
@@ -82,8 +84,7 @@ export default function DiscountEligibilityStep({
               month: 'long',
               day: 'numeric',
             })}
-            ! This discount will be applied automatically and cannot be combined
-            with other discounts.
+            ! This limited time offer cannot be combined with other discounts.
           </p>
           <div className="flex items-center mt-3 bg-indigo-950/50 p-2 rounded border border-indigo-700">
             <span className="text-sm text-indigo-200 mr-2">
@@ -128,9 +129,11 @@ export default function DiscountEligibilityStep({
             </p>
           </div>
           <p className="text-sm text-gray-400 mt-2">
-            Register as a group of 3 or more and get a ₱{GROUP_DISCOUNT}{' '}
-            discount on your total purchase! Only available for non-Atenean
-            registrations.
+            🎯 Save big when you register with 3 or more friends! Ateneans and
+            AMA/Scholars get ₱{ATENEAN_AMA_BUNDLE_DISCOUNT} off, while outsiders
+            get ₱{OUTSIDER_BUNDLE_DISCOUNT} off. Remember that bundle
+            registrations must be within the same category
+            (Ateneans/AMA/Scholars together, or outsiders together).
           </p>
         </div>
       )}
@@ -138,10 +141,9 @@ export default function DiscountEligibilityStep({
       <div className="space-y-4">
         <div className="space-y-4 bg-white/5 p-6 rounded-md">
           <div className="text-sm text-gray-400 mb-4">
-            Note: Only outsiders can register in groups.{' '}
             {IS_PRE_SPEAKER_PERIOD
-              ? 'During the pre-speaker period, all registrations must be individual.'
-              : 'Ateneans, scholars, and AMA members are limited to individual registration.'}
+              ? '✨ Early Bird Promo is for individual registration only'
+              : '🎯 You can register individually or with 3 or more friends'}
           </div>
           <RadioGroup
             value={
@@ -169,11 +171,8 @@ export default function DiscountEligibilityStep({
                 </Label>
                 <p className="text-sm text-gray-400">
                   {IS_PRE_SPEAKER_PERIOD
-                    ? `Identity verification required. Pre-speaker ₱${PRE_SPEAKER_DISCOUNT} discount will be applied.`
-                    : `₱${SCHOLAR_AMA_DISCOUNT} discount for scholars and AMA members. You'll need to provide proof of your status during registration.`}
-                </p>
-                <p className="text-sm text-red-500 mt-1">
-                  Individual registration only
+                    ? `🎉 Get ₱${PRE_SPEAKER_DISCOUNT} off during our Early Bird Promo! Just bring your ID for verification.`
+                    : `💫 Get ₱${SCHOLAR_AMA_DISCOUNT} off for individual registration or ₱${ATENEAN_AMA_BUNDLE_DISCOUNT} off for groups of 3 or more. ID verification needed.`}
                 </p>
               </div>
             </div>
@@ -193,11 +192,8 @@ export default function DiscountEligibilityStep({
                 </Label>
                 <p className="text-sm text-gray-400">
                   {IS_PRE_SPEAKER_PERIOD
-                    ? `ID verification required. Pre-speaker ₱${PRE_SPEAKER_DISCOUNT} discount will be applied.`
-                    : `₱${ATENEAN_DISCOUNT} discount for Ateneo students, faculty, and staff. Please have your ID ready for verification.`}
-                </p>
-                <p className="text-sm text-red-500 mt-1">
-                  Individual registration only
+                    ? `🎉 Get ₱${PRE_SPEAKER_DISCOUNT} off during our Early Bird Promo! Just bring your ID for verification.`
+                    : `💫 Get ₱${ATENEAN_DISCOUNT} off for individual registration or ₱${ATENEAN_AMA_BUNDLE_DISCOUNT} off for groups of 3 or more. ID verification needed.`}
                 </p>
               </div>
             </div>
@@ -217,17 +213,8 @@ export default function DiscountEligibilityStep({
                 </Label>
                 <p className="text-sm text-gray-400">
                   {IS_PRE_SPEAKER_PERIOD
-                    ? `Pre-speaker ₱${PRE_SPEAKER_DISCOUNT} discount will be applied.`
-                    : 'Standard registration fee applies. No additional verification needed.'}
-                </p>
-                <p
-                  className={`text-sm ${
-                    IS_PRE_SPEAKER_PERIOD ? 'text-red-500' : 'text-green-500'
-                  } mt-1`}
-                >
-                  {IS_PRE_SPEAKER_PERIOD
-                    ? 'Individual registration only during pre-speaker period'
-                    : 'Eligible for both individual and group registration'}
+                    ? `🎉 Get ₱${PRE_SPEAKER_DISCOUNT} off during our Early Bird Promo!`
+                    : `💫 Standard price for individual registration or ₱${OUTSIDER_BUNDLE_DISCOUNT} off for groups of 3 or more`}
                 </p>
               </div>
             </div>

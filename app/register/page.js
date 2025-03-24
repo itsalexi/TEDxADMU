@@ -227,9 +227,9 @@ export default function ApplicationForm() {
           isValid = false;
         } else if (
           (formData.is_atenean || formData.is_scholar_or_ama) &&
-          !formData.email.toLowerCase().endsWith('.ateneo.edu')
+          !formData.email.toLowerCase().match(/@[^.]+\.ateneo\.edu$/)
         ) {
-          newErrors.email = 'Registration requires an ateneo.edu email address';
+          newErrors.email = 'Must be an ateneo.edu email address';
           isValid = false;
         }
       }
@@ -294,7 +294,7 @@ export default function ApplicationForm() {
     } else if (currentStep === 4) {
       // Checkout step validation
       if (!formData.accepted_terms) {
-        newErrors.acceptedTerms = 'You must accept the terms to continue';
+        newErrors.accepted_terms = 'You must accept the terms to continue';
         isValid = false;
       }
 
@@ -303,26 +303,79 @@ export default function ApplicationForm() {
           !formData.additional_attendees ||
           formData.additional_attendees.length === 0
         ) {
-          newErrors.additionalAttendees =
+          newErrors.additional_attendees =
             'Group registration requires at least one additional attendee';
           isValid = false;
         } else {
           const attendeeErrors = {};
           formData.additional_attendees.forEach((attendee, index) => {
-            if (
-              !attendee.first_name ||
-              !attendee.last_name ||
-              !attendee.email
-            ) {
-              attendeeErrors[index] =
-                'Please complete all fields for this attendee';
-              isValid = false;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(attendee.email)) {
-              attendeeErrors[index] =
-                'Please enter a valid email address for this attendee';
+            const attendeeValidationErrors = {};
+
+            // Required fields validation
+            if (!attendee.first_name)
+              attendeeValidationErrors.first_name = 'First name is required';
+            if (!attendee.last_name)
+              attendeeValidationErrors.last_name = 'Last name is required';
+            if (!attendee.email)
+              attendeeValidationErrors.email = 'Email is required';
+            if (!attendee.age) attendeeValidationErrors.age = 'Age is required';
+            if (!attendee.occupation)
+              attendeeValidationErrors.occupation = 'Occupation is required';
+            if (!attendee.phone)
+              attendeeValidationErrors.phone = 'Phone number is required';
+
+            // Email validation
+            if (attendee.email) {
+              if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(attendee.email)) {
+                attendeeValidationErrors.email =
+                  'Please enter a valid email address';
+              } else if (
+                (formData.is_atenean || formData.is_scholar_or_ama) &&
+                !attendee.email.toLowerCase().match(/@[^.]+\.ateneo\.edu$/)
+              ) {
+                attendeeValidationErrors.email =
+                  'Must be an ateneo.edu email address';
+              }
+            }
+
+            // Age validation
+            if (attendee.age) {
+              const age = parseInt(attendee.age);
+              if (isNaN(age) || age < 13 || age > 120) {
+                attendeeValidationErrors.age =
+                  'Please enter a valid age between 13 and 120';
+              }
+            }
+
+            // Phone number validation
+            if (attendee.phone && !/^[+]?[\d\s-()]{8,}$/.test(attendee.phone)) {
+              attendeeValidationErrors.phone =
+                'Please enter a valid phone number';
+            }
+
+            // Special validation for Ateneans and AMA/Scholars
+            if (formData.is_atenean || formData.is_scholar_or_ama) {
+              if (!attendee.school) {
+                attendeeValidationErrors.school =
+                  'School is required for Ateneans and AMA/Scholars';
+              }
+              if (!attendee.year_and_course) {
+                attendeeValidationErrors.year_and_course =
+                  'Year and Course is required for Ateneans and AMA/Scholars';
+              } else if (
+                !/^[1-5]\s+[A-Za-z\s]+$/.test(attendee.year_and_course)
+              ) {
+                attendeeValidationErrors.year_and_course =
+                  'Please enter a valid year and course (e.g., 3 BS Computer Science)';
+              }
+            }
+
+            if (Object.keys(attendeeValidationErrors).length > 0) {
+              attendeeErrors[index] = attendeeValidationErrors;
               isValid = false;
             }
           });
+
           if (Object.keys(attendeeErrors).length > 0) {
             newErrors.attendees = attendeeErrors;
           }

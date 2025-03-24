@@ -17,11 +17,12 @@ import {
 import {
   SINGLE_TICKET_PRICE,
   GROUP_DISCOUNT_THRESHOLD,
-  GROUP_DISCOUNT,
   SCHOLAR_AMA_DISCOUNT,
   ATENEAN_DISCOUNT,
   IS_PRE_SPEAKER_PERIOD,
   PRE_SPEAKER_DISCOUNT,
+  ATENEAN_AMA_BUNDLE_DISCOUNT,
+  OUTSIDER_BUNDLE_DISCOUNT,
 } from '@/app/config/config';
 
 export default function CheckoutStep({
@@ -33,21 +34,34 @@ export default function CheckoutStep({
     formData.additional_attendees || []
   );
 
-  console.log(formData);
-
   const calculateTotalPrice = (totalAttendees) => {
     let price = SINGLE_TICKET_PRICE * totalAttendees;
 
     if (IS_PRE_SPEAKER_PERIOD) {
       price = price - PRE_SPEAKER_DISCOUNT * totalAttendees;
     } else {
+      // Apply individual discounts for main registrant
+      if (formData.is_scholar_or_ama) {
+        price = price - SCHOLAR_AMA_DISCOUNT;
+      } else if (formData.is_atenean) {
+        price = price - ATENEAN_DISCOUNT;
+      }
+
+      // Apply individual discounts for additional attendees
+      attendees.forEach((attendee) => {
+        if (attendee.is_scholar_or_ama) {
+          price = price - SCHOLAR_AMA_DISCOUNT;
+        } else if (attendee.is_atenean) {
+          price = price - ATENEAN_DISCOUNT;
+        }
+      });
+
+      // Then apply bundle discount if eligible
       if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
-        price = price - GROUP_DISCOUNT;
-      } else {
-        if (formData.is_scholar_or_ama) {
-          price = price - SCHOLAR_AMA_DISCOUNT * totalAttendees;
-        } else if (formData.is_atenean) {
-          price = price - ATENEAN_DISCOUNT * totalAttendees;
+        if (formData.is_scholar_or_ama || formData.is_atenean) {
+          price = price - ATENEAN_AMA_BUNDLE_DISCOUNT;
+        } else {
+          price = price - OUTSIDER_BUNDLE_DISCOUNT;
         }
       }
     }
@@ -68,12 +82,7 @@ export default function CheckoutStep({
   }, [attendees]);
 
   const handleRegistrationTypeChange = (value) => {
-    if (
-      value === 'group' &&
-      (formData.is_scholar_or_ama ||
-        formData.is_atenean ||
-        IS_PRE_SPEAKER_PERIOD)
-    ) {
+    if (value === 'group' && IS_PRE_SPEAKER_PERIOD) {
       return;
     }
 
@@ -82,7 +91,6 @@ export default function CheckoutStep({
     const updatedFormData = {
       ...formData,
       registration_type: value,
-      is_scholar_or_ama: value === 'group' ? false : formData.is_scholar_or_ama,
       additional_attendees: value === 'group' ? attendees : [],
     };
 
@@ -111,8 +119,8 @@ export default function CheckoutStep({
       occupation: '',
       phone: '',
       attended_before: false,
-      is_scholar_or_ama: false,
-      is_atenean: false,
+      is_scholar_or_ama: formData.is_scholar_or_ama,
+      is_atenean: formData.is_atenean,
       school: '',
       year_and_course: '',
     };
@@ -157,12 +165,40 @@ export default function CheckoutStep({
 
   const totalAttendees =
     formData.registration_type === 'group' ? 1 + attendees.length : 1;
-  const isEligibleForDiscount = totalAttendees >= GROUP_DISCOUNT_THRESHOLD;
+  const isEligibleForBundle = totalAttendees >= GROUP_DISCOUNT_THRESHOLD;
+  const bundleDiscount =
+    formData.is_scholar_or_ama || formData.is_atenean
+      ? ATENEAN_AMA_BUNDLE_DISCOUNT
+      : OUTSIDER_BUNDLE_DISCOUNT;
 
   let totalPrice = calculateTotalPrice(totalAttendees);
 
   return (
     <div className="space-y-8">
+      {(errors.attendees || errors.accepted_terms) && (
+        <div className="bg-red-900/20 border border-red-800 rounded-md p-4">
+          <h3 className="text-red-400 font-medium mb-2">
+            Please fix the following errors:
+          </h3>
+          <ul className="space-y-1 text-sm text-red-400">
+            {errors.accepted_terms && <li>• {errors.accepted_terms}</li>}
+            {errors.attendees &&
+              Object.entries(errors.attendees).map(
+                ([index, attendeeErrors]) => (
+                  <li key={index}>
+                    • Attendee #{parseInt(index) + 1} has the following errors:
+                    <ul className="ml-4 mt-1 space-y-1">
+                      {Object.entries(attendeeErrors).map(([field, error]) => (
+                        <li key={field}>- {error}</li>
+                      ))}
+                    </ul>
+                  </li>
+                )
+              )}
+          </ul>
+        </div>
+      )}
+
       <div className="bg-white/5 p-6 rounded-md border border-gray-800">
         <div className="text-lg font-medium mb-4 text-white">
           Registration Options
@@ -200,8 +236,6 @@ export default function CheckoutStep({
 
           <div
             className={`flex items-start space-x-3 p-5 border border-gray-700 rounded-md transition-colors ${
-              formData.is_scholar_or_ama ||
-              formData.is_atenean ||
               IS_PRE_SPEAKER_PERIOD
                 ? 'opacity-50 cursor-not-allowed'
                 : 'hover:bg-white/5'
@@ -211,11 +245,7 @@ export default function CheckoutStep({
               value="group"
               id="registration-group"
               className="mt-1 border-gray-600 text-indigo-500"
-              disabled={
-                formData.is_scholar_or_ama ||
-                formData.is_atenean ||
-                IS_PRE_SPEAKER_PERIOD
-              }
+              disabled={IS_PRE_SPEAKER_PERIOD}
             />
             <div className="space-y-1 flex-1">
               <div className="flex items-center">
@@ -223,34 +253,28 @@ export default function CheckoutStep({
                 <Label
                   htmlFor="registration-group"
                   className={`font-medium ${
-                    formData.is_scholar_or_ama ||
-                    formData.is_atenean ||
-                    IS_PRE_SPEAKER_PERIOD
-                      ? 'text-gray-500'
-                      : 'text-white'
+                    IS_PRE_SPEAKER_PERIOD ? 'text-gray-500' : 'text-white'
                   }`}
                 >
                   Group Registration
                 </Label>
               </div>
               <div className="text-sm text-gray-400">
-                Register multiple attendees to qualify for group discount
+                Register multiple attendees to qualify for bundle discount
               </div>
               <div className="font-medium text-right text-indigo-400">
                 ₱{SINGLE_TICKET_PRICE} × number of attendees
               </div>
               {IS_PRE_SPEAKER_PERIOD ? (
                 <div className="text-sm text-red-500 mt-1">
-                  Group registration is not available during the pre-speaker
-                  discount period
+                  Group registration not available during Early Bird Promo
                 </div>
               ) : (
-                (formData.is_scholar_or_ama || formData.is_atenean) && (
-                  <div className="text-sm text-red-500 mt-1">
-                    Group registration is not available for Ateneans, scholars,
-                    or AMA members
-                  </div>
-                )
+                <div className="text-sm text-green-500 mt-1">
+                  {formData.is_scholar_or_ama || formData.is_atenean
+                    ? `₱${ATENEAN_AMA_BUNDLE_DISCOUNT} bundle discount for 3+ attendees`
+                    : `₱${OUTSIDER_BUNDLE_DISCOUNT} bundle discount for 3+ attendees`}
+                </div>
               )}
             </div>
           </div>
@@ -274,7 +298,7 @@ export default function CheckoutStep({
 
           {attendees.length === 0 ? (
             <div className="text-sm text-gray-400 py-4 px-5 bg-white/5 rounded-md border border-gray-800">
-              No additional attendees yet. Add attendees to qualify for group
+              No additional attendees yet. Add attendees to qualify for bundle
               discount.
             </div>
           ) : (
@@ -302,7 +326,11 @@ export default function CheckoutStep({
 
                   {errors.attendees && errors.attendees[attendee.id] && (
                     <div className="text-sm text-red-500 bg-red-900/20 p-3 rounded-md">
-                      {errors.attendees[attendee.id]}
+                      {Object.entries(errors.attendees[attendee.id]).map(
+                        ([field, error]) => (
+                          <p key={field}>{error}</p>
+                        )
+                      )}
                     </div>
                   )}
 
@@ -325,9 +353,18 @@ export default function CheckoutStep({
                           )
                         }
                         required
-                        className="bg-white/10 border-gray-700 text-white py-3"
+                        className={`bg-white/10 border-gray-700 text-white py-3 ${
+                          errors.attendees?.[index]?.first_name
+                            ? 'border-red-500'
+                            : ''
+                        }`}
                         placeholder="First name"
                       />
+                      {errors.attendees?.[index]?.first_name && (
+                        <p className="text-sm text-red-500">
+                          {errors.attendees[index].first_name}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label
@@ -347,9 +384,18 @@ export default function CheckoutStep({
                           )
                         }
                         required
-                        className="bg-white/10 border-gray-700 text-white py-3"
+                        className={`bg-white/10 border-gray-700 text-white py-3 ${
+                          errors.attendees?.[index]?.last_name
+                            ? 'border-red-500'
+                            : ''
+                        }`}
                         placeholder="Last name"
                       />
+                      {errors.attendees?.[index]?.last_name && (
+                        <p className="text-sm text-red-500">
+                          {errors.attendees[index].last_name}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -358,7 +404,12 @@ export default function CheckoutStep({
                       htmlFor={`attendee-${attendee.id}-email`}
                       className="text-gray-300"
                     >
-                      Email Address
+                      Email Address{' '}
+                      {(formData.is_atenean || formData.is_scholar_or_ama) && (
+                        <span className="text-red-500">
+                          *must be an ateneo.edu email
+                        </span>
+                      )}
                     </Label>
                     <Input
                       id={`attendee-${attendee.id}-email`}
@@ -368,9 +419,26 @@ export default function CheckoutStep({
                         updateAttendee(attendee.id, 'email', e.target.value)
                       }
                       required
-                      className="bg-white/10 border-gray-700 text-white py-3"
-                      placeholder="your.email@example.com"
+                      className={`bg-white/10 border-gray-700 text-white py-3 ${
+                        errors.attendees?.[index]?.email ? 'border-red-500' : ''
+                      }`}
+                      placeholder={
+                        formData.is_atenean || formData.is_scholar_or_ama
+                          ? 'your.name@student.ateneo.edu (or other ateneo.edu domain)'
+                          : 'your.email@example.com'
+                      }
                     />
+                    {errors.attendees?.[index]?.email && (
+                      <p className="text-sm text-red-500">
+                        {errors.attendees[index].email}
+                      </p>
+                    )}
+                    {(formData.is_atenean || formData.is_scholar_or_ama) && (
+                      <p className="text-xs text-gray-500 mt-1">
+                        Accepts any ateneo.edu email domain (e.g.,
+                        student.ateneo.edu, obf.ateneo.edu)
+                      </p>
+                    )}
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -389,9 +457,16 @@ export default function CheckoutStep({
                           updateAttendee(attendee.id, 'age', e.target.value)
                         }
                         required
-                        className="bg-white/10 border-gray-700 text-white py-3"
+                        className={`bg-white/10 border-gray-700 text-white py-3 ${
+                          errors.attendees?.[index]?.age ? 'border-red-500' : ''
+                        }`}
                         placeholder="Age"
                       />
+                      {errors.attendees?.[index]?.age && (
+                        <p className="text-sm text-red-500">
+                          {errors.attendees[index].age}
+                        </p>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <Label
@@ -411,9 +486,18 @@ export default function CheckoutStep({
                           )
                         }
                         required
-                        className="bg-white/10 border-gray-700 text-white py-3"
+                        className={`bg-white/10 border-gray-700 text-white py-3 ${
+                          errors.attendees?.[index]?.occupation
+                            ? 'border-red-500'
+                            : ''
+                        }`}
                         placeholder="Profession"
                       />
+                      {errors.attendees?.[index]?.occupation && (
+                        <p className="text-sm text-red-500">
+                          {errors.attendees[index].occupation}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -432,10 +516,105 @@ export default function CheckoutStep({
                         updateAttendee(attendee.id, 'phone', e.target.value)
                       }
                       required
-                      className="bg-white/10 border-gray-700 text-white py-3"
+                      className={`bg-white/10 border-gray-700 text-white py-3 ${
+                        errors.attendees?.[index]?.phone ? 'border-red-500' : ''
+                      }`}
                       placeholder="+1 (555) 123-4567"
                     />
+                    {errors.attendees?.[index]?.phone && (
+                      <p className="text-sm text-red-500">
+                        {errors.attendees[index].phone}
+                      </p>
+                    )}
                   </div>
+
+                  {(formData.is_atenean || formData.is_scholar_or_ama) && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor={`attendee-${attendee.id}-school`}
+                          className="text-gray-300"
+                        >
+                          School
+                        </Label>
+                        <Select
+                          value={attendee.school}
+                          onValueChange={(value) =>
+                            updateAttendee(attendee.id, 'school', value)
+                          }
+                        >
+                          <SelectTrigger
+                            className={`bg-white/10 border-gray-700 text-white py-3 ${
+                              errors.attendees?.[index]?.school
+                                ? 'border-red-500'
+                                : ''
+                            }`}
+                          >
+                            <SelectValue placeholder="Select school" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="SOSE">
+                              School of Science and Engineering (SOSE)
+                            </SelectItem>
+                            <SelectItem value="SOSS">
+                              School of Social Sciences (SOSS)
+                            </SelectItem>
+                            <SelectItem value="SOH">
+                              School of Humanities (SOH)
+                            </SelectItem>
+                            <SelectItem value="JGSOM">
+                              School of Management (JGSOM)
+                            </SelectItem>
+                            <SelectItem value="GBSEALD">
+                              School of Education and Learning Design (GBSEALD)
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                        {errors.attendees?.[index]?.school && (
+                          <p className="text-sm text-red-500">
+                            {errors.attendees[index].school}
+                          </p>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <Label
+                          htmlFor={`attendee-${attendee.id}-year_and_course`}
+                          className="text-gray-300"
+                        >
+                          Year and Course
+                        </Label>
+                        <Input
+                          id={`attendee-${attendee.id}-year_and_course`}
+                          value={attendee.year_and_course || ''}
+                          onChange={(e) =>
+                            updateAttendee(
+                              attendee.id,
+                              'year_and_course',
+                              e.target.value
+                            )
+                          }
+                          required={
+                            formData.is_atenean || formData.is_scholar_or_ama
+                          }
+                          placeholder="e.g., 3 BS Computer Science"
+                          className={`bg-white/10 border-gray-700 text-white py-3 ${
+                            errors.attendees?.[index]?.year_and_course
+                              ? 'border-red-500'
+                              : ''
+                          }`}
+                        />
+                        {errors.attendees?.[index]?.year_and_course && (
+                          <p className="text-sm text-red-500">
+                            {errors.attendees[index].year_and_course}
+                          </p>
+                        )}
+                        <p className="text-xs text-gray-500 mt-1">
+                          Format: Year followed by Course (e.g., 2 BS
+                          Management, 4 AB Literature)
+                        </p>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="space-y-3 bg-white/5 p-5 rounded-md">
                     <Label className="text-gray-300">
@@ -480,6 +659,91 @@ export default function CheckoutStep({
                       </div>
                     </RadioGroup>
                   </div>
+
+                  {(formData.is_scholar_or_ama || formData.is_atenean) && (
+                    <div className="space-y-3 bg-white/5 p-5 rounded-md">
+                      <Label className="text-gray-300">
+                        Discount Eligibility
+                      </Label>
+                      <RadioGroup
+                        value={
+                          attendee.is_scholar_or_ama
+                            ? 'scholar_ama'
+                            : attendee.is_atenean
+                            ? 'atenean'
+                            : 'none'
+                        }
+                        onValueChange={(value) => {
+                          const isScholarOrAma = value === 'scholar_ama';
+                          const isAtenean = value === 'atenean';
+                          const newAttendees = attendees.map((a) =>
+                            a.id === attendee.id
+                              ? {
+                                  ...a,
+                                  is_scholar_or_ama: isScholarOrAma,
+                                  is_atenean: isAtenean,
+                                }
+                              : a
+                          );
+                          setAttendees(newAttendees);
+                          if (formData.registration_type === 'group') {
+                            updateFormData({
+                              ...formData,
+                              additional_attendees: newAttendees,
+                            });
+                          }
+                        }}
+                        className="flex space-x-4 pt-2"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem
+                            value="scholar_ama"
+                            id={`scholar-ama-${attendee.id}`}
+                            className="border-gray-600 text-red-500"
+                          />
+                          <Label
+                            htmlFor={`scholar-ama-${attendee.id}`}
+                            className="text-gray-300"
+                          >
+                            Scholar / AMA Member
+                          </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem
+                            value="atenean"
+                            id={`atenean-${attendee.id}`}
+                            className="border-gray-600 text-red-500"
+                          />
+                          <Label
+                            htmlFor={`atenean-${attendee.id}`}
+                            className="text-gray-300"
+                          >
+                            Atenean
+                          </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem
+                            value="none"
+                            id={`no-discount-${attendee.id}`}
+                            className="border-gray-600 text-red-500"
+                            disabled={
+                              formData.is_scholar_or_ama || formData.is_atenean
+                            }
+                          />
+                          <Label
+                            htmlFor={`no-discount-${attendee.id}`}
+                            className={`text-gray-300 ${
+                              formData.is_scholar_or_ama || formData.is_atenean
+                                ? 'text-gray-500'
+                                : ''
+                            }`}
+                          >
+                            None
+                          </Label>
+                        </div>
+                      </RadioGroup>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -504,39 +768,52 @@ export default function CheckoutStep({
           {IS_PRE_SPEAKER_PERIOD ? (
             <div className="flex justify-between text-green-400">
               <span>
-                Pre-speaker Discount (₱{PRE_SPEAKER_DISCOUNT} off per person)
+                Early Bird Promo (₱{PRE_SPEAKER_DISCOUNT} off per person)
               </span>
               <span>-₱{PRE_SPEAKER_DISCOUNT * totalAttendees}</span>
             </div>
           ) : (
             <>
-              {isEligibleForDiscount && (
-                <div className="flex justify-between text-green-400">
-                  <span>Group Discount (₱{GROUP_DISCOUNT} off)</span>
-                  <span>-₱{GROUP_DISCOUNT}</span>
-                </div>
-              )}
+              {/* Count discounts by type */}
+              {(() => {
+                const scholarAmaCount =
+                  attendees.filter((a) => a.is_scholar_or_ama).length +
+                  (formData.is_scholar_or_ama ? 1 : 0);
+                const ateneanCount =
+                  attendees.filter((a) => a.is_atenean).length +
+                  (formData.is_atenean ? 1 : 0);
 
-              {!isEligibleForDiscount && formData.is_scholar_or_ama && (
+                return (
+                  <>
+                    {scholarAmaCount > 0 && (
+                      <div className="flex justify-between text-green-400">
+                        <span>Scholar/AMA Discount ({scholarAmaCount}x)</span>
+                        <span>-₱{SCHOLAR_AMA_DISCOUNT * scholarAmaCount}</span>
+                      </div>
+                    )}
+                    {ateneanCount > 0 && (
+                      <div className="flex justify-between text-green-400">
+                        <span>Atenean Discount ({ateneanCount}x)</span>
+                        <span>-₱{ATENEAN_DISCOUNT * ateneanCount}</span>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
+
+              {/* Bundle discount */}
+              {isEligibleForBundle && (
                 <div className="flex justify-between text-green-400">
                   <span>
-                    Scholar/AMA Discount (₱{SCHOLAR_AMA_DISCOUNT} off per
-                    person)
+                    Bundle Discount (
+                    {formData.is_scholar_or_ama || formData.is_atenean
+                      ? 'Atenean/AMA/Scholar'
+                      : 'Outsider'}{' '}
+                    Group)
                   </span>
-                  <span>-₱{SCHOLAR_AMA_DISCOUNT * totalAttendees}</span>
+                  <span>-₱{bundleDiscount}</span>
                 </div>
               )}
-
-              {!isEligibleForDiscount &&
-                formData.is_atenean &&
-                !formData.is_scholar_or_ama && (
-                  <div className="flex justify-between text-green-400">
-                    <span>
-                      Atenean Discount (₱{ATENEAN_DISCOUNT} off per person)
-                    </span>
-                    <span>-₱{ATENEAN_DISCOUNT * totalAttendees}</span>
-                  </div>
-                )}
             </>
           )}
 
@@ -577,34 +854,6 @@ export default function CheckoutStep({
               ₱{totalPrice.toFixed(2)}
             </div>
           </div>
-          {IS_PRE_SPEAKER_PERIOD ? (
-            <div className="text-sm text-green-400">
-              Pre-speaker discount of ₱{PRE_SPEAKER_DISCOUNT} per person
-              applied!
-            </div>
-          ) : (
-            <>
-              {isEligibleForDiscount && (
-                <div className="text-sm text-green-400">
-                  Group discount of ₱{GROUP_DISCOUNT} applied for registering 3
-                  or more attendees!
-                </div>
-              )}
-              {!isEligibleForDiscount && formData.is_scholar_or_ama && (
-                <div className="text-sm text-green-400">
-                  Scholar/AMA member discount of ₱{SCHOLAR_AMA_DISCOUNT}{' '}
-                  applied!
-                </div>
-              )}
-              {!isEligibleForDiscount &&
-                formData.is_atenean &&
-                !formData.is_scholar_or_ama && (
-                  <div className="text-sm text-green-400">
-                    Atenean discount of ₱{ATENEAN_DISCOUNT} applied!
-                  </div>
-                )}
-            </>
-          )}
         </div>
       </div>
     </div>
