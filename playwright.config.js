@@ -14,7 +14,7 @@ module.exports = defineConfig({
   },
   use: {
     baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
     video: 'retain-on-failure',
     viewport: { width: 1280, height: 720 }, // Set consistent viewport
     actionTimeout: 45000, // Increase action timeout to 45 seconds
