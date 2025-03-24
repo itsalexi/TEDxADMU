@@ -85,6 +85,11 @@ const AboutPage = () => {
           </div>
         </section>
 
+        {/* Speakers Section */}
+        <section className="py-10 bg-black" id="speakers-section">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8"></div>
+        </section>
+
         {/* Event Details */}
         <section className="about-section bg-black py-5 relative container mx-auto px-8 sm:px-6 lg:px-16 flex flex-col transition-all duration-1000 ease-out">
           <div className="flex flex-col mt-24 gap-10">
