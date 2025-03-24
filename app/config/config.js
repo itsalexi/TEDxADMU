@@ -14,7 +14,7 @@ export const ATENEAN_AMA_BUNDLE_DISCOUNT = 90;
 export const OUTSIDER_BUNDLE_DISCOUNT = 150;
 
 // Pre-speaker period settings
-export const IS_PRE_SPEAKER_PERIOD = true;
+export const IS_PRE_SPEAKER_PERIOD = false;
 export const PRE_SPEAKER_DISCOUNT = 80;
 
 export const PRE_SPEAKER_PERIOD_START = '2025-03-25';
