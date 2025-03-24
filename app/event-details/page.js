@@ -101,6 +101,11 @@ const AboutPage = () => {
               "egress.png",
               "emergency exits.png",
               "traffic.png",
+              "prohibited1.png",
+              "prohibited2.png",
+              "health-guidelines.png",
+              "health-guidelines2.png",
+              "health-guidelines3.png",
             ].map((src, index) => (
               <div key={index} className="relative w-full max-w-2xl h-80">
                 <Image
@@ -112,9 +117,6 @@ const AboutPage = () => {
                 />
               </div>
             ))}
-          </div>
-          <div className="text-center text-4xl mt-24">
-            Instructions, Reminders, etc here
           </div>
         </section>
       </main>
