@@ -250,7 +250,7 @@ const TopicSection = React.forwardRef(
                     }}
                     className={cn(
                       "absolute inset-0",
-                      isSelected ? "md:mr-0" : "mt-16 md:mt-0" // Add top margin only on mobile when unselected
+                      isSelected ? "md:mr-0" : "mt-24 md:mt-0" // Add top margin only on mobile when unselected
                     )}
                   >
                     <Image
