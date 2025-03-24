@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const TedxSection = ({ isVisible, isHighlighted }) => {
+const OrganizersSection = ({ isVisible, isHighlighted }) => {
   return (
     <section
       id="tedx-section"
@@ -16,9 +16,7 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
         >
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0 text-white rounded-md p-6 transition duration-300 ease-in-out transform hover:scale-105 bg-black">
             <h2 className="text-3xl sm:text-5xl font-bold mb-6 p-4 relative inline-block">
-              <span className="relative z-10">
-                What is <span className="text-[#eb0028]">TEDx?</span>
-              </span>
+              <span className="relative z-10">Meet the Organizers</span>
 
               {/* Highlight animation element */}
               <span
@@ -33,39 +31,31 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
 
             <div className="space-y-4">
               <p className="text-lg md:text-xl">
-                TEDx is a grassroots initiative, created in the spirit of
-                TED&apos;s overall mission to research and discover &quot;ideas
-                worth spreading.&quot;
+                TEDxAteneodeManilaU is organized by a dedicated team of students
+                and faculty members who share a passion for spreading impactful
+                ideas.
               </p>
 
               <p className="text-lg md:text-xl">
-                TEDx brings the spirit of TED to local communities around the
-                globe through self-organized events. TEDxAteneodeManilaU events
-                are organized by students and faculty to share ideas in and
-                beyond the university community.
+                Our organizers come from diverse backgrounds, bringing together
+                creativity, leadership, and innovation to curate an inspiring
+                event for the community. From selecting speakers to managing
+                logistics, each member plays a crucial role in making
+                TEDxAteneodeManilaU a platform for meaningful conversations.
               </p>
 
               <p className="text-lg md:text-xl">
-                Each TEDx event is unique, but all share features like TED Talk
-                videos, live speakers, and deep conversations.
+                With a shared commitment to excellence, the team works
+                tirelessly to create an unforgettable experience, fostering
+                dialogue and sparking change within and beyond the university.
               </p>
             </div>
+
             <div className="mt-8 flex gap-6">
               <div className="">
                 <Link href="/about">
                   <span className="inline-block bg-[#eb0028] hover:bg-red-700 hover:font-bold text-white text-base md:text-lg px-6 py-3 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
-                    Learn More About Us
-                  </span>
-                </Link>
-              </div>
-              <div className="">
-                <Link
-                  href="https://www.ted.com/about/programs-initiatives/tedx-program"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="inline-block bg-[#eb0028] hover:bg-red-700 hover:font-bold text-white text-base md:text-lg px-6 py-3 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
-                    TEDx Program
+                    Get to Know the Team
                   </span>
                 </Link>
               </div>
@@ -92,4 +82,4 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
   );
 };
 
-export default TedxSection;
+export default OrganizersSection;

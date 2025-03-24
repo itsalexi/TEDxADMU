@@ -11,6 +11,7 @@ import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
 import TextLoadingScreen from "@/components/TextLoadingScreen";
 import { GlareGrid } from "@/components/glareGrid";
 import TedxSection from "@/components/tedxSection";
+import OrganizersSection from "@/components/meetOrganizers";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -22,9 +23,8 @@ export default function Home() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
-  const [tedxSectionVisible, setTedxSectionVisible] = useState(false);
-  const [headingHighlight, setHeadingHighlight] = useState(false);
+  const [visibleSections, setVisibleSections] = useState({});
+  const [headingHighlights, setHeadingHighlights] = useState({});
 
   const speakersAnnounced = false;
 
@@ -71,40 +71,55 @@ export default function Home() {
 
     if (speakerSection) speakerSectionObserver.observe(speakerSection);
 
-    // New observer for TEDx section
-    const tedxSectionObserver = new IntersectionObserver(
+    // Generic observer for sections that need visibility tracking
+    const sectionObserver = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          setTedxSectionVisible(true);
-          tedxSectionObserver.disconnect();
-        }
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            setVisibleSections((prev) => ({
+              ...prev,
+              [sectionId]: true,
+            }));
+            sectionObserver.unobserve(entry.target);
+          }
+        });
       },
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.3, // Trigger when 30% of the element is visible
+        threshold: 0.3,
       }
     );
 
-    const tedxSection = document.getElementById("tedx-section");
-    if (tedxSection) tedxSectionObserver.observe(tedxSection);
+    // Observe sections that need visibility tracking
+    const sectionsToObserve = ["tedx-section", "organizers-section"];
+    sectionsToObserve.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) sectionObserver.observe(section);
+    });
 
     return () => {
       speakerSectionObserver.disconnect();
-      tedxSectionObserver.disconnect();
+      sectionObserver.disconnect();
     };
   }, [mounted, isLoading]);
 
   useEffect(() => {
     // Trigger heading highlight animation with delay after section becomes visible
-    if (tedxSectionVisible) {
-      const highlightTimer = setTimeout(() => {
-        setHeadingHighlight(true);
-      }, 200); // 0.2 second delay
+    Object.entries(visibleSections).forEach(([sectionId, isVisible]) => {
+      if (isVisible && !headingHighlights[sectionId]) {
+        const timer = setTimeout(() => {
+          setHeadingHighlights((prev) => ({
+            ...prev,
+            [sectionId]: true,
+          }));
+        }, 200);
 
-      return () => clearTimeout(highlightTimer);
-    }
-  }, [tedxSectionVisible]);
+        return () => clearTimeout(timer);
+      }
+    });
+  }, [visibleSections, headingHighlights]);
 
   const handleLoadComplete = () => {
     setIsLoading(false);
@@ -254,14 +269,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* What is TEDx? - Now using the component */}
+        {/* What is TEDx? - Now using the component with section-specific visibility */}
         <TedxSection
-          tedxSectionVisible={tedxSectionVisible}
-          headingHighlight={headingHighlight}
+          isVisible={visibleSections["tedx-section"]}
+          isHighlighted={headingHighlights["tedx-section"]}
         />
 
         {/* Meet the Organizers */}
-        <section id="meet-organizers-section"></section>
+        <OrganizersSection
+          isVisible={visibleSections["organizers-section"]}
+          isHighlighted={headingHighlights["organizers-section"]}
+        />
 
         {/* Speakers Cards */}
         <section id="speaker-section" className="py-10 bg-black">
