@@ -68,14 +68,14 @@ const AboutPage = () => {
               <section className="mx-auto max-w-screen-sm">
                 <p className="text-gray-300 leading-relaxed text-xl">
                   Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
-                  Management Association (AMA). Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                  ea commodo consequat. Duis aute irure dolor in reprehenderit
-                  in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                  in culpa qui officia deserunt mollit anim id est laborum.
+                  Management Association (AMA). The event continues to serve as
+                  a platform for innovative ideas, thought-provoking
+                  discussions, and inspiring stories from a diverse range of
+                  speakers. It brings together students, professionals, and
+                  changemakers who are passionate about driving positive impact
+                  in their communities. With each edition, TEDxAteneoDeManilaU
+                  fosters meaningful conversations that challenge perspectives,
+                  ignite curiosity, and encourage action toward a better future.
                 </p>
               </section>
             </div>

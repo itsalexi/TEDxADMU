@@ -60,7 +60,7 @@ const CoreTeamPage = () => {
     <div className="relative min-h-screen bg-black">
       <ParticlesBackground />
 
-      <div className="relative z-10">
+      <div className="relative z-15">
         {/* Core Team Section */}
         <div className="relative pt-56">
           {/* Background Image - Sticky within the Section */}
