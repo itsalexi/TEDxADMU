@@ -42,43 +42,43 @@ const TeamPhotoSection = () => {
 
   const images = [
     {
-      src: "/meeting1.jpg",
+      src: "/meeting1.webp",
       alt: "TEDx organizers collaborating",
     },
     {
-      src: "/zoom1.jpg",
+      src: "/zoom1.webp",
       alt: "Team planning session",
     },
     {
-      src: "/meeting2.jpg",
+      src: "/meeting2.webp",
       alt: "TEDx team members",
     },
     {
-      src: "/zoom2.jpg",
+      src: "/zoom2.webp",
       alt: "Brainstorming ideas",
     },
     {
-      src: "/meeting3.jpg",
+      src: "/meeting3.webp",
       alt: "TEDx team at event",
     },
     {
-      src: "/zoom3.jpg",
+      src: "/zoom3.webp",
       alt: "Preparing for talks",
     },
     {
-      src: "/meeting4.jpg",
+      src: "/meeting4.webp",
       alt: "Team building activities",
     },
     {
-      src: "/zoom4.jpg",
+      src: "/zoom4.webp",
       alt: "Organizing logistics",
     },
     {
-      src: "/meeting5.jpg",
+      src: "/meeting5.webp",
       alt: "TEDx volunteers",
     },
     {
-      src: "/2ctm.jpg",
+      src: "/2ctm.webp",
       alt: "Behind the scenes",
     },
   ];
@@ -117,7 +117,7 @@ const TeamPhotoSection = () => {
 
             <div className="w-full lg:w-1/2 h-[400px] relative rounded-md overflow-hidden shadow-lg shadow-red-900/20 border-2 border-[#eb0028] transform transition-all duration-500 hover:scale-[1.02]">
               <Image
-                src="/1ctm.jpg"
+                src="/1ctm.webp"
                 alt="Team members collaborating on TEDx planning"
                 fill
                 className="object-cover"
@@ -163,7 +163,7 @@ const TeamPhotoSection = () => {
               {/* Image 1 */}
               <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
                 <Image
-                  src="/meeting1.jpg"
+                  src="/meeting1.webp"
                   alt="TEDx team planning session 1"
                   fill
                   className="object-cover"
@@ -175,7 +175,7 @@ const TeamPhotoSection = () => {
               {/* Image 2 */}
               <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
                 <Image
-                  src="/meeting2.jpg"
+                  src="/meeting2.webp"
                   alt="TEDx team planning session 2"
                   fill
                   className="object-cover"
@@ -187,7 +187,7 @@ const TeamPhotoSection = () => {
               {/* Image 3 */}
               <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
                 <Image
-                  src="/meeting3.jpg"
+                  src="/meeting3.webp"
                   alt="TEDx team planning session 3"
                   fill
                   className="object-cover"
@@ -199,7 +199,7 @@ const TeamPhotoSection = () => {
               {/* Image 4 */}
               <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
                 <Image
-                  src="/meeting4.jpg"
+                  src="/meeting4.webp"
                   alt="TEDx team planning session 4"
                   fill
                   className="object-cover"
@@ -240,7 +240,7 @@ const TeamPhotoSection = () => {
 
             <div className="w-full lg:w-1/2 h-[400px] relative rounded-md overflow-hidden shadow-lg shadow-red-900/20 border-2 border-[#eb0028] transform transition-all duration-500 hover:scale-[1.02]">
               <Image
-                src="/2ctm.jpg"
+                src="/2ctm.webp"
                 alt="TEDx team at the event"
                 fill
                 className="object-cover"

@@ -81,7 +81,7 @@ const AboutPage = () => {
             </div>
             <div className="relative w-full h-96">
               <Image
-                src="/about-tedxadmu.jpg"
+                src="/about-tedxadmu.webp"
                 alt="TEDx"
                 fill
                 objectFit="contain"
