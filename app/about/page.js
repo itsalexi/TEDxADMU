@@ -10,7 +10,6 @@ const AboutPage = () => {
     // Set a small timeout to ensure the animation triggers after component mounts
     const timer = setTimeout(() => {
       setIsVisible(true);
-      console.log("visible true");
     }, 300);
 
     // Set up intersection observer for scroll animations

@@ -3,9 +3,30 @@
 import React, { useEffect, useState } from "react";
 import TopicsDropdown from "@/components/topicsDropdown";
 import Image from "next/image";
+import CircularSpeakersSection from "@/components/CircularSpeakersSection";
 
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [expandedCards, setExpandedCards] = useState({});
+
+  const imageTitles = {
+    "ingress.png": "Ingress",
+    "egress.png": "Egress",
+    "emergency exits.png": "Emergency Exits",
+    "traffic.png": "Traffic",
+    "prohibited1.png": "Prohibited Items 1",
+    "prohibited2.png": "Prohibited Items 2",
+    "health-guidelines.png": "Health Guidelines 1",
+    "health-guidelines2.png": "Health Guidelines 2",
+    "health-guidelines3.png": "Health Guidelines 3"
+  };
+
+  const toggleCard = (index) => {
+    setExpandedCards(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
 
   useEffect(() => {
     // Set Topics section (top of page) to visible after a short delay
@@ -85,10 +106,8 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Speakers Section */}
-        <section className="py-10 bg-black" id="speakers-section">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8"></div>
-        </section>
+        {/* Speakers Section - Circular Layout */}
+        <CircularSpeakersSection />
 
         {/* Event Details */}
         <section className="about-section bg-black py-5 relative container mx-auto px-8 sm:px-6 lg:px-16 flex flex-col transition-all duration-1000 ease-out">
@@ -100,7 +119,7 @@ const AboutPage = () => {
           </div>
 
           {/* Image gallery - vertically stacked */}
-          <div className="flex flex-col gap-8 mt-12 items-center">
+          <div className="flex flex-col gap-8 mt-12 items-center w-full">
             {[
               "ingress.png",
               "egress.png",
@@ -110,16 +129,18 @@ const AboutPage = () => {
               "prohibited2.png",
               "health-guidelines.png",
               "health-guidelines2.png",
-              "health-guidelines3.png",
+              "health-guidelines3.png"
             ].map((src, index) => (
-              <div key={index} className="relative w-full max-w-2xl h-80">
-                <Image
-                  src={`/${src}`}
-                  alt="TEDx Event"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+              <div key={index} className="w-full max-w-2xl">
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src={`/${src}`}
+                    alt={imageTitles[src]}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
               </div>
             ))}
           </div>

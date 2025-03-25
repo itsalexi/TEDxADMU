@@ -409,7 +409,7 @@ export default function ApplicationForm() {
       case 4:
         return 'Complete your registration';
       case 5:
-        return 'Application submitted';
+        return 'Registration submitted';
       default:
         return '';
     }
@@ -459,7 +459,7 @@ export default function ApplicationForm() {
                       'Share your perspective and ideas with us'}
                     {currentStep === 4 &&
                       'Choose your registration type and complete payment details'}
-                    {currentStep === 5 && 'Thank you for your application'}
+                    {currentStep === 5 && 'Thank you for your registration'}
                   </p>
                 </div>
 

@@ -12,7 +12,6 @@ const ParticlesBackground = React.memo(() => {
       await loadSlim(engine);
     }).then(() => {
       setInit(true);
-      console.log("Particles initialized");
     });
   }, []);
 

@@ -10,7 +10,6 @@ export const LayoutGrid = ({ cards }) => {
   const handleClick = (card) => {
     setLastSelected(selected);
     setSelected(card);
-    console.log("clicked");
   };
 
   const handleOutsideClick = () => {
@@ -137,7 +136,6 @@ const SelectedCard = ({ selected }) => {
           className="my-4"
           onClick={(e) => {
             e.stopPropagation();
-            console.log(`Learn more about ${selected.title}`);
           }}
         >
           <Link href="/event-details#topics-section">
