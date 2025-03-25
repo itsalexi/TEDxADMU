@@ -407,7 +407,7 @@ export default function Home() {
 
             {/* Mobile version */}
             <div className="md:hidden space-y-4 max-w-sm mx-auto">
-              {speakersAnnounced
+              {IS_SPEAKERS_ANNOUNCED
                 ? // Original speakers code for mobile
                   speakers.map((speaker, index) => (
                     <div
