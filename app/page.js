@@ -193,6 +193,16 @@ export default function Home() {
                 </p>
 
                 <div
+                  className={`text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal px-4 transition-all duration-1000 ease-out ${
+                    subtitleLoaded
+                      ? 'opacity-100 transform translate-y-0'
+                      : 'opacity-0 transform translate-y-16'
+                  }`}
+                >
+                  April 30, 2025 (Wednesday) • Leong Hall • 1-4 PM
+                </div>
+
+                <div
                   className={`transition-all duration-1000 ease-out ${
                     buttonLoaded
                       ? 'opacity-100 transform translate-y-0'
@@ -225,6 +235,26 @@ export default function Home() {
                   <h2 className="text-3xl sm:text-5xl font-bold mb-5 text-[#eb0028]">
                     What Awaits You at <br /> TEDxAteneodeManilaU: Labyrinthine?
                   </h2>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                      </svg>
+                      <span>April 30, 2025 (Wednesday)</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                      </svg>
+                      <span>Leong Hall</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-gray-300">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                      </svg>
+                      <span>1:00 PM - 4:00 PM</span>
+                    </div>
+                  </div>
                   <AnimatedEventDescription />
                 </div>
 
