@@ -117,7 +117,7 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
             <div className="mt-8 flex gap-6">
               <div className="">
                 <Link href="/about">
-                  <span className="inline-block bg-[#eb0028] hover:bg-red-700 hover:font-bold text-white text-base md:text-lg px-6 py-3 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
+                  <span className="inline-block  text-center bg-[#eb0028] hover:bg-red-700 hover:font-bold text-white text-base md:text-lg px-6 py-3 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
                     Learn More About Us
                   </span>
                 </Link>
@@ -128,7 +128,7 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span className="inline-block bg-[#eb0028] hover:bg-red-700 hover:font-bold text-white text-base md:text-lg px-6 py-3 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
+                  <span className="inline-block text-center bg-[#eb0028] hover:bg-red-700 hover:font-bold text-white text-base md:text-lg px-6 py-3 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
                     TEDx Program
                   </span>
                 </Link>
