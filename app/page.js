@@ -229,12 +229,14 @@ export default function Home() {
                 </div>
 
                 <div className="w-full lg:w-1/2 h-[50vh] flex items-center justify-center">
-                  <Image
-                    src="/goingtosomewhere.gif"
-                    alt="Going to somewhere animation"
+                  <video
+                    src="/goingtosomewhere.mp4"
                     width={500}
                     height={500}
-                    priority
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                     className="object-contain w-full h-full"
                   />
                 </div>
@@ -242,11 +244,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="h-24 sm:h-32 md:h-40 lg:h-48"></div>
-
-          <div className="absolute left-0 bottom-0 w-full sm:w-2/3 md:w-1/2 lg:w-2/5 xl:w-1/3 transform translate-y-0 overflow-visible pb-16">
-            <CurvedLineAnimation />
-          </div>
+          {/* ... (rest of the section remains the same) */}
         </section>
 
         <section
@@ -257,12 +255,14 @@ export default function Home() {
             <div className="flex-1 pr-4 pl-4 md:pl-0">
               <div className="flex flex-col lg:flex-row items-center">
                 <div className="w-full lg:w-1/2 h-[50vh] flex items-center justify-center">
-                  <Image
-                    src="/movingcoolthing.gif"
-                    alt="Moving cool animation"
+                  <video
+                    src="/movingcoolthing.mp4"
                     width={500}
                     height={500}
-                    priority
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                     className="object-contain w-full h-full"
                   />
                 </div>
