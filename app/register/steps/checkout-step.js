@@ -38,6 +38,7 @@ export default function CheckoutStep({
     let price = SINGLE_TICKET_PRICE * totalAttendees;
 
     if (IS_PRE_SPEAKER_PERIOD) {
+      // Early bird discount only
       price = price - PRE_SPEAKER_DISCOUNT * totalAttendees;
     } else {
       // Apply individual discounts for main registrant
@@ -56,16 +57,13 @@ export default function CheckoutStep({
         }
       });
 
-      // Apply bundle discount for every group of 3
+      // Apply bundle discount for group of 3
       if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
-        const numberOfCompleteGroups = Math.floor(
-          totalAttendees / GROUP_DISCOUNT_THRESHOLD
-        );
         const bundleDiscountAmount =
           formData.is_scholar_or_ama || formData.is_atenean
             ? ATENEAN_AMA_BUNDLE_DISCOUNT
             : OUTSIDER_BUNDLE_DISCOUNT;
-        price = price - bundleDiscountAmount * numberOfCompleteGroups;
+        price = price - bundleDiscountAmount;
       }
     }
     return price;
@@ -76,11 +74,71 @@ export default function CheckoutStep({
       formData.registration_type === 'group' ? 1 + attendees.length : 1;
     const updatedPrice = calculateTotalPrice(totalAttendees);
 
+    // Calculate order summary
+    const basePrice = SINGLE_TICKET_PRICE * totalAttendees;
+
+    const orderSummary = {
+      base_price: basePrice,
+      total_attendees: totalAttendees,
+      registration_type: formData.registration_type,
+      discounts: IS_PRE_SPEAKER_PERIOD
+        ? {
+            early_bird: {
+              amount: PRE_SPEAKER_DISCOUNT * totalAttendees,
+              attendees: totalAttendees,
+            },
+          }
+        : {
+            scholar_ama:
+              attendees.filter((a) => a.is_scholar_or_ama).length +
+                (formData.is_scholar_or_ama ? 1 : 0) >
+              0
+                ? {
+                    amount:
+                      SCHOLAR_AMA_DISCOUNT *
+                      (attendees.filter((a) => a.is_scholar_or_ama).length +
+                        (formData.is_scholar_or_ama ? 1 : 0)),
+                    attendees:
+                      attendees.filter((a) => a.is_scholar_or_ama).length +
+                      (formData.is_scholar_or_ama ? 1 : 0),
+                  }
+                : null,
+            atenean:
+              attendees.filter((a) => a.is_atenean).length +
+                (formData.is_atenean ? 1 : 0) >
+              0
+                ? {
+                    amount:
+                      ATENEAN_DISCOUNT *
+                      (attendees.filter((a) => a.is_atenean).length +
+                        (formData.is_atenean ? 1 : 0)),
+                    attendees:
+                      attendees.filter((a) => a.is_atenean).length +
+                      (formData.is_atenean ? 1 : 0),
+                  }
+                : null,
+            bundle: isEligibleForBundle
+              ? {
+                  amount:
+                    formData.is_scholar_or_ama || formData.is_atenean
+                      ? ATENEAN_AMA_BUNDLE_DISCOUNT
+                      : OUTSIDER_BUNDLE_DISCOUNT,
+                  type:
+                    formData.is_scholar_or_ama || formData.is_atenean
+                      ? 'Atenean/AMA/Scholar'
+                      : 'Outsider',
+                }
+              : null,
+          },
+      final_price: updatedPrice,
+    };
+
     updateFormData({
       ...formData,
       cost: updatedPrice,
       additional_attendees:
         formData.registration_type === 'group' ? attendees : [],
+      order_summary: orderSummary,
     });
   }, [attendees]);
 
