@@ -6,6 +6,7 @@ import coreTeamData from "./coreTeamMembers.json";
 import CoreTeamCard from "./CoreTeamCard";
 import ParticlesBackground from "../ParticlesBackground";
 import TeamPhotoSection from "@/components/TeamPhotoSection";
+import WebdevSection from "@/components/webdevSection";
 
 const CoreTeamPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -60,7 +61,6 @@ const CoreTeamPage = () => {
   return (
     <div className="relative min-h-screen bg-black">
       <ParticlesBackground />
-
 
       <div className="relative z-10">
         {/*About TEDxAteneoDeManilaU */}
@@ -215,6 +215,9 @@ const CoreTeamPage = () => {
           </div>
         </div>
       </div>
+
+      {/* WebDev Section */}
+      <WebdevSection />
     </div>
   );
 };
