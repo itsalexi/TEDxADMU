@@ -5,8 +5,8 @@ import Link from "next/link";
 const OrganizersSection = ({ isVisible, isHighlighted }) => {
   return (
     <section
-      id="tedx-section"
-      className="bg-[#eb0028] py-20 relative overflow-hidden"
+      id="organizers-section"
+      className="bg-black py-20 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div
@@ -14,6 +14,20 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
+          <div className="w-full lg:w-1/2 border-[#eb0028] border-2 rounded-md shadow-lg shadow-red-900 flex justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
+            <Link
+              href="/about"
+              className="relative w-full h-[400px] overflow-hidden"
+            >
+              <Image
+                src="/group-x.jpg"
+                alt="TEDx Event"
+                fill
+                className="object-cover rounded-lg cursor-pointer"
+                priority
+              />
+            </Link>
+          </div>
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0 text-white rounded-md p-6 transition duration-300 ease-in-out transform hover:scale-105 bg-black">
             <h2 className="text-3xl sm:text-5xl font-bold mb-6 p-4 relative inline-block">
               <span className="relative z-10">Meet the Organizers</span>
@@ -60,21 +74,6 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
                 </Link>
               </div>
             </div>
-          </div>
-
-          <div className="w-full lg:w-1/2 flex justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
-            <Link
-              href="/about"
-              className="relative w-full h-[400px] overflow-hidden"
-            >
-              <Image
-                src="/tedx-event-image.jpg"
-                alt="TEDx Event"
-                fill
-                className="object-cover rounded-lg cursor-pointer"
-                priority
-              />
-            </Link>
           </div>
         </div>
       </div>

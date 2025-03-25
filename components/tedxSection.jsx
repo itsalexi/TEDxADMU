@@ -14,7 +14,7 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
-          <div className="w-full lg:w-1/2 mb-10 lg:mb-0 text-white rounded-md p-6 transition duration-300 ease-in-out transform hover:scale-105 bg-black">
+          <div className="w-full lg:w-1/2 mb-10 lg:mb-0 text-white rounded-md p-6 transition duration-300 ease-in-out transform hover:scale-105 bg-black hover:border-2 border-white">
             <h2 className="text-3xl sm:text-5xl font-bold mb-6 p-4 relative inline-block">
               <span className="relative z-10">
                 What is <span className="text-[#eb0028]">TEDx?</span>
@@ -72,7 +72,7 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
             </div>
           </div>
 
-          <div className="w-full lg:w-1/2 flex justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
+          <div className="w-full lg:w-1/2 border-white border-2 rounded-md shadow-lg shadow-slate-600 flex justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
             <Link
               href="/about"
               className="relative w-full h-[400px] overflow-hidden"
