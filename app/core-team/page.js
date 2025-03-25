@@ -62,6 +62,35 @@ const CoreTeamPage = () => {
       <ParticlesBackground />
 
       <div className="relative z-10">
+        {/*About TEDxAteneoDeManilaU */}
+        <div>
+          <div className=" flex xl:flex-row mt-40 mx-8 gap-10 flex-col">
+            <div className="text-2xl sm:text-3xl md:text-5xl">
+              <h1 className="text-center font-bold text-[#eb0028]">
+                About
+                <p>
+                  TEDx
+                  <span className="text-white font-thin">AteneoDeManilaU</span>
+                </p>
+              </h1>
+            </div>
+            <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
+              <p className="text-gray-300 leading-relaxed text-xl">
+                Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
+                Management Association (AMA). The event continues to serve as a
+                platform for innovative ideas, thought-provoking discussions,
+                and inspiring stories from a diverse range of speakers. It
+                brings together students, professionals, and changemakers who
+                are passionate about driving positive impact in their
+                communities. With each edition, TEDxAteneoDeManilaU fosters
+                meaningful conversations that challenge perspectives, ignite
+                curiosity, and encourage action toward a better future.
+              </p>
+            </section>
+          </div>
+        </div>
+        {/* Group Photos */}
+        <TeamPhotoSection />
         {/* Core Team Section */}
         <div className="relative pt-56">
           {/* Background Image - Sticky within the Section */}
@@ -185,35 +214,7 @@ const CoreTeamPage = () => {
             </div>
           </div>
         </div>
-        {/*About TEDxAteneoDeManilaU */}
-        <div>
-          <div className=" flex xl:flex-row mt-40 mx-8 gap-10 flex-col">
-            <div className="text-2xl sm:text-3xl md:text-5xl">
-              <h1 className="text-center font-bold text-[#eb0028]">
-                About
-                <p>
-                  TEDx
-                  <span className="text-white font-thin">AteneoDeManilaU</span>
-                </p>
-              </h1>
-            </div>
-            <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
-              <p className="text-gray-300 leading-relaxed text-xl">
-                Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
-                Management Association (AMA). The event continues to serve as a
-                platform for innovative ideas, thought-provoking discussions,
-                and inspiring stories from a diverse range of speakers. It
-                brings together students, professionals, and changemakers who
-                are passionate about driving positive impact in their
-                communities. With each edition, TEDxAteneoDeManilaU fosters
-                meaningful conversations that challenge perspectives, ignite
-                curiosity, and encourage action toward a better future.
-              </p>
-            </section>
-          </div>
-        </div>
-        {/* Group Photos */}
-        <TeamPhotoSection />
+        
       </div>
     </div>
   );
