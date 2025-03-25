@@ -3,7 +3,7 @@ import { Typewriter } from "@/components/typeWriter";
 import { TextShimmer } from "@/components/textShimmer";
 import Image from "next/image";
 import { Linkedin, Facebook } from "lucide-react"; // Import social icons
-
+ 
 const developers = [
   {
     name: "Alexi Roth Luis Canamo",
