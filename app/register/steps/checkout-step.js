@@ -572,17 +572,19 @@ export default function CheckoutStep({
                             <SelectItem value="SOSE">
                               School of Science and Engineering (SOSE)
                             </SelectItem>
-                            <SelectItem value="SOSS">
-                              School of Social Sciences (SOSS)
+                            <SelectItem value="RGL-SOSS">
+                              Dr Rosita G Leong School of Social Sciences
+                              (RGL-SOSS)
                             </SelectItem>
                             <SelectItem value="SOH">
                               School of Humanities (SOH)
                             </SelectItem>
                             <SelectItem value="JGSOM">
-                              School of Management (JGSOM)
+                              John Gokongwei School of Management (JGSOM)
                             </SelectItem>
                             <SelectItem value="GBSEALD">
-                              School of Education and Learning Design (GBSEALD)
+                              Gokongwei Brothers School of Education and
+                              Learning Design (GBSEALD)
                             </SelectItem>
                           </SelectContent>
                         </Select>
