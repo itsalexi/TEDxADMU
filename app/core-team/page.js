@@ -6,8 +6,7 @@ import coreTeamData from "./coreTeamMembers.json";
 import CoreTeamCard from "./CoreTeamCard";
 import ParticlesBackground from "../ParticlesBackground";
 import TeamPhotoSection from "@/components/TeamPhotoSection";
-import { Typewriter } from "@/components/typeWriter";
-import { TextShimmer } from "@/components/textShimmer";
+import WebdevSection from "@/components/webdevSection";
 
 const CoreTeamPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -62,7 +61,6 @@ const CoreTeamPage = () => {
   return (
     <div className="relative min-h-screen bg-black">
       <ParticlesBackground />
-
 
       <div className="relative z-10">
         {/*About TEDxAteneoDeManilaU */}
@@ -219,36 +217,7 @@ const CoreTeamPage = () => {
       </div>
 
       {/* WebDev Section */}
-      <section id="webdev-section">
-        <div>
-          <div className="w-full h-full md:text-4xl lg:text-5xl sm:text-3xl text-2xl flex flex-row items-start justify-start bg-background font-normal overflow-hidden p-16 pt-48">
-            <div className="whitespace-pre-wrap z-50 text-white">
-              <span>{"Special thanks to our "}</span>
-              <Typewriter
-                text={[
-                  "Website Development",
-                  "GOAT",
-                  "hard carry",
-                  "insanely handsome",
-                  "infinite aura",
-                ]}
-                speed={70}
-                className="text-[#eb0028]"
-                waitTime={1500}
-                deleteSpeed={40}
-                cursorChar={"_"}
-              />
-              <span>team</span>
-            </div>
-          </div>
-          <TextShimmer
-            duration={1.2}
-            className="text-xl font-medium [--base-color:theme(colors.blue.600)] [--base-gradient-color:theme(colors.blue.200)] dark:[--base-color:theme(colors.blue.700)] dark:[--base-gradient-color:theme(colors.blue.400)]"
-          >
-            Alexi Roth Canamo
-          </TextShimmer>
-        </div>
-      </section>
+      <WebdevSection />
     </div>
   );
 };
