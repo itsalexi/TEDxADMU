@@ -3,6 +3,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ParticlesBackground from "../ParticlesBackground";
+import Image from "next/image";
 
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -10,7 +11,6 @@ const AboutPage = () => {
     // Set a small timeout to ensure the animation triggers after component mounts
     const timer = setTimeout(() => {
       setIsVisible(true);
-      console.log("visible true");
     }, 300);
 
     // Set up intersection observer for scroll animations
@@ -52,30 +52,44 @@ const AboutPage = () => {
       <main className="container mx-auto px-8 sm:px-6 lg:px-16 py-20 relative">
         {/*About TEDxAteneoDeManilaU */}
         <div
-          className={`flex flex-col mt-24 gap-10 transform transition-all duration-1000 ease-out ${
+          className={`mt-24 transform transition-all duration-1000 ease-out ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
           }`}
         >
-          <h1 className="text-2xl sm:text-3xl md:text-6xl text-center font-bold text-[#eb0028]">
-            About{" "}
-            <p>
-              TEDx
-              <span className="text-white font-thin">AteneoDeManilaU</span>
-            </p>
-          </h1>
-          <section className="mx-auto max-w-screen-sm">
-            <p className="text-gray-300 leading-relaxed text-xl text-center">
-              Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
-              Management Association (AMA). Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-              occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim id est laborum.
-            </p>
-          </section>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl text-center font-bold text-[#eb0028] mb-6">
+                About{" "}
+                <p>
+                  TEDx
+                  <span className="text-white font-thin">AteneodeManilaU</span>
+                </p>
+              </h1>
+              <section className="mx-auto max-w-screen-sm">
+                <p className="text-gray-300 leading-relaxed text-xl">
+                  Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
+                  Management Association (AMA). The event continues to serve as
+                  a platform for innovative ideas, thought-provoking
+                  discussions, and inspiring stories from a diverse range of
+                  speakers. It brings together students, professionals, and
+                  changemakers who are passionate about driving positive impact
+                  in their communities. With each edition, TEDxAteneoDeManilaU
+                  fosters meaningful conversations that challenge perspectives,
+                  ignite curiosity, and encourage action toward a better future.
+                </p>
+              </section>
+            </div>
+            <div className="relative w-full h-96">
+              <Image
+                src="/about-tedxadmu.jpg"
+                alt="TEDx"
+                fill
+                objectFit="contain"
+                className="w-full h-full"
+                priority
+              />
+            </div>
+          </div>
         </div>
 
         {/*About TEDx */}
@@ -86,7 +100,7 @@ const AboutPage = () => {
             </h1>
             <span>x = independently organized event</span>
           </div>
-          <section className="prose prose-lg mx-auto prose-invert xl:border-r-2 xl:pr-2">
+          <section className="prose prose-lg mx-auto prose-invert">
             <p className="text-gray-300 leading-relaxed text-xl">
               In the spirit of discovering and spreading ideas, TEDx is a
               program of local, self-organized events that bring people together

@@ -8,16 +8,16 @@ export default function SuccessStep({ formData }) {
       </div>
 
       <h2 className="text-2xl font-bold text-white">
-        Application Submitted Successfully!
+        Registration Submitted Successfully!
       </h2>
 
       <p className="text-gray-300 max-w-md leading-relaxed">
-        Thank you for applying to TEDx AteneoDeManila U: Labyrinthine. We&apos;ve received your
-        application and will review it shortly.
+        Thank you for applying to TEDx AteneoDeManilaU: Labyrinthine. We&apos;ve received your
+        registration and will review it shortly.
         <br />
         <br />
         You will receive an email within 3-5 business days with the status of
-        your application. If approved, the email will include payment
+        your registration. If approved, the email will include payment
         instructions and next steps.
       </p>
 

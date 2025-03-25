@@ -4,14 +4,19 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export default function BasicInfoStep({
   formData,
   updateFormData,
   errors = {},
 }) {
-  
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     updateFormData({
@@ -82,7 +87,10 @@ export default function BasicInfoStep({
 
       <div className="space-y-2">
         <Label htmlFor="email" className="text-gray-300">
-          Email Address {(formData.is_atenean || formData.is_scholar_or_ama) && <span className="text-red-500">*must be an ateneo.edu email</span>}
+          Email Address{' '}
+          {(formData.is_atenean || formData.is_scholar_or_ama) && (
+            <span className="text-red-500">*must be an ateneo.edu email</span>
+          )}
         </Label>
         <Input
           id="email"
@@ -95,9 +103,9 @@ export default function BasicInfoStep({
             errors.email ? 'border-red-500' : ''
           }`}
           placeholder={
-            (formData.is_atenean || formData.is_scholar_or_ama)
-              ? "your.name@student.ateneo.edu (or other ateneo.edu domain)" 
-              : "your.email@example.com"
+            formData.is_atenean || formData.is_scholar_or_ama
+              ? 'your.name@student.ateneo.edu (or other ateneo.edu domain)'
+              : 'your.email@example.com'
           }
         />
         {errors.email && (
@@ -105,7 +113,8 @@ export default function BasicInfoStep({
         )}
         {(formData.is_atenean || formData.is_scholar_or_ama) && (
           <p className="text-xs text-gray-500 mt-1">
-            Accepts any ateneo.edu email domain (e.g., student.ateneo.edu, obf.ateneo.edu)
+            Accepts any ateneo.edu email domain (e.g., student.ateneo.edu,
+            obf.ateneo.edu)
           </p>
         )}
       </div>
@@ -191,11 +200,20 @@ export default function BasicInfoStep({
                 <SelectValue placeholder="Select your school" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="SOSE">School of Science and Engineering (SOSE)</SelectItem>
-                <SelectItem value="SOSS">School of Social Sciences (SOSS)</SelectItem>
+                <SelectItem value="SOSE">
+                  School of Science and Engineering (SOSE)
+                </SelectItem>
+                <SelectItem value="RGL-SOSS">
+                  Dr Rosita G Leong School of Social Sciences (RGL-SOSS)
+                </SelectItem>
                 <SelectItem value="SOH">School of Humanities (SOH)</SelectItem>
-                <SelectItem value="JGSOM">School of Management (JGSOM)</SelectItem>
-                <SelectItem value="GBSEALD">School of Education and Learning Design (GBSEALD)</SelectItem>
+                <SelectItem value="JGSOM">
+                  John Gokongwei School of Management (JGSOM)
+                </SelectItem>
+                <SelectItem value="GBSEALD">
+                  Gokongwei Brothers School of Education and Learning Design
+                  (GBSEALD)
+                </SelectItem>
               </SelectContent>
             </Select>
             {errors.school && (
@@ -219,10 +237,13 @@ export default function BasicInfoStep({
               }`}
             />
             {errors.year_and_course && (
-              <p className="text-sm text-red-500 mt-1">{errors.year_and_course}</p>
+              <p className="text-sm text-red-500 mt-1">
+                {errors.year_and_course}
+              </p>
             )}
             <p className="text-xs text-gray-500 mt-1">
-              Format: Year followed by Course (e.g., 2 BS Management, 4 AB Literature)
+              Format: Year followed by Course (e.g., 2 BS Management, 4 AB
+              Literature)
             </p>
           </div>
         </div>

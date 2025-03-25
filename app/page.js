@@ -1,4 +1,3 @@
-"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -14,6 +13,7 @@ import TedxSection from "@/components/tedxSection";
 import OrganizersSection from "@/components/meetOrganizers";
 import IS_SPEAKERS_ANNOUNCED from "./config/config"
 
+
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
@@ -26,6 +26,7 @@ export default function Home() {
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
   const [visibleSections, setVisibleSections] = useState({});
   const [headingHighlights, setHeadingHighlights] = useState({});
+
 
   useEffect(() => {
     setMounted(true);
@@ -61,12 +62,12 @@ export default function Home() {
       },
       {
         root: null,
-        rootMargin: "0px",
+        rootMargin: '0px',
         threshold: 0.6, // Trigger when 60% of the element is visible
       }
     );
 
-    const speakerSection = document.getElementById("speaker-section");
+    const speakerSection = document.getElementById('speaker-section');
 
     if (speakerSection) speakerSectionObserver.observe(speakerSection);
 
@@ -124,6 +125,29 @@ export default function Home() {
     setIsLoading(false);
   };
 
+  const speakers = [
+    {
+      name: 'Dr. Maria Santos',
+      bio: 'Cognitive Neuroscientist exploring the depths of human consciousness',
+      image: '/api/placeholder/300/300',
+    },
+    {
+      name: 'Architect Juan Reyes',
+      bio: 'Sustainable urban designer creating spaces that heal communities',
+      image: '/api/placeholder/300/300',
+    },
+    {
+      name: 'Innovator Ana Cruz',
+      bio: 'Tech entrepreneur bridging digital divides in underserved regions',
+      image: '/api/placeholder/300/300',
+    },
+    {
+      name: 'Prof. David Lee',
+      bio: 'Philosopher examining the ethical labyrinths of emerging technologies',
+      image: '/api/placeholder/300/300',
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-black text-white">
       {isLoading && <TextLoadingScreen onLoadComplete={handleLoadComplete} />}
@@ -138,8 +162,8 @@ export default function Home() {
                 <div
                   className={`w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
                     logoLoaded
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-16"
+                      ? 'opacity-100 transform translate-y-0'
+                      : 'opacity-0 transform translate-y-16'
                   }`}
                 >
                   <Image
@@ -162,8 +186,8 @@ export default function Home() {
                 <p
                   className={`text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal px-4 transition-all duration-1000 ease-out ${
                     subtitleLoaded
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-16"
+                      ? 'opacity-100 transform translate-y-0'
+                      : 'opacity-0 transform translate-y-16'
                   }`}
                 >
                   Unlocking Paths, Inspiring Change
@@ -172,8 +196,8 @@ export default function Home() {
                 <div
                   className={`transition-all duration-1000 ease-out ${
                     buttonLoaded
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-10"
+                      ? 'opacity-100 transform translate-y-0'
+                      : 'opacity-0 transform translate-y-10'
                   }`}
                 >
                   <Link href="/register">
