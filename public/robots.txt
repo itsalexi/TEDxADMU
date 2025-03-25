@@ -8,4 +8,7 @@ Disallow: /dashboard
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://tedxadmu.com/sitemap.xml
+Sitemap: https://tedxateneodemanilau.com/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 10
