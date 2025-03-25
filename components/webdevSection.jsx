@@ -38,7 +38,7 @@ function WebdevSection() {
         <div className="whitespace-pre-wrap z-30 text-white">
           <span>{"Special thanks to our "}</span>
           <Typewriter
-            text={["Website Development", "GOAT", "amazing", "wonderful"]}
+            text={["Website Development💻", "GOAT🐐", "amazing😍", "wonderful✨"]}
             speed={70}
             className="text-[#eb0028]"
             waitTime={1500}
