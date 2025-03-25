@@ -121,15 +121,15 @@ const AboutPage = () => {
           {/* Image gallery - vertically stacked */}
           <div className="flex flex-col gap-8 mt-12 items-center w-full">
             {[
-              "ingress.png",
-              "egress.png",
-              "emergency exits.png",
-              "traffic.png",
-              "prohibited1.png",
-              "prohibited2.png",
-              "health-guidelines.png",
-              "health-guidelines2.png",
-              "health-guidelines3.png",
+              "ingress.webp",
+              "egress.webp",
+              "emergency exits.webp",
+              "traffic.webp",
+              "prohibited1.webp",
+              "prohibited2.webp",
+              "health-guidelines.webp",
+              "health-guidelines2.webp",
+              "health-guidelines3.webp",
             ].map((src, index) => (
               <div key={index} className="w-full max-w-2xl">
                 <div className="relative w-full aspect-[4/3]">
