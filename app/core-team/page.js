@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import coreTeamData from "./coreTeamMembers.json";
 import CoreTeamCard from "./CoreTeamCard";
@@ -81,24 +81,25 @@ const CoreTeamPage = () => {
           <div className="relative z-10 flex flex-col items-center">
             {/* Core Team Header */}
             <div
-              className={`text-center mb-2 transform transition-all duration-1000 ease-out ${
+              className={`text-center mb-2 transform transition-all duration-1000 ease-out flex flex-col items-center ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-16"
               }`}
             >
-              <h2 className="text-3xl md:text-5xl text-white font-light">
-                Meet the
-              </h2>
-              <div className="text-3xl md:text-6xl text-center">
-                <h1 className="font-bold text-[#eb0028]">
-                  TEDx
-                  <span className="text-white font-thin">AteneoDeManilaU</span>
-                </h1>
-                <h1 className="text-4xl md:text-7xl font-bold text-[#eb0028] mb-4">
-                  Core Team
-                </h1>
+              <div className="w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6">
+                <Image
+                  src="/tedx-logo.png"
+                  alt="TEDx"
+                  width={220}
+                  height={70}
+                  className="w-full h-auto"
+                  priority
+                />
               </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white text-center tracking-wider mb-12 sm:mb-4">
+                LABYRINTHINE <br /> CORE TEAM
+              </h1>
               <p className="text-sm md:text-lg text-white">
                 Meet the people who made this event possible.
               </p>
