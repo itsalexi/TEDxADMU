@@ -8,7 +8,7 @@ const developers = [
   {
     name: "Alexi Roth Luis Canamo",
     image: "/alex-canamo.webp", // Replace with actual image path
-    bio: "Backend guru crafting robust APIs and databases.",
+    bio: "Loves to build cool and impactful stuff, portfolio @alexi.life",
     linkedin: "https://www.linkedin.com/in/alexicanamo/", // Replace with actual LinkedIn profile
     facebook: "https://www.facebook.com/alexirothluis.canamo", // Replace with actual Facebook profile
   },
