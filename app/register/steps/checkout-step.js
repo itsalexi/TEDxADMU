@@ -56,13 +56,16 @@ export default function CheckoutStep({
         }
       });
 
-      // Then apply bundle discount if eligible
+      // Apply bundle discount for every group of 3
       if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
-        if (formData.is_scholar_or_ama || formData.is_atenean) {
-          price = price - ATENEAN_AMA_BUNDLE_DISCOUNT;
-        } else {
-          price = price - OUTSIDER_BUNDLE_DISCOUNT;
-        }
+        const numberOfCompleteGroups = Math.floor(
+          totalAttendees / GROUP_DISCOUNT_THRESHOLD
+        );
+        const bundleDiscountAmount =
+          formData.is_scholar_or_ama || formData.is_atenean
+            ? ATENEAN_AMA_BUNDLE_DISCOUNT
+            : OUTSIDER_BUNDLE_DISCOUNT;
+        price = price - bundleDiscountAmount * numberOfCompleteGroups;
       }
     }
     return price;
@@ -110,8 +113,15 @@ export default function CheckoutStep({
   };
 
   const addAttendee = () => {
+    if (attendees.length >= 2) {
+      return; // Don't add more if already at max
+    }
+
+    // Generate a unique ID using timestamp and random number
+    const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
+
     const newAttendee = {
-      id: attendees.length + 1,
+      id: uniqueId,
       first_name: '',
       last_name: '',
       email: '',
@@ -260,7 +270,7 @@ export default function CheckoutStep({
                 </Label>
               </div>
               <div className="text-sm text-gray-400">
-                Register multiple attendees to qualify for bundle discount
+                Register as a group of 3 to get the bundle discount
               </div>
               <div className="font-medium text-right text-indigo-400">
                 ₱{SINGLE_TICKET_PRICE} × number of attendees
@@ -272,8 +282,8 @@ export default function CheckoutStep({
               ) : (
                 <div className="text-sm text-green-500 mt-1">
                   {formData.is_scholar_or_ama || formData.is_atenean
-                    ? `₱${ATENEAN_AMA_BUNDLE_DISCOUNT} bundle discount for 3+ attendees`
-                    : `₱${OUTSIDER_BUNDLE_DISCOUNT} bundle discount for 3+ attendees`}
+                    ? `₱${ATENEAN_AMA_BUNDLE_DISCOUNT} bundle discount for 3 attendees`
+                    : `₱${OUTSIDER_BUNDLE_DISCOUNT} bundle discount for 3 attendees`}
                 </div>
               )}
             </div>
@@ -290,16 +300,22 @@ export default function CheckoutStep({
               variant="outline"
               size="sm"
               onClick={addAttendee}
-              className="flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white border-none px-4 py-2"
+              disabled={attendees.length >= 2}
+              className={`flex items-center gap-1 ${
+                attendees.length >= 2
+                  ? 'bg-gray-600 hover:bg-gray-600 cursor-not-allowed'
+                  : 'bg-indigo-600 hover:bg-indigo-700'
+              } text-white border-none px-4 py-2`}
             >
-              <Plus className="h-4 w-4" /> Add Attendee
+              <Plus className="h-4 w-4" /> Add Attendee{' '}
+              {attendees.length >= 2 && '(Max 2)'}
             </Button>
           </div>
 
           {attendees.length === 0 ? (
             <div className="text-sm text-gray-400 py-4 px-5 bg-white/5 rounded-md border border-gray-800">
-              No additional attendees yet. Add attendees to qualify for bundle
-              discount.
+              No additional attendees yet. You can add up to 2 additional
+              attendees.
             </div>
           ) : (
             <div className="space-y-4">
@@ -809,7 +825,7 @@ export default function CheckoutStep({
                     {formData.is_scholar_or_ama || formData.is_atenean
                       ? 'Atenean/AMA/Scholar'
                       : 'Outsider'}{' '}
-                    Group)
+                    Group of 3)
                   </span>
                   <span>-₱{bundleDiscount}</span>
                 </div>

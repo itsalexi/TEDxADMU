@@ -129,9 +129,9 @@ export default function DiscountEligibilityStep({
             </p>
           </div>
           <p className="text-sm text-gray-400 mt-2">
-            🎯 Save big when you register with 3 or more friends! Ateneans and
+            🎯 Register as a group of 3 (you + 2 friends)! Ateneans and
             AMA/Scholars get ₱{ATENEAN_AMA_BUNDLE_DISCOUNT} off, while outsiders
-            get ₱{OUTSIDER_BUNDLE_DISCOUNT} off. Remember that bundle
+            get ₱{OUTSIDER_BUNDLE_DISCOUNT} off. Remember that group
             registrations must be within the same category
             (Ateneans/AMA/Scholars together, or outsiders together).
           </p>
@@ -143,7 +143,7 @@ export default function DiscountEligibilityStep({
           <div className="text-sm text-gray-400 mb-4">
             {IS_PRE_SPEAKER_PERIOD
               ? '✨ Early Bird Promo is for individual registration only'
-              : '🎯 You can register individually or with 3 or more friends'}
+              : '🎯 You can register individually or as a group of 3 (you + 2 friends)'}
           </div>
           <RadioGroup
             value={
@@ -172,7 +172,7 @@ export default function DiscountEligibilityStep({
                 <p className="text-sm text-gray-400">
                   {IS_PRE_SPEAKER_PERIOD
                     ? `🎉 Get ₱${PRE_SPEAKER_DISCOUNT} off during our Early Bird Promo! Just bring your ID for verification.`
-                    : `💫 Get ₱${SCHOLAR_AMA_DISCOUNT} off for individual registration or ₱${ATENEAN_AMA_BUNDLE_DISCOUNT} off for groups of 3 or more. ID verification needed.`}
+                    : `💫 Get ₱${SCHOLAR_AMA_DISCOUNT} off for individual registration or ₱${ATENEAN_AMA_BUNDLE_DISCOUNT} off for a group of 3. ID verification needed.`}
                 </p>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function DiscountEligibilityStep({
                 <p className="text-sm text-gray-400">
                   {IS_PRE_SPEAKER_PERIOD
                     ? `🎉 Get ₱${PRE_SPEAKER_DISCOUNT} off during our Early Bird Promo! Just bring your ID for verification.`
-                    : `💫 Get ₱${ATENEAN_DISCOUNT} off for individual registration or ₱${ATENEAN_AMA_BUNDLE_DISCOUNT} off for groups of 3 or more. ID verification needed.`}
+                    : `💫 Get ₱${ATENEAN_DISCOUNT} off for individual registration or ₱${ATENEAN_AMA_BUNDLE_DISCOUNT} off for a group of 3. ID verification needed.`}
                 </p>
               </div>
             </div>
