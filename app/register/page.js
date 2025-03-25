@@ -71,7 +71,7 @@ export default function ApplicationForm() {
   useEffect(() => {
     if (state.message === 'Form submitted successfully!') {
       toast({
-        title: '🎉 Application Submitted Successfully!',
+        title: '🎉 Registration Submitted Successfully!',
         description:
           'Thank you for registering for TEDxADMU! You will receive a confirmation email shortly with further instructions.',
         variant: 'success',
@@ -539,7 +539,7 @@ export default function ApplicationForm() {
                           Processing...
                         </span>
                       ) : currentStep === 4 ? (
-                        'Submit Application'
+                        'Submit Registration'
                       ) : (
                         'Next'
                       )}
