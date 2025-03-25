@@ -17,17 +17,15 @@ const AboutPage = () => {
     const observerOptions = {
       root: null, // viewport
       rootMargin: "0px",
-      threshold: 0.2, // 15% of the element needs to be visible
+      threshold: 0.1, 
     };
 
     const handleIntersect = (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Add visible class to the element
           entry.target.classList.remove("opacity-0", "translate-y-16");
           entry.target.classList.add("opacity-100", "translate-y-0");
 
-          // Stop observing once animation is triggered
           observer.unobserve(entry.target);
         }
       });
