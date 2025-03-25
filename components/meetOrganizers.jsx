@@ -85,7 +85,7 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
               className="relative w-full h-[400px] overflow-hidden"
             >
               <Image
-                src="/group-x.jpg"
+                src="/group-x.webp"
                 alt="TEDx Event"
                 fill
                 className="object-cover rounded-lg cursor-pointer"

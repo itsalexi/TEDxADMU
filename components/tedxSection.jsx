@@ -142,7 +142,7 @@ const TedxSection = ({ isVisible, isHighlighted }) => {
               className="relative w-full h-[400px] overflow-hidden"
             >
               <Image
-                src="/tedx-event-image.jpg"
+                src="/tedx-event-image.webp"
                 alt="TEDx Event"
                 fill
                 className="object-cover rounded-lg cursor-pointer"
