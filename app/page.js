@@ -12,6 +12,7 @@ import TextLoadingScreen from "@/components/TextLoadingScreen";
 import { GlareGrid } from "@/components/glareGrid";
 import TedxSection from "@/components/tedxSection";
 import OrganizersSection from "@/components/meetOrganizers";
+import IS_SPEAKERS_ANNOUNCED from "./config/config"
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -25,8 +26,6 @@ export default function Home() {
 
   const [visibleSections, setVisibleSections] = useState({});
   const [headingHighlights, setHeadingHighlights] = useState({});
-
-  const speakersAnnounced = false;
 
   useEffect(() => {
     setMounted(true);
@@ -291,7 +290,7 @@ export default function Home() {
             {/* Desktop version - overlapping cards with spread functionality */}
             <div className="hidden md:block">
               <div className="flex justify-center items-center h-96 relative mb-16">
-                {speakersAnnounced
+                {IS_SPEAKERS_ANNOUNCED
                   ? // Original speakers code when speakers are announced
                     speakers.map((speaker, index) => {
                       // Calculate spread positioning
@@ -446,7 +445,7 @@ export default function Home() {
 
             {/* Mobile version */}
             <div className="md:hidden space-y-4 max-w-sm mx-auto">
-              {speakersAnnounced
+              {IS_SPEAKERS_ANNOUNCED
                 ? // Original speakers code for mobile
                   speakers.map((speaker, index) => (
                     <div
