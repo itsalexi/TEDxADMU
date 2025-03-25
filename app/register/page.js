@@ -53,8 +53,6 @@ export default function ApplicationForm() {
     cost: 0,
   });
 
-  console.log(formData);
-
   const [errors, setErrors] = useState({
     basicInfo: {},
     personality: {},

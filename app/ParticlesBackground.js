@@ -1,7 +1,7 @@
-"use client";
-import React, { useState, useEffect, useMemo } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
+'use client';
+import React, { useState, useEffect, useMemo } from 'react';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
 
 const ParticlesBackground = React.memo(() => {
   const [init, setInit] = useState(false);
@@ -15,11 +15,18 @@ const ParticlesBackground = React.memo(() => {
     });
   }, []);
 
+  useEffect(() => {
+    const container = document.getElementById('particles-container');
+    if (container) {
+      initParticles(container);
+    }
+  }, []);
+
   const particlesOptions = useMemo(
     () => ({
       background: {
         color: {
-          value: "#000000",
+          value: '#000000',
         },
       },
       fpsLimit: 60,
@@ -27,11 +34,11 @@ const ParticlesBackground = React.memo(() => {
         events: {
           onClick: {
             enable: true,
-            mode: "push",
+            mode: 'push',
           },
           onHover: {
             enable: true,
-            mode: "repulse",
+            mode: 'repulse',
             distance: 100,
           },
         },
@@ -47,23 +54,23 @@ const ParticlesBackground = React.memo(() => {
       },
       particles: {
         color: {
-          value: ["#ffffff", "#f53333"],
+          value: ['#ffffff', '#f53333'],
         },
         links: {
-          color: "#ffffff",
+          color: '#ffffff',
           distance: 150,
           enable: false,
-          opacity: 0.5, 
-          width: 0.2, 
+          opacity: 0.5,
+          width: 0.2,
         },
         collisions: {
           enable: false,
         },
         move: {
-          direction: "none",
+          direction: 'none',
           enable: true,
           outModes: {
-            default: "out",
+            default: 'out',
           },
           random: true,
           speed: 0.8, // movement for stars
@@ -89,7 +96,7 @@ const ParticlesBackground = React.memo(() => {
           },
         },
         shape: {
-          type: "star",
+          type: 'star',
         },
         size: {
           value: {
@@ -117,7 +124,7 @@ const ParticlesBackground = React.memo(() => {
   );
 
   const particlesLoaded = (container) => {
-    console.log("Particles container loaded", container);
+    console.log('Particles container loaded', container);
   };
 
   if (!init) return null;
@@ -135,6 +142,6 @@ const ParticlesBackground = React.memo(() => {
 });
 
 // Add display name for React DevTools
-ParticlesBackground.displayName = "ParticlesBackground";
+ParticlesBackground.displayName = 'ParticlesBackground';
 
 export default ParticlesBackground;

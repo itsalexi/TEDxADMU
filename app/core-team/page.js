@@ -1,58 +1,36 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useMemo } from "react";
-import Image from "next/image";
-import coreTeamData from "./coreTeamMembers.json";
-import CoreTeamCard from "./CoreTeamCard";
-import ParticlesBackground from "../ParticlesBackground";
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import Image from 'next/image';
+import coreTeamData from './coreTeamMembers.json';
+import CoreTeamCard from './CoreTeamCard';
+import ParticlesBackground from '../ParticlesBackground';
 
-const CoreTeamPage = () => {
+export default function CoreTeamPage() {
   const [isVisible, setIsVisible] = useState(false);
-  console.log("CoreTeamPage rendered");
+  const contentRef = useRef(null);
 
-  // Mounting animations
   useEffect(() => {
-    // Set a small timeout to ensure the animation triggers after component mounts
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-      console.log("visible true");
-    }, 100);
-
-    // Set up intersection observer for scroll animations
-    const observerOptions = {
-      root: null, // viewport
-      rootMargin: "0px",
-      threshold: 0.01,
-    };
-
-    const handleIntersect = (entries, observer) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
         if (entry.isIntersecting) {
-          // Add visible class to the element
-          entry.target.classList.remove("opacity-0", "translate-y-16");
-          entry.target.classList.add("opacity-100", "translate-y-0");
-
-          // Stop observing once animation is triggered
+          setIsVisible(true);
           observer.unobserve(entry.target);
         }
-      });
-    };
+      },
+      {
+        threshold: 0.2,
+      }
+    );
 
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-
-    // Observe leadership team sections
-    document.querySelectorAll(".leadership-section").forEach((section) => {
-      observer.observe(section);
-    });
-
-    // Observe department sections
-    document.querySelectorAll(".department-section").forEach((section) => {
-      observer.observe(section);
-    });
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
 
     return () => {
-      clearTimeout(timer);
-      observer.disconnect();
+      if (contentRef.current) {
+        observer.unobserve(contentRef.current);
+      }
     };
   }, []);
 
@@ -83,8 +61,8 @@ const CoreTeamPage = () => {
             <div
               className={`text-center mb-2 transform transition-all duration-1000 ease-out ${
                 isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-16'
               }`}
             >
               <h2 className="text-3xl md:text-5xl text-white font-light">
@@ -216,6 +194,4 @@ const CoreTeamPage = () => {
       </div>
     </div>
   );
-};
-
-export default CoreTeamPage;
+}
