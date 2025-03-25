@@ -17,14 +17,14 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL('https://tedxateneodemanilau.com'),
   title:
-    'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
+    'TEDxAteneodeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
   description:
-    'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
+    'Join TEDxAteneodeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
   keywords:
-    'TEDx, TEDxAteneoDeManilaU, Labyrinthine, Ateneo de Manila University, TED Talks, Innovation, Ideas Worth Spreading',
-  authors: [{ name: 'TEDxAteneoDeManilaU Team' }],
-  creator: 'TEDxAteneoDeManilaU',
-  publisher: 'TEDxAteneoDeManilaU',
+    'TEDx, TEDxAteneodeManilaU, TedXAteneo, TedXADMU, ADMU, Ateneo de Manila University, Labyrinthine, TED Talks, Innovation, Ideas Worth Spreading, Manila, Philippines, Conference, Event, April 30 2025, Leong Hall, Ateneo, Katipunan, Loyola Heights, TEDxManila, TEDxPhilippines, Student Conference, University Event, Ateneo Event, TEDx Conference, Public Speaking, Knowledge Sharing, Intellectual Discourse, Academic Conference, University Talks, Student Organization, Ateneo Organizations, TEDx Community, Philippine TEDx',
+  authors: [{ name: 'TEDxAteneodeManilaU Team' }],
+  creator: 'TEDxAteneodeManilaU',
+  publisher: 'TEDxAteneodeManilaU',
   formatDetection: {
     email: false,
     address: false,
@@ -34,26 +34,26 @@ export const metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://tedxateneodemanilau.com',
-    siteName: 'TEDxAteneoDeManilaU',
+    siteName: 'TEDxAteneodeManilaU',
     title:
-      'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
+      'TEDxAteneodeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
     description:
-      'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
+      'Join TEDxAteneodeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
     images: [
       {
         url: '/tedx-logo.png',
         width: 1200,
         height: 630,
-        alt: 'TEDxAteneoDeManilaU Labyrinthine',
+        alt: 'TEDxAteneodeManilaU Labyrinthine',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title:
-      'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
+      'TEDxAteneodeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
     description:
-      'Join TEDxAteneoDeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
+      'Join TEDxAteneodeManilaU for Labyrinthine, where we explore the intricate paths of innovation, creativity, and transformation. Experience talks that challenge perspectives and inspire change.',
     images: ['/tedx-logo.png'],
   },
   robots: {
@@ -67,8 +67,18 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: 'https://tedxateneodemanilau.com',
+  },
+  verification: {
+    google: 'your-google-site-verification',
+  },
+  category: 'event',
+  classification: 'public',
+  referrer: 'origin-when-cross-origin',
   icons: {
     icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
   },
   manifest: '/site.webmanifest',
 };
