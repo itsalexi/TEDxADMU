@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import TopicsDropdown from '@/components/topicsDropdown';
 import Image from 'next/image';
 import CircularSpeakersSection from '@/components/CircularSpeakersSection';
+import { IS_SPEAKERS_ANNOUNCED } from '../config/config';
 
 const AboutPage = () => {
   const [isVisible, setIsVisible] = useState(false);
