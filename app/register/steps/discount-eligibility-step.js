@@ -214,7 +214,7 @@ export default function DiscountEligibilityStep({
                 <p className="text-sm text-gray-400">
                   {IS_PRE_SPEAKER_PERIOD
                     ? `🎉 Get ₱${PRE_SPEAKER_DISCOUNT} off during our Early Bird Promo!`
-                    : `💫 Standard price for individual registration or ₱${OUTSIDER_BUNDLE_DISCOUNT} off for groups of 3 or more`}
+                    : `💫 Standard price for individual registration or ₱${OUTSIDER_BUNDLE_DISCOUNT} off for a group of 3.`}
                 </p>
               </div>
             </div>
