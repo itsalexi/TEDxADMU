@@ -6,7 +6,7 @@ import Image from "next/image";
 const InfiniteImageScroll = ({
   images,
   height = 200,
-  speed = 40,
+  speed = 50,
   direction = "left", // or "right"
 }) => {
   if (!images || images.length === 0) return null;

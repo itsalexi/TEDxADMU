@@ -63,9 +63,13 @@ const CoreTeamPage = () => {
 
       <div className="relative z-10">
         {/*About TEDxAteneoDeManilaU */}
-        <div>
-          <div className=" flex xl:flex-row mt-40 mx-8 gap-10 flex-col">
-            <div className="text-2xl sm:text-3xl md:text-5xl">
+        <div
+          className={`transform transition-all duration-1000 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+          }`}
+        >
+          <div className="grid md:grid-cols-2 mt-60 mx-8 gap-10 flex-col">
+            <div className="text-4xl md:text-6xl">
               <h1 className="text-center font-bold text-[#eb0028]">
                 About
                 <p>
@@ -74,7 +78,7 @@ const CoreTeamPage = () => {
                 </p>
               </h1>
             </div>
-            <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
+            <section className="prose prose-lg mx-auto prose-invert">
               <p className="text-gray-300 leading-relaxed text-xl">
                 Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
                 Management Association (AMA). The event continues to serve as a
@@ -92,7 +96,7 @@ const CoreTeamPage = () => {
         {/* Group Photos */}
         <TeamPhotoSection />
         {/* Core Team Section */}
-        <div className="relative pt-56">
+        <div className="relative pt-20">
           {/* Background Image - Sticky within the Section */}
           <div className="absolute top-[45rem] left-0 w-full h-5/6 place-items-center">
             <div className="sticky top-80 w-full h-32">
@@ -110,13 +114,7 @@ const CoreTeamPage = () => {
           {/* Core Team Members */}
           <div className="relative z-10 flex flex-col items-center">
             {/* Core Team Header */}
-            <div
-              className={`text-center mb-2 transform transition-all duration-1000 ease-out flex flex-col items-center ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
-              }`}
-            >
+            <div className="leadership-section text-center mb-2 opacity-0 translate-y-16 transform transition-all duration-1000 ease-out flex flex-col items-center">
               <div className="w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6">
                 <Image
                   src="/tedx-logo.png"
@@ -137,7 +135,7 @@ const CoreTeamPage = () => {
 
             <div className="mx-8">
               {/* Leadership Team */}
-              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-36 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
+              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-20 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
                 {coreTeamData.leadershipTeam.map((category) => (
                   <div
                     key={category.category}
@@ -214,7 +212,6 @@ const CoreTeamPage = () => {
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   );
