@@ -2,7 +2,7 @@ import React from "react";
 import { Typewriter } from "@/components/typeWriter";
 import { TextShimmer } from "@/components/textShimmer";
 import Image from "next/image";
-import { Linkedin, Facebook } from "lucide-react"; // Import social icons
+import { FaFacebookF, FaLinkedin } from "react-icons/fa6";
  
 const developers = [
   {
@@ -95,7 +95,7 @@ function WebdevSection() {
                   className="text-gray-400 hover:text-blue-500 transition-colors"
                   aria-label={`LinkedIn profile of ${member.name}`}
                 >
-                  <Linkedin size={20} />
+                  <FaLinkedin size={20} />
                 </a>
                 <a
                   href={member.facebook}
@@ -104,7 +104,7 @@ function WebdevSection() {
                   className="text-gray-400 hover:text-blue-600 transition-colors"
                   aria-label={`Facebook profile of ${member.name}`}
                 >
-                  <Facebook size={20} />
+                  <FaFacebookF size={20} />
                 </a>
               </div>
             </div>
