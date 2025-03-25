@@ -308,7 +308,7 @@ export default function Home() {
         </section>
 
         {/* Topics Cards */}
-        <section id="topics-section" className="py-10">
+        <section id="topics-section" className="pt-10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
               Explore the Labyrinth
