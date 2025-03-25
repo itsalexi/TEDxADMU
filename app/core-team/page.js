@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import coreTeamData from "./coreTeamMembers.json";
 import CoreTeamCard from "./CoreTeamCard";
 import ParticlesBackground from "../ParticlesBackground";
+import TeamPhotoSection from "@/components/TeamPhotoSection";
 
 const CoreTeamPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -60,9 +61,44 @@ const CoreTeamPage = () => {
     <div className="relative min-h-screen bg-black">
       <ParticlesBackground />
 
-      <div className="relative z-15">
+
+      <div className="relative z-10">
+        {/*About TEDxAteneoDeManilaU */}
+        <div
+          className={`transform transition-all duration-1000 ease-out ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+          }`}
+        >
+          <div className="grid md:grid-cols-2 mt-60 mx-8 gap-10 flex-col">
+            <div className="text-4xl md:text-6xl">
+              <h1 className="text-center font-bold text-[#eb0028]">
+                About
+                <p>
+                  TEDx
+                  <span className="text-white font-thin">AteneoDeManilaU</span>
+                </p>
+              </h1>
+            </div>
+            <section className="prose prose-lg mx-auto prose-invert">
+              <p className="text-gray-300 leading-relaxed text-xl">
+                Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
+                Management Association (AMA). The event continues to serve as a
+                platform for innovative ideas, thought-provoking discussions,
+                and inspiring stories from a diverse range of speakers. It
+                brings together students, professionals, and changemakers who
+                are passionate about driving positive impact in their
+                communities. With each edition, TEDxAteneoDeManilaU fosters
+                meaningful conversations that challenge perspectives, ignite
+                curiosity, and encourage action toward a better future.
+              </p>
+            </section>
+          </div>
+        </div>
+        {/* Group Photos */}
+        <TeamPhotoSection />
+
         {/* Core Team Section */}
-        <div className="relative pt-56">
+        <div className="relative pt-20">
           {/* Background Image - Sticky within the Section */}
           <div className="absolute top-[45rem] left-0 w-full h-5/6 place-items-center">
             <div className="sticky top-80 w-full h-32">
@@ -80,25 +116,20 @@ const CoreTeamPage = () => {
           {/* Core Team Members */}
           <div className="relative z-10 flex flex-col items-center">
             {/* Core Team Header */}
-            <div
-              className={`text-center mb-2 transform transition-all duration-1000 ease-out ${
-                isVisible
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
-              }`}
-            >
-              <h2 className="text-3xl md:text-5xl text-white font-light">
-                Meet the
-              </h2>
-              <div className="text-3xl md:text-6xl text-center">
-                <h1 className="font-bold text-[#eb0028]">
-                  TEDx
-                  <span className="text-white font-thin">AteneoDeManilaU</span>
-                </h1>
-                <h1 className="text-4xl md:text-7xl font-bold text-[#eb0028] mb-4">
-                  Core Team
-                </h1>
+            <div className="leadership-section text-center mb-2 opacity-0 translate-y-16 transform transition-all duration-1000 ease-out flex flex-col items-center">
+              <div className="w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6">
+                <Image
+                  src="/tedx-logo.png"
+                  alt="TEDx"
+                  width={220}
+                  height={70}
+                  className="w-full h-auto"
+                  priority
+                />
               </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white text-center tracking-wider mb-12 sm:mb-4">
+                LABYRINTHINE <br /> CORE TEAM
+              </h1>
               <p className="text-sm md:text-lg text-white">
                 Meet the people who made this event possible.
               </p>
@@ -106,7 +137,7 @@ const CoreTeamPage = () => {
 
             <div className="mx-8">
               {/* Leadership Team */}
-              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-36 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
+              <div className="leadership-section flex flex-wrap justify-center gap-12 mt-20 w-full opacity-0 translate-y-16 transform transition-all duration-1000 ease-out">
                 {coreTeamData.leadershipTeam.map((category) => (
                   <div
                     key={category.category}
@@ -183,36 +214,6 @@ const CoreTeamPage = () => {
             </div>
           </div>
         </div>
-        {/*About TEDxAteneoDeManilaU */}
-        <div>
-          <div className=" flex xl:flex-row mt-40 mx-8 gap-10 flex-col">
-            <div className="text-2xl sm:text-3xl md:text-5xl">
-              <h1 className="text-center font-bold text-[#eb0028]">
-                About
-                <p>
-                  TEDx
-                  <span className="text-white font-thin">AteneoDeManilaU</span>
-                </p>
-              </h1>
-            </div>
-            <section className="prose prose-lg mx-auto prose-invert border-l-2 pl-2">
-              <p className="text-gray-300 leading-relaxed text-xl">
-                Since 2024, TEDxAteneoDeManilaU has been under the Ateneo
-                Management Association (AMA). Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
-              </p>
-            </section>
-          </div>
-        </div>
-        {/* Group Photos */}
-
-        <div className="w-full text-white">Group Photos</div>
       </div>
     </div>
   );
