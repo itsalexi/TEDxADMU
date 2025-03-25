@@ -313,7 +313,7 @@ export function GlareGrid() {
         </div>
       ),
       className: 'md:col-span-2',
-      thumbnail: '/maze-elevated.jpg',
+      thumbnail: '/maze-elevated.webp',
     },
     {
       id: 2,
@@ -330,7 +330,7 @@ export function GlareGrid() {
         </div>
       ),
       className: 'col-span-1',
-      thumbnail: '/stair-gap.jpg',
+      thumbnail: '/stair-gap.webp',
     },
     {
       id: 3,
@@ -349,7 +349,7 @@ export function GlareGrid() {
         </div>
       ),
       className: 'col-span-1',
-      thumbnail: '/fork-road-ill.png',
+      thumbnail: '/fork-road-ill.webp',
     },
     {
       id: 4,
@@ -369,7 +369,7 @@ export function GlareGrid() {
         </div>
       ),
       className: 'md:col-span-2',
-      thumbnail: '/walking.jpg',
+      thumbnail: '/walking.webp',
     },
   ];
   return (
