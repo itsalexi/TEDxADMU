@@ -1,13 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 const OrganizersSection = ({ isVisible, isHighlighted }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [wasHovered, setWasHovered] = useState(false);
+
   return (
     <section
       id="organizers-section"
       className="bg-black py-20 relative overflow-hidden"
     >
+      <style jsx>{`
+        @keyframes borderRotate {
+          0% {
+            clip-path: inset(0 0 100% 0);
+          }
+          25% {
+            clip-path: inset(0 0 0 0);
+          }
+          50% {
+            clip-path: inset(0 0 0 0);
+          }
+          100% {
+            clip-path: inset(0 0 0 0);
+          }
+        }
+
+        @keyframes borderRotateOut {
+          0% {
+            clip-path: inset(0 0 0 0);
+          }
+          100% {
+            clip-path: inset(100% 0 0 0);
+          }
+        }
+
+        .border-animation {
+          position: absolute;
+          inset: 0;
+          border: 3px solid #eb0028;
+          pointer-events: none;
+        }
+
+        .hover-active .border-animation {
+          animation: borderRotate 1.5s ease-in-out forwards;
+        }
+
+        .border-visible {
+          clip-path: inset(0 0 0 0);
+        }
+
+        .hover-inactive .border-animation {
+          animation: borderRotateOut 0.5s ease-in-out forwards;
+        }
+      `}</style>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div
           className={`flex flex-col lg:flex-row lg:gap-8 items-center transform transition-all duration-1000 ease-out ${
@@ -28,7 +76,19 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
               />
             </Link>
           </div>
-          <div className="w-full lg:w-1/2 mb-10 lg:mb-0 text-white rounded-md p-6 transition duration-300 ease-in-out transform hover:scale-105 bg-black">
+          <div
+            className={`w-full lg:w-1/2 mb-10 lg:mb-0 text-white rounded-md p-6 transition duration-300 ease-in-out transform hover:scale-105 bg-black relative ${
+              isHovered ? "hover-active" : wasHovered ? "hover-inactive" : ""
+            }`}
+            onMouseEnter={() => {
+              setIsHovered(true);
+              setWasHovered(true);
+            }}
+            onMouseLeave={() => {
+              setIsHovered(false);
+            }}
+          >
+            <div className={`border-animation rounded-md ${isHovered && wasHovered ? "border-visible" : ""}`}></div>
             <h2 className="text-3xl sm:text-5xl font-bold mb-6 p-4 relative inline-block">
               <span className="relative z-10">Meet the Organizers</span>
 
@@ -67,7 +127,7 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
 
             <div className="mt-8 flex gap-6">
               <div className="">
-                <Link href="/about">
+                <Link href="/core-team">
                   <span className="inline-block bg-[#eb0028] hover:bg-red-700 hover:font-bold text-white text-base md:text-lg px-6 py-3 rounded-md font-medium cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
                     Get to Know the Team
                   </span>
