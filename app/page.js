@@ -1,18 +1,18 @@
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import TrippyScroll from "@/components/TrippyScroll";
-import AnimatedEventDescription from "@/components/animatedEventDesc";
-import CurvedLineAnimation from "@/components/animatedCurvedLine";
-import MazeBackground from "@/components/MazeBackground";
-import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
-import TextLoadingScreen from "@/components/TextLoadingScreen";
-import { GlareGrid } from "@/components/glareGrid";
-import TedxSection from "@/components/tedxSection";
-import OrganizersSection from "@/components/meetOrganizers";
-import IS_SPEAKERS_ANNOUNCED from "./config/config"
-
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import TrippyScroll from '@/components/TrippyScroll';
+import AnimatedEventDescription from '@/components/animatedEventDesc';
+import CurvedLineAnimation from '@/components/animatedCurvedLine';
+import MazeBackground from '@/components/MazeBackground';
+import AnimatedTeamDescription from '@/components/animatedTeamDecsription';
+import TextLoadingScreen from '@/components/TextLoadingScreen';
+import { GlareGrid } from '@/components/glareGrid';
+import TedxSection from '@/components/tedxSection';
+import OrganizersSection from '@/components/meetOrganizers';
+import IS_SPEAKERS_ANNOUNCED from './config/config';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -26,7 +26,6 @@ export default function Home() {
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
   const [visibleSections, setVisibleSections] = useState({});
   const [headingHighlights, setHeadingHighlights] = useState({});
-
 
   useEffect(() => {
     setMounted(true);
@@ -87,13 +86,13 @@ export default function Home() {
       },
       {
         root: null,
-        rootMargin: "0px",
+        rootMargin: '0px',
         threshold: 0.3,
       }
     );
 
     // Observe sections that need visibility tracking
-    const sectionsToObserve = ["tedx-section", "organizers-section"];
+    const sectionsToObserve = ['tedx-section', 'organizers-section'];
     sectionsToObserve.forEach((id) => {
       const section = document.getElementById(id);
       if (section) sectionObserver.observe(section);
@@ -294,14 +293,14 @@ export default function Home() {
 
         {/* What is TEDx? - Now using the component with section-specific visibility */}
         <TedxSection
-          isVisible={visibleSections["tedx-section"]}
-          isHighlighted={headingHighlights["tedx-section"]}
+          isVisible={visibleSections['tedx-section']}
+          isHighlighted={headingHighlights['tedx-section']}
         />
 
         {/* Meet the Organizers */}
         <OrganizersSection
-          isVisible={visibleSections["organizers-section"]}
-          isHighlighted={headingHighlights["organizers-section"]}
+          isVisible={visibleSections['organizers-section']}
+          isHighlighted={headingHighlights['organizers-section']}
         />
 
         {/* Speakers Cards */}

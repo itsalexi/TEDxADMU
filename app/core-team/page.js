@@ -1,36 +1,58 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import Image from 'next/image';
-import coreTeamData from './coreTeamMembers.json';
-import CoreTeamCard from './CoreTeamCard';
-import ParticlesBackground from '../ParticlesBackground';
+import React, { useState, useEffect, useMemo } from "react";
+import Image from "next/image";
+import coreTeamData from "./coreTeamMembers.json";
+import CoreTeamCard from "./CoreTeamCard";
+import ParticlesBackground from "../ParticlesBackground";
 
-export default function CoreTeamPage() {
+const CoreTeamPage = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const contentRef = useRef(null);
+  console.log("CoreTeamPage rendered");
 
+  // Mounting animations
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    // Set a small timeout to ensure the animation triggers after component mounts
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+      console.log("visible true");
+    }, 100);
+
+    // Set up intersection observer for scroll animations
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: "0px",
+      threshold: 0.01,
+    };
+
+    const handleIntersect = (entries, observer) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // Add visible class to the element
+          entry.target.classList.remove("opacity-0", "translate-y-16");
+          entry.target.classList.add("opacity-100", "translate-y-0");
+
+          // Stop observing once animation is triggered
           observer.unobserve(entry.target);
         }
-      },
-      {
-        threshold: 0.2,
-      }
-    );
+      });
+    };
 
-    if (contentRef.current) {
-      observer.observe(contentRef.current);
-    }
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    // Observe leadership team sections
+    document.querySelectorAll(".leadership-section").forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Observe department sections
+    document.querySelectorAll(".department-section").forEach((section) => {
+      observer.observe(section);
+    });
 
     return () => {
-      if (contentRef.current) {
-        observer.unobserve(contentRef.current);
-      }
+      clearTimeout(timer);
+      observer.disconnect();
     };
   }, []);
 
@@ -38,7 +60,7 @@ export default function CoreTeamPage() {
     <div className="relative min-h-screen bg-black">
       <ParticlesBackground />
 
-      <div className="relative z-10">
+      <div className="relative z-15">
         {/* Core Team Section */}
         <div className="relative pt-56">
           {/* Background Image - Sticky within the Section */}
@@ -61,8 +83,8 @@ export default function CoreTeamPage() {
             <div
               className={`text-center mb-2 transform transition-all duration-1000 ease-out ${
                 isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-16'
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-16"
               }`}
             >
               <h2 className="text-3xl md:text-5xl text-white font-light">
@@ -194,4 +216,6 @@ export default function CoreTeamPage() {
       </div>
     </div>
   );
-}
+};
+
+export default CoreTeamPage;
