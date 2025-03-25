@@ -70,7 +70,7 @@ const CoreTeamPage = () => {
           }`}
         >
           <div className="grid md:grid-cols-2 mt-60 mx-8 gap-10 flex-col">
-            <div className="text-4xl md:text-6xl">
+            <div className="text-2xl md:text-4xl lg:text-6xl">
               <h1 className="text-center font-bold text-[#eb0028]">
                 About
                 <p>
