@@ -46,7 +46,7 @@ const CoreTeamPage = () => {
     document.querySelectorAll(".leadership-section").forEach((section) => {
       observer.observe(section);
     });
-
+ 
     // Observe department sections
     document.querySelectorAll(".department-section").forEach((section) => {
       observer.observe(section);
