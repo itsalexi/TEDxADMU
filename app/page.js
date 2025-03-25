@@ -409,7 +409,7 @@ export default function Home() {
                         rotation = 0;
                         scale = 1.1;
                         zIndex = 50;
-                      } else if (hoveredIndex !== null) {
+                      } else if (hoveredIndex !== null) { 
                         const direction = index < hoveredIndex ? -1 : 1;
                         leftPosition = `calc(45% - 32px + ${index * 70}px + ${
                           direction * 20
