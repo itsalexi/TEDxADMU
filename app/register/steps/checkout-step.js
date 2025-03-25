@@ -126,7 +126,7 @@ export default function CheckoutStep({
                   type:
                     formData.is_scholar_or_ama || formData.is_atenean
                       ? 'Atenean/AMA/Scholar'
-                      : 'Outsider',
+                      : 'Non-Atenean',
                 }
               : null,
           },
@@ -884,7 +884,7 @@ export default function CheckoutStep({
                     Bundle Discount (
                     {formData.is_scholar_or_ama || formData.is_atenean
                       ? 'Atenean/AMA/Scholar'
-                      : 'Outsider'}{' '}
+                      : 'Non-Atenean'}{' '}
                     Group of 3)
                   </span>
                   <span>-₱{bundleDiscount}</span>

@@ -1,15 +1,16 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import TrippyScroll from "@/components/TrippyScroll";
-import AnimatedEventDescription from "@/components/animatedEventDesc";
-import CurvedLineAnimation from "@/components/animatedCurvedLine";
-import MazeBackground from "@/components/MazeBackground";
-import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
-import TextLoadingScreen from "@/components/TextLoadingScreen";
-import { GlareGrid } from "@/components/glareGrid";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import TrippyScroll from '@/components/TrippyScroll';
+import AnimatedEventDescription from '@/components/animatedEventDesc';
+import CurvedLineAnimation from '@/components/animatedCurvedLine';
+import MazeBackground from '@/components/MazeBackground';
+import AnimatedTeamDescription from '@/components/animatedTeamDecsription';
+import TextLoadingScreen from '@/components/TextLoadingScreen';
+import { GlareGrid } from '@/components/glareGrid';
+import { IS_SPEAKERS_ANNOUNCED } from './config/config';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -22,8 +23,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
-
-  const speakersAnnounced = false;
 
   useEffect(() => {
     setMounted(true);
@@ -59,12 +58,12 @@ export default function Home() {
       },
       {
         root: null,
-        rootMargin: "0px",
+        rootMargin: '0px',
         threshold: 0.6, // Trigger when 60% of the element is visible
       }
     );
 
-    const speakerSection = document.getElementById("speaker-section");
+    const speakerSection = document.getElementById('speaker-section');
 
     if (speakerSection) speakerSectionObserver.observe(speakerSection);
 
@@ -79,24 +78,24 @@ export default function Home() {
 
   const speakers = [
     {
-      name: "Dr. Maria Santos",
-      bio: "Cognitive Neuroscientist exploring the depths of human consciousness",
-      image: "/api/placeholder/300/300",
+      name: 'Dr. Maria Santos',
+      bio: 'Cognitive Neuroscientist exploring the depths of human consciousness',
+      image: '/api/placeholder/300/300',
     },
     {
-      name: "Architect Juan Reyes",
-      bio: "Sustainable urban designer creating spaces that heal communities",
-      image: "/api/placeholder/300/300",
+      name: 'Architect Juan Reyes',
+      bio: 'Sustainable urban designer creating spaces that heal communities',
+      image: '/api/placeholder/300/300',
     },
     {
-      name: "Innovator Ana Cruz",
-      bio: "Tech entrepreneur bridging digital divides in underserved regions",
-      image: "/api/placeholder/300/300",
+      name: 'Innovator Ana Cruz',
+      bio: 'Tech entrepreneur bridging digital divides in underserved regions',
+      image: '/api/placeholder/300/300',
     },
     {
-      name: "Prof. David Lee",
-      bio: "Philosopher examining the ethical labyrinths of emerging technologies",
-      image: "/api/placeholder/300/300",
+      name: 'Prof. David Lee',
+      bio: 'Philosopher examining the ethical labyrinths of emerging technologies',
+      image: '/api/placeholder/300/300',
     },
   ];
 
@@ -114,8 +113,8 @@ export default function Home() {
                 <div
                   className={`w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
                     logoLoaded
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-16"
+                      ? 'opacity-100 transform translate-y-0'
+                      : 'opacity-0 transform translate-y-16'
                   }`}
                 >
                   <Image
@@ -138,8 +137,8 @@ export default function Home() {
                 <p
                   className={`text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal px-4 transition-all duration-1000 ease-out ${
                     subtitleLoaded
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-16"
+                      ? 'opacity-100 transform translate-y-0'
+                      : 'opacity-0 transform translate-y-16'
                   }`}
                 >
                   Unlocking Paths, Inspiring Change
@@ -148,8 +147,8 @@ export default function Home() {
                 <div
                   className={`transition-all duration-1000 ease-out ${
                     buttonLoaded
-                      ? "opacity-100 transform translate-y-0"
-                      : "opacity-0 transform translate-y-10"
+                      ? 'opacity-100 transform translate-y-0'
+                      : 'opacity-0 transform translate-y-10'
                   }`}
                 >
                   <Link href="/register">
@@ -235,7 +234,9 @@ export default function Home() {
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
               Explore the Labyrinth
             </h2>
-            <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">Event topics</h4>
+            <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">
+              Event topics
+            </h4>
 
             {/* Topics Cards */}
             <GlareGrid />
@@ -251,7 +252,7 @@ export default function Home() {
             {/* Desktop version - overlapping cards with spread functionality */}
             <div className="hidden md:block">
               <div className="flex justify-center items-center h-96 relative mb-16">
-                {speakersAnnounced
+                {IS_SPEAKERS_ANNOUNCED
                   ? // Original speakers code when speakers are announced
                     speakers.map((speaker, index) => {
                       // Calculate spread positioning
