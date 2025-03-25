@@ -10,7 +10,9 @@ import MazeBackground from '@/components/MazeBackground';
 import AnimatedTeamDescription from '@/components/animatedTeamDecsription';
 import TextLoadingScreen from '@/components/TextLoadingScreen';
 import { GlareGrid } from '@/components/glareGrid';
-import { IS_SPEAKERS_ANNOUNCED } from './config/config';
+import TedxSection from '@/components/tedxSection';
+import OrganizersSection from '@/components/meetOrganizers';
+import IS_SPEAKERS_ANNOUNCED from './config/config';
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -21,8 +23,9 @@ export default function Home() {
   const [showSpread, setShowSpread] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
+  const [visibleSections, setVisibleSections] = useState({});
+  const [headingHighlights, setHeadingHighlights] = useState({});
 
   useEffect(() => {
     setMounted(true);
@@ -67,10 +70,55 @@ export default function Home() {
 
     if (speakerSection) speakerSectionObserver.observe(speakerSection);
 
+    // Generic observer for sections that need visibility tracking
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            setVisibleSections((prev) => ({
+              ...prev,
+              [sectionId]: true,
+            }));
+            sectionObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3,
+      }
+    );
+
+    // Observe sections that need visibility tracking
+    const sectionsToObserve = ['tedx-section', 'organizers-section'];
+    sectionsToObserve.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) sectionObserver.observe(section);
+    });
+
     return () => {
       speakerSectionObserver.disconnect();
+      sectionObserver.disconnect();
     };
   }, [mounted, isLoading]);
+
+  useEffect(() => {
+    // Trigger heading highlight animation with delay after section becomes visible
+    Object.entries(visibleSections).forEach(([sectionId, isVisible]) => {
+      if (isVisible && !headingHighlights[sectionId]) {
+        const timer = setTimeout(() => {
+          setHeadingHighlights((prev) => ({
+            ...prev,
+            [sectionId]: true,
+          }));
+        }, 200);
+
+        return () => clearTimeout(timer);
+      }
+    });
+  }, [visibleSections, headingHighlights]);
 
   const handleLoadComplete = () => {
     setIsLoading(false);
@@ -123,7 +171,7 @@ export default function Home() {
                     width={220}
                     height={70}
                     className="w-full h-auto"
-                    onLoadingComplete={() => setLogoLoaded(true)}
+                    onLoad={() => setLogoLoaded(true)}
                     priority
                   />
                 </div>
@@ -229,7 +277,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="topics-section" className="py-20">
+        {/* Topics Cards */}
+        <section id="topics-section" className="py-10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
               Explore the Labyrinth
@@ -238,11 +287,23 @@ export default function Home() {
               Event topics
             </h4>
 
-            {/* Topics Cards */}
             <GlareGrid />
           </div>
         </section>
 
+        {/* What is TEDx? - Now using the component with section-specific visibility */}
+        <TedxSection
+          isVisible={visibleSections['tedx-section']}
+          isHighlighted={headingHighlights['tedx-section']}
+        />
+
+        {/* Meet the Organizers */}
+        <OrganizersSection
+          isVisible={visibleSections['organizers-section']}
+          isHighlighted={headingHighlights['organizers-section']}
+        />
+
+        {/* Speakers Cards */}
         <section id="speaker-section" className="py-10 bg-black">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">

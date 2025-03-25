@@ -52,7 +52,7 @@ const TopicsDropdown = () => {
         we can unlock our full potential and improve our overall well-being.`,
       image: "/empty-head.png", // Keep only the image property
       backgroundColor: "bg-blue-950",
-      textColor: "text-orange-500",
+      textColor: "text-orange-400",
     },
     {
       id: "impasse",
@@ -205,14 +205,13 @@ const TopicSection = React.forwardRef(
         layout="position"
         className={cn(
           "relative w-full origin-top overflow-hidden cursor-pointer",
-          `${topic.backgroundColor}`,
-          isSelected ? "h-[40rem]" : "h-[18rem]"
+          topic.backgroundColor // Apply background color via classes
         )}
         onClick={onClick}
         initial={false}
         animate={{
           backgroundColor: topic.backgroundColor,
-          height: isSelected ? "40rem" : "18rem",
+          minHeight: isSelected ? "40rem" : "18rem",
         }}
         transition={{
           duration: 0.8,
@@ -220,7 +219,7 @@ const TopicSection = React.forwardRef(
         }}
       >
         <motion.div
-          className="relative w-full h-full flex flex-col"
+          className="relative w-full min-h-[18rem] flex flex-col"
           transition={sectionTransition}
         >
           {/* Background Image */}
@@ -250,7 +249,7 @@ const TopicSection = React.forwardRef(
                     }}
                     className={cn(
                       "absolute inset-0",
-                      isSelected ? "md:mr-0" : "mt-24 md:mt-0" // Add top margin only on mobile when unselected
+                      isSelected ? "md:mr-0" : "mt-24 md:mt-0"
                     )}
                   >
                     <Image

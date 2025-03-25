@@ -126,7 +126,7 @@ export default function CheckoutStep({
                   type:
                     formData.is_scholar_or_ama || formData.is_atenean
                       ? 'Atenean/AMA/Scholar'
-                      : 'Non-Atenean',
+                      : 'General Public',
                 }
               : null,
           },
@@ -884,7 +884,7 @@ export default function CheckoutStep({
                     Bundle Discount (
                     {formData.is_scholar_or_ama || formData.is_atenean
                       ? 'Atenean/AMA/Scholar'
-                      : 'Non-Atenean'}{' '}
+                      : 'General Public'}{' '}
                     Group of 3)
                   </span>
                   <span>-₱{bundleDiscount}</span>
@@ -899,8 +899,8 @@ export default function CheckoutStep({
           </div>
 
           <div className="text-sm text-gray-400 pt-3 text-bold">
-            Payment will be collected after your application is approved. You'll
-            receive payment instructions by email.
+            Payment will be collected after your registration is approved.
+            You'll receive payment instructions by email.
           </div>
         </div>
       </div>
@@ -915,7 +915,7 @@ export default function CheckoutStep({
         />
         <Label htmlFor="accept-terms" className="text-gray-300 cursor-pointer">
           I understand that TEDx AteneodeManilaU requires a registration fee and
-          agree to proceed with my application.
+          agree to proceed with my registration.
         </Label>
         {errors.accepted_terms && (
           <p className="text-sm text-red-500 mt-2">{errors.accepted_terms}</p>

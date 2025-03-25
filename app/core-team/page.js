@@ -63,6 +63,7 @@ const CoreTeamPage = () => {
     <div className="relative min-h-screen bg-black">
       <ParticlesBackground />
 
+
       <div className="relative z-10">
         {/*About TEDxAteneoDeManilaU */}
         <div
@@ -97,6 +98,7 @@ const CoreTeamPage = () => {
         </div>
         {/* Group Photos */}
         <TeamPhotoSection />
+
         {/* Core Team Section */}
         <div className="relative pt-20">
           {/* Background Image - Sticky within the Section */}

@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://tedxateneodemanilau.com'),
   title:
     'TEDxAteneoDeManilaU: Labyrinthine | Navigating Complexity Through Ideas Worth Spreading',
   description:
@@ -70,12 +71,13 @@ export const metadata = {
     icon: '/favicon.ico',
   },
   manifest: '/site.webmanifest',
+};
+
+export const viewport = {
   themeColor: '#000000',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({ children }) {
