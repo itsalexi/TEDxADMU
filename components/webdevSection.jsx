@@ -7,24 +7,24 @@ import { FaFacebookF, FaLinkedin } from "react-icons/fa6";
 const developers = [
   {
     name: "Alexi Roth Luis Canamo",
-    image: "/alex-canamo.webp", // Replace with actual image path
+    image: "/alex-canamo.webp", 
     bio: "Loves to build cool and impactful stuff, portfolio @alexi.life",
-    linkedin: "https://www.linkedin.com/in/alexicanamo/", // Replace with actual LinkedIn profile
-    facebook: "https://www.facebook.com/alexirothluis.canamo", // Replace with actual Facebook profile
+    linkedin: "https://www.linkedin.com/in/alexicanamo/", 
+    facebook: "https://www.facebook.com/alexirothluis.canamo",
   },
   {
     name: "Carl Washington Siy",
-    image: "/carl-siy.webp", // Replace with actual image path
-    bio: "Frontend wizard specializing in React and animations.",
-    linkedin: "https://www.linkedin.com/in/carl-washington-siy-69b322326/", // Replace with actual LinkedIn profile
-    facebook: "https://facebook.com/carlwashington.siy", // Replace with actual Facebook profile
+    image: "/carl-siy.webp",
+    bio: "Does animations and glowy things on websites",
+    linkedin: "https://www.linkedin.com/in/carl-washington-siy-69b322326/", 
+    facebook: "https://facebook.com/carlwashington.siy", 
   },
   {
     name: "John Jerome Pardo",
-    image: "/jj-pardo.webp", // Replace with actual image path
-    bio: "Full-stack expert, bridging design and functionality.",
-    linkedin: "https://www.linkedin.com/in/john-jerome-pardo-24b5bb311/", // Replace with actual LinkedIn profile
-    facebook: "https://www.facebook.com/pardo3toh", // Replace with actual Facebook profile
+    image: "/jj-pardo.webp",
+    bio: "Likes to create moving things and aesthetic websites",
+    linkedin: "https://www.linkedin.com/in/john-jerome-pardo-24b5bb311/",
+    facebook: "https://www.facebook.com/pardo3toh", 
   },
 ];
 
@@ -84,7 +84,7 @@ function WebdevSection() {
             </div>
 
             <div className="px-6 py-4 border-t border-gray-800 flex items-center justify-between">
-              <p className="text-gray-400 text-sm">
+              <p className="text-gray-400 text-xs">
                 TEDxAteneodeManilaU WebDev Team
               </p>
               <div className="flex space-x-3">
