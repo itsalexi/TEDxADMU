@@ -349,7 +349,7 @@ export function GlareGrid() {
         </div>
       ),
       className: 'col-span-1',
-      thumbnail: '/fork-road-ill.webp',
+      thumbnail: '/fork-road.webp',
     },
     {
       id: 4,
