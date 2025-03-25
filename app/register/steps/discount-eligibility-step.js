@@ -129,11 +129,11 @@ export default function DiscountEligibilityStep({
             </p>
           </div>
           <p className="text-sm text-gray-400 mt-2">
-            🎯 Register as a group of 3 (you + 2 friends)! Ateneans and
-            AMA/Scholars get ₱{ATENEAN_AMA_BUNDLE_DISCOUNT} off, while outsiders
-            get ₱{OUTSIDER_BUNDLE_DISCOUNT} off. Remember that group
-            registrations must be within the same category
-            (Ateneans/AMA/Scholars together, or outsiders together).
+            🎯 Save big when you register with 3 or more friends! Ateneans and
+            AMA/Scholars get ₱{ATENEAN_AMA_BUNDLE_DISCOUNT} off, while
+            Non-Ateneans get ₱{OUTSIDER_BUNDLE_DISCOUNT} off. Remember that
+            bundle registrations must be within the same category
+            (Ateneans/AMA/Scholars together, or Non-Ateneans together).
           </p>
         </div>
       )}
@@ -209,7 +209,7 @@ export default function DiscountEligibilityStep({
                   htmlFor="no_discount"
                   className="font-medium text-white text-lg"
                 >
-                  Outsider
+                  Non-Atenean
                 </Label>
                 <p className="text-sm text-gray-400">
                   {IS_PRE_SPEAKER_PERIOD
