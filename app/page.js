@@ -35,7 +35,7 @@ export default function Home() {
       const titleTimer = setTimeout(() => setTitleLoaded(true), 600);
       const subtitleTimer = setTimeout(() => setSubtitleLoaded(true), 300);
       const buttonTimer = setTimeout(() => setButtonLoaded(true), 200);
-
+  
       return () => {
         clearTimeout(logoTimer);
         clearTimeout(titleTimer);
