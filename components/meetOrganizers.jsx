@@ -54,6 +54,23 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
         .hover-inactive .border-animation {
           animation: borderRotateOut 0.5s ease-in-out forwards;
         }
+
+        .word-highlight {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 100%;
+          background-color: #eb0028;
+          opacity: 0.9;
+          z-index: -1;
+          transition: width 0.8s ease-out;
+          transform-origin: left;
+        }
+
+        .highlighted .word-highlight {
+          width: 100%;
+        }
       `}</style>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +81,7 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
         >
           <div className="w-full lg:w-1/2 border-[#eb0028] border-2 rounded-md shadow-lg shadow-red-900 flex justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
             <Link
-              href="/about"
+              href="/core-team"
               className="relative w-full h-[400px] overflow-hidden"
             >
               <Image
@@ -88,19 +105,21 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
               setIsHovered(false);
             }}
           >
-            <div className={`border-animation rounded-md ${isHovered && wasHovered ? "border-visible" : ""}`}></div>
+            <div
+              className={`border-animation rounded-md ${
+                isHovered && wasHovered ? "border-visible" : ""
+              }`}
+            ></div>
             <h2 className="text-3xl sm:text-5xl font-bold mb-6 p-4 relative inline-block">
-              <span className="relative z-10">Meet the Organizers</span>
-
-              {/* Highlight animation element */}
+              <span className="relative z-10">Meet the </span>
               <span
-                className={`absolute bottom-0 left-0 w-full h-1 bg-[#eb0028] transform origin-left transition-transform duration-1000 ease-out ${
-                  isHighlighted ? "scale-x-100" : "scale-x-0"
+                className={`relative z-10 px-2 pb-1  ${
+                  isHighlighted ? "highlighted" : ""
                 }`}
-                style={{
-                  transformOrigin: "left",
-                }}
-              ></span>
+              >
+                Organizers
+                <span className="word-highlight p-1"></span>
+              </span>
             </h2>
 
             <div className="space-y-4">
