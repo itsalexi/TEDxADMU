@@ -123,7 +123,7 @@ export default function Home() {
                     width={220}
                     height={70}
                     className="w-full h-auto"
-                    onLoadingComplete={() => setLogoLoaded(true)}
+                    onLoad={() => setLogoLoaded(true)}
                     priority
                   />
                 </div>
