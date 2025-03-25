@@ -58,7 +58,7 @@ const AboutPage = () => {
         >
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl text-center font-bold text-[#eb0028] mb-6">
+              <h1 className="overflow-hidden text-2xl lg:text-5xl xl:text-6xl text-center font-bold text-[#eb0028] mb-6">
                 About{" "}
                 <p>
                   TEDx
