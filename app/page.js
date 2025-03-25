@@ -23,7 +23,7 @@ export default function Home() {
   const [showSpread, setShowSpread] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
   const [visibleSections, setVisibleSections] = useState({});
   const [headingHighlights, setHeadingHighlights] = useState({});
 
