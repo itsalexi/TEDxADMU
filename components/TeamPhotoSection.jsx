@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import InfiniteImageScroll from "./InfiniteImageScroll";
 
 const TeamPhotoSection = () => {
   const [visibleSections, setVisibleSections] = useState({
@@ -39,82 +40,217 @@ const TeamPhotoSection = () => {
     };
   }, []);
 
-  const teamSections = [
+  const images = [
     {
-      id: "section1",
-      title: "Collaboration & Creativity",
-      description:
-        "Our dedicated team of organizers brings together diverse perspectives and talents to create an unforgettable TEDx experience. Through collaborative brainstorming and creative problem-solving, we craft an event that challenges perspectives and inspires action.",
-      image: "/team-collaboration.jpg",
-      alt: "Team members collaborating on TEDx planning",
+      src: "/meeting1.jpg",
+      alt: "TEDx organizers collaborating",
     },
     {
-      id: "section2",
-      title: "Passion & Purpose",
-      description:
-        "Driven by a shared passion for ideas worth spreading, our team works tirelessly behind the scenes to curate thought-provoking content and seamless experiences. Every member contributes their unique skills with purpose, ensuring that each TEDx event creates lasting impact.",
-      image: "/team-planning.jpg",
-      alt: "TEDx team planning session",
+      src: "/zoom1.jpg",
+      alt: "Team planning session",
     },
     {
-      id: "section3",
-      title: "Community & Connection",
-      description:
-        "Beyond organizing events, we're building a community that values intellectual curiosity and meaningful connections. Our team fosters an environment where diverse ideas can flourish, bringing together speakers, attendees, and volunteers who share our vision for positive change.",
-      image: "/team-event.jpg",
-      alt: "TEDx team at the event",
+      src: "/meeting2.jpg",
+      alt: "TEDx team members",
+    },
+    {
+      src: "/zoom2.jpg",
+      alt: "Brainstorming ideas",
+    },
+    {
+      src: "/meeting3.jpg",
+      alt: "TEDx team at event",
+    },
+    {
+      src: "/zoom3.jpg",
+      alt: "Preparing for talks",
+    },
+    {
+      src: "/meeting4.jpg",
+      alt: "Team building activities",
+    },
+    {
+      src: "/zoom4.jpg",
+      alt: "Organizing logistics",
+    },
+    {
+      src: "/meeting5.jpg",
+      alt: "TEDx volunteers",
+    },
+    {
+      src: "/2ctm.jpg",
+      alt: "Behind the scenes",
     },
   ];
 
   return (
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
-          Meet Our Team
-        </h2>
-
         <div className="space-y-32">
-          {teamSections.map((section, index) => (
-            <div
-              key={section.id}
-              id={section.id}
-              className={`flex flex-col ${
-                index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-              } items-center gap-8 transform transition-all duration-1000 ease-out ${
-                visibleSections[section.id]
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-16"
-              }`}
-            >
-              <div className="w-full lg:w-1/2 space-y-6">
-                <h3 className="text-2xl sm:text-4xl font-bold text-white relative inline-block">
-                  {section.title}
-                  <span
-                    className={`absolute bottom-0 left-0 w-full h-1 bg-[#eb0028] transform origin-left transition-transform duration-1000 ease-out ${
-                      visibleSections[section.id] ? "scale-x-100" : "scale-x-0"
-                    }`}
-                    style={{ transformOrigin: "left" }}
-                  ></span>
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  {section.description}
-                </p>
-              </div>
+          {/* Section 1 */}
+          <div
+            id="section1"
+            className={`flex flex-col lg:flex-row items-center gap-8 transform transition-all duration-1000 ease-out ${
+              visibleSections.section1
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-16"
+            }`}
+          >
+            <div className="w-full lg:w-1/2 space-y-6">
+              <h3 className="text-2xl sm:text-4xl font-bold text-white relative inline-block">
+                Collaboration & Creativity
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#eb0028] transform origin-left transition-transform duration-1000 ease-out ${
+                    visibleSections.section1 ? "scale-x-100" : "scale-x-0"
+                  }`}
+                  style={{ transformOrigin: "left" }}
+                ></span>
+              </h3>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Our dedicated team of organizers brings together diverse
+                perspectives and talents to create an unforgettable TEDx
+                experience. Through collaborative brainstorming and creative
+                problem-solving, we craft an event that challenges perspectives
+                and inspires action.
+              </p>
+            </div>
 
-              <div className="w-full lg:w-1/2 h-[400px] relative rounded-md overflow-hidden shadow-lg shadow-red-900/20 border-2 border-[#eb0028] transform transition-all duration-500 hover:scale-[1.02]">
+            <div className="w-full lg:w-1/2 h-[400px] relative rounded-md overflow-hidden shadow-lg shadow-red-900/20 border-2 border-[#eb0028] transform transition-all duration-500 hover:scale-[1.02]">
+              <Image
+                src="/1ctm.jpg"
+                alt="Team members collaborating on TEDx planning"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70"></div>
+            </div>
+          </div>
+
+          <InfiniteImageScroll images={images} />
+
+          {/* Section 2 */}
+          <div
+            id="section2"
+            className={`flex flex-col lg:flex-row-reverse items-center gap-8 transform transition-all duration-1000 ease-out ${
+              visibleSections.section2
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-16"
+            }`}
+          >
+            <div className="w-full lg:w-1/2 space-y-6">
+              <h3 className="text-2xl sm:text-4xl font-bold text-white relative inline-block">
+                Passion & Purpose
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#eb0028] transform origin-left transition-transform duration-1000 ease-out ${
+                    visibleSections.section2 ? "scale-x-100" : "scale-x-0"
+                  }`}
+                  style={{ transformOrigin: "left" }}
+                ></span>
+              </h3>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Driven by a shared passion for ideas worth spreading, our team
+                works tirelessly behind the scenes to curate thought-provoking
+                content and seamless experiences. Every member contributes their
+                unique skills with purpose, ensuring that each TEDx event
+                creates lasting impact.
+              </p>
+            </div>
+
+            <div className="w-full lg:w-1/2 h-[400px] relative grid grid-cols-2 gap-2">
+              {/* Image 1 */}
+              <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
                 <Image
-                  src={section.image}
-                  alt={section.alt}
+                  src="/meeting1.jpg"
+                  alt="TEDx team planning session 1"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70"></div>
+              </div>
 
-                {/* Gradient overlay */}
+              {/* Image 2 */}
+              <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
+                <Image
+                  src="/meeting2.jpg"
+                  alt="TEDx team planning session 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70"></div>
+              </div>
+
+              {/* Image 3 */}
+              <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
+                <Image
+                  src="/meeting3.jpg"
+                  alt="TEDx team planning session 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70"></div>
+              </div>
+
+              {/* Image 4 */}
+              <div className="relative overflow-hidden rounded-md shadow-lg shadow-red-900/20 border border-[#eb0028] transition-all duration-300 hover:scale-[1.05] hover:rotate-1 z-10">
+                <Image
+                  src="/meeting4.jpg"
+                  alt="TEDx team planning session 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70"></div>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Section 3 */}
+          <div
+            id="section3"
+            className={`flex flex-col lg:flex-row items-center gap-8 transform transition-all duration-1000 ease-out ${
+              visibleSections.section3
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-16"
+            }`}
+          >
+            <div className="w-full lg:w-1/2 space-y-6">
+              <h3 className="text-2xl sm:text-4xl font-bold text-white relative inline-block">
+                Community & Connection
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#eb0028] transform origin-left transition-transform duration-1000 ease-out ${
+                    visibleSections.section3 ? "scale-x-100" : "scale-x-0"
+                  }`}
+                  style={{ transformOrigin: "left" }}
+                ></span>
+              </h3>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Beyond organizing events, we're building a community that values
+                intellectual curiosity and meaningful connections. Our team
+                fosters an environment where diverse ideas can flourish,
+                bringing together speakers, attendees, and volunteers who share
+                our vision for positive change.
+              </p>
+            </div>
+
+            <div className="w-full lg:w-1/2 h-[400px] relative rounded-md overflow-hidden shadow-lg shadow-red-900/20 border-2 border-[#eb0028] transform transition-all duration-500 hover:scale-[1.02]">
+              <Image
+                src="/2ctm.jpg"
+                alt="TEDx team at the event"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-70"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
