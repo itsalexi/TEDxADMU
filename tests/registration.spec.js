@@ -208,7 +208,7 @@ test.describe('Registration Process', () => {
 
     // Wait for success message with a longer timeout
     await expect(
-      page.getByRole('heading', { name: 'Application submitted', exact: true })
+      page.getByRole('heading', { name: 'Registration submitted', exact: true })
     ).toBeVisible({
       timeout: 20000,
     });
@@ -318,7 +318,7 @@ test.describe('Registration Process', () => {
 
     // Wait for success message with increased timeout
     await expect(
-      page.getByRole('heading', { name: 'Application submitted', exact: true })
+      page.getByRole('heading', { name: 'Registration submitted', exact: true })
     ).toBeVisible({
       timeout: 45000,
     });
@@ -413,7 +413,7 @@ test.describe('Registration Process', () => {
 
     // Wait for success message with increased timeout
     await expect(
-      page.getByRole('heading', { name: 'Application submitted', exact: true })
+      page.getByRole('heading', { name: 'Registration submitted', exact: true })
     ).toBeVisible({
       timeout: 45000,
     });
