@@ -219,7 +219,7 @@ const TopicSection = React.forwardRef(
         }}
       >
         <motion.div
-          className="relative w-full h-full flex flex-col"
+          className="relative w-full min-h-[18rem] flex flex-col"
           transition={sectionTransition}
         >
           {/* Background Image */}
@@ -249,7 +249,7 @@ const TopicSection = React.forwardRef(
                     }}
                     className={cn(
                       "absolute inset-0",
-                      isSelected ? "md:mr-0" : "mt-24 md:mt-0" // Add top margin only on mobile when unselected
+                      isSelected ? "md:mr-0" : "mt-24 md:mt-0"
                     )}
                   >
                     <Image
