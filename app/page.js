@@ -28,6 +28,81 @@ export default function Home() {
   const [headingHighlights, setHeadingHighlights] = useState({});
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let isInBarrier = false;
+    const MAX_SCROLL_SPEED = 12; // Maximum allowed scroll speed
+    const DECELERATION_FACTOR = 0.1; // Dividing factor to slow down scroll (less than 1)
+    let isMobileView = window.innerWidth < 768; // Check for mobile/small screen
+
+    // Function to update mobile view status
+    const updateViewportCheck = () => {
+      isMobileView = window.innerWidth < 768;
+    };
+
+    const handleScroll = (e) => {
+      // Only apply scroll barrier on mobile screens
+      if (!isMobileView) return;
+
+      const barrierSection = document.querySelector(".scroll-barrier");
+      if (!barrierSection) return;
+
+      const barrierStart = barrierSection.offsetTop;
+      const barrierEnd = barrierStart + barrierSection.offsetHeight;
+      const currentScrollY = window.scrollY;
+      const scrollSpeed = Math.abs(currentScrollY - lastScrollY);
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      // Check if we're within the barrier section
+      if (
+        currentScrollY >= barrierStart - 1500 &&
+        currentScrollY <= barrierEnd + 100
+      ) {
+        // Only apply deceleration when scrolling downward and exceeding max speed
+        if (isScrollingDown && scrollSpeed > MAX_SCROLL_SPEED) {
+          // Calculate the reduced scroll position
+          const reducedScrollSpeed = scrollSpeed * DECELERATION_FACTOR; // Slow down by applying factor
+
+          // Adjust scroll position to slow down
+          window.scrollTo({
+            top: lastScrollY + reducedScrollSpeed, // Only positive direction since we know we're scrolling down
+            behavior: "auto", // Using 'auto' instead of 'smooth' for more precise control
+          });
+
+          // Prevent default to stop normal scrolling
+          if (e && e.preventDefault) {
+            e.preventDefault();
+          }
+
+          isInBarrier = true;
+        } else {
+          // For upward scrolling, we don't interfere
+          isInBarrier = false;
+        }
+      } else {
+        isInBarrier = false;
+      }
+
+      // Update last scroll position
+      // For downward scrolling in barrier, only update if speed is acceptable
+      // For upward scrolling or outside barrier, always update
+      if (!isInBarrier || !isScrollingDown || scrollSpeed <= MAX_SCROLL_SPEED) {
+        lastScrollY = currentScrollY;
+      }
+    };
+
+    // Add resize listener to update mobile check
+    window.addEventListener("resize", updateViewportCheck);
+
+    // Use passive: false to enable preventDefault in the handler
+    window.addEventListener("scroll", handleScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener("resize", updateViewportCheck);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     setMounted(true);
 
     if (!isLoading) {
@@ -225,6 +300,11 @@ export default function Home() {
 
         <section className="bg-[#161616]">
           <TrippyScroll />
+          {/* Scroll barrier positioned absolutely to avoid creating gaps */}
+          <div
+            className="scroll-barrier absolute w-full h-6 opacity-0 pointer-events-none"
+            aria-hidden="true"
+          ></div>
         </section>
 
         <section
