@@ -87,7 +87,7 @@ export default function Home() {
       {
         root: null,
         rootMargin: '0px',
-        threshold: 0.3,
+        threshold: 0.1,
       }
     );
 
@@ -313,9 +313,12 @@ export default function Home() {
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
               Explore the Labyrinth
             </h2>
-            <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">
+            <h4 className="text-center text-gray-300 text-xl md:text-2xl">
               Event topics
             </h4>
+            <h5 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">
+              Click on a card to read about a topic
+            </h5>
 
             <GlareGrid />
           </div>
