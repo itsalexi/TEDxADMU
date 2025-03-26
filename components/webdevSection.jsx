@@ -32,7 +32,7 @@ function WebdevSection() {
   return (
     <section
       id="webdev-section"
-      className="p-16 bg-background text-white"
+      className="p-16 pt-32 bg-background text-white"
     >
       <div className="w-full h-full md:text-4xl lg:text-5xl sm:text-3xl text-2xl flex flex-row items-start justify-start bg-background font-normal overflow-hidden pb-16 ">
         <div className="whitespace-pre-wrap z-30 text-white">
