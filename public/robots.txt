@@ -1,0 +1,14 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and authentication pages
+Disallow: /login
+Disallow: /dashboard
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://tedxateneodemanilau.com/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 10

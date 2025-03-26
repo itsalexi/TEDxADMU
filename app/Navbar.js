@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -9,6 +10,32 @@ export default function Navbar() {
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const navRef = useRef(null);
   const aboutMenuRef = useRef(null);
+  const pathname = usePathname();
+
+  const [isInHeroSection, setIsInHeroSection] = useState(true);
+  const [isRegistrationPage, setIsRegistrationPage] = useState(false);
+
+  useEffect(() => {
+    setIsRegistrationPage(pathname === "/register");
+  }, [pathname]);
+
+  useEffect(() => {
+    const heroSection = document.getElementById("hero-section");
+
+    const handleScroll = () => {
+      if (pathname !== "/") {
+        setIsInHeroSection(false);
+      } else if (heroSection) {
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+        setIsInHeroSection(heroBottom > 0);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -87,13 +114,13 @@ export default function Navbar() {
                     onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
                   >
                     <Link
-                        href="/event-details"
-                        onClick={() => setAboutDropdownOpen(false)}
-                      >
-                        <span className="block px-4 py-3 text-gray-300 hover:text-[#eb0028] transition duration-300">
-                          About
-                        </span>
-                      </Link>
+                      href="/event-details"
+                      onClick={() => setAboutDropdownOpen(false)}
+                    >
+                      <span className="block px-4 py-3 text-gray-300 hover:text-[#eb0028] transition duration-300">
+                        About
+                      </span>
+                    </Link>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={`h-4 w-4 transition-transform duration-300 ${
@@ -162,14 +189,27 @@ export default function Navbar() {
               </div>
             </div>
             <div className="lg:hidden">
+              <Link href="/register">
+                <span
+                  className={`bg-[#eb0028] text-white hover:bg-red-700 px-3 py-2 rounded-md font-medium cursor-pointer transition-all duration-500 ${
+                    !isInHeroSection && !isRegistrationPage
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                >
+                  Register
+                </span>
+              </Link>
+            </div>
+            <div className="lg:hidden">
               <button
                 className={`${
-                  mobileMenuOpen ? "text-[#eb0028]" : "text-gray-300"
+                  mobileMenuOpen ? "text-[#eb0028]" : "text-[#eb0028]"
                 } hover:text-[#eb0028] inline-flex items-center justify-center p-2 rounded-md transition-all duration-300`}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle menu"
               >
-                <div className="relative w-6 h-5">
+                <div className="relative w-6 h-6">
                   <span
                     className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ${
                       mobileMenuOpen ? "rotate-45 top-2" : "rotate-0 top-0"

@@ -9,7 +9,7 @@ const OrganizersSection = ({ isVisible, isHighlighted }) => {
   return (
     <section
       id="organizers-section"
-      className="bg-black py-20 relative overflow-hidden"
+      className="bg-black py-10 relative overflow-hidden"
     >
       <style jsx>{`
         @keyframes borderRotate {

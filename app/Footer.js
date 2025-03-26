@@ -98,6 +98,12 @@ const Footer = () => {
             <p className="text-gray-400 mt-2">
               This independent TEDx event is operated under license from TED.
             </p>
+            <p className="text-gray-400 mt-2">
+              Made with love by {" "}
+              <Link href="core-team#webdev-section" className="underline">
+                Carl, Alexi, & JJ
+              </Link>
+            </p>
           </div>
         </div>
       </div>

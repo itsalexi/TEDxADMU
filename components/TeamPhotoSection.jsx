@@ -15,7 +15,7 @@ const TeamPhotoSection = () => {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.35,
+      threshold: 0.1,
     };
 
     const sectionObserver = new IntersectionObserver((entries) => {
@@ -86,7 +86,7 @@ const TeamPhotoSection = () => {
   return (
     <section className="py-20 bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-32">
+        <div className="space-y-16 md:space-y-32">
           {/* Section 1 */}
           <div
             id="section1"

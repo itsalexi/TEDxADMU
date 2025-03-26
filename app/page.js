@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import TrippyScroll from '@/components/TrippyScroll';
-import AnimatedEventDescription from '@/components/animatedEventDesc';
-import CurvedLineAnimation from '@/components/animatedCurvedLine';
-import MazeBackground from '@/components/MazeBackground';
-import AnimatedTeamDescription from '@/components/animatedTeamDecsription';
-import TextLoadingScreen from '@/components/TextLoadingScreen';
-import { GlareGrid } from '@/components/glareGrid';
-import TedxSection from '@/components/tedxSection';
-import OrganizersSection from '@/components/meetOrganizers';
-import IS_SPEAKERS_ANNOUNCED from './config/config';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import TrippyScroll from "@/components/TrippyScroll";
+import AnimatedEventDescription from "@/components/animatedEventDesc";
+import CurvedLineAnimation from "@/components/animatedCurvedLine";
+import MazeBackground from "@/components/MazeBackground";
+import AnimatedTeamDescription from "@/components/animatedTeamDecsription";
+import TextLoadingScreen from "@/components/TextLoadingScreen";
+import { GlareGrid } from "@/components/glareGrid";
+import TedxSection from "@/components/tedxSection";
+import OrganizersSection from "@/components/meetOrganizers";
+import IS_SPEAKERS_ANNOUNCED from "./config/config";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -26,6 +26,81 @@ export default function Home() {
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
   const [visibleSections, setVisibleSections] = useState({});
   const [headingHighlights, setHeadingHighlights] = useState({});
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let isInBarrier = false;
+    const MAX_SCROLL_SPEED = 12; // Maximum allowed scroll speed
+    const DECELERATION_FACTOR = 0.1; // Dividing factor to slow down scroll (less than 1)
+    let isMobileView = window.innerWidth < 768; // Check for mobile/small screen
+
+    // Function to update mobile view status
+    const updateViewportCheck = () => {
+      isMobileView = window.innerWidth < 768;
+    };
+
+    const handleScroll = (e) => {
+      // Only apply scroll barrier on mobile screens
+      if (!isMobileView) return;
+
+      const barrierSection = document.querySelector(".scroll-barrier");
+      if (!barrierSection) return;
+
+      const barrierStart = barrierSection.offsetTop;
+      const barrierEnd = barrierStart + barrierSection.offsetHeight;
+      const currentScrollY = window.scrollY;
+      const scrollSpeed = Math.abs(currentScrollY - lastScrollY);
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      // Check if we're within the barrier section
+      if (
+        currentScrollY >= barrierStart - 1500 &&
+        currentScrollY <= barrierEnd + 100
+      ) {
+        // Only apply deceleration when scrolling downward and exceeding max speed
+        if (isScrollingDown && scrollSpeed > MAX_SCROLL_SPEED) {
+          // Calculate the reduced scroll position
+          const reducedScrollSpeed = scrollSpeed * DECELERATION_FACTOR; // Slow down by applying factor
+
+          // Adjust scroll position to slow down
+          window.scrollTo({
+            top: lastScrollY + reducedScrollSpeed, // Only positive direction since we know we're scrolling down
+            behavior: "auto", // Using 'auto' instead of 'smooth' for more precise control
+          });
+
+          // Prevent default to stop normal scrolling
+          if (e && e.preventDefault) {
+            e.preventDefault();
+          }
+
+          isInBarrier = true;
+        } else {
+          // For upward scrolling, we don't interfere
+          isInBarrier = false;
+        }
+      } else {
+        isInBarrier = false;
+      }
+
+      // Update last scroll position
+      // For downward scrolling in barrier, only update if speed is acceptable
+      // For upward scrolling or outside barrier, always update
+      if (!isInBarrier || !isScrollingDown || scrollSpeed <= MAX_SCROLL_SPEED) {
+        lastScrollY = currentScrollY;
+      }
+    };
+
+    // Add resize listener to update mobile check
+    window.addEventListener("resize", updateViewportCheck);
+
+    // Use passive: false to enable preventDefault in the handler
+    window.addEventListener("scroll", handleScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener("resize", updateViewportCheck);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -61,12 +136,12 @@ export default function Home() {
       },
       {
         root: null,
-        rootMargin: '0px',
+        rootMargin: "0px",
         threshold: 0.6, // Trigger when 60% of the element is visible
       }
     );
 
-    const speakerSection = document.getElementById('speaker-section');
+    const speakerSection = document.getElementById("speaker-section");
 
     if (speakerSection) speakerSectionObserver.observe(speakerSection);
 
@@ -86,13 +161,13 @@ export default function Home() {
       },
       {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.3,
+        rootMargin: "0px",
+        threshold: 0.1,
       }
     );
 
     // Observe sections that need visibility tracking
-    const sectionsToObserve = ['tedx-section', 'organizers-section'];
+    const sectionsToObserve = ["tedx-section", "organizers-section"];
     sectionsToObserve.forEach((id) => {
       const section = document.getElementById(id);
       if (section) sectionObserver.observe(section);
@@ -126,24 +201,24 @@ export default function Home() {
 
   const speakers = [
     {
-      name: 'Dr. Maria Santos',
-      bio: 'Cognitive Neuroscientist exploring the depths of human consciousness',
-      image: '/api/placeholder/300/300',
+      name: "Dr. Maria Santos",
+      bio: "Cognitive Neuroscientist exploring the depths of human consciousness",
+      image: "/api/placeholder/300/300",
     },
     {
-      name: 'Architect Juan Reyes',
-      bio: 'Sustainable urban designer creating spaces that heal communities',
-      image: '/api/placeholder/300/300',
+      name: "Architect Juan Reyes",
+      bio: "Sustainable urban designer creating spaces that heal communities",
+      image: "/api/placeholder/300/300",
     },
     {
-      name: 'Innovator Ana Cruz',
-      bio: 'Tech entrepreneur bridging digital divides in underserved regions',
-      image: '/api/placeholder/300/300',
+      name: "Innovator Ana Cruz",
+      bio: "Tech entrepreneur bridging digital divides in underserved regions",
+      image: "/api/placeholder/300/300",
     },
     {
-      name: 'Prof. David Lee',
-      bio: 'Philosopher examining the ethical labyrinths of emerging technologies',
-      image: '/api/placeholder/300/300',
+      name: "Prof. David Lee",
+      bio: "Philosopher examining the ethical labyrinths of emerging technologies",
+      image: "/api/placeholder/300/300",
     },
   ];
 
@@ -152,7 +227,10 @@ export default function Home() {
       {isLoading && <TextLoadingScreen onLoadComplete={handleLoadComplete} />}
 
       <main>
-        <section className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
+        <section
+          id="hero-section"
+          className="relative h-screen flex items-center justify-center overflow-hidden pt-16"
+        >
           <MazeBackground />
 
           <div className="container relative z-10 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
@@ -161,8 +239,8 @@ export default function Home() {
                 <div
                   className={`w-32 sm:w-40 md:w-48 lg:w-56 mb-4 sm:mb-6 transition-all duration-1000 ease-out ${
                     logoLoaded
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-16'
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-16"
                   }`}
                 >
                   <Image
@@ -185,8 +263,8 @@ export default function Home() {
                 <p
                   className={`text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal px-4 transition-all duration-1000 ease-out ${
                     subtitleLoaded
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-16'
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-16"
                   }`}
                 >
                   Unlocking Paths, Inspiring Change
@@ -195,8 +273,8 @@ export default function Home() {
                 <div
                   className={`text-sm sm:text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal px-4 transition-all duration-1000 ease-out ${
                     subtitleLoaded
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-16'
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-16"
                   }`}
                 >
                   April 30, 2025 (Wednesday) • Leong Hall • 1-4 PM
@@ -205,8 +283,8 @@ export default function Home() {
                 <div
                   className={`transition-all duration-1000 ease-out ${
                     buttonLoaded
-                      ? 'opacity-100 transform translate-y-0'
-                      : 'opacity-0 transform translate-y-10'
+                      ? "opacity-100 transform translate-y-0"
+                      : "opacity-0 transform translate-y-10"
                   }`}
                 >
                   <Link href="/register">
@@ -222,6 +300,11 @@ export default function Home() {
 
         <section className="bg-[#161616]">
           <TrippyScroll />
+          {/* Scroll barrier positioned absolutely to avoid creating gaps */}
+          <div
+            className="scroll-barrier absolute w-full h-6 opacity-0 pointer-events-none"
+            aria-hidden="true"
+          ></div>
         </section>
 
         <section
@@ -237,20 +320,47 @@ export default function Home() {
                   </h2>
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center gap-2 text-gray-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                       <span>April 30, 2025 (Wednesday)</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                       <span>Leong Hall</span>
                     </div>
                     <div className="flex items-center gap-2 text-gray-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                       <span>1:00 PM - 4:00 PM</span>
                     </div>
@@ -308,14 +418,17 @@ export default function Home() {
         </section>
 
         {/* Topics Cards */}
-        <section id="topics-section" className="py-10">
+        <section id="topics-section" className="pt-10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl sm:text-5xl font-bold text-center mb-2 text-[#eb0028]">
               Explore the Labyrinth
             </h2>
-            <h4 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">
+            <h4 className="text-center text-gray-300 text-xl md:text-2xl">
               Event topics
             </h4>
+            <h5 className="text-center text-gray-300 italic text-lg md:text-xl mb-12">
+              Click on a card to read about a topic
+            </h5>
 
             <GlareGrid />
           </div>
@@ -323,14 +436,14 @@ export default function Home() {
 
         {/* What is TEDx? - Now using the component with section-specific visibility */}
         <TedxSection
-          isVisible={visibleSections['tedx-section']}
-          isHighlighted={headingHighlights['tedx-section']}
+          isVisible={visibleSections["tedx-section"]}
+          isHighlighted={headingHighlights["tedx-section"]}
         />
 
         {/* Meet the Organizers */}
         <OrganizersSection
-          isVisible={visibleSections['organizers-section']}
-          isHighlighted={headingHighlights['organizers-section']}
+          isVisible={visibleSections["organizers-section"]}
+          isHighlighted={headingHighlights["organizers-section"]}
         />
 
         {/* Speakers Cards */}
@@ -439,7 +552,7 @@ export default function Home() {
                         rotation = 0;
                         scale = 1.1;
                         zIndex = 50;
-                      } else if (hoveredIndex !== null) { 
+                      } else if (hoveredIndex !== null) {
                         const direction = index < hoveredIndex ? -1 : 1;
                         leftPosition = `calc(45% - 32px + ${index * 70}px + ${
                           direction * 20
