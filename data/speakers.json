@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Mary Grace Banal, RND, MS CN",
+    "bio": "Registered Nutritionist-Dietitian specializing in clinical nutrition, sports nutrition, and behavioral coaching",
+    "bio-long": "Mary Grace Banal, RND, MS CN, is a highly experienced Registered Nutritionist-Dietitian with a proven track record in clinical nutrition, fitness coaching, and public health education. With over 16 years in the field, she has worked across multiple sectors, from medical nutrition therapy for lifestyle diseases to sports nutrition for athletes and fitness enthusiasts. She has also played a pivotal role in corporate wellness programs, helping organizations integrate evidence-based nutrition strategies to improve employee health and productivity. As an assistant professor and nutrition clinic manager, she has mentored students and conducted research on digital nutrition tracking and dietary assessment methods, contributing to international publications. Passionate about bridging the gap between science and practical application, she creates accessible, research-backed content for social media and digital platforms. Whether through one-on-one coaching, corporate workshops, or academic lectures, Mary Grace is dedicated to helping Filipinos achieve sustainable, health-focused lifestyles.",
+    "image": "/grace-banal.webp"
+  },
+  {
+    "name": "Zymba Ding",
+    "bio": "Rising drag performer from Caloocan, known for her fierce stage presence and bold fashion choices.",
+    "bio-long": "Zymba Ding is a dynamic and fearless drag performer making waves in the Philippine drag scene. A proud member of the House of Ding, she first gained widespread recognition as a contestant on Drag Race Philippines Season 3. Known for her electrifying stage presence and bold fashion, Zymba has captivated audiences with her unapologetic artistry and ability to seamlessly merge performance with deeper personal narratives. In just over a year, she has secured titles in some of the country’s most competitive drag battles, including Dragdagulan, Ikaw Nemen, and Bunganga Battle Royale. A trailblazer in her own right, Zymba takes pride in incorporating her Christian identity into her drag, aiming to challenge norms and build connections between seemingly contrasting worlds. Her tribute to Tala, Caloocan, and its history with leprosy further reflects her commitment to using drag as a platform for storytelling and representation. Fierce, fearless, and deeply passionate, Zymba Ding is one of the most exciting new voices in Philippine drag today.",
+    "image": "/zymba-ding.webp"
+  },
+  {
+    "name": "Vien Valencia",
+    "bio": "Manila-based artist exploring the relationship between people and spaces through unconventional archival methods.",
+    "bio-long": "Vien Valencia is a multidisciplinary artist whose work delves into the complex relationship between people and the spaces they inhabit. Born in Manila in 1998, he focuses on documenting spaces, conditions, and experiences that resist traditional forms of archiving. Through drawings, photographs, and experimental materials, Valencia challenges conventional methods of recording history, instead creating immersive narratives that capture the fluid, ever-evolving nature of communities. Deeply engaged with local settings, Valencia’s artistic practice is rooted in direct interaction and observation, allowing him to document the ways people shape their environments—and how those environments, in turn, shape them. His groundbreaking approach has earned him prestigious accolades, including the Ateneo Art Award (2023) and the Cultural Center of the Philippines Thirteen Artists Award (2024). Constantly pushing boundaries in contemporary art, Valencia continues to craft thought-provoking works that redefine documentation and memory.",
+    "image": "/vien-valencia.webp"
+  },
+  {
+    "name": "Mikee Reyes",
+    "bio": "Philosopher examining the ethical labyrinths of emerging technologies",
+    "bio-long": "example text",
+    "image": "/mikee-reyes.webp"
+  }
+]

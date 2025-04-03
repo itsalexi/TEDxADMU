@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { IS_SPEAKERS_ANNOUNCED } from "../app/config/config";
+import speakers from "@/data/speakers.json";
 
 export default function CircularSpeakersSection() {
   const [mounted, setMounted] = useState(false);
@@ -49,41 +50,6 @@ export default function CircularSpeakersSection() {
 
     return () => clearInterval(rotationInterval);
   }, [speakerSectionVisible, expandedSpeakerIndex]);
-
-  const speakers = [
-    {
-      name: "Dr. Maria Santos",
-      bio: "Cognitive Neuroscientist exploring the depths of human consciousness",
-      image: "/api/placeholder/300/300",
-      position: "north",
-      details:
-        "Dr. Santos has conducted groundbreaking research on neural plasticity and consciousness, with over 50 publications in leading scientific journals. Her TED talk will explore the frontiers of human perception and how we navigate the labyrinths of our own minds.",
-    },
-    {
-      name: "Architect Juan Reyes",
-      bio: "Sustainable urban designer creating spaces that heal communities",
-      image: "/api/placeholder/300/300",
-      position: "east",
-      details:
-        "Juan Reyes has transformed urban spaces across South America, implementing biophilic design principles that bring nature into cities. His award-winning structures serve as both functional spaces and psychological sanctuaries, guiding people through mindful journeys in the concrete jungle.",
-    },
-    {
-      name: "Innovator Ana Cruz",
-      bio: "Tech entrepreneur bridging digital divides in underserved regions",
-      image: "/api/placeholder/300/300",
-      position: "south",
-      details:
-        "Ana Cruz founded ConnectAll, a social enterprise that has brought internet access to over 200 remote communities. Her innovative mesh network technology runs on renewable energy and has become a model for sustainable connectivity solutions worldwide.",
-    },
-    {
-      name: "Prof. David Lee",
-      bio: "Philosopher examining the ethical labyrinths of emerging technologies",
-      image: "/api/placeholder/300/300",
-      position: "west",
-      details:
-        "Professor Lee combines Eastern and Western philosophical traditions to create new ethical frameworks for AI development and implementation. His work with major tech companies has influenced responsible design practices and policy recommendations for the ethical deployment of autonomous systems.",
-    },
-  ];
 
   const getPositionStyles = (index, totalSpeakers, isMobile) => {
     // If this speaker is expanded

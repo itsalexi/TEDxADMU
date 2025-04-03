@@ -13,6 +13,8 @@ import { GlareGrid } from "@/components/glareGrid";
 import TedxSection from "@/components/tedxSection";
 import OrganizersSection from "@/components/meetOrganizers";
 import IS_SPEAKERS_ANNOUNCED from "./config/config";
+import speakers from '@/data/speakers.json';
+
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -199,28 +201,7 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const speakers = [
-    {
-      name: "Dr. Maria Santos",
-      bio: "Cognitive Neuroscientist exploring the depths of human consciousness",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Architect Juan Reyes",
-      bio: "Sustainable urban designer creating spaces that heal communities",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Innovator Ana Cruz",
-      bio: "Tech entrepreneur bridging digital divides in underserved regions",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Prof. David Lee",
-      bio: "Philosopher examining the ethical labyrinths of emerging technologies",
-      image: "/api/placeholder/300/300",
-    },
-  ];
+  
 
   return (
     <div className="min-h-screen bg-black text-white">
