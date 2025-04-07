@@ -62,7 +62,7 @@ export default function CircularSpeakersSection() {
           zIndex: 100,
           transition: "all 0.5s ease-out",
           height: "auto", // Allow height to expand to fit content
-          width: "320px", // Wider to accommodate more content
+          width: "800px", // Increased from 320px to 400px for more width
           maxHeight: "80vh", // Prevent it from growing too large
         };
       } else {
@@ -71,6 +71,8 @@ export default function CircularSpeakersSection() {
           zIndex: 100,
           transition: "all 0.5s ease-out",
           height: "auto", // Allow height to expand for mobile too
+          width: "95%", // Make it take up most of the container width on mobile
+          maxWidth: "400px", // But cap it at 400px for larger phones
         };
       }
     }
@@ -89,7 +91,7 @@ export default function CircularSpeakersSection() {
     if (!isMobile) {
       // Calculate angle for each position around the circle
       const angle = (index * (360 / totalSpeakers) + rotation) % 360;
-      const radius = 180; // radius of the circle in pixels
+      const radius = 250; // Increased radius from 180px to 250px for more spacing
 
       // Convert angle to radians and calculate position
       const radians = (angle * Math.PI) / 180;
@@ -129,8 +131,11 @@ export default function CircularSpeakersSection() {
   return (
     <section id="circular-speaker-section" className="py-20 bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
+        <h2 className="text-3xl sm:text-5xl font-bold text-center mb-48 max-sm:mb-16 text-[#eb0028]">
           Our Speakers
+          <p className="mt-2 text-lg italic font-normal text-gray-400">
+            Click the cards for more info
+          </p>
         </h2>
 
         {/* Desktop version - circular layout */}
@@ -151,7 +156,7 @@ export default function CircularSpeakersSection() {
                   } ${
                     expandedSpeakerIndex === index
                       ? "overflow-y-auto"
-                      : "h-64 w-56 overflow-hidden"
+                      : "h-96 w-72 overflow-hidden"
                   }`}
                   style={getPositionStyles(index, speakers.length, false)}
                   onClick={() => handleSpeakerClick(index)}
@@ -161,13 +166,20 @@ export default function CircularSpeakersSection() {
                       expandedSpeakerIndex === index ? "" : "h-full"
                     }`}
                   >
-                    <div className="relative h-32 w-full overflow-hidden rounded-t-md">
-                      {IS_SPEAKERS_ANNOUNCED ? (
+                    <div
+                      className={`relative w-full overflow-hidden rounded-t-md ${
+                        IS_SPEAKERS_ANNOUNCED && expandedSpeakerIndex !== index
+                          ? "h-60"
+                          : "h-0"
+                      }`}
+                    >
+                      {IS_SPEAKERS_ANNOUNCED &&
+                      expandedSpeakerIndex !== index ? (
                         <Image
                           src={speaker.image}
                           alt={speaker.name}
                           fill
-                          className="object-contain"
+                          className="object-cover object-top"
                         />
                       ) : (
                         <div className="text-gray-500 relative h-40 w-full overflow-hidden rounded-t-md bg-gray-800 text-4xl opacity-30 flex items-center justify-center">
@@ -188,6 +200,7 @@ export default function CircularSpeakersSection() {
                         </div>
                       )}
                     </div>
+
                     <div className="p-4 flex-1 flex flex-col">
                       <h3 className="text-lg font-semibold mb-2 text-white">
                         {IS_SPEAKERS_ANNOUNCED ? speaker.name : "Coming Soon"}
@@ -196,12 +209,32 @@ export default function CircularSpeakersSection() {
                       {IS_SPEAKERS_ANNOUNCED ? (
                         expandedSpeakerIndex === index ? (
                           <div className="flex-1">
-                            <p className="text-gray-200 text-sm mb-4">
-                              {speaker.bio}
-                            </p>
-                            <p className="text-gray-300 text-sm mb-4">
-                              {speaker.details}
-                            </p>
+                            {/* Change layout to horizontal when expanded */}
+                            <div className="flex flex-col lg:flex-row">
+                              {/* Image container on the left */}
+                              <div className="lg:w-2/5 mb-4 lg:mb-0 lg:mr-4">
+                                <div className="relative h-60 w-full rounded-md overflow-hidden">
+                                  <Image
+                                    src={speaker.image}
+                                    alt={speaker.name}
+                                    fill
+                                    className="object-cover object-top"
+                                  />
+                                </div>
+                              </div>
+                              {/* Text content on the right */}
+                              <div className="lg:w-3/5">
+                                {speaker.bioLong.map((paragraph, i) => (
+                                  <p
+                                    key={i}
+                                    className="text-gray-200 text-sm mb-4"
+                                  >
+                                    {paragraph}
+                                  </p>
+                                ))}
+                              </div>
+                            </div>
+
                             <div className="mt-4 text-center">
                               <button
                                 className="text-xs text-white bg-red-600 px-3 py-1 rounded-full hover:bg-red-700 transition-colors"
@@ -215,9 +248,14 @@ export default function CircularSpeakersSection() {
                             </div>
                           </div>
                         ) : (
-                          <p className="text-gray-400 text-sm line-clamp-2">
-                            {speaker.bio}
-                          </p>
+                          <div>
+                            <p className="text-gray-400 text-md">
+                              {speaker.bio}
+                            </p>
+                            <p className="mt-2 text-sm italic font-normal text-gray-400">
+                              Click the cards for more info
+                            </p>
+                          </div>
                         )
                       ) : (
                         <p className="text-gray-400 text-sm">
@@ -249,7 +287,7 @@ export default function CircularSpeakersSection() {
                     src={speaker.image}
                     alt={speaker.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 ) : (
                   <div className="text-gray-500 relative h-40 w-full overflow-hidden rounded-t-md bg-gray-800 text-4xl opacity-30 flex items-center justify-center">
@@ -279,9 +317,11 @@ export default function CircularSpeakersSection() {
                   expandedSpeakerIndex === index ? (
                     <div>
                       <p className="text-gray-200 mb-3">{speaker.bio}</p>
-                      <p className="text-gray-300 text-sm mb-4">
-                        {speaker.details}
-                      </p>
+                      {speaker.bioLong.map((paragraph, i) => (
+                        <p key={i} className="text-gray-200 text-sm mb-4">
+                          {paragraph}
+                        </p>
+                      ))}
                       <div className="text-center">
                         <button
                           className="text-white bg-red-600 px-4 py-2 rounded-full hover:bg-red-700 transition-colors"
@@ -295,7 +335,12 @@ export default function CircularSpeakersSection() {
                       </div>
                     </div>
                   ) : (
-                    <p className="text-gray-400">{speaker.bio}</p>
+                    <div>
+                      <p className="text-gray-400 text-md">{speaker.bio}</p>
+                      <p className="mt-2 text-sm italic font-normal text-gray-400">
+                        Click the cards for more info
+                      </p>
+                    </div>
                   )
                 ) : (
                   <p className="text-gray-400 text-sm">

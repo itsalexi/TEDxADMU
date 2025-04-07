@@ -2,25 +2,44 @@
   {
     "name": "Mary Grace Banal, RND, MS CN",
     "bio": "Registered Nutritionist-Dietitian specializing in clinical nutrition, sports nutrition, and behavioral coaching",
-    "bio-long": "<p>Grace Banal is an evidence-based and results-driven Registered Nutritionist-Dietitian with 16+ years of experience spanning clinical nutrition, food service, sports and fitness, behavioral coaching, and social media content creation.</p>/n<p>She has proven expertise in medical nutrition therapy for lifestyle diseases, weight management, fitness and sports nutrition, and disease prevention.</p>/n<p>A thought leader in nutrition education and public speaking, providing tailored meal planning, health coaching, and workplace wellness programs.</p>/n<p>Lastly, passionate about bridging the gap between nutrition science and practical, sustainable eating solutions for Filipinos worldwide.</p>",
+    "bioLong": [
+      "Grace Banal is an evidence-based and results-driven Registered Nutritionist-Dietitian with 16+ years of experience spanning clinical nutrition, food service, sports and fitness, behavioral coaching, and social media content creation.",
+      "She has proven expertise in medical nutrition therapy for lifestyle diseases, weight management, fitness and sports nutrition, and disease prevention.",
+      "A thought leader in nutrition education and public speaking, providing tailored meal planning, health coaching, and workplace wellness programs.",
+      "Lastly, passionate about bridging the gap between nutrition science and practical, sustainable eating solutions for Filipinos worldwide."
+    ],
     "image": "/grace-banal.webp"
   },
   {
     "name": "Zymba Ding",
     "bio": "Rising drag performer from Caloocan, known for her fierce stage presence and bold fashion choices.",
-    "bio-long": "<p>Formerly a contestant on Drag Race Philippines Season 3, Zymba Ding is a rising drag performer from Caloocan and a proud member of the House of  Ding. Known for her fierce stage presence and interesting choice of fashion, she has quickly made a name for herself in the Philippine drag scene.</p>\n<p>In just over a year, she has managed to earn titles in competitions such as Dragdagulan, Ikaw Nemen, and most notably, Bunganga Battle Royale.  Zymba takes pride in incorporating her Christian identity within drag, aiming to bridge two seemingly different worlds through her strong performances, truly embodying a fierce, fearless, and ferocious identity.</p>\n<p>Her representation of her hometown, Tala, and its history with leprosy is evidence of her love for the craft and unapologetic spirit, making her one of the most promising new voices in Philippine drag.</p>",
+    "bioLong": [
+      "Formerly a contestant on Drag Race Philippines Season 3, Zymba Ding is a rising drag performer from Caloocan and a proud member of the House of Ding. Known for her fierce stage presence and interesting choice of fashion, she has quickly made a name for herself in the Philippine drag scene.",
+      "In just over a year, she has managed to earn titles in competitions such as Dragdagulan, Ikaw Nemen, and most notably, Bunganga Battle Royale. Zymba takes pride in incorporating her Christian identity within drag, aiming to bridge two seemingly different worlds through her strong performances, truly embodying a fierce, fearless, and ferocious identity.",
+      "Her representation of her hometown, Tala, and its history with leprosy is evidence of her love for the craft and unapologetic spirit, making her one of the most promising new voices in Philippine drag."
+    ],
     "image": "/zymbia-ding.webp"
   },
   {
     "name": "Vien Valencia",
     "bio": "Manila-based artist exploring the relationship between people and spaces through unconventional archival methods.",
-    "bio-long": "Vien Valencia (b. 1998, Manila, Philippines) centers his practice on the act of recording spaces, conditions, and situations that resist documentation. His work explores how people shape their spaces and how spaces, in turn, shape them. He has immersed himself in local communities, creating drawings, photographs, and materials that reject traditional methods of archiving. In 2023, Valencia received the Ateneo Art Award, followed by the Cultural Center of the Philippines Thirteen Artists Award in 2024.",
+    "bioLong": [
+      "Vien Valencia (b. 1998, Manila, Philippines) centers his practice on the act of recording spaces, conditions, and situations that resist documentation.",
+      "His work explores how people shape their spaces and how spaces, in turn, shape them.",
+      "He has immersed himself in local communities, creating drawings, photographs, and materials that reject traditional methods of archiving.",
+      "In 2023, Valencia received the Ateneo Art Award, followed by the Cultural Center of the Philippines Thirteen Artists Award in 2024."
+    ],
     "image": "/vien-valencia.webp"
   },
   {
     "name": "Mikee Reyes",
     "bio": "Former UP basketball player turned podcaster, content creator, and founder of the streetwear brand Diin.",
-    "bio-long": "<p>Miguel 'Mikee' Reyes is a former basketball player, now a podcaster and social media influencer. After his time playing basketball for the University of the Philippines, Mikee ventured into a variety of professional fields. He is currently the host of the podcast Tito Thoughts, where he offers insights on a wide range of topics, including career development, stress management, and sports.</p>/n<p>Known as 'Tito Mikee,' he also creates content that shares glimpses of his daily life with his audience. In addition to his work as a podcaster and content creator, Tito Mikee is the founder of Diin, a clothing brand specializing in versatile and minimalist streetwear, embodying the tagline 'Madiin for anything.'</p>",
+    "bioLong": [
+      "Miguel 'Mikee' Reyes is a former basketball player, now a podcaster and social media influencer. After his time playing basketball for the University of the Philippines, Mikee ventured into a variety of professional fields.",
+      "He is currently the host of the podcast Tito Thoughts, where he offers insights on a wide range of topics, including career development, stress management, and sports.",
+      "Known as 'Tito Mikee,' he also creates content that shares glimpses of his daily life with his audience.",
+      "In addition to his work as a podcaster and content creator, Tito Mikee is the founder of Diin, a clothing brand specializing in versatile and minimalist streetwear, embodying the tagline 'Madiin for anything.'"
+    ],
     "image": "/mikee-reyes.webp"
   }
 ]

@@ -613,7 +613,12 @@ export default function Home() {
                         <h3 className="text-xl font-semibold mb-2 text-white">
                           {speaker.name}
                         </h3>
-                        <p className="text-gray-400">{speaker.bio}</p>
+                        <p className="text-gray-400 mb-16">{speaker.bio}</p>
+                        <Link href="/event-details#circular-speaker-section">
+                          <span className="absolute bottom-4 px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-black hover:text-white transition-colors duration-300">
+                            Learn More
+                          </span>
+                        </Link>
                       </div>
                     </div>
                   ))
