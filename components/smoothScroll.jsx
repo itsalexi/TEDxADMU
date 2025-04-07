@@ -285,7 +285,7 @@ const ParallaxCard = ({ product, start, end }) => {
         <div className="flex items-center justify-between w-full">
           <span className="text-lg font-bold text-white">{product.price}</span>
           <Link
-            href="https://google.com"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdHg8QyWQ-tPzeTBajSsxeTWX-ybXcYOKV_T0X3DIsMrVQtPA/viewform"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-red-600 hover:bg-red-700 text-white max-lg:text-sm font-bold py-1 lg:py-2 lg:px-4 px-2 rounded transition-all duration-300 hover:scale-105"

@@ -71,7 +71,7 @@ const ShopHero = () => {
           Labyrinthine
         </p>
         <Link
-          href="https://google.com"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdHg8QyWQ-tPzeTBajSsxeTWX-ybXcYOKV_T0X3DIsMrVQtPA/viewform"
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs hover:scale-110 transition-transform bg-red-600 rounded-full py-2 w-20 cursor-pointer"
