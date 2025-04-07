@@ -167,7 +167,7 @@ export default function CircularSpeakersSection() {
                           src={speaker.image}
                           alt={speaker.name}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       ) : (
                         <div className="text-gray-500 relative h-40 w-full overflow-hidden rounded-t-md bg-gray-800 text-4xl opacity-30 flex items-center justify-center">

@@ -12,9 +12,8 @@ import TextLoadingScreen from "@/components/TextLoadingScreen";
 import { GlareGrid } from "@/components/glareGrid";
 import TedxSection from "@/components/tedxSection";
 import OrganizersSection from "@/components/meetOrganizers";
-import IS_SPEAKERS_ANNOUNCED from "./config/config";
-import speakers from '@/data/speakers.json';
-
+import { IS_SPEAKERS_ANNOUNCED } from "./config/config";
+import speakers from "@/data/speakers.json";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -200,8 +199,6 @@ export default function Home() {
   const handleLoadComplete = () => {
     setIsLoading(false);
   };
-
-  
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -430,12 +427,12 @@ export default function Home() {
         {/* Speakers Cards */}
         <section id="speaker-section" className="py-10 bg-black">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
+            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-32 max-xl:mb-16 text-[#eb0028]">
               Our Speakers
             </h2>
 
             {/* Desktop version - overlapping cards with spread functionality */}
-            <div className="hidden md:block">
+            <div className="hidden xl:block">
               <div className="flex justify-center items-center h-96 relative mb-16">
                 {IS_SPEAKERS_ANNOUNCED
                   ? // Original speakers code when speakers are announced
@@ -484,7 +481,7 @@ export default function Home() {
                       return (
                         <div
                           key={index}
-                          className="absolute h-80 w-64 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
+                          className="absolute h-[33rem] w-72 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
                           style={{
                             left: leftPosition,
                             transform: `translateX(-50%) rotate(${rotation}deg) scale(${scale})`,
@@ -493,7 +490,7 @@ export default function Home() {
                           onMouseEnter={() => setHoveredIndex(index)}
                           onMouseLeave={() => setHoveredIndex(null)}
                         >
-                          <div className="relative h-40 w-full overflow-hidden rounded-t-md">
+                          <div className="relative h-80 w-full overflow-hidden rounded-t-md">
                             <Image
                               src={speaker.image}
                               alt={speaker.name}
@@ -505,9 +502,14 @@ export default function Home() {
                             <h3 className="text-lg font-semibold mb-2 text-white">
                               {speaker.name}
                             </h3>
-                            <p className="text-gray-400 text-sm line-clamp-3">
+                            <p className="text-gray-400 text-sm">
                               {speaker.bio}
                             </p>
+                            <Link href="/event-details#circular-speaker-section">
+                              <span className="absolute bottom-4 px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-black hover:text-white transition-colors duration-300">
+                                Learn More
+                              </span>
+                            </Link>
                           </div>
                         </div>
                       );
@@ -591,7 +593,7 @@ export default function Home() {
             </div>
 
             {/* Mobile version */}
-            <div className="md:hidden space-y-4 max-w-sm mx-auto">
+            <div className="xl:hidden space-y-4 max-w-sm mx-auto">
               {IS_SPEAKERS_ANNOUNCED
                 ? // Original speakers code for mobile
                   speakers.map((speaker, index) => (
@@ -599,7 +601,7 @@ export default function Home() {
                       key={index}
                       className="relative ml-auto h-full w-full bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 shadow-lg transition-all duration-300 hover:scale-105"
                     >
-                      <div className="relative h-48 w-full overflow-hidden rounded-t-md">
+                      <div className="relative h-[32rem] w-full overflow-hidden rounded-t-md">
                         <Image
                           src={speaker.image}
                           alt={speaker.name}
