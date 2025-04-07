@@ -42,15 +42,23 @@ const TopicsDropdown = () => {
       id: "curiosity",
       title: "Curiosity",
       shortDescription: "Microbiome: The Ecosystem Inside You",
-      fullDescription: `The microbiome is the diverse community of microorganisms which includes bacteria, fungi, 
-        and viruses that live within us. From digestion to mental health, this intricate ecosystem plays 
-        a crucial role in shaping our overall well-being. This talk will explore the interconnectedness 
-        between our gut and brain, the potential of microbiome-based therapies, and the impact of modern 
-        lifestyles on this vital ecosystem. By understanding the importance of the microbiome, we can take 
-        proactive steps to cultivate a healthy internal ecosystem. Adopt mindful eating practices, reduce 
-        antibiotic use, and consider personalized microbiome-based interventions. By nurturing the microbiome, 
-        we can unlock our full potential and improve our overall well-being.`,
-      image: "/empty-head.png", // Keep only the image property
+      fullDescription: (
+        <>
+          <p>The <strong>microbiome</strong> is the diverse community of microorganisms which includes bacteria, fungi, 
+          and viruses that live within us. From <strong>digestion to mental health</strong>, this intricate ecosystem plays 
+          a crucial role in shaping our overall well-being.</p>
+          <br />
+          <p>This talk will explore the interconnectedness 
+          between our gut and brain, the potential of <strong>microbiome-based therapies</strong>, and the impact of <strong>modern 
+          lifestyles</strong> on this vital ecosystem.</p>
+          <br />
+          <p>By understanding the importance of the microbiome, we can take 
+          proactive steps to cultivate a <strong>healthy internal ecosystem</strong>. Adopt mindful eating practices, reduce 
+          antibiotic use, and consider <strong>personalized</strong> microbiome-based interventions. By nurturing the microbiome, 
+          we can unlock our <strong>full potential</strong> and improve our overall well-being.</p>
+        </>
+      ),
+      image: "/empty-head.png",
       backgroundColor: "bg-blue-950",
       textColor: "text-orange-400",
     },
@@ -58,18 +66,27 @@ const TopicsDropdown = () => {
       id: "impasse",
       title: "Impasse",
       shortDescription: "Finding Purpose and Strength in Stillness and Grief",
-      fullDescription: `In a fast-paced world where instant gratification is the norm, we’re often unprepared 
-      for moments that force us to pause—especially in times of loss, uncertainty, or pain. This talk explores 
-      how waiting, particularly in grief, can become a powerful tool for transformation, clarity, and resilience. 
-      Grief is one of life’s longest waits—waiting for healing, answers, or a sense of wholeness. Yet, like all 
-      forms of waiting, it can also be a departure point: a painful but necessary pause that teaches the value of 
-      stillness and the lessons we’d miss in our rush to move on. For college students, this stage of life is 
-      often marked by excitement but also uncertainty, fear, and loss—whether it’s the death of a loved one, a 
-      failed relationship, the loss of a work opportunity, or the struggle to find identity. These experiences 
-      remind us that some things can’t be rushed or fixed. By reframing grief as an active, strategic part of 
-      our journey, this talk offers students a new perspective on challenges and loss. It reminds them that 
-      waiting isn’t passive—it’s a time of preparation, reflection, and, ultimately, transformation.`,
-      image: "/red-drawing.png", // Keep only the image property
+      fullDescription: (
+        <>
+          <p>In a fast-paced world where <strong>instant gratification</strong> is the norm, we’re often unprepared 
+          for moments that force us to pause—especially in times of <strong>loss, uncertainty, or pain</strong>. This talk explores 
+          how <strong>waiting</strong>, particularly in grief, can become a powerful tool for <strong>transformation, clarity, and resilience</strong>.</p>
+          <br />
+          <p>Grief is one of life’s longest waits—waiting for <strong>healing, answers, or a sense of wholeness</strong>. Yet, like all 
+          forms of waiting, it can also be a <strong>departure point</strong>: a painful but necessary pause that teaches the value of 
+          stillness and the lessons we’d miss in our rush to move on.</p>
+          <br />
+          <p>For college students, this stage of life is 
+          often marked by <strong>excitement but also uncertainty, fear, and loss</strong>—whether it’s the death of a loved one, a 
+          failed relationship, the loss of a work opportunity, or the struggle to find identity. These experiences 
+          remind us that some things can’t be <strong>rushed or fixed</strong>.</p>
+          <br />
+          <p>By reframing grief as an <strong>active, strategic part</strong> of 
+          our journey, this talk offers students a new perspective on <strong>challenges and loss</strong>. It reminds them that 
+          <strong> waiting isn’t passive</strong>—it’s a time of preparation, reflection, and, ultimately, transformation.</p>
+        </>
+      ),
+      image: "/red-drawing.png",
       backgroundColor: "bg-[#eb0028]",
       textColor: "text-black",
     },
@@ -77,12 +94,20 @@ const TopicsDropdown = () => {
       id: "turning-point",
       title: "Turning Point",
       shortDescription: "Artivism: The Power of Art in Activism",
-      fullDescription: `In a world marked by growing societal divides, art has emerged as a powerful force for unity, understanding,
-         and social change. Through shared experiences and emotional engagement, art transcends boundaries, inspiring 
-         action, building empathy, and fostering community. This topic explores how artists harness their creativity 
-         as a tool for activism, using storytelling, performance, and visual expression to address pressing societal 
-         challenges and advocate for meaningful change. From protest art to community-driven projects, discover how 
-         artivism empowers individuals and movements to imagine—and create—a better world.`,
+      fullDescription: (
+        <>
+          <p>In a world marked by growing <strong>societal divides</strong>, art has emerged as a powerful force for <strong>unity, understanding, 
+          and social change</strong>. Through <strong>shared experiences and emotional engagement</strong>, art transcends boundaries, inspiring 
+          action, building empathy, and fostering community.</p>
+          <br />
+          <p>This topic explores how <strong>artists harness their creativity </strong> 
+          as a tool for activism, using <strong>storytelling, performance, and visual expression</strong> to address pressing societal 
+          challenges and advocate for meaningful change.</p>
+          <br />
+          <p>From <strong>protest art</strong> to <strong>community-driven projects</strong>, discover how 
+          <strong>artivism</strong> empowers individuals and movements to imagine—and create—a better world.</p>
+        </>
+      ),
       image: "/fishing.png",
       backgroundColor: "bg-green-900",
       textColor: "text-lime-100",
@@ -91,18 +116,26 @@ const TopicsDropdown = () => {
       id: "transformation",
       title: "Transformation",
       shortDescription: "Digital Nomads: Work with Freedom and Fulfillment",
-      fullDescription: `Imagine a world where work transcends geographical boundaries, allowing individuals to explore new cultures, 
-        pursue their passions, and live life on their own terms. This reality is embraced by millions of digital nomads, 
-        who challenge the traditional 9-to-5 work model and redefine what it means to have a successful career. However, 
-        the digital nomad lifestyle is not without its controversies. As global companies push for employees to return to 
-        the office, questions arise about the value of this lifestyle in terms of productivity, collaboration, and work-life 
-        balance. This talk will delve into the complexities of digital nomadism, examining both its advantages and drawbacks 
-        across different industries.`,
+      fullDescription: (
+        <>
+          <p>Imagine a world where <strong>work transcends geographical boundaries</strong>, allowing individuals to <strong>explore new cultures</strong>, 
+          pursue their <strong>passions</strong>, and live life on their own terms. This reality is embraced by millions of <strong>digital nomads</strong>, 
+          who challenge the traditional <strong>9-to-5 work model</strong> and redefine what it means to have a <strong>successful career</strong>.</p>
+          <br />
+          <p>However, 
+          the <strong>digital nomad lifestyle</strong> is not without its controversies. As <strong>global companies</strong> push for employees to return to 
+          the office, questions arise about the value of this lifestyle in terms of <strong>productivity, collaboration, and work-life balance</strong>.</p>
+          <br />
+          <p>This talk will delve into the complexities of <strong>digital nomadism</strong>, examining both its <strong>advantages and drawbacks </strong> 
+          across different industries.</p>
+        </>
+      ),
       image: "/batman.png",
       backgroundColor: "bg-gray-900",
       textColor: "text-yellow-400",
     },
   ];
+
 
   return (
     <div className="w-full bg-">

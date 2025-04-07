@@ -12,7 +12,8 @@ import TextLoadingScreen from "@/components/TextLoadingScreen";
 import { GlareGrid } from "@/components/glareGrid";
 import TedxSection from "@/components/tedxSection";
 import OrganizersSection from "@/components/meetOrganizers";
-import IS_SPEAKERS_ANNOUNCED from "./config/config";
+import { IS_SPEAKERS_ANNOUNCED } from "./config/config";
+import speakers from "@/data/speakers.json";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -26,6 +27,81 @@ export default function Home() {
   const [speakerSectionVisible, setSpeakerSectionVisible] = useState(false);
   const [visibleSections, setVisibleSections] = useState({});
   const [headingHighlights, setHeadingHighlights] = useState({});
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let isInBarrier = false;
+    const MAX_SCROLL_SPEED = 12; // Maximum allowed scroll speed
+    const DECELERATION_FACTOR = 0.1; // Dividing factor to slow down scroll (less than 1)
+    let isMobileView = window.innerWidth < 768; // Check for mobile/small screen
+
+    // Function to update mobile view status
+    const updateViewportCheck = () => {
+      isMobileView = window.innerWidth < 768;
+    };
+
+    const handleScroll = (e) => {
+      // Only apply scroll barrier on mobile screens
+      if (!isMobileView) return;
+
+      const barrierSection = document.querySelector(".scroll-barrier");
+      if (!barrierSection) return;
+
+      const barrierStart = barrierSection.offsetTop;
+      const barrierEnd = barrierStart + barrierSection.offsetHeight;
+      const currentScrollY = window.scrollY;
+      const scrollSpeed = Math.abs(currentScrollY - lastScrollY);
+      const isScrollingDown = currentScrollY > lastScrollY;
+
+      // Check if we're within the barrier section
+      if (
+        currentScrollY >= barrierStart - 1500 &&
+        currentScrollY <= barrierEnd + 100
+      ) {
+        // Only apply deceleration when scrolling downward and exceeding max speed
+        if (isScrollingDown && scrollSpeed > MAX_SCROLL_SPEED) {
+          // Calculate the reduced scroll position
+          const reducedScrollSpeed = scrollSpeed * DECELERATION_FACTOR; // Slow down by applying factor
+
+          // Adjust scroll position to slow down
+          window.scrollTo({
+            top: lastScrollY + reducedScrollSpeed, // Only positive direction since we know we're scrolling down
+            behavior: "auto", // Using 'auto' instead of 'smooth' for more precise control
+          });
+
+          // Prevent default to stop normal scrolling
+          if (e && e.preventDefault) {
+            e.preventDefault();
+          }
+
+          isInBarrier = true;
+        } else {
+          // For upward scrolling, we don't interfere
+          isInBarrier = false;
+        }
+      } else {
+        isInBarrier = false;
+      }
+
+      // Update last scroll position
+      // For downward scrolling in barrier, only update if speed is acceptable
+      // For upward scrolling or outside barrier, always update
+      if (!isInBarrier || !isScrollingDown || scrollSpeed <= MAX_SCROLL_SPEED) {
+        lastScrollY = currentScrollY;
+      }
+    };
+
+    // Add resize listener to update mobile check
+    window.addEventListener("resize", updateViewportCheck);
+
+    // Use passive: false to enable preventDefault in the handler
+    window.addEventListener("scroll", handleScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener("resize", updateViewportCheck);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     setMounted(true);
@@ -124,29 +200,6 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const speakers = [
-    {
-      name: "Dr. Maria Santos",
-      bio: "Cognitive Neuroscientist exploring the depths of human consciousness",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Architect Juan Reyes",
-      bio: "Sustainable urban designer creating spaces that heal communities",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Innovator Ana Cruz",
-      bio: "Tech entrepreneur bridging digital divides in underserved regions",
-      image: "/api/placeholder/300/300",
-    },
-    {
-      name: "Prof. David Lee",
-      bio: "Philosopher examining the ethical labyrinths of emerging technologies",
-      image: "/api/placeholder/300/300",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-black text-white">
       {isLoading && <TextLoadingScreen onLoadComplete={handleLoadComplete} />}
@@ -225,6 +278,11 @@ export default function Home() {
 
         <section className="bg-[#161616]">
           <TrippyScroll />
+          {/* Scroll barrier positioned absolutely to avoid creating gaps */}
+          <div
+            className="scroll-barrier absolute w-full h-6 opacity-0 pointer-events-none"
+            aria-hidden="true"
+          ></div>
         </section>
 
         <section
@@ -369,12 +427,12 @@ export default function Home() {
         {/* Speakers Cards */}
         <section id="speaker-section" className="py-10 bg-black">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-16 text-[#eb0028]">
+            <h2 className="text-3xl sm:text-5xl font-bold text-center mb-32 max-xl:mb-16 text-[#eb0028]">
               Our Speakers
             </h2>
 
             {/* Desktop version - overlapping cards with spread functionality */}
-            <div className="hidden md:block">
+            <div className="hidden xl:block">
               <div className="flex justify-center items-center h-96 relative mb-16">
                 {IS_SPEAKERS_ANNOUNCED
                   ? // Original speakers code when speakers are announced
@@ -423,7 +481,7 @@ export default function Home() {
                       return (
                         <div
                           key={index}
-                          className="absolute h-80 w-64 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
+                          className="absolute h-[33rem] w-72 bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 transition-all duration-300 shadow-lg cursor-pointer"
                           style={{
                             left: leftPosition,
                             transform: `translateX(-50%) rotate(${rotation}deg) scale(${scale})`,
@@ -432,7 +490,7 @@ export default function Home() {
                           onMouseEnter={() => setHoveredIndex(index)}
                           onMouseLeave={() => setHoveredIndex(null)}
                         >
-                          <div className="relative h-40 w-full overflow-hidden rounded-t-md">
+                          <div className="relative h-80 w-full overflow-hidden rounded-t-md">
                             <Image
                               src={speaker.image}
                               alt={speaker.name}
@@ -444,9 +502,14 @@ export default function Home() {
                             <h3 className="text-lg font-semibold mb-2 text-white">
                               {speaker.name}
                             </h3>
-                            <p className="text-gray-400 text-sm line-clamp-3">
+                            <p className="text-gray-400 text-sm">
                               {speaker.bio}
                             </p>
+                            <Link href="/event-details#circular-speaker-section">
+                              <span className="absolute bottom-4 px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-black hover:text-white transition-colors duration-300">
+                                Learn More
+                              </span>
+                            </Link>
                           </div>
                         </div>
                       );
@@ -530,7 +593,7 @@ export default function Home() {
             </div>
 
             {/* Mobile version */}
-            <div className="md:hidden space-y-4 max-w-sm mx-auto">
+            <div className="xl:hidden space-y-4 max-w-sm mx-auto">
               {IS_SPEAKERS_ANNOUNCED
                 ? // Original speakers code for mobile
                   speakers.map((speaker, index) => (
@@ -538,7 +601,7 @@ export default function Home() {
                       key={index}
                       className="relative ml-auto h-full w-full bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-white-300 shadow-lg transition-all duration-300 hover:scale-105"
                     >
-                      <div className="relative h-48 w-full overflow-hidden rounded-t-md">
+                      <div className="relative h-[32rem] w-full overflow-hidden rounded-t-md">
                         <Image
                           src={speaker.image}
                           alt={speaker.name}
@@ -550,7 +613,12 @@ export default function Home() {
                         <h3 className="text-xl font-semibold mb-2 text-white">
                           {speaker.name}
                         </h3>
-                        <p className="text-gray-400">{speaker.bio}</p>
+                        <p className="text-gray-400 mb-16">{speaker.bio}</p>
+                        <Link href="/event-details#circular-speaker-section">
+                          <span className="absolute bottom-4 px-6 py-2 bg-white text-black font-medium rounded-md hover:bg-black hover:text-white transition-colors duration-300">
+                            Learn More
+                          </span>
+                        </Link>
                       </div>
                     </div>
                   ))
