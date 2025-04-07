@@ -85,7 +85,7 @@ const ShopHero = () => {
           <motion.img
             initial={{ opacity: 0 }}
             src={images[6].url}
-            className="w-24 h-24 md:w-36 md:h-36 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
+            className="w-24 h-24 md:w-36 md:h-36 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform shadow-slate-400 shadow-md"
           />
         </FloatingElement>
         <FloatingElement depth={1} className="top-[27rem] left-[32%]">
