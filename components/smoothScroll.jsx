@@ -34,7 +34,7 @@ export const SmoothScrollHero = () => {
   );
 };
 
-const SECTION_HEIGHT = 5500;
+const SECTION_HEIGHT = 5800;
 
 const Hero = () => {
   return (
@@ -87,35 +87,83 @@ const CenterImage = () => {
 const productData = [
   {
     id: 1,
-    title: "Light T-Shirt (Back)",
-    description: "Premium cotton TEDxAteneodeManilaU t-shirt in light color",
-    price: "$29.99",
-    image: "/shirt-light-back.png",
-    alt: "TEDxAteneodeManilaU T-shirt Light back view",
+    title: "T-Shirt Cream",
+    description: "Premium cotton TEDxAteneodeManilaU t-shirt in cream color",
+    price: "₱250",
+    image: "/shirts/Design 2 Cream.png",
+    alt: "TEDxAteneodeManilaU T-shirt Cream front and back view",
   },
   {
     id: 2,
-    title: "Light T-Shirt (Front)",
-    description: "Official TEDx design on soft, breathable fabric",
-    price: "$29.99",
-    image: "/shirt-light-front.png",
-    alt: "TEDxAteneodeManilaU T-shirt Light front view",
+    title: "T-Shirt Black",
+    description: "Official TEDxAteneodeManilaU design on soft, breathable fabric",
+    price: "₱250",
+    image: "/shirts/Design 1 Black.png",
+    alt: "TEDxAteneodeManilaU T-shirt Black front and back view",
   },
   {
     id: 3,
-    title: "Dark T-Shirt (Front)",
-    description: "Bold TEDx design stands out on this premium dark shirt",
-    price: "$32.99",
-    image: "/shirt-dark-front.png",
-    alt: "TEDxAteneodeManilaU T-shirt dark front view",
+    title: "Sticker 1",
+    description: "Take One to Enter. A proud statement to wear for a participant of TEDxAteneodeManilaU",
+    price: "₱25",
+    image: "/stickers/2.png",
+    alt: "TEDxAteneodeManilaU Sticker",
   },
   {
     id: 4,
-    title: "Dark T-Shirt (Back)",
-    description: "Stylish back design on our signature dark t-shirt",
-    price: "$32.99",
-    image: "/shirt-dark-back.png",
-    alt: "TEDxAteneodeManilaU T-shirt dark back view",
+    title: "Sticker 2",
+    description: "A labyrinth, a maze, a blueprint. A reminder of life's intricacies.",
+    price: "₱25",
+    image: "/stickers/3.png",
+    alt: "TEDxAteneodeManilaU Sticker",
+  },
+  {
+    id: 5,
+    title: "Sticker 3",
+    description: "Look for the eye of the labyrinth. You'll never know what's coming.",
+    price: "₱25",
+    image: "/stickers/4.png",
+    alt: "TEDxAteneodeManilaU Sticker",
+  },
+  {
+    id: 6,
+    title: "Sticker 4",
+    description: "Life is labyrinthine. And just like a maze, we can navigate complexity together.",
+    price: "₱25",
+    image: "/stickers/5.png",
+    alt: "TEDxAteneodeManilaU Sticker",
+  },
+  {
+    id: 7,
+    title: "Sticker 5",
+    description: "A labyrinth, a maze, a blueprint. A reminder of life's intricacies.",
+    price: "₱25",
+    image: "/stickers/6.png",
+    alt: "TEDxAteneodeManilaU Sticker",
+  },
+  {
+    id: 8,
+    title: "Sticker 6",
+    description: "Exploring the labyrinth. Because what else can we do?",
+    price: "₱25",
+    image: "/stickers/7.png",
+    alt: "TEDxAteneodeManilaU Sticker",
+  },
+  {
+    id: 9,
+    title: "Sticker 7",
+    description: "Tick tack toe. TEDxAteneodeManilaU: Labyrinthine.",
+    price: "₱25",
+    image: "/stickers/8.png",
+    alt: "TEDxAteneodeManilaU Sticker",
+  },
+  {
+    id: 10,
+    title: "Sticker 8",
+    description: "Exploring the labyrinth in you. What can you find?",
+    price: "₱25",
+    image: "/stickers/9.png",
+    alt: "TEDxAteneodeManilaU Sticker",
   },
 ];
 
@@ -123,7 +171,7 @@ const ParallaxImages = () => {
   return (
     <div className="px-4 2xl:pr-40 pt-[200px]">
       <ParallaxImg
-        src="/shirt-light-back.png"
+        src="/shirts/Design 2 Cream Back.png"
         alt="And example of a space launch"
         start={-200}
         end={200}
@@ -131,7 +179,7 @@ const ParallaxImages = () => {
         className="ml-1 w-1/2"
       />
       <ParallaxImg
-        src="/shirt-light-front.png"
+        src="/shirts/Design 1 Black Front.png"
         alt="An example of a space launch"
         start={200}
         end={-250}
@@ -139,7 +187,7 @@ const ParallaxImages = () => {
         className="mx-auto w-1/2"
       />
       <ParallaxImg
-        src="/shirt-dark-front.png"
+        src="/shirts/Design 2 Cream Front.png"
         alt="Orbiting satellite"
         start={-200}
         end={200}
@@ -147,11 +195,11 @@ const ParallaxImages = () => {
         className="ml-auto w-1/2"
       />
       <ParallaxImg
-        src="/shirt-dark-back.png"
+        src="/shirts/Design 1 Black Back.png"
         alt="Orbiting satellite"
         start={0}
         end={-500}
-        text="Out of the Labyrinthe."
+        text="Out of the Labyrinth."
         className="ml-24 w-1/2"
       />
     </div>
@@ -185,7 +233,9 @@ const ParallaxImg = ({ className, alt, src, start, end, text }) => {
         height={100}
         width={100}
       />
-      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white z-50">{text}</h2>
+      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white z-50">
+        {text}
+      </h2>
     </motion.div>
   );
 };
@@ -193,30 +243,9 @@ const ParallaxImg = ({ className, alt, src, start, end, text }) => {
 const ParallaxCards = () => {
   return (
     <div className="mx-auto grid md:grid-cols-2 gap-6 px-4 pt-[100px]">
-      <ParallaxCard
-        product={productData[0]}
-        start={-200}
-        end={200}
-        className=""
-      />
-      <ParallaxCard
-        product={productData[1]}
-        start={-200}
-        end={200}
-        className=""
-      />
-      <ParallaxCard
-        product={productData[2]}
-        start={-200}
-        end={200}
-        className=""
-      />
-      <ParallaxCard
-        product={productData[3]}
-        start={-200}
-        end={200}
-        className=""
-      />
+      {productData.map((product, index) => (
+        <ParallaxCard key={product.id} product={product} start={-200} end={200} className="" />
+      ))}
     </div>
   );
 };
@@ -239,7 +268,7 @@ const ParallaxCard = ({ product, start, end }) => {
     <motion.div
       ref={ref}
       style={{ transform, opacity }}
-      className={`bg-zinc-800 bg-opacity-40 rounded-xl overflow-hidden shadow-lg mb-32 flex items-center justify-between`}
+      className={`bg-zinc-400 bg-opacity-40 rounded-xl h-80 overflow-hidden shadow-lg mb-32 flex items-center justify-between p-4`}
     >
       <div className="max-w-[40%] overflow-hidden">
         <motion.img
@@ -256,7 +285,7 @@ const ParallaxCard = ({ product, start, end }) => {
         <div className="flex items-center justify-between w-full">
           <span className="text-lg font-bold text-white">{product.price}</span>
           <Link
-            href="https://google.com"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdHg8QyWQ-tPzeTBajSsxeTWX-ybXcYOKV_T0X3DIsMrVQtPA/viewform"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-red-600 hover:bg-red-700 text-white max-lg:text-sm font-bold py-1 lg:py-2 lg:px-4 px-2 rounded transition-all duration-300 hover:scale-105"
