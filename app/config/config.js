@@ -20,5 +20,7 @@ export const PRE_SPEAKER_DISCOUNT = 130;
 export const PRE_SPEAKER_PERIOD_START = '2025-03-25';
 
 export const PRE_SPEAKER_PERIOD_END = '2025-03-31';
+
 export const IS_SHOP_ANNOUNCED = true;
-export const IS_SPEAKERS_ANNOUNCED = false;
+export const IS_SPEAKERS_ANNOUNCED = true;
+
