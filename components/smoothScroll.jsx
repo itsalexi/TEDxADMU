@@ -171,7 +171,7 @@ const ParallaxImages = () => {
   return (
     <div className="px-4 2xl:pr-40 pt-[200px]">
       <ParallaxImg
-        src="/shirt-light-back.png"
+        src="/shirts/Design 2 Cream Back.png"
         alt="And example of a space launch"
         start={-200}
         end={200}
@@ -179,7 +179,7 @@ const ParallaxImages = () => {
         className="ml-1 w-1/2"
       />
       <ParallaxImg
-        src="/shirt-light-front.png"
+        src="/shirts/Design 1 Black Front.png"
         alt="An example of a space launch"
         start={200}
         end={-250}
@@ -187,7 +187,7 @@ const ParallaxImages = () => {
         className="mx-auto w-1/2"
       />
       <ParallaxImg
-        src="/shirt-dark-front.png"
+        src="/shirts/Design 2 Cream Front.png"
         alt="Orbiting satellite"
         start={-200}
         end={200}
@@ -195,11 +195,11 @@ const ParallaxImages = () => {
         className="ml-auto w-1/2"
       />
       <ParallaxImg
-        src="/.png"
+        src="/shirts/Design 1 Black Back.png"
         alt="Orbiting satellite"
         start={0}
         end={-500}
-        text="Out of the Labyrinthe."
+        text="Out of the Labyrinth."
         className="ml-24 w-1/2"
       />
     </div>
