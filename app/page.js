@@ -278,9 +278,9 @@ export default function Home() {
 
         <section className="bg-[#161616]">
           <TrippyScroll />
-          {/* Scroll barrier positioned absolutely to avoid creating gaps */}
+          {/* Scroll barrier disabled - buggy */}
           <div
-            className="scroll-barrier absolute w-full h-6 opacity-0 pointer-events-none"
+            className="s absolute w-full h-6 opacity-0 pointer-events-none"
             aria-hidden="true"
           ></div>
         </section>
