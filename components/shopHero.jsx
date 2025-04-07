@@ -8,28 +8,40 @@ import Floating, { FloatingElement } from "./parallax-floating";
 
 const images = [
   {
-    url: "/sticker-1.png",
+    url: "/stickers/2.png",
   },
   {
-    url: "/sticker-2.png",
+    url: "/stickers/3.png",
   },
   {
-    url: "/sticker-3.png",
+    url: "/stickers/4.png",
   },
   {
-    url: "/sticker-4.png",
+    url: "/stickers/5.png",
   },
   {
-    url: "shirt-dark-front.png",
+    url: "/stickers/6.png",
   },
   {
-    url: "shirt-light-front.png",
+    url: "/stickers/7.png",
   },
   {
-    url: "shirt-light-back.png",
+    url: "/stickers/8.png",
   },
   {
-    url: "shirt-dark-back.png",
+    url: "/stickers/9.png",
+  },
+  {
+    url: "/shirts/Design 1 Black Back.png",
+  },
+  {
+    url: "/shirts/Design 1 Black Front.png",
+  },
+  {
+    url: "/shirts/Design 2 Cream Back.png",
+  },
+  {
+    url: "/shirts/Design 2 Cream Front.png",
   },
 ];
 
@@ -72,8 +84,8 @@ const ShopHero = () => {
         <FloatingElement depth={0.5} className="top-[36rem] left-[23%]">
           <motion.img
             initial={{ opacity: 0 }}
-            src={images[0].url}
-            className="w-24 h-16 md:w-36 md:h-24 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
+            src={images[6].url}
+            className="w-24 h-24 md:w-36 md:h-36 object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
         <FloatingElement depth={1} className="top-[27rem] left-[32%]">
@@ -116,14 +128,14 @@ const ShopHero = () => {
         <FloatingElement depth={4} className="top-[19rem] left-[19%]">
           <motion.img
             initial={{ opacity: 0 }}
-            src={images[6].url}
+            src={images[10].url}
             className="w-64 md:w-64 h-full object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
         <FloatingElement depth={4} className="top-[30rem] left-[60%]">
           <motion.img
             initial={{ opacity: 0 }}
-            src={images[7].url}
+            src={images[8].url}
             className="w-64 md:w-64 h-full object-cover hover:scale-105 duration-200 cursor-pointer transition-transform"
           />
         </FloatingElement>
