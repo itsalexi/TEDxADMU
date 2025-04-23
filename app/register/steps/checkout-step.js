@@ -36,7 +36,6 @@ export default function CheckoutStep({
 
   const calculateTotalPrice = (totalAttendees) => {
     let price = SINGLE_TICKET_PRICE * totalAttendees;
-
     if (IS_PRE_SPEAKER_PERIOD) {
       // Early bird discount only
       price = price - PRE_SPEAKER_DISCOUNT * totalAttendees;
@@ -48,24 +47,27 @@ export default function CheckoutStep({
         price = price - ATENEAN_DISCOUNT;
       }
 
-      // Apply individual discounts for additional attendees
-      attendees.forEach((attendee) => {
-        if (attendee.is_scholar_or_ama) {
-          price = price - SCHOLAR_AMA_DISCOUNT;
-        } else if (attendee.is_atenean) {
-          price = price - ATENEAN_DISCOUNT;
-        }
-      });
+      // Apply individual discounts for additional attendees ONLY for group registration
+      if (formData.registration_type === 'group' && totalAttendees > 1) {
+        attendees.forEach((attendee) => {
+          if (attendee.is_scholar_or_ama) {
+            price = price - SCHOLAR_AMA_DISCOUNT;
+          } else if (attendee.is_atenean) {
+            price = price - ATENEAN_DISCOUNT;
+          }
+        });
 
-      // Apply bundle discount for group of 3
-      if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
-        const bundleDiscountAmount =
-          formData.is_scholar_or_ama || formData.is_atenean
-            ? ATENEAN_AMA_BUNDLE_DISCOUNT
-            : OUTSIDER_BUNDLE_DISCOUNT;
-        price = price - bundleDiscountAmount;
+        // Apply bundle discount for group of 3 (only for group registration)
+        if (totalAttendees >= GROUP_DISCOUNT_THRESHOLD) {
+          const bundleDiscountAmount =
+            formData.is_scholar_or_ama || formData.is_atenean
+              ? ATENEAN_AMA_BUNDLE_DISCOUNT
+              : OUTSIDER_BUNDLE_DISCOUNT;
+          price = price - bundleDiscountAmount;
+        }
       }
     }
+
     return price;
   };
 
@@ -73,7 +75,6 @@ export default function CheckoutStep({
     const totalAttendees =
       formData.registration_type === 'group' ? 1 + attendees.length : 1;
     const updatedPrice = calculateTotalPrice(totalAttendees);
-
     // Calculate order summary
     const basePrice = SINGLE_TICKET_PRICE * totalAttendees;
 
@@ -90,9 +91,18 @@ export default function CheckoutStep({
           }
         : {
             scholar_ama:
-              attendees.filter((a) => a.is_scholar_or_ama).length +
-                (formData.is_scholar_or_ama ? 1 : 0) >
-              0
+              // For single registration, only consider the main registrant
+              formData.registration_type === 'single'
+                ? formData.is_scholar_or_ama
+                  ? {
+                      amount: SCHOLAR_AMA_DISCOUNT,
+                      attendees: 1,
+                    }
+                  : null
+                : // For group registration, consider all attendees
+                attendees.filter((a) => a.is_scholar_or_ama).length +
+                    (formData.is_scholar_or_ama ? 1 : 0) >
+                  0
                 ? {
                     amount:
                       SCHOLAR_AMA_DISCOUNT *
@@ -104,9 +114,18 @@ export default function CheckoutStep({
                   }
                 : null,
             atenean:
-              attendees.filter((a) => a.is_atenean).length +
-                (formData.is_atenean ? 1 : 0) >
-              0
+              // For single registration, only consider the main registrant
+              formData.registration_type === 'single'
+                ? formData.is_atenean
+                  ? {
+                      amount: ATENEAN_DISCOUNT,
+                      attendees: 1,
+                    }
+                  : null
+                : // For group registration, consider all attendees
+                attendees.filter((a) => a.is_atenean).length +
+                    (formData.is_atenean ? 1 : 0) >
+                  0
                 ? {
                     amount:
                       ATENEAN_DISCOUNT *
@@ -117,22 +136,23 @@ export default function CheckoutStep({
                       (formData.is_atenean ? 1 : 0),
                   }
                 : null,
-            bundle: isEligibleForBundle
-              ? {
-                  amount:
-                    formData.is_scholar_or_ama || formData.is_atenean
-                      ? ATENEAN_AMA_BUNDLE_DISCOUNT
-                      : OUTSIDER_BUNDLE_DISCOUNT,
-                  type:
-                    formData.is_scholar_or_ama || formData.is_atenean
-                      ? 'Atenean/AMA/Scholar'
-                      : 'General Public',
-                }
-              : null,
+            bundle:
+              // Only apply bundle discount for group registration with sufficient attendees
+              formData.registration_type === 'group' && isEligibleForBundle
+                ? {
+                    amount:
+                      formData.is_scholar_or_ama || formData.is_atenean
+                        ? ATENEAN_AMA_BUNDLE_DISCOUNT
+                        : OUTSIDER_BUNDLE_DISCOUNT,
+                    type:
+                      formData.is_scholar_or_ama || formData.is_atenean
+                        ? 'Atenean/AMA/Scholar'
+                        : 'General Public',
+                  }
+                : null,
           },
       final_price: updatedPrice,
     };
-
     updateFormData({
       ...formData,
       cost: updatedPrice,
@@ -140,7 +160,7 @@ export default function CheckoutStep({
         formData.registration_type === 'group' ? attendees : [],
       order_summary: orderSummary,
     });
-  }, [attendees]);
+  }, [attendees, formData.registration_type]);
 
   const handleRegistrationTypeChange = (value) => {
     if (value === 'group' && IS_PRE_SPEAKER_PERIOD) {
@@ -148,15 +168,18 @@ export default function CheckoutStep({
     }
 
     const totalAttendees = value === 'group' ? 1 + attendees.length : 1;
-
+    // Create updated form data with new registration type
     const updatedFormData = {
       ...formData,
       registration_type: value,
       additional_attendees: value === 'group' ? attendees : [],
     };
 
-    const updatedPrice = calculateTotalPrice(totalAttendees);
-
+    // Calculate new price based on updated registration type
+    const updatedPrice = calculateTotalPrice(
+      value === 'group' ? 1 + attendees.length : 1
+    );
+    // Update form data with new price and order summary
     updateFormData({
       ...updatedFormData,
       cost: updatedPrice,
@@ -850,14 +873,23 @@ export default function CheckoutStep({
             </div>
           ) : (
             <>
-              {/* Count discounts by type */}
               {(() => {
+                // For single registration, only count the main registrant's discounts
                 const scholarAmaCount =
-                  attendees.filter((a) => a.is_scholar_or_ama).length +
-                  (formData.is_scholar_or_ama ? 1 : 0);
+                  formData.registration_type === 'single'
+                    ? formData.is_scholar_or_ama
+                      ? 1
+                      : 0
+                    : attendees.filter((a) => a.is_scholar_or_ama).length +
+                      (formData.is_scholar_or_ama ? 1 : 0);
+
                 const ateneanCount =
-                  attendees.filter((a) => a.is_atenean).length +
-                  (formData.is_atenean ? 1 : 0);
+                  formData.registration_type === 'single'
+                    ? formData.is_atenean
+                      ? 1
+                      : 0
+                    : attendees.filter((a) => a.is_atenean).length +
+                      (formData.is_atenean ? 1 : 0);
 
                 return (
                   <>
