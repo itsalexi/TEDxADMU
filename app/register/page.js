@@ -1,26 +1,51 @@
-'use client';
+"use client";
 
-import { useState, useEffect, startTransition } from 'react';
-import { useActionState } from 'react';
-import { submitForm } from '@/lib/actions';
+import { useState, useEffect, startTransition } from "react";
+import { useActionState } from "react";
+import { submitForm } from "@/lib/actions";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
-} from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
-import SteppedProgress from '@/components/stepped-progress';
-import BasicInfoStep from './steps/basic-info-step';
-import PersonalityStep from './steps/personality-step';
-import CheckoutStep from './steps/checkout-step';
-import SuccessStep from './steps/success-step';
-import DiscountEligibilityStep from './steps/discount-eligibility-step';
-import ParticlesBackground from '../ParticlesBackground';
+} from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import SteppedProgress from "@/components/stepped-progress";
+import BasicInfoStep from "./steps/basic-info-step";
+import PersonalityStep from "./steps/personality-step";
+import CheckoutStep from "./steps/checkout-step";
+import SuccessStep from "./steps/success-step";
+import DiscountEligibilityStep from "./steps/discount-eligibility-step";
+import ParticlesBackground from "../ParticlesBackground";
+import Image from "next/image";
 
 export default function ApplicationForm() {
-  const { toast } = useToast();
+  return (
+    <div className="container mx-auto mt-40">
+      <h1 className="text-white xl:text-6xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center mb-12">Registration period is over, but walk ins are still accepted! See you in Leong Hall at 1pm!</h1>
+      <div className="flex items-center justify-center ">
+        <Image
+          src="/pricepub.jpg"
+          alt="Price Pub"
+          width={100}
+          height={100}
+          className="w-2/5"
+          quality={100}
+        />
+        <Image
+          src="/freeticket.jpg"
+          alt="Price Pub"
+          width={100}
+          height={100}
+          className="w-2/5"
+          quality={100}
+        />
+      </div>
+    </div>
+  );
+
+  /* const { toast } = useToast();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -550,5 +575,5 @@ export default function ApplicationForm() {
         </div>
       </main>
     </div>
-  );
+  ); */
 }
